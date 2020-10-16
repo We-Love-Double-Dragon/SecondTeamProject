@@ -1,4 +1,4 @@
-package com.sist.vo;
+package vo;
 /*
  * Table VIDEO이(가) 생성되었습니다.
 
