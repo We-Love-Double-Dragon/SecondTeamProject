@@ -2,26 +2,28 @@ package com.sist.vo;
 /*
  * Table NEWS이(가) 생성되었습니다.
 
-이름        널?       유형             
---------- -------- -------------- 
-N_NO      NOT NULL NUMBER         
-N_TITLE   NOT NULL VARCHAR2(1000) 
-N_POSTER  NOT NULL VARCHAR2(1000) 
-N_REGDATE NOT NULL VARCHAR2(500)  
-N_CONTENT NOT NULL CLOB           
-N_WRITER  NOT NULL VARCHAR2(500)  
-N_HIT              NUMBER         
-N_TAG              VARCHAR2(500)  
-N_CNO              NUMBER         
-N_COMMENT          CLOB           
-N_ID               VARCHAR2(500)  
-N_PWD              VARCHAR2(500)
+이름           널?       유형             
+------------ -------- -------------- 
+N_NO         NOT NULL NUMBER         
+N_TITLE      NOT NULL VARCHAR2(1000) 
+N_POSTER     NOT NULL VARCHAR2(1000) 
+N_REGDATE    NOT NULL VARCHAR2(500)  
+N_PRECONTENT NOT NULL VARCHAR2(2000) 
+N_CONTENT    NOT NULL CLOB           
+N_WRITER     NOT NULL VARCHAR2(500)  
+N_HIT                 NUMBER         
+N_TAG                 VARCHAR2(500)  
+N_CNO                 NUMBER         
+N_COMMENT             CLOB           
+N_ID                  VARCHAR2(500)  
+N_PWD                 VARCHAR2(500) 
  */
 public class NewsVO {
 	private int n_no;
 	private String n_title;
 	private String n_poster;
 	private String n_regdate;
+	private String n_precontent;
 	private String n_content;
 	private String n_writer;
 	private int n_hit;
@@ -53,6 +55,12 @@ public class NewsVO {
 	}
 	public void setN_regdate(String n_regdate) {
 		this.n_regdate = n_regdate;
+	}
+	public String getN_precontent() {
+		return n_precontent;
+	}
+	public void setN_precontent(String n_precontent) {
+		this.n_precontent = n_precontent;
 	}
 	public String getN_content() {
 		return n_content;
