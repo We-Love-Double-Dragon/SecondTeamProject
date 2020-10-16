@@ -2,26 +2,28 @@ package vo;
 /*
  * Table TIP이(가) 생성되었습니다.
 
-이름        널?       유형             
---------- -------- -------------- 
-T_NO      NOT NULL NUMBER         
-T_TITLE   NOT NULL VARCHAR2(1000) 
-T_POSTER  NOT NULL VARCHAR2(1000) 
-T_REGDATE NOT NULL VARCHAR2(500)  
-T_CONTENT NOT NULL CLOB           
-T_WRITER  NOT NULL VARCHAR2(500)  
-T_HIT              NUMBER         
-T_TAG              VARCHAR2(500)  
-T_CNO              NUMBER         
-T_COMMENT          CLOB           
-T_ID               VARCHAR2(500)  
-T_PWD              VARCHAR2(500)
+이름           널?       유형             
+------------ -------- -------------- 
+T_NO         NOT NULL NUMBER         
+T_TITLE      NOT NULL VARCHAR2(1000) 
+T_POSTER     NOT NULL VARCHAR2(1000) 
+T_REGDATE    NOT NULL VARCHAR2(500)  
+T_PRECONTENT NOT NULL VARCHAR2(2000) 
+T_CONTENT    NOT NULL CLOB           
+T_WRITER     NOT NULL VARCHAR2(500)  
+T_HIT                 NUMBER         
+T_TAG                 VARCHAR2(500)  
+T_CNO                 NUMBER         
+T_COMMENT             CLOB           
+T_ID                  VARCHAR2(500)  
+T_PWD                 VARCHAR2(500)  
  */
 public class TipVO {
 	private int t_no;
 	private String t_title;
 	private String t_poster;
 	private String t_regdate;
+	private String t_precontent;
 	private String t_content;
 	private String t_writer;
 	private int t_hit;
@@ -53,6 +55,12 @@ public class TipVO {
 	}
 	public void setT_regdate(String t_regdate) {
 		this.t_regdate = t_regdate;
+	}
+	public String getT_precontent() {
+		return t_precontent;
+	}
+	public void setT_precontent(String t_precontent) {
+		this.t_precontent = t_precontent;
 	}
 	public String getT_content() {
 		return t_content;
