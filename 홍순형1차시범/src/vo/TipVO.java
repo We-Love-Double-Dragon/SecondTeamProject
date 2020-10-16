@@ -7,6 +7,7 @@ package com.sist.vo;
 T_NO         NOT NULL NUMBER         
 T_TITLE      NOT NULL VARCHAR2(1000) 
 T_POSTER     NOT NULL VARCHAR2(1000) 
+T_POSTER2             VARCHAR2(1000) 
 T_REGDATE    NOT NULL VARCHAR2(500)  
 T_PRECONTENT NOT NULL VARCHAR2(2000) 
 T_CONTENT    NOT NULL CLOB           
@@ -16,12 +17,13 @@ T_TAG                 VARCHAR2(500)
 T_CNO                 NUMBER         
 T_COMMENT             CLOB           
 T_ID                  VARCHAR2(500)  
-T_PWD                 VARCHAR2(500)  
+T_PWD                 VARCHAR2(500)
  */
 public class TipVO {
 	private int t_no;
 	private String t_title;
 	private String t_poster;
+	private String t_poster2;
 	private String t_regdate;
 	private String t_precontent;
 	private String t_content;
@@ -49,6 +51,12 @@ public class TipVO {
 	}
 	public void setT_poster(String t_poster) {
 		this.t_poster = t_poster;
+	}
+	public String getT_poster2() {
+		return t_poster2;
+	}
+	public void setT_poster2(String t_poster2) {
+		this.t_poster2 = t_poster2;
 	}
 	public String getT_regdate() {
 		return t_regdate;
