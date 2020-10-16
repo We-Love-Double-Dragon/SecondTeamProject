@@ -15,7 +15,7 @@ public class ComAnnVO {
    private String c_cname;
    private String c_ctype;
    private String c_indutype;
-   private String c_deadline;
+   private String c_deadline;  
    private String c_comscale;
    private String c_content;
    private int c_hit;
