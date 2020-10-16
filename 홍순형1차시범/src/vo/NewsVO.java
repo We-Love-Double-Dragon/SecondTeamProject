@@ -7,6 +7,7 @@ package vo;
 N_NO         NOT NULL NUMBER         
 N_TITLE      NOT NULL VARCHAR2(1000) 
 N_POSTER     NOT NULL VARCHAR2(1000) 
+N_POSTER2             VARCHAR2(1000) 
 N_REGDATE    NOT NULL VARCHAR2(500)  
 N_PRECONTENT NOT NULL VARCHAR2(2000) 
 N_CONTENT    NOT NULL CLOB           
@@ -16,12 +17,14 @@ N_TAG                 VARCHAR2(500)
 N_CNO                 NUMBER         
 N_COMMENT             CLOB           
 N_ID                  VARCHAR2(500)  
-N_PWD                 VARCHAR2(500) 
+N_PWD                 VARCHAR2(500)  
+
  */
 public class NewsVO {
 	private int n_no;
 	private String n_title;
 	private String n_poster;
+	private String n_poster2;
 	private String n_regdate;
 	private String n_precontent;
 	private String n_content;
@@ -49,6 +52,12 @@ public class NewsVO {
 	}
 	public void setN_poster(String n_poster) {
 		this.n_poster = n_poster;
+	}
+	public String getN_poster2() {
+		return n_poster2;
+	}
+	public void setN_poster2(String n_poster2) {
+		this.n_poster2 = n_poster2;
 	}
 	public String getN_regdate() {
 		return n_regdate;

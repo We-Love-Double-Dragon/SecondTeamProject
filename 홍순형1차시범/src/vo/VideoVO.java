@@ -6,6 +6,7 @@ package vo;
 --------- -------- -------------- 
 V_NO      NOT NULL NUMBER         
 V_TITLE   NOT NULL VARCHAR2(1000) 
+V_POSTER  NOT NULL VARCHAR2(1000) 
 V_VIDEO   NOT NULL VARCHAR2(1000) 
 V_REGDATE          VARCHAR2(500)  
 V_CONTENT          CLOB           
@@ -15,12 +16,12 @@ V_TAG              VARCHAR2(500)
 V_CNO              NUMBER         
 V_COMMENT          CLOB           
 V_ID               VARCHAR2(500)  
-V_PWD              VARCHAR2(500) 
- * 
+V_PWD              VARCHAR2(500)  
  */
 public class VideoVO {
 	private int v_no;
 	private String v_title;
+	private String v_poster;
 	private String v_video;
 	private String v_regdate;
 	private String v_content;
@@ -42,6 +43,12 @@ public class VideoVO {
 	}
 	public void setV_title(String v_title) {
 		this.v_title = v_title;
+	}
+	public String getV_poster() {
+		return v_poster;
+	}
+	public void setV_poster(String v_poster) {
+		this.v_poster = v_poster;
 	}
 	public String getV_video() {
 		return v_video;
