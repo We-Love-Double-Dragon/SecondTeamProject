@@ -10,6 +10,12 @@ public class MainModel {
 	@RequestMapping("main/main.do")
 	public String main_page(HttpServletRequest request) {
 		
+		try {
+			System.out.println("ssssssssssss");
+			request.setAttribute("main_jsp", "../main/content.jsp");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 		return "../main/main.jsp";
 	}

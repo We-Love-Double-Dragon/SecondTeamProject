@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -27,22 +27,31 @@
    </head>
 
    <body>
+   
+   
        
     
 <!-- 헤더 ================================================================================================================================ 헤더 -->
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="../main/header.jsp"></jsp:include>
 
 
 
 
 <!-- 콘텐트(페이지바뀌는곳) =========================================================================================================== 콘텐트(페이지바뀌는곳) -->
-    <jsp:include page="content.jsp"></jsp:include>
+    <jsp:include page="${main_jsp }"></jsp:include>
     
     
     
     
 <!-- 푸터 ================================================================================================================================ 푸터-->
-   <jsp:include page="footer.jsp"></jsp:include>
+   <jsp:include page="../main/footer.jsp"></jsp:include>
+   
+   
+   
+   
+   
+   
+   
    
 	<!-- JS here (자바스크립트 링크) ============================================================================================= JS here (자바스크립트 링크) -->
 	
