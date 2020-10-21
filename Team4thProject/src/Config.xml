@@ -92,7 +92,7 @@
                 ===== Annotation  @
    -->
   <mappers>
-    <mapper resource=""/>
+    <mapper resource="mapper/jobknowledge-mapper.xml"/>
   </mappers>
 </configuration>
 
