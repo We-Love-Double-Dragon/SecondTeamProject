@@ -14,7 +14,7 @@
 </head>
 <body>
 		<div class="col-lg-12" style="background-color: #8DB3DE; border-radius: 5px;">
-			<table height=1000px>
+			<table height=1700px>
 				<tr>
 					<th>사이드바</th>
 					<td>사이드바</td>
