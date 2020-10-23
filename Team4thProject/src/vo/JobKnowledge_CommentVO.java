@@ -17,7 +17,7 @@ ROOT            NUMBER
 //잡지식인 댓글 VO ==================================================
 
 import java.util.*;
-public class jobKnowledge_CommentVO {
+public class JobKnowledge_CommentVO {
 	
 	private int no;				// 댓글번호
 	private String id;			// 작성자 아이디
