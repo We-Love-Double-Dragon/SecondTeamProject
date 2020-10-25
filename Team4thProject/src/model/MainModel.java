@@ -15,7 +15,7 @@ public class MainModel {
 			System.out.println("메인모델");
 			request.setAttribute("main_jsp", "../main/content.jsp");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		

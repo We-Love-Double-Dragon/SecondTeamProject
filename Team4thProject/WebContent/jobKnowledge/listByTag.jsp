@@ -4,35 +4,16 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
-<!-- 게시글 목록 출력하는 페이지 ============================================================================================================= -->
+<!-- 태그별 게시글 목록 출력하는 페이지 ============================================================================================================= -->
     
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-	/* $(function(){
-		$('.array_by_reply').click(function(){
-			$.ajax({
-				type:'post',
-				url:'../jobKnowledge/listByTag.do',
-				success:function(result){
-					$('.body').html(result);
-				}
-			})
-		})
-	}); */
-</script>
 <style type="text/css">
 
 .answer_box:hover {					/* 게시글 호버 */
 	background-color:  #CDCDCD;
 }
-
-.list_option input:hover{
-	background-color: #E1E1E1;
-}
-
 </style>
 
 <meta charset="UTF-8">
@@ -42,9 +23,8 @@
 		<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px; height: 800px;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
 				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
-					<h3>전체</h3>																<!-- 머리부분 제목 -->
-					<div class="list_option" style="text-align: right;">						<!-- 머리부분 옵션들 -->
-						
+					<h3>${tag }</h3>																<!-- 머리부분 제목 -->
+					<div class="list_option" style="text-align: right">						<!-- 머리부분 옵션들 -->
 						<input type=button value="답변적은순" id="array_by_reply" style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
 						<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
 						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">

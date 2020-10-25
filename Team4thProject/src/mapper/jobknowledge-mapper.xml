@@ -2,9 +2,103 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.jobknowledge-mapper">
 
-<!-- 게시글 리스트 출력 -->
-	<select id="jobknowledgeListData" resultType="JobKnowledgeVO" parameterType="String">
-		SELECT subject, content, tag, regdate FROM jobknowledge WHERE tag = #{}
+<!-- 전체태그 게시글 리스트 출력 -->
+	<select id="jobknowledgeListData" resultType="JobKnowledgeVO" parameterType="hashmap">
+		SELECT no, subject, content, tag, regdate, reply, num
+		FROM (SELECT no, subject, content, tag, regdate, reply, rownum as num
+		FROM (SELECT no, subject, content, tag, regdate, reply
+		FROM jobknowledge WHERE root = 0 ORDER BY regdate desc))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
+<!-- 총 페이지 구하기 -->
+	<select id="jobknowledgeTatalPage" resultType="int">
+		SELECT CEIL(COUNT(*) / 10.0) FROM jobknowledge
+	</select>
+	
+	
+<!-- 태그별 게시글 리스트 출력 -->
+	<select id="jobknowledgeListDataByTag" resultType="JobKnowledgeVO" parameterType="hashmap">
+		SELECT no, subject, content, tag, regdate, reply, num
+		FROM (SELECT no, subject, content, tag, regdate, reply, rownum as num
+		FROM (SELECT no, subject, content, tag, regdate, reply 
+		FROM jobknowledge WHERE tag = #{tag} AND root = 0 ORDER BY regdate desc))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>	
+<!-- 태그별 총 페이지 구하기 -->
+	<select id="jobknowledgeTatalPageByTag" resultType="int" parameterType="String">
+		SELECT CEIL(COUNT(*) / 10.0) FROM jobknowledge WHERE tag = #{tag}
+	</select>
+	
+	
+	
+	
+	
+<!-- 게시글 상세보기 -->
+	<select id="jobknowledgeDetail" resultType="JobKnowledgeVO" parameterType="int">
+		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE no = #{no}
+	</select>
+<!-- 상세보기할 때 조회수 증가 -->
+	<update id="jobknowledgeIncrementHit" parameterType="int">
+		UPDATE jobknowledge SET hit = hit + 1 WHERE no = #{no}
+	</update>
+<!-- 상세보기할 때 답변글 가져오기 -->
+	<select id="jobknowledgeDetailReply" resultType="JobKnowledgeVO" parameterType="int">
+		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE root = #{no} ORDER BY regdate
+	</select>
+	
+	
+	
+	
+<!-- 질문하기 -->
+	<insert id="jobknowledgeInsertAnswer" parameterType="JobKnowledgeVO">
+		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
+		VALUES(
+		(SELECT (MAX(no)) FROM jobknowledge)+1,
+		'테스트아이디',
+		#{subject},
+		#{content},
+		SYSDATE,
+		0,
+		(SELECT (MAX(no)) FROM jobknowledge)+1,
+		0,
+		0,
+		0,
+		(SELECT (MAX(no)) FROM jobknowledge)+1,
+		#{tag},
+		0,
+		0
+		)
+	</insert>
+	
+	
+<!-- 답변달기 -->
+	<insert id="jobknowledgeReply" parameterType="hashmap">
+		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
+		VALUES(
+		(SELECT (MAX(no)) FROM jobknowledge)+1,
+		'테스트아이디(답변)',
+		'답변제목',
+		#{content},
+		SYSDATE,
+		0,
+		(SELECT no FROM jobknowledge WHERE no = #{no}),
+		(SELECT group_step FROM jobknowledge WHERE no = #{no})+1,
+		(SELECT no FROM jobknowledge WHERE no = #{no}),
+		(SELECT depth FROM jobknowledge WHERE no = #{no})+1,
+		(SELECT no FROM jobknowledge WHERE no = #{no})+1,
+		'답변',
+		0,
+		0
+		)
+	</insert>
+<!-- 답변달릴시 원 질문글 답변수 증가 -->
+	<update id="jobknowledgeUpdateReply" parameterType="int">
+		UPDATE jobknowledge set reply = reply + 1 WHERE no = #{no}
+	</update>
+<!-- 답변작성시에 group_step 증가 -->
+	<update id="jobknowledgeUpdateGroupStep" parameterType="hashmap">
+		UPDATE jobknowledge set group_step = group_step+1 WHERE group_id = #{group_id} AND group_step &gt; #{group_step}
+	</update>
+	
 	
 </mapper>

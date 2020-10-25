@@ -13,23 +13,139 @@ import com.sist.controller.RequestMapping;
 public class JobKnowledgeModel {
 
 	
-	// 잡지식인 메인페이지 출력 (게시글 목록) ============================================================================================
+	// 잡지식인 메인페이지 출력 (전체태그 게시물 출력) ============================================================================================
 	@RequestMapping("jobKnowledge/box.do")
 	public String jobKnowledge_box(HttpServletRequest request) {
 		
 		
+		return "../jobKnowledge/box.jsp";
+	}
+	
+	// 전체태그 게시물 출력 ============================================================================================
+	@RequestMapping("jobKnowledge/list.do")
+	public String jobKnowledge_list(HttpServletRequest request) {
+		
+		
 		try {
-			String tag = request.getParameter("tag");
 			
-			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListData(tag);
+			// 변수 -------------------------------------------------------------
+			String page = request.getParameter("page");					// 사용자로부터 받는 페이지
+			if(page == null) {		
+				page = "1";
+			}
 			
+			int currpage = Integer.parseInt(page);						// 현재 페이지
+			int totalpage = JobKnowledgeDAO.jobknowledgeTatalPage();	// 총 페이지
+			int rowSize = 10;											// 한번에 출력될 게시글
+			int start = (rowSize*currpage) - (rowSize - 1);				
+			int end = (rowSize*currpage);
+			int block = 5;												// 페이지 블록
+			int startpage=((currpage-1)/block*block)+1;					
+			int endpage=((currpage-1)/block*block)+block;
+			if(endpage>totalpage) {
+				endpage=totalpage;
+			}
 			
+			// 해쉬맵에 시작 / 끝 변수 담기 ------------------------------------------------------
+			Map map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListData(map);			// DAO의 메소드 리턴값을 받는 List 변수
+			
+			// 페이지로 보낼 파라미터들 -----------------------------------------------------------
+			request.setAttribute("list", list);
+			request.setAttribute("currpage", currpage);
+			request.setAttribute("totalpage", totalpage);
+			request.setAttribute("block", block);
+			request.setAttribute("startpage", startpage);
+			request.setAttribute("endpage", endpage);
 			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/list.jsp");
 			System.out.println("잡지식인 메인페이지");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		return "../jobKnowledge/box.jsp";
+	}
+	
+// 태그별 게시물 출력 ============================================================================================
+	@RequestMapping("jobKnowledge/listByTag.do")
+	public String jobKnowledge_listByTag(HttpServletRequest request) {
+		
+		
+		try {
+			System.out.println("태그별 게시물출력 모델");
+			
+			// 변수 -------------------------------------------------------------
+			String page = request.getParameter("page");					// 사용자로부터 받는 페이지
+			String tag = request.getParameter("tag");					// 사용자로부터 받는 태그
+			if(page == null) {		
+				page = "1";
+			}
+			if(tag == null) {
+				tag = "취업지원";
+			}
+			
+			int currpage = Integer.parseInt(page);								// 현재 페이지
+			int totalpage = JobKnowledgeDAO.jobknowledgeTatalPageByTag(tag);	// 총 페이지
+			int rowSize = 10;													// 한번에 출력될 게시글
+			int start = (rowSize*currpage) - (rowSize - 1);				
+			int end = (rowSize*currpage);
+			int block = 5;														// 페이지 블록
+			int startpage=((currpage-1)/block*block)+1;					
+			int endpage=((currpage-1)/block*block)+block;
+			if(endpage>totalpage) {
+				endpage=totalpage;
+			}
+			
+			// 해쉬맵에 시작 / 끝 변수 담기 ------------------------------------------------------
+			Map map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("tag", tag);
+			
+			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListDataByTag(map);			// DAO의 메소드 리턴값을 받는 List 변수
+			
+			// 페이지로 보낼 파라미터들 -----------------------------------------------------------
+			request.setAttribute("list", list);
+			request.setAttribute("currpage", currpage);
+			request.setAttribute("totalpage", totalpage);
+			request.setAttribute("block", block);
+			request.setAttribute("startpage", startpage);
+			request.setAttribute("endpage", endpage);
+			request.setAttribute("tag", tag); 													// 태그 파라미터 보내기
+			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/listByTag.jsp");
+			System.out.println("잡지식인 메인페이지");
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "../jobKnowledge/box.jsp";
+	}
+	
+	
+	
+	// 게시글 상세보기 ========================================================================================================
+	@RequestMapping("jobKnowledge/detail.do")
+	public String jobKnowledge_detail(HttpServletRequest request) {
+		
+		try {
+			System.out.println("게시글 상세페이지");
+			
+			String no = request.getParameter("no");					// 사용자로부터 받는 글번호 no
+			
+			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));				// DAO의 상세보기 메소드 리턴값을 vo에 담기 
+			
+			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeDetailReply(Integer.parseInt(no));	// list에 답변글들을 담기
+			
+			request.setAttribute("vo", vo);
+			request.setAttribute("list", list);
+			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/detail.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "../jobKnowledge/box.jsp";
 	}
 	
@@ -67,5 +183,103 @@ public class JobKnowledgeModel {
 		
 		return "../jobKnowledge/box.jsp";
 	}
+	
+	
+	// 질문하기 메소드 ========================================================================================================
+	/*
+	 * no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt 
+	 */
+	@RequestMapping("jobKnowledge/answer_ok.do")
+	public String jobknowledge_InsertAnswer(HttpServletRequest request) {
+		
+		try {
+			System.out.println("질문하기 모델");
+			
+			request.setCharacterEncoding("utf-8");
+			
+			// answer.jsp 페이지로부터 받는 파라미터들 ----------------------------
+//			String id = request.getParameter("id");
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+			String tag = request.getParameter("tag");
+			
+			// VO에 파라미터를 담아서 DAO의 질문하기 메소드 실행 -------------------------
+			JobKnowledgeVO vo = new JobKnowledgeVO();
+//			vo.setId(id);
+			vo.setSubject(subject);
+			vo.setContent(content);
+			vo.setTag(tag);
+			JobKnowledgeDAO.jobknowledgeInsertAnswer(vo);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/answer_ok.jsp";
+	}
+	
+	
+	
+	// 답변달기 메소드 ====================================================================================================
+	@RequestMapping("jobKnowledge/reply.do")
+	public String jobknowledge_Reply(HttpServletRequest request) {
+		try {
+			System.out.println("답변달기 모델");
+			request.setCharacterEncoding("utf-8");
+			
+			// 게시글 페이지로부터 받는 파라미터들 ----------------------------------------------
+			String no = request.getParameter("no");
+			String content = request.getParameter("content");
+			
+			// Map에 파라미터 담아서 DAO 메소드 실행 --------------------------------------------
+			Map map = new HashMap();
+			map.put("no", no);
+			map.put("content", content);
+			JobKnowledgeDAO.jobknowledgeReply(map);
+			JobKnowledgeDAO.jobknowledgeUpdateReply(Integer.parseInt(no));
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return "../jobKnowledge/reply_ok.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 테스트 ============================================================================================
+		@RequestMapping("jobKnowledge/test.do")
+		public String test(HttpServletRequest request) {
+			
+			
+			try {
+				String content = request.getParameter("content");
+				String no = request.getParameter("no");
+				
+				request.setAttribute("content", content);
+				request.setAttribute("no", no);
+				request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/test.jsp");
+				System.out.println("잡지식인 메인페이지");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return "../jobKnowledge/box.jsp";
+		}
+		
+		
+	
 	
 }

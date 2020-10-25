@@ -34,6 +34,16 @@ public class JobKnowledgeVO {
 	private int comment_id;		// 댓글그룹
 	private String tag;			// 태그
 	private int adopt;			// 채택여부
+	private int reply;
+	
+	
+	
+	public int getReply() {
+		return reply;
+	}
+	public void setReply(int reply) {
+		this.reply = reply;
+	}
 	public int getNo() {
 		return no;
 	}

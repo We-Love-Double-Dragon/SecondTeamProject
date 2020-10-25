@@ -85,10 +85,11 @@
                                                     <li><a href="#">추가요망</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="../jobKnowledge/box.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
+                                            <li><a href="../jobKnowledge/list.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
                                             	<ul class="submenu">
                                                     <li><a href="../jobKnowledge/answer.do">질문하기</a></li>
                                                     <li><a href="../jobKnowledge/profile.do">지식인 프로필</a></li>
+                                                    <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">로그인</a>
