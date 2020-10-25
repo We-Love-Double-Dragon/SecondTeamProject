@@ -9,7 +9,10 @@
   <properties resource="db.properties"/>
   <typeAliases>
     <!-- VO를 등록 -->
-    
+    <typeAlias type="vo.ComVO" alias="ComVO"/>
+    <typeAlias type="vo.IntVO" alias="IntVO"/>
+    <typeAlias type="vo.SelfVO" alias="SelfVO"/>
+    <typeAlias type="vo.WorkVO" alias="WorkVO"/>
     <!-- 
                       오라클에서 가지고 오는 데이터를 받아서 저장 
             while(rs.next())
@@ -92,7 +95,8 @@
                 ===== Annotation  @
    -->
   <mappers>
-    <mapper resource=""/>
+    <mapper resource="mapper/letter-mapper.xml"/>
+    <mapper resource="mapper/company-mapper.xml"/>
   </mappers>
 </configuration>
 
