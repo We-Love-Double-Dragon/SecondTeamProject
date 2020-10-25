@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 	<header>
@@ -61,7 +66,7 @@
                                 <div class="main-menu d-none d-md-block">
                                     <nav>                  
                                         <ul id="navigation">    
-                                            <li><a href="index.html">홈</a></li>
+                                            <li><a href="../main/main.do">홈</a></li>
                                             <li><a href="categori.html">채용공고</a>
                                             	<ul class="submenu">
                                                     <li><a href="#">100대기업 공채</a></li>
@@ -94,11 +99,36 @@
                                             </li>
                                             <li><a href="#">로그인</a>
                                                 <ul class="submenu">
-                                                    <li><a href="elements.html">추가요망</a></li>
-                                                    <li><a href="blog.html">추가요망</a></li>
-                                                    <li><a href="single-blog.html">추가요망</a></li>
+                                                     <c:if test="${sessionScope.id!=null }">
+	                                                   <c:if test="${sessionScope.admin=='n'}">
+												            <li><a href="../resume/resume.do">내 이력서</a></li>
+												          </c:if>
+											           <li><a href="../user/join.do">회원수정</a></li>
+											         </c:if>
+											         <c:if test="${sessionScope.id==null }">
+	                                                   <li><a href="../user/login_form.do">로그인</a></li>
+												       <li><a href="../user/join.do">회원가입</a></li>
+                                                     </c:if>
+	                                                 <c:if test="${ sessionScope.id!=null}">
+													      <c:if test="${sessionScope.admin=='n'}">
+												            <li><a href="#">마이페이지</a></li>
+												          </c:if>
+												          <c:if test="${sessionScope.admin=='y'}">
+												            <li><a href="#">관리자페이지</a></li>
+												          </c:if>
+	      											 </c:if>
                                                 </ul>
                                             </li>
+                                        	<li>
+                                            <c:if test="${sessionScope.id!=null }">
+											  <form action="../user/logout.do"><%-- get(생략이 가능) --%>
+											    <div class="text-right" >
+											      ${sessionScope.name }님 
+											      <button class="genric-btn danger radius small">로그아웃</button>
+											    </div>
+											  </form>
+ 											</c:if>
+ 											</li>
                                         </ul>
                                     </nav>
                                 </div>

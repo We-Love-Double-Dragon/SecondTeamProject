@@ -91,8 +91,9 @@
       MyBatis => XML없이도 사용이 가능 
                 ===== Annotation  @
    -->
-  <mappers>
-    <mapper resource=""/>
+   <mappers>
+    <mapper resource="mapper/user-mapper.xml"/>
+    <mapper resource="mapper/resume-mapper.xml"/>
   </mappers>
 </configuration>
 
