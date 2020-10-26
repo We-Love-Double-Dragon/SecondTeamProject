@@ -72,6 +72,7 @@ public class UserModel {
 	   @RequestMapping("user/login_form.do")
 	   public String user_login_form(HttpServletRequest request)
 	   {
+		   System.out.println("login_form.do 모델");
 		   request.setAttribute("main_jsp", "../user/login_form.jsp");//include(메인에 들어갈 파일 지정)
 		   return "../main/main.jsp";//include
 	   }
@@ -80,6 +81,7 @@ public class UserModel {
 	   @RequestMapping("user/login.do")
 	   public String user_login(HttpServletRequest request)
 	   {
+		   System.out.println("login.do 모델");
 		   String id=request.getParameter("id");
 		   String pwd=request.getParameter("pwd");
 		   UserformVO vo=UserDAO.userLogin(id, pwd);

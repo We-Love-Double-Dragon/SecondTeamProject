@@ -3,6 +3,9 @@ package model;
 import java.util.*;
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
+
 import vo.*;
 import dao.*;
 
@@ -131,6 +134,7 @@ public class JobKnowledgeModel {
 	public String jobKnowledge_detail(HttpServletRequest request) {
 		
 		try {
+			request.setCharacterEncoding("utf-8");
 			System.out.println("게시글 상세페이지");
 			
 			String no = request.getParameter("no");					// 사용자로부터 받는 글번호 no
@@ -138,6 +142,7 @@ public class JobKnowledgeModel {
 			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));				// DAO의 상세보기 메소드 리턴값을 vo에 담기 
 			
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeDetailReply(Integer.parseInt(no));	// list에 답변글들을 담기
+			
 			
 			request.setAttribute("vo", vo);
 			request.setAttribute("list", list);
@@ -193,9 +198,12 @@ public class JobKnowledgeModel {
 	public String jobknowledge_InsertAnswer(HttpServletRequest request) {
 		
 		try {
-			System.out.println("질문하기 모델");
-			
+			System.out.println("질문하기 모델");			
 			request.setCharacterEncoding("utf-8");
+			
+			// session
+			HttpSession session = request.getSession();									// 세션 가져오기
+			
 			
 			// answer.jsp 페이지로부터 받는 파라미터들 ----------------------------
 //			String id = request.getParameter("id");
@@ -205,7 +213,8 @@ public class JobKnowledgeModel {
 			
 			// VO에 파라미터를 담아서 DAO의 질문하기 메소드 실행 -------------------------
 			JobKnowledgeVO vo = new JobKnowledgeVO();
-//			vo.setId(id);
+			vo.setId(session.getId());													// 아이디를 세션id로 지정
+			
 			vo.setSubject(subject);
 			vo.setContent(content);
 			vo.setTag(tag);

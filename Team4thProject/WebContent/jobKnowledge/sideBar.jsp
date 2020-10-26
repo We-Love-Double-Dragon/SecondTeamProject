@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!-- 왼쪽 사이드바 ============================================================================================================================= -->
     
@@ -21,8 +22,16 @@
 				<!-- <div class="button_answer" style="height:100px; background-color: #5A91CF; text-align: center; line-height: 100px; border-radius: 5px;">
 					<a href="../jobKnowledge/answer.do" style="font-size: 30px;">질문하기</a>
 				</div> -->
-				<input type="button" value="질문하기" class="button_answer" onclick="location.href='../jobKnowledge/answer.do'"
-						style="height:100px; width:100%; background-color: #5A91CF; color:white; font-size: 30px; border: none; border-radius: 5px;">
+				
+				<!-- ../jobKnowledge/answer.do -->
+				<c:if test="${sessionScope.id==null }">
+					<input type="button" value="질문하기" class="button_answer" onclick="location.href='../user/login_form.do'"
+							style="height:100px; width:100%; background-color: #5A91CF; color:white; font-size: 30px; border: none; border-radius: 5px;">
+				</c:if>
+				<c:if test="${sessionScope.id!=null }">
+					<input type="button" value="질문하기" class="button_answer" onclick="location.href='../jobKnowledge/answer.do'"
+							style="height:100px; width:100%; background-color: #5A91CF; color:white; font-size: 30px; border: none; border-radius: 5px;">
+				</c:if>
 			</div>
 		</div>
 					

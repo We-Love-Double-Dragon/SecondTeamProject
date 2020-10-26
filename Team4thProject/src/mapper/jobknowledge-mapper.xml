@@ -54,7 +54,7 @@
 		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
 		VALUES(
 		(SELECT (MAX(no)) FROM jobknowledge)+1,
-		'테스트아이디',
+		#{id},																	<!-- 아이디를 세션의 아이디로 지정할 것 -->
 		#{subject},
 		#{content},
 		SYSDATE,
