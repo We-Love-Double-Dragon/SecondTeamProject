@@ -33,6 +33,8 @@
 	
 	
 	
+	
+	
 <!-- 게시글 상세보기 -->
 	<select id="jobknowledgeDetail" resultType="JobKnowledgeVO" parameterType="int">
 		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE no = #{no}
@@ -45,6 +47,7 @@
 	<select id="jobknowledgeDetailReply" resultType="JobKnowledgeVO" parameterType="int">
 		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE root = #{no} ORDER BY regdate
 	</select>
+	
 	
 	
 	
@@ -71,12 +74,15 @@
 	</insert>
 	
 	
+	
+	
+	
 <!-- 답변달기 -->
 	<insert id="jobknowledgeReply" parameterType="hashmap">
 		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
 		VALUES(
 		(SELECT (MAX(no)) FROM jobknowledge)+1,
-		'테스트아이디(답변)',
+		#{id},
 		'답변제목',
 		#{content},
 		SYSDATE,
@@ -100,5 +106,28 @@
 		UPDATE jobknowledge set group_step = group_step+1 WHERE group_id = #{group_id} AND group_step &gt; #{group_step}
 	</update>
 	
+	
+	
+	
+	
+<!-- 게시글 수정하기 -->
+	<update id="jobknowledgeModifyBoard_ok" parameterType="hashmap">
+		UPDATE jobknowledge SET
+		content = #{content},
+		subject = #{subject}
+		WHERE no = #{no}
+	</update>
+	
+	
+	
+	
+<!-- 게시글 삭제하기 -->
+	<delete id="jobknowledgeDeleteBoard" parameterType="int">
+		DELETE FROM jobknowledge WHERE no = #{no}
+	</delete>
+<!-- 답변 삭제하기 -->
+	<delete id="jobknowledgeDeleteReply" parameterType="int">
+		DELETE FROM jobknowledge WHERE root = #{no}
+	</delete>
 	
 </mapper>

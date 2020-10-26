@@ -9,6 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	function deleteReally(){
+		window.open("../jobKnowledge/deleteReally.do", "deleteReally", "width=320,height=300,scrollbars=no")
+	}
+</script>
 <style type="text/css">
 .bottom_info span{
 	font-size: 15px;
@@ -35,10 +41,25 @@
 			</div>
 			
 			<div class="bottom_area" style="margin-top: 20px;">
-				<div class="bottom_info">
-					<span style="color: #636363; font-weight: bold;">${sessionScope.id }</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<div class="bottom_info" style="position: relative;">
+					<span style="color: #636363; font-weight: bold;">${vo.id }</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<span>조회수&nbsp;${vo.hit }</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<span>작성일&nbsp;<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/></span>
+					<c:if test="${vo.id == sessionScope.id }" >																				<!-- 세션id와 게시글 id가 같으면 수정 / 삭제 버튼 활성화 -->
+						<form action="../jobKnowledge/modify_board.do" method="post" style="position: absolute; right: 5px; bottom:1px;">
+							<input type=submit value="수정">
+							<input type=hidden name=no value=${vo.no }>
+						</form>
+					</c:if>
+					<c:if test="${vo.id == sessionScope.id }" >	
+						<%-- <form action="../jobKnowledge/delete_board.do" method="post" style="position: absolute; right: 50px; bottom:1px;">
+							<input type=submit value="삭제">
+							<input type=hidden name=no value=${vo.no }>
+						</form> --%>
+						<input type=button value=삭제 onclick="deleteReally()" style="position: absolute; right: 50px; bottom:1px;">
+						<input type=hidden value=${vo.no } id="parentId">
+					</c:if>
+					
 				</div>
 			</div>
 			

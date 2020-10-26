@@ -24,6 +24,10 @@ public class JobKnowledgeModel {
 		return "../jobKnowledge/box.jsp";
 	}
 	
+	
+	
+	
+	
 	// 전체태그 게시물 출력 ============================================================================================
 	@RequestMapping("jobKnowledge/list.do")
 	public String jobKnowledge_list(HttpServletRequest request) {
@@ -71,7 +75,6 @@ public class JobKnowledgeModel {
 		}
 		return "../jobKnowledge/box.jsp";
 	}
-	
 // 태그별 게시물 출력 ============================================================================================
 	@RequestMapping("jobKnowledge/listByTag.do")
 	public String jobKnowledge_listByTag(HttpServletRequest request) {
@@ -129,6 +132,9 @@ public class JobKnowledgeModel {
 	
 	
 	
+	
+	
+	
 	// 게시글 상세보기 ========================================================================================================
 	@RequestMapping("jobKnowledge/detail.do")
 	public String jobKnowledge_detail(HttpServletRequest request) {
@@ -156,6 +162,10 @@ public class JobKnowledgeModel {
 	
 	
 	
+	
+	
+	
+	
 	// 질문하기 페이지 출력하는 메소드 ============================================================================================
 	@RequestMapping("jobKnowledge/answer.do")
 	public String jobKnowledge_answer(HttpServletRequest request) {
@@ -171,25 +181,6 @@ public class JobKnowledgeModel {
 		
 		return "../jobKnowledge/box.jsp";
 	}
-	
-	
-	// 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
-	@RequestMapping("jobKnowledge/profile.do")
-	public String jobKnowledge_profile(HttpServletRequest request) {
-		
-		try {
-			System.out.println("프로필");
-			
-			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/profile.jsp");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		
-		return "../jobKnowledge/box.jsp";
-	}
-	
-	
 	// 질문하기 메소드 ========================================================================================================
 	/*
 	 * no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt 
@@ -201,7 +192,7 @@ public class JobKnowledgeModel {
 			System.out.println("질문하기 모델");			
 			request.setCharacterEncoding("utf-8");
 			
-			// session
+			// 세션 -------------------------------------------------------
 			HttpSession session = request.getSession();									// 세션 가져오기
 			
 			
@@ -213,7 +204,7 @@ public class JobKnowledgeModel {
 			
 			// VO에 파라미터를 담아서 DAO의 질문하기 메소드 실행 -------------------------
 			JobKnowledgeVO vo = new JobKnowledgeVO();
-			vo.setId(session.getId());													// 아이디를 세션id로 지정
+			vo.setId((String)session.getAttribute("id"));								// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★
 			
 			vo.setSubject(subject);
 			vo.setContent(content);
@@ -230,6 +221,10 @@ public class JobKnowledgeModel {
 	
 	
 	
+	
+	
+	
+	
 	// 답변달기 메소드 ====================================================================================================
 	@RequestMapping("jobKnowledge/reply.do")
 	public String jobknowledge_Reply(HttpServletRequest request) {
@@ -237,14 +232,21 @@ public class JobKnowledgeModel {
 			System.out.println("답변달기 모델");
 			request.setCharacterEncoding("utf-8");
 			
+			// 세션 --------------------------------------------------------------
+			HttpSession session = request.getSession();
+			
 			// 게시글 페이지로부터 받는 파라미터들 ----------------------------------------------
 			String no = request.getParameter("no");
-			String content = request.getParameter("content");
+			String content = request.getParameter("content");							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
+			String sessionID = (String)session.getAttribute("id");
 			
 			// Map에 파라미터 담아서 DAO 메소드 실행 --------------------------------------------
 			Map map = new HashMap();
-			map.put("no", no);
+			map.put("id", sessionID);
 			map.put("content", content);
+			map.put("no", no);
+			
+			
 			JobKnowledgeDAO.jobknowledgeReply(map);
 			JobKnowledgeDAO.jobknowledgeUpdateReply(Integer.parseInt(no));
 			
@@ -262,8 +264,103 @@ public class JobKnowledgeModel {
 	
 	
 	
+	// 게시글 수정 전 내용 가져오기 =================================================================================================================
+	@RequestMapping("jobKnowledge/modify_board.do")
+	public String jobknowledgeModifyBoard(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			// 사용자로부터 받는  파라미터 -----------------------------------------------
+			String no = request.getParameter("no");
+			
+			// DAO 메소드 결과를 vo에 담아서 전송
+			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeModifyBoard(Integer.parseInt(no));
+			request.setAttribute("vo", vo);
+			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/modify_board.jsp");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "../jobKnowledge/box.jsp";			// ????????????????????????????????????????????????????????????????????????????
+	}
+	// 게시글 수정하기 ===========================================================================================================================
+	@RequestMapping("jobKnowledge/modify_board_ok.do")
+	public String jobknowledgeModifyBoard_ok(HttpServletRequest request) {
+		
+		try {
+			System.out.println("게시글 수정하기 모델");
+			request.setCharacterEncoding("utf-8");
+			
+			// 사용자로부터 받는 파라미터 ----------------------------------------------------
+			String no = request.getParameter("no");
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+			
+			// Map에 파라미터 넣기 ---------------------------------------------------------
+			Map map = new HashMap();
+			map.put("no", Integer.parseInt(no));
+			map.put("subject", subject);
+			map.put("content", content);
+			
+			// DAO 메소드 실행 -----------------------------------------------------------
+			JobKnowledgeDAO.jobknowledgeModifyBoard_ok(map);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/modify_board_ok.jsp";
+	}
 	
 	
+	
+	
+	
+	
+	// 게시글과 답변 삭제하기 =======================================================================================================
+	@RequestMapping("jobKnowledge/deleteAll.do")
+	public String jobKnowledgeDeleteAll(HttpServletRequest request) {
+		
+		try {
+			System.out.println("게시글과 답변 삭제하기");
+			
+			// 사용자로부터 받는 파라미터 --------------------------------------
+			String no = request.getParameter("no");
+			
+			// DAO 메소드 실행
+			JobKnowledgeDAO.jobknowledgeDeleteAll(Integer.parseInt(no));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/deleteAll.jsp";
+	}
+	// 삭제 확인창 띄우기 ===========================================================================================================
+	@RequestMapping("jobKnowledge/deleteReally.do")
+	public String jobKnowledgeDeleteReally(HttpServletRequest request) {
+		return "../jobKnowledge/deleteReally.jsp";
+	}
+	
+	
+	
+	
+	// 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
+		@RequestMapping("jobKnowledge/profile.do")
+		public String jobKnowledge_profile(HttpServletRequest request) {
+			
+			try {
+				System.out.println("프로필");
+				
+				request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/profile.jsp");
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			
+			return "../jobKnowledge/box.jsp";
+		}
 	
 	
 	

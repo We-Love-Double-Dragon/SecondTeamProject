@@ -109,6 +109,8 @@ public class JobKnowledgeDAO {
 	}
 	
 	
+	
+	
 	// 질문하기 =======================================================================================================================
 	public static void jobknowledgeInsertAnswer(JobKnowledgeVO vo) {
 		SqlSession session = ssf.openSession(true);
@@ -121,6 +123,8 @@ public class JobKnowledgeDAO {
 	}
 	
 	
+	
+	
 	// 답변달기 ========================================================================================================================
 	public static void jobknowledgeReply(Map map) {
 		SqlSession session = ssf.openSession(true);
@@ -131,7 +135,6 @@ public class JobKnowledgeDAO {
 			e.printStackTrace();
 		}
 	}
-	
 	// 답변달면 원 질문글 답변수 증가 ==========================================================================================================
 	public static void jobknowledgeUpdateReply(int no) {
 		SqlSession session = ssf.openSession(true);
@@ -142,7 +145,6 @@ public class JobKnowledgeDAO {
 			e.printStackTrace();
 		}
 	}
-	
 	// 답변달면 group_step 증가 ==========================================================================================================
 	public static void jobknowledgeUpdateGroupStep(Map map) {
 		SqlSession session = ssf.openSession(true);
@@ -154,6 +156,49 @@ public class JobKnowledgeDAO {
 		}
 	}
 	
+	
+	
+	
+	
+	// 게시글 수정 전 내용 가져오기 =============================================================================================================
+	public static JobKnowledgeVO jobknowledgeModifyBoard(int no) {
+		JobKnowledgeVO vo = new JobKnowledgeVO();
+		SqlSession session = ssf.openSession();
+		
+		try {
+			vo = session.selectOne("jobknowledgeDetail", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	// 게시글 수정하기 =======================================================================================================================
+	public static void jobknowledgeModifyBoard_ok(Map map) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.update("jobknowledgeModifyBoard_ok", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	// 게시글과 답변 삭제하기 ================================================================================================================
+	public static void jobknowledgeDeleteAll(int no) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.delete("jobknowledgeDeleteBoard", no);
+			session.delete("jobknowledgeDeleteReply", no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
