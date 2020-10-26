@@ -9,7 +9,7 @@
 <body>
 	<header>
         <!-- Header Start -->
-       <div class="header-area">
+       <div class="header-area" style="background-color: #5076A0;">
             <div class="main-header ">
                 <div class="header-top black-bg d-none d-md-block">
                    <div class="container">
@@ -61,7 +61,7 @@
                                 <div class="main-menu d-none d-md-block">
                                     <nav>                  
                                         <ul id="navigation">    
-                                            <li><a href="index.html">홈</a></li>
+                                            <li><a href="../main/main.do">홈</a></li>
                                             <li><a href="categori.html">채용공고</a>
                                             	<ul class="submenu">
                                                     <li><a href="#">100대기업 공채</a></li>
@@ -85,11 +85,11 @@
                                                     <li><a href="#">추가요망</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact.html">Job 지식인</a>
+                                            <li><a href="../jobKnowledge/list.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
                                             	<ul class="submenu">
-                                                    <li><a href="elements.html">추가요망</a></li>
-                                                    <li><a href="blog.html">추가요망</a></li>
-                                                    <li><a href="single-blog.html">추가요망</a></li>
+                                                    <li><a href="../jobKnowledge/answer.do">질문하기</a></li>
+                                                    <li><a href="../jobKnowledge/profile.do">지식인 프로필</a></li>
+                                                    <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="#">로그인</a>
