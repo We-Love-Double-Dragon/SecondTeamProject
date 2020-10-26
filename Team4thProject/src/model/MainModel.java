@@ -15,10 +15,9 @@ public class MainModel {
 			request.setAttribute("main_jsp", "../main/content.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
-		
+		}
 		return "../main/main.jsp";
+	
 	}
-	
-	
 	
 }
