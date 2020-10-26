@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -8,8 +9,10 @@
         <title>쌍용인력사무소</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script> -->
         <link rel="manifest" href="site.webmanifest">
 		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+		
 
 		<!-- CSS here -->
             <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -24,6 +27,10 @@
             <link rel="stylesheet" href="assets/css/slick.css">
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
+ 
+ 	 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+  
    </head>
 
    <body>
@@ -38,23 +45,14 @@
 
 
 <!-- 콘텐트(페이지바뀌는곳) =========================================================================================================== 콘텐트(페이지바뀌는곳) -->
-    <jsp:include page="${main_jsp }"></jsp:include>
+	<jsp:include page="${main_jsp }"></jsp:include>
     
     
     
     
 <!-- 푸터 ================================================================================================================================ 푸터-->
    <jsp:include page="../main/footer.jsp"></jsp:include>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
    
 	<!-- JS here (자바스크립트 링크) ============================================================================================= JS here (자바스크립트 링크) -->
 	

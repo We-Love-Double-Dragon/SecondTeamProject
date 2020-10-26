@@ -22,5 +22,5 @@ public class CreateSqlSessionFactory {
 		return ssf;
 	}
 	
-    
 }
+
