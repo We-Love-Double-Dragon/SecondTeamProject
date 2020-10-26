@@ -31,6 +31,8 @@ public class LetterDAO {
 		session.close();
 		return total;
 	}
+	//자소서 상세보기
+	//<select id="letterDetailData" resultType="SelfVO" parameterType="int">
 	
 	
 	

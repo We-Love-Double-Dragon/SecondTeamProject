@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!doctype html>
 <html>
@@ -34,41 +32,59 @@
 
 <body>
 			<div class="section-top-border">
-				<h3 class="mb-30">합격 자기소개서</h3>
-				<!-- 이부분에 검색기능 추가할것!!! -->
-				<div class="progress-table-wrap">
-				<div class=button>
-					<a href="insert.jsp" class="btn btn-sm btn-primary">새글</a>
-				</div>
-					<table class="table">
-						<tr>
-							<th class="text-center" width=10%>번호</th>
-							<th class="text-center" width=30%>직종</th>
-							<th class="text-center" width=60%>제목</th>
-						</tr>
-						<c:forEach var="vo" items="${list }">
-						<tr>
-							<td class="text-center" width=10%>${vo.sno }</td>
-							<td class="text-center" width=30%>${vo.sindutype }</td>
-							<td class="text-center" width=60%>
-					<!--	<a href="detail.jsp?sno=${vo.sno }">  -->${vo.ssubject }<!--</a>  -->
-							</td>
-						</tr>
-							<!-- 이 항목을 10개씩 출력-->
-						</c:forEach>
-					</table>
-					<table>
-				        <tr>
-				          <td class="text-right">
-				            <a href="letter.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
-				              ${curpage } page / ${totalpage } pages
-				            <a href="letter.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
-				          </td>
-				        </tr>
-				      </table>
-				</div>
-			</div>
-	
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<h3 class="mb-30">합격자소서 작성</h3>
+						<form method=post action="../selfletter/insert_ok.do">
+							<div class="mt-10">
+								<input type="text" name="company_name" placeholder="지원기업명"
+									 onfocus="this.placeholder = ''" onblur="this.placeholder = '지원기업명'" required
+									class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="industry_type" placeholder="지원 직무"
+									 onfocus="this.placeholder = ''" onblur="this.placeholder = '지원직무'" required
+									class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="text" name="subject" placeholder="자소서 제목"
+									 onfocus="this.placeholder = ''" onblur="this.placeholder = '자소서 제목'" required
+									class="single-input">
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="질문1" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '항목1'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="답변1" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '답변1'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="질문2" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '항목2'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="답변2" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '답변2'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="질문3" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '항목3'" required></textarea>
+							</div>
+							<div class="mt-10">
+								<textarea class="single-textarea" placeholder="답변3" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = '답변'" required></textarea>
+							</div>
+							<div id="btn_group">
+				                <input type=button value="입력" class="genric-btn success radius" id="submitBtn">
+				                <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
+				                 onclick="javascript:history.back()">
+			               </div>
+
+						</form>
+					</div>
+					
+
 <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
