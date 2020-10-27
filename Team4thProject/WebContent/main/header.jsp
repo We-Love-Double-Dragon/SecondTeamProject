@@ -79,8 +79,9 @@
                                             	<ul class="submenu">
                                                     <li><a href="../selfletter/letter.do">합격자소서</a></li>
                                                     <li><a href="../company/company.do">기업·면접후기</a></li>
-                                                    <li><a href="#">동영상</a></li>
-                                                    <li><a href="#">꿀팁</a></li>
+                                                    <li><a href="../newsTipVideo/news.do">취업뉴스</a></li>
+                                                    <li><a href="../newsTipVideo/tip.do">취업꿀팁</a></li>
+                                                    <li><a href="../newsTipVideo/video.do">취업영상</a></li>
                                                     <li><a href="details.html">추가요망</a></li>
                                                 </ul>
                                             </li>
