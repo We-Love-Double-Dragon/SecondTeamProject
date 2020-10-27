@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.resume-mapper">
+ <insert id="resumeInsert" parameterType="vo.ResumeVO">
+     INSERT INTO resume VALUES(
+       #{id},
+       #{photo},
+       #{stype},
+       #{sname},
+       #{smajor},
+       #{btype},
+       #{bname},
+       #{bdate},
+       #{cname},
+       #{cdate},
+       #{cl}
+     )
+  </insert>
+</mapper>
