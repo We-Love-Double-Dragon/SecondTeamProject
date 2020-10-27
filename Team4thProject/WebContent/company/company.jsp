@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
     <head>
@@ -31,7 +31,7 @@
 
    <body>
     <main>
-   <!-- Whats New Start -->
+   <!-- 기업목록 출력 시작 -->
     <section class="whats-news-area pt-50 pb-20">
         <div class="container">
             <div class="row">
@@ -39,23 +39,7 @@
                 <div class="row d-flex justify-content-between">
                     <div class="col-lg-3 col-md-3">
                         <div class="section-tittle mb-30">
-                            <h3>Whats New</h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 col-md-9">
-                        <div class="properties__button">
-                            <!--Nav Button  -->                                            
-                            <nav>                                                                     
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Travel</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                    <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
-                                    <a class="nav-item nav-link" id="nav-technology" data-toggle="tab" href="#nav-techno" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a>
-                                </div>
-                            </nav>
-                            <!--End Nav Button  -->
+                            <h3>기업보기</h3>
                         </div>
                     </div>
                 </div>
@@ -70,11 +54,11 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="assets/img/news/whatNews1.jpg" alt="">
+                                                    <img src="${vo.clogo }" alt="">
                                                 </div>
                                                 <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                                    <span class="color1">${vo.cscore }</span>
+                                                    <h4><a href="detail.jsp?cno=${vo.cno }">${vo.cname }</a></h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +91,7 @@
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
-                                                    <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                                                    <h4><a href="#">${vo.cname }</a></h4>
                                                 </div>
                                             </div>
                                         </div>
@@ -379,51 +363,193 @@
                 <div class="section-tittle mb-40">
                     <h3>Follow Us</h3>
                 </div>
-                <!-- Flow Socail -->
-                <div class="single-follow mb-45">
-                    <div class="single-box">
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="assets/img/news/icon-fb.png" alt=""></a>
-                            </div>
-                            <div class="follow-count">  
-                                <span>8,045</span>
-                                <p>Fans</p>
-                            </div>
-                        </div> 
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="assets/img/news/icon-tw.png" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>8,045</span>
-                                <p>Fans</p>
-                            </div>
+                <div class="blog_right_sidebar">
+                  <aside class="single_sidebar_widget search_widget">
+                     <form action="#">
+                        <div class="form-group">
+                           <div class="input-group mb-3">
+                              <input type="text" class="form-control" placeholder='Search Keyword'
+                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                              <div class="input-group-append">
+                                 <button class="btns" type="button"><i class="ti-search"></i></button>
+                              </div>
+                           </div>
                         </div>
-                            <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="assets/img/news/icon-ins.png" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>8,045</span>
-                                <p>Fans</p>
-                            </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Search</button>
+                     </form>
+                  </aside>
+                  <aside class="single_sidebar_widget post_category_widget">
+                     <h4 class="widget_title">Category</h4>
+                     <ul class="list cat-list">
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>서비스업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>제조/화학</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>의료/제약/복지</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>유통/무역/운송</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>교육업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>건설업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>IT/웹/통신</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>미디어/디자인</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>은행/금융업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>기관/협회</p>
+                           </a>
+                        </li>
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget popular_post_widget">
+                     <h3 class="widget_title">Recent Post</h3>
+                     <div class="media post_item">
+                        <img src="assets/img/post/post_1.png" alt="post">
+                        <div class="media-body">
+                           <a href="single-blog.html">
+                              <h3>From life was you fish...</h3>
+                           </a>
+                           <p>January 12, 2019</p>
                         </div>
-                        <div class="follow-us d-flex align-items-center">
-                            <div class="follow-social">
-                                <a href="#"><img src="assets/img/news/icon-yo.png" alt=""></a>
-                            </div>
-                            <div class="follow-count">
-                                <span>8,045</span>
-                                <p>Fans</p>
-                            </div>
+                     </div>
+                     <div class="media post_item">
+                        <img src="assets/img/post/post_2.png" alt="post">
+                        <div class="media-body">
+                           <a href="single-blog.html">
+                              <h3>The Amazing Hubble</h3>
+                           </a>
+                           <p>02 Hours ago</p>
                         </div>
-                    </div>
-                </div>
-                <!-- New Poster -->
-                <div class="news-poster d-none d-lg-block">
-                    <img src="assets/img/news/news_card.jpg" alt="">
-                </div>
+                     </div>
+                     <div class="media post_item">
+                        <img src="assets/img/post/post_3.png" alt="post">
+                        <div class="media-body">
+                           <a href="single-blog.html">
+                              <h3>Astronomy Or Astrology</h3>
+                           </a>
+                           <p>03 Hours ago</p>
+                        </div>
+                     </div>
+                     <div class="media post_item">
+                        <img src="assets/img/post/post_4.png" alt="post">
+                        <div class="media-body">
+                           <a href="single-blog.html">
+                              <h3>Asteroids telescope</h3>
+                           </a>
+                           <p>01 Hours ago</p>
+                        </div>
+                     </div>
+                  </aside>
+                  <aside class="single_sidebar_widget tag_cloud_widget">
+                     <h4 class="widget_title">Tag Clouds</h4>
+                     <ul class="list">
+                        <li>
+                           <a href="#">project</a>
+                        </li>
+                        <li>
+                           <a href="#">love</a>
+                        </li>
+                        <li>
+                           <a href="#">technology</a>
+                        </li>
+                        <li>
+                           <a href="#">travel</a>
+                        </li>
+                        <li>
+                           <a href="#">restaurant</a>
+                        </li>
+                        <li>
+                           <a href="#">life style</a>
+                        </li>
+                        <li>
+                           <a href="#">design</a>
+                        </li>
+                        <li>
+                           <a href="#">illustration</a>
+                        </li>
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget instagram_feeds">
+                     <h4 class="widget_title">Instagram Feeds</h4>
+                     <ul class="instagram_row flex-wrap">
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#">
+                              <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
+                           </a>
+                        </li>
+                     </ul>
+                  </aside>
+                  <aside class="single_sidebar_widget newsletter_widget">
+                     <h4 class="widget_title">Newsletter</h4>
+                     <form action="#">
+                        <div class="form-group">
+                           <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                        </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Subscribe</button>
+                     </form>
+                  </aside>
+               </div>
+            </div>
             </div>
             </div>
         </div>

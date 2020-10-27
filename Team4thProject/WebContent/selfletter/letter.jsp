@@ -5,7 +5,6 @@
 
 <!doctype html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -51,7 +50,7 @@
 							<td class="text-center" width=10%>${vo.sno }</td>
 							<td class="text-center" width=30%>${vo.sindutype }</td>
 							<td class="text-center" width=60%>
-					<!--	<a href="detail.jsp?sno=${vo.sno }">  -->${vo.ssubject }<!--</a>  -->
+								<!--<a href="detail.jsp?sno=${vo.sno }">-->${vo.ssubject }<!-- </a> --> 
 							</td>
 						</tr>
 							<!-- 이 항목을 10개씩 출력-->

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
 
@@ -48,30 +49,35 @@
 	<!-- Start Sample Area -->
 	<section class="text-area">
 		<div class="container box_1170">
-			<h3 class="text-heading">ㅁㅁ합격자기소개서(vo.ssubject)</h3>
+			<h3 class="text-heading">합격 자기소개서</h3>
 			<div class="progress-table-wrap">
 				<table class="table">
 					<tr>
-						<th class="text-center" width=30%>기업명</th>
-						<th class="text-center" width=60%>직종</th>
-						<th class="text-center" width=60%>제목</th>
+						<th class="text-center" width=20%>기업명</th>
+						<td class="text-center" width=20%>${vo.sname }</td>
+						<th class="text-center" width=30%>직종</th>
+						<td class="text-center" width=30%>${vo.sindutype }</td>
+					</tr>
+					<tr>
+						<th class="text-center" width=50%>제목</th>
+						<td class="text-center" width=50%>${vo.ssubject }</td>
 					</tr>
 					<c:forEach var="vo" items="${list }">
-						<tr>
-							<td class="text-center" width=10%>${vo.sname }</td>
-							<td class="text-center" width=30%>${vo.sindutype }</td>
-							<td class="text-center" width=60%>${vo.ssubject }</td>
-						</tr>
-				</table>
-				<table>
-						<tr>
-							<p class="sample-text">${vo.sq1}</p>
-							<p class="sample-text">${vo.sa1}</p>
-							<p class="sample-text">${vo.sq2}</p>
-							<p class="sample-text">${vo.sa2}</p>
-							<p class="sample-text">${vo.sq3}</p>
-							<p class="sample-text">${vo.sa3}</p>
-						</tr>
+					<tr>
+						<pre><td class="text-center">${vo.sq1 }</td></pre>
+						<pre><td class="text-center">${vo.sa1 }</td></pre>
+						<pre><td class="text-center">${vo.sq2 }</td></pre>
+						<pre><td class="text-center">${vo.sa2 }</td></pre>
+						<pre><td class="text-center">${vo.sq3 }</td></pre>
+						<pre><td class="text-center">${vo.sa3 }</td></pre>
+					</tr>
+					<tr>
+			          <td colspan="4" class="text-right">
+			            <%-- <a href="update.do?no=${vo.no }" class="btn btn-xs btn-success">수정</a> --%>
+			            <%-- <a href="delete.do?no=${vo.no }" class="btn btn-xs btn-info">삭제</a> --%>
+			            <a href="letter.do" class="btn btn-xs btn-warning">목록</a>
+			          </td>
+			        </tr>
 					</c:forEach>
 				</table>
 			</div>

@@ -13,7 +13,7 @@
         <param-value>C:\SecondTeamProject\Team4thProject\src</param-value>
      </init-param>
   </servlet>
-  
+
   <servlet-mapping>
      <servlet-name>dispatcher</servlet-name>
      <url-pattern>*.do</url-pattern>
