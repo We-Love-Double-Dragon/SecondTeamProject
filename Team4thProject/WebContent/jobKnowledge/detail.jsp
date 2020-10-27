@@ -11,9 +11,31 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	function deleteReally(){
+	function deleteReally_board(){
 		window.open("../jobKnowledge/deleteReally.do", "deleteReally", "width=320,height=300,scrollbars=no")
 	}
+	
+	function deleteReally_reply(){
+		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
+	}
+	
+	var rno = $('#parentId_reply').val();			// rno 보내기
+	var sessionID = $('#sessionID').val();			// sessionID 보내기
+	var bno = $('#bno').val();						// 질문글번호 보내기
+	$(function(){
+		$('#commentButton').click(function(){
+			$.ajax({
+				type:'get',
+				data:{"rno":rno, "sessionID":sessionID, "bno":bno},
+				url:'../jobKnowledge/commentButton.do',
+				success:function(result){
+					$('.comment_area').html(result);
+				}
+			})
+		})
+		
+		
+	});
 </script>
 <style type="text/css">
 .bottom_info span{
@@ -48,7 +70,7 @@
 					<c:if test="${vo.id == sessionScope.id }" >																				<!-- 세션id와 게시글 id가 같으면 수정 / 삭제 버튼 활성화 -->
 						<form action="../jobKnowledge/modify_board.do" method="post" style="position: absolute; right: 5px; bottom:1px;">
 							<input type=submit value="수정">
-							<input type=hidden name=no value=${vo.no }>
+							<input type=hidden name=no value=${vo.no } id="bno">
 						</form>
 					</c:if>
 					<c:if test="${vo.id == sessionScope.id }" >	
@@ -56,14 +78,21 @@
 							<input type=submit value="삭제">
 							<input type=hidden name=no value=${vo.no }>
 						</form> --%>
-						<input type=button value=삭제 onclick="deleteReally()" style="position: absolute; right: 50px; bottom:1px;">
+						<input type=button value=삭제 onclick="deleteReally_board()" style="position: absolute; right: 50px; bottom:1px;">
 						<input type=hidden value=${vo.no } id="parentId">
 					</c:if>
 					
 				</div>
 			</div>
 			
-			<form action="../jobKnowledge/reply.do" method="post">																													<!-- 답변하기 -->
+			<c:if test="${sessionScope.id==null}">
+				<c:set var="isLogin" value="../user/login_form.do"/>
+			</c:if>
+			<c:if test="${sessionScope.id!=null}">
+				<c:set var="isLogin" value="../jobKnowledge/reply.do"/>
+			</c:if>
+			<%-- <c:if test="${sessionScope.id==null? ${isLogin}==../user/login_form.do: ${ isLogin}==../jobKnowledge/reply.do }"/> --%>
+			<form action="${isLogin }" method="post">																													<!-- 답변하기 -->
 				<div class="reply_area" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-top: 30px; position: relative;">
 					
 						<div class="reply_content_area">
@@ -91,6 +120,29 @@
 					</div>
 					<div class="content_area">
 						<p>${rVO.content }</p>
+					</div>
+					<div class="button_reply" style="position: relative;">
+						
+						<c:if test="${sessionScope.id != null}">											<!-- 댓글창 뜨는 버튼 =========================================================== -->
+							<input type="button" id="commentButton" value="댓글">
+						</c:if>
+																											<!-- 답변 수정 / 삭제 -->
+						<c:if test="${rVO.id == sessionScope.id }" >
+							<form action="../jobKnowledge/modify_reply.do" method="post" style="position: absolute; right: 5px; bottom:1px;">
+								<input type=submit value="수정">
+								<input type=hidden name=no value=${rVO.no }>
+							</form>
+								<input type=button value=삭제 onclick="deleteReally_reply()" style="position: absolute; right: 50px; bottom:1px;">
+								<input type=hidden value=${rVO.no } id="parentId_reply">	<!-- 답변글 번호 -->
+								<input type=hidden value=${vo.no } id="parentId_reply_refresh">	<!-- 질문글 번호(질문글 reply 감소 용도) -->
+						</c:if>
+					</div>
+					
+					<input type=hidden id="sessionID" value="${sessionID }">	<!-- 세션아이디 보내서 아이디로 삼기 -->		
+					<div class="comment_area">		<!-- 댓글창 뜨는 공간 -->
+					</div>	
+					<div class="comment_list">				<!-- 댓글창 리스트 -->
+					
 					</div>
 				</div>
 			</c:forEach>

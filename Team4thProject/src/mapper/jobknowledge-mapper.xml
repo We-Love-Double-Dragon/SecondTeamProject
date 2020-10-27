@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.jobknowledge-mapper">
 
+<!-- 리스트 출력 ===================================================================================================================== 리스트 출력 -->
 <!-- 전체태그 게시글 리스트 출력 -->
 	<select id="jobknowledgeListData" resultType="JobKnowledgeVO" parameterType="hashmap">
 		SELECT no, subject, content, tag, regdate, reply, num
@@ -30,11 +31,20 @@
 	</select>
 	
 	
+<!-- 답변 적은 순으로 리스트 출력 -->
+	<select id="jobknowledgeListDataByReply" resultType="JobKnowledgeVO" parameterType="hashmap">
+		SELECT no, subject, content, tag, regdate, reply, num
+		FROM (SELECT no, subject, content, tag, regdate, reply, rownum as num
+		FROM (SELECT no, subject, content, tag, regdate, reply 
+		FROM jobknowledge WHERE root = 0 ORDER BY reply))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
 	
 	
 	
 	
 	
+<!-- 상세보기 ===================================================================================================================== 상세보기 -->	
 <!-- 게시글 상세보기 -->
 	<select id="jobknowledgeDetail" resultType="JobKnowledgeVO" parameterType="int">
 		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE no = #{no}
@@ -47,12 +57,16 @@
 	<select id="jobknowledgeDetailReply" resultType="JobKnowledgeVO" parameterType="int">
 		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE root = #{no} ORDER BY regdate
 	</select>
+<!-- 답변에 해당하는 댓글 가져오기 -->
+	<select id="jobknowledgeGetComment" resultType="JobKnowledge_CommentVO" parameterType="int">
+		SELECT no, id, content, regdate, root FROM JobKnowledge_Comment WHERE comment_id = #{no}
+	</select>
 	
 	
 	
 	
 	
-<!-- 질문하기 -->
+<!-- 질문하기 ========================================================================================================================= 질문하기-->
 	<insert id="jobknowledgeInsertAnswer" parameterType="JobKnowledgeVO">
 		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
 		VALUES(
@@ -77,7 +91,7 @@
 	
 	
 	
-<!-- 답변달기 -->
+<!-- 답변달기  ========================================================================================================================= 답변달기 -->
 	<insert id="jobknowledgeReply" parameterType="hashmap">
 		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
 		VALUES(
@@ -110,7 +124,7 @@
 	
 	
 	
-<!-- 게시글 수정하기 -->
+<!-- 게시글 수정하기  =======================================================================================================================게시글 수정하기-->
 	<update id="jobknowledgeModifyBoard_ok" parameterType="hashmap">
 		UPDATE jobknowledge SET
 		content = #{content},
@@ -121,13 +135,49 @@
 	
 	
 	
-<!-- 게시글 삭제하기 -->
+<!-- 게시글 삭제하기 =====================================================================================================================게시글 삭제하기-->
 	<delete id="jobknowledgeDeleteBoard" parameterType="int">
 		DELETE FROM jobknowledge WHERE no = #{no}
 	</delete>
-<!-- 답변 삭제하기 -->
+<!-- 답변 삭제하기 (질문글과 함께 삭제)-->
 	<delete id="jobknowledgeDeleteReply" parameterType="int">
 		DELETE FROM jobknowledge WHERE root = #{no}
 	</delete>
+	
+	
+<!-- 답변 삭제하기 (답변만 삭제) ==================================================================================================== 답변 삭제하기 (답변만 삭제) -->
+	<delete id="jobknowledgeDeleteReplyAlone" parameterType="int">
+		DELETE FROM jobknowledge WHERE no = #{no}
+	</delete>
+<!-- 질문글의 답변수 감소 -->
+	<update id="jobknowledgeDeclineReply" parameterType="int">
+		UPDATE jobknowledge SET reply = reply - 1 WHERE no = #{no}
+	</update>
+	
+	
+
+<!-- 댓글 달기 ================================================================================================================= 댓글 달기 -->
+	<insert id="jobknowledgeInsertComment" parameterType="hashmap">
+		INERT INTO jobknowledge_comment(no, id, comment_id, content, regdate, comment_step, root)
+		VALUES(
+			(SELECT MAX(no) FROM jobknowledge_comment)+1,
+			#{id},
+			(SELECT group_id FROM jobknowledge WHERE no = #{rno}),
+			#{content},
+			SYSDATE,
+			0,
+			(SELECT no FROM jobknowledge WHERE no = #{rno})
+		)
+		
+	</insert>
+	<!-- 
+	private int no;				// 댓글번호
+	private String id;			// 작성자 아이디
+	private int comment_id;		// 댓글그룹
+	private String content;		// 내용
+	private Date regdate;		// 작성일
+	private int comment_step;	// 그룹내순서
+	private int root;			// 뿌리글
+	 -->
 	
 </mapper>

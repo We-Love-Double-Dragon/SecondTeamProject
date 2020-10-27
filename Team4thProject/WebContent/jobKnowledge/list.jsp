@@ -45,7 +45,8 @@
 					<h3>전체</h3>																<!-- 머리부분 제목 -->
 					<div class="list_option" style="text-align: right;">						<!-- 머리부분 옵션들 -->
 						
-						<input type=button value="답변적은순" id="array_by_reply" style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
+						<input type=button value="답변적은순" id="array_by_reply" onclick="location.href='../jobKnowledge/listByReply.do'"
+						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
 						<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
 						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
 						

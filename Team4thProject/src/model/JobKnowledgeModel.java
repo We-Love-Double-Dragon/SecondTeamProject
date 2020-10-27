@@ -40,6 +40,9 @@ public class JobKnowledgeModel {
 			if(page == null) {		
 				page = "1";
 			}
+			HttpSession session = request.getSession();											//세션아이디 전송 ------------------------------
+			String sessionID = (String)session.getAttribute("id");
+			request.setAttribute("sessionID", sessionID);
 			
 			int currpage = Integer.parseInt(page);						// 현재 페이지
 			int totalpage = JobKnowledgeDAO.jobknowledgeTatalPage();	// 총 페이지
@@ -68,7 +71,7 @@ public class JobKnowledgeModel {
 			request.setAttribute("startpage", startpage);
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/list.jsp");
-			System.out.println("잡지식인 메인페이지");
+			System.out.println("잡지식인 전체 게시글 출력");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -82,6 +85,10 @@ public class JobKnowledgeModel {
 		
 		try {
 			System.out.println("태그별 게시물출력 모델");
+			
+			HttpSession session = request.getSession();											//세션아이디 전송 ------------------------------
+			String sessionID = (String)session.getAttribute("id");
+			request.setAttribute("sessionID", sessionID);
 			
 			// 변수 -------------------------------------------------------------
 			String page = request.getParameter("page");					// 사용자로부터 받는 페이지
@@ -122,13 +129,66 @@ public class JobKnowledgeModel {
 			request.setAttribute("endpage", endpage);
 			request.setAttribute("tag", tag); 													// 태그 파라미터 보내기
 			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/listByTag.jsp");
-			System.out.println("잡지식인 메인페이지");
+			System.out.println("잡지식인 태그별 게시글 출력");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return "../jobKnowledge/box.jsp";
 	}
+	
+	
+	// 답변적은순 게시물 출력 ============================================================================================
+		@RequestMapping("jobKnowledge/listByReply.do")
+		public String jobKnowledge_listByReply(HttpServletRequest request) {
+			
+			
+			try {
+				
+				// 변수 -------------------------------------------------------------
+				String page = request.getParameter("page");					// 사용자로부터 받는 페이지
+				if(page == null) {		
+					page = "1";
+				}
+				
+				HttpSession session = request.getSession();											//세션아이디 전송 ------------------------------
+				String sessionID = (String)session.getAttribute("id");
+				request.setAttribute("sessionID", sessionID);
+				
+				int currpage = Integer.parseInt(page);						// 현재 페이지
+				int totalpage = JobKnowledgeDAO.jobknowledgeTatalPage();	// 총 페이지
+				int rowSize = 10;											// 한번에 출력될 게시글
+				int start = (rowSize*currpage) - (rowSize - 1);				
+				int end = (rowSize*currpage);
+				int block = 5;												// 페이지 블록
+				int startpage=((currpage-1)/block*block)+1;					
+				int endpage=((currpage-1)/block*block)+block;
+				if(endpage>totalpage) {
+					endpage=totalpage;
+				}
+				
+				// 해쉬맵에 시작 / 끝 변수 담기 ------------------------------------------------------
+				Map map = new HashMap();
+				map.put("start", start);
+				map.put("end", end);
+				
+				List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListDataByReply(map);			// DAO의 메소드 리턴값을 받는 List 변수
+				
+				// 페이지로 보낼 파라미터들 -----------------------------------------------------------
+				request.setAttribute("list", list);
+				request.setAttribute("currpage", currpage);
+				request.setAttribute("totalpage", totalpage);
+				request.setAttribute("block", block);
+				request.setAttribute("startpage", startpage);
+				request.setAttribute("endpage", endpage);
+				request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/listByReply.jsp");
+				System.out.println("잡지식인 답변 적은순으로 리스트 출력");
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return "../jobKnowledge/box.jsp";
+		}
 	
 	
 	
@@ -143,11 +203,17 @@ public class JobKnowledgeModel {
 			request.setCharacterEncoding("utf-8");
 			System.out.println("게시글 상세페이지");
 			
+			HttpSession session = request.getSession();											//세션아이디 전송 ------------------------------
+			String sessionID = (String)session.getAttribute("id");
+			request.setAttribute("sessionID", sessionID);
+			
 			String no = request.getParameter("no");					// 사용자로부터 받는 글번호 no
 			
 			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));				// DAO의 상세보기 메소드 리턴값을 vo에 담기 
 			
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeDetailReply(Integer.parseInt(no));	// list에 답변글들을 담기
+			
+			List<JobKnowledge_CommentVO> clist = JobKnowledgeDAO.jobknowledgeGetComment(Integer.parseInt(no));
 			
 			
 			request.setAttribute("vo", vo);
@@ -342,6 +408,74 @@ public class JobKnowledgeModel {
 	public String jobKnowledgeDeleteReally(HttpServletRequest request) {
 		return "../jobKnowledge/deleteReally.jsp";
 	}
+	
+	
+	
+	// 답변만 삭제하기 =======================================================================================================
+	@RequestMapping("jobKnowledge/delete_reply.do")
+	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
+		
+		try {
+			System.out.println("답변만 삭제하기");
+			
+			// 사용자로부터 받는 파라미터 --------------------------------------
+			String no = request.getParameter("no");		// 답변의 번호
+			String bno = request.getParameter("bno");
+			
+			// DAO 메소드 실행
+			JobKnowledgeDAO.jobknowledgeDeleteReplyAlone(Integer.parseInt(no), Integer.parseInt(bno));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/delete_reply.jsp";
+	}
+	// 답변만 삭제 확인창 띄우기 ===========================================================================================================
+	@RequestMapping("jobKnowledge/deleteReally_reply.do")
+	public String jobKnowledgeDeleteReally_reply(HttpServletRequest request) {
+		return "../jobKnowledge/deleteReally_reply.jsp";
+	}
+	
+	
+	
+	
+	// 댓글달기 ==========================================================================================================================
+	@RequestMapping("jobKnowledge/comment.do")
+	public String jobknowledge_InsertComment(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		String content = request.getParameter("content");
+		String rno = request.getParameter("rno");			// 답변글번호
+		String bno = request.getParameter("bno");			// 질문글번호
+		
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("content", content);
+		map.put("rno", rno);
+		
+		request.setAttribute("bno", bno);					// 질문글번호는 comment.jsp로 넘기고 바로 detail.do?no=${bno} 리다이렉트
+		
+		JobKnowledgeDAO.jobknowledgeInsertComment(map);
+		
+		return "../jobKnowledge/comment.jsp";
+	}
+	// 댓글창 보이기 =========================================================================================================================
+	@RequestMapping("jobKnowledge/commentButton.do")
+	public String jobknowledge_commentButton(HttpServletRequest request) {
+		
+		return "../jobKnowledge/commentButton.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

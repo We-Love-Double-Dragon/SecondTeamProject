@@ -10,6 +10,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 
 import vo.JobKnowledgeVO;
+import vo.JobKnowledge_CommentVO;
 
 public class JobKnowledgeDAO {
 	
@@ -78,6 +79,21 @@ public class JobKnowledgeDAO {
 		return total;
 	}
 	
+	// 답변 적은 순으로 게시글 출력 =====================================================================================================
+	public static List<JobKnowledgeVO> jobknowledgeListDataByReply(Map map) {
+		SqlSession session = ssf.openSession();
+		List<JobKnowledgeVO> list = new ArrayList<JobKnowledgeVO>();
+		
+		try {
+			list = session.selectList("jobknowledgeListDataByReply", map);
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return list;
+	} 
+	
 	
 	
 	
@@ -110,6 +126,20 @@ public class JobKnowledgeDAO {
 		}
 		
 		return list;
+	}
+	// 답변에 해당하는 댓글 가져오기
+	public static List<JobKnowledge_CommentVO> jobknowledgeGetComment(int no){
+		List<JobKnowledge_CommentVO> clist = new ArrayList<JobKnowledge_CommentVO>();
+		SqlSession session = ssf.openSession();
+		
+		try {
+			
+		} catch (Exception e) {
+			clist = session.selectList("jobknowledgeGetComment", no);		// 질문글번호(그룹번호)
+			session.close();
+		}
+		
+		return clist;
 	}
 	
 	
@@ -214,6 +244,33 @@ public class JobKnowledgeDAO {
 	
 	
 	
+	// 답변만 삭제하기 ================================================================================================================
+	public static void jobknowledgeDeleteReplyAlone(int no, int bno) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.delete("jobknowledgeDeleteReplyAlone", no);			// 답변만 삭제
+			session.update("jobknowledgeDeclineReply", bno);			// 질문글의 reply 감소
+			session.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	// 댓글 입력하기 ======================================================================================================================
+	public static void jobknowledgeInsertComment(Map map) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.insert("jobknowledgeInsertComment", map);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

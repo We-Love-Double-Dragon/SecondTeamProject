@@ -75,18 +75,6 @@
                                                     <li><a href="details.html">상시모집</a></li>
                                                 </ul>
                                             </li>
-                                            <!-- 
-                                            <li><a href="about.html">취업꿀팁</a>
-                                            	<ul class="submenu">
-                                                    <li><a href="../selfletter/letter.do">합격자소서</a></li>
-                                                    <li><a href="../company/company.do">기업·면접후기</a></li>
-                                                    <li><a href="../newsTipVideo/news.do">취업뉴스</a></li>
-                                                    <li><a href="../newsTipVideo/tip.do">취업꿀팁</a></li>
-                                                    <li><a href="../newsTipVideo/video.do">취업영상</a></li>
-                                                    <li><a href="details.html">추가요망</a></li>
-                                                </ul>
-                                            </li>
-                                             -->
                                             <li><a href="about.html">취업꿀팁</a>
                                             	<ul class="submenu">
                                                     <li><a href="../selfletter/letter.do">합격자소서</a></li>
@@ -106,7 +94,10 @@
                                             </li>
                                             <li><a href="../jobKnowledge/list.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
                                             	<ul class="submenu">
-                                                    <li><a href="../jobKnowledge/answer.do">질문하기</a></li>
+                                            		<li><a href="../jobKnowledge/list.do">목록</a></li>
+                                            		<c:if test="${sessionScope.id!=null }">
+                                            			<li><a href="../jobKnowledge/answer.do">질문하기</a></li>
+                                            		</c:if>
                                                     <li><a href="../jobKnowledge/profile.do">지식인 프로필</a></li>
                                                     <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
