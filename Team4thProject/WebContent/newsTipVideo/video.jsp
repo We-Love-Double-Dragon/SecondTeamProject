@@ -25,9 +25,9 @@
   </div>
   <div class="row">
     <div class="text-center">
-      <a href="../newsTipVideo/tip.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-info">이전</a>
+      <a href="../newsTipVideo/video.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-info">이전</a>
        ${curpage } page / ${totalpage } pages
-      <a href="../newsTipVideo/tip.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-success">다음</a>
+      <a href="../newsTipVideo/video.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-success">다음</a>
     </div>
   </div>
 </body>
