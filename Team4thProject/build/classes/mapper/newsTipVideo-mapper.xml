@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.newsTipVideo-mapper">
+
+	<!-- 뉴스 리스트 -->
+	<select id="newsListData" resultType="vo.NewsVO" parameterType="hashmap">
+	    SELECT n_no,n_poster,n_title,n_precontent,n_regdate,num
+	    FROM (SELECT n_no,n_poster,n_title,n_precontent,n_regdate,rownum as num
+	    FROM (SELECT n_no,n_poster,n_title,n_precontent,n_regdate 
+	    FROM news ORDER BY n_no))
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 뉴스 페이지 수 -->
+	<select id="newsTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM news
+	</select>
+
+	<!-- 뉴스 상세페이지 -->
+	<select id="newsDetailData" resultType="vo.NewsVO" parameterType="int">
+	    SELECT n_no,n_poster2,n_title,n_regdate,n_content,n_writer,n_hit FROM news 
+	    WHERE n_no=#{n_no}
+	</select>
+	
+	<!-- 뉴스 조회수 -->
+	<update id="newsHitIncrement" parameterType="int">
+		UPDATE news SET
+		n_hit=n_hit+1
+		WHERE n_no=#{n_no}
+	</update>
+	
+	<!-- 팁 리스트 -->
+	<select id="tipListData" resultType="vo.TipVO" parameterType="hashmap">
+	    SELECT t_no,t_poster,t_title,t_precontent,t_regdate,num
+	    FROM (SELECT t_no,t_poster,t_title,t_precontent,t_regdate,rownum as num
+	    FROM (SELECT t_no,t_poster,t_title,t_precontent,t_regdate 
+	    FROM tip ORDER BY t_no))
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 팁 페이지 수 -->
+	<select id="tipTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM tip
+	</select>
+	
+	<!-- 팁 상세페이지 -->
+	<select id="tipDetailData" resultType="vo.TipVO" parameterType="int">
+	    SELECT t_no,t_poster2,t_title,t_regdate,t_content,t_writer,t_hit FROM tip  
+	    WHERE t_no=#{t_no}
+	</select>
+	
+	<!-- 팁 조회수 -->
+	<update id="tipHitIncrement" parameterType="int">
+		UPDATE tip SET
+		t_hit=t_hit+1
+		WHERE t_no=#{t_no}
+	</update>
+	
+	<!-- 비디오 리스트 -->
+	<select id="videoListData" resultType="vo.VideoVO" parameterType="hashmap">
+	    SELECT v_no,v_poster,v_title,v_writer,num
+	    FROM (SELECT v_no,v_poster,v_title,v_writer,rownum as num
+	    FROM (SELECT v_no,v_poster,v_title,v_writer 
+	    FROM video ORDER BY v_no))
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 비디오 페이지 수 -->
+	<select id="videoTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/20.0) FROM video
+	</select>
+	
+	<!-- 비디오 상세페이지 -->
+	<select id="videoDetailData" resultType="vo.VideoVO" parameterType="int">
+	    SELECT v_no,v_title,v_video,v_writer,v_hit FROM video 
+	    WHERE v_no=#{v_no}
+	</select>
+	
+	<!-- 비디오 조회수 -->
+	<update id="videoHitIncrement" parameterType="int">
+		UPDATE video SET
+		v_hit=v_hit+1
+		WHERE v_no=#{v_no}
+	</update>
+</mapper>
