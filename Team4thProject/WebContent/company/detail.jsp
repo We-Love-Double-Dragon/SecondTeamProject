@@ -134,14 +134,27 @@
                <div class="single-post">
                   <div class="feature-img"></div>
                   	<h2>기업로고자리</h2>
-                     <img class="img-fluid" src="<%-- ${vo.clogo } --%>" alt="">
+                     <img class="img-fluid" src="${vo.clogo }" alt="">
                   </div>
                   <div class="blog_details">
                      <h2><%-- ${vo.cname } --%>기업이름</h2>
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="fa fa-user"></i> <%-- ${vo.cscore } --%></a></li>
+                        <li><a href="#"><i class="fa fa-user"></i>${vo.cscore }</a></li>
                         <li><a href="#"><i class="fa fa-comments"></i> <%-- ${vo.cindutype } --%></a></li>
                      </ul>
+                      <div class="col-lg-9 col-md-9">
+                        <div class="properties__button">
+                            <!--Nav Button  -->                                            
+                            <nav>                                                                     
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">소개</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">기업후기</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">면접후기</a> 
+                                </div>
+                            </nav>
+                            <!--End Nav Button  -->
+                        </div>
+                    </div>
 					<!-- 이부분에 테이블 형식으로 기업 소개 넣기 -->
                </div>
                <div class="navigation-top">
@@ -346,40 +359,54 @@
                   <aside class="single_sidebar_widget post_category_widget">
                      <h4 class="widget_title">Category</h4>
                      <ul class="list cat-list">
-                        <li>
+                         <li>
                            <a href="#" class="d-flex">
-                              <p>Resaurant food</p>
-                              <p>(37)</p>
+                              <p>서비스업</p>
                            </a>
                         </li>
                         <li>
                            <a href="#" class="d-flex">
-                              <p>Travel news</p>
-                              <p>(10)</p>
+                              <p>제조/화학</p>
                            </a>
                         </li>
                         <li>
                            <a href="#" class="d-flex">
-                              <p>Modern technology</p>
-                              <p>(03)</p>
+                              <p>의료/제약/복지</p>
                            </a>
                         </li>
                         <li>
                            <a href="#" class="d-flex">
-                              <p>Product</p>
-                              <p>(11)</p>
+                              <p>유통/무역/운송</p>
                            </a>
                         </li>
                         <li>
                            <a href="#" class="d-flex">
-                              <p>Inspiration</p>
-                              <p>(21)</p>
+                              <p>교육업</p>
                            </a>
                         </li>
                         <li>
                            <a href="#" class="d-flex">
-                              <p>Health Care</p>
-                              <p>(21)</p>
+                              <p>건설업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>IT/웹/통신</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>미디어/디자인</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>은행/금융업</p>
+                           </a>
+                        </li>
+                        <li>
+                           <a href="#" class="d-flex">
+                              <p>기관/협회</p>
                            </a>
                         </li>
                      </ul>
@@ -487,17 +514,7 @@
                         </li>
                      </ul>
                   </aside>
-                  <aside class="single_sidebar_widget newsletter_widget">
-                     <h4 class="widget_title">Newsletter</h4>
-                     <form action="#">
-                        <div class="form-group">
-                           <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                              onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                        </div>
-                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">Subscribe</button>
-                     </form>
-                  </aside>
+                  
                </div>
             </div>
          </div>

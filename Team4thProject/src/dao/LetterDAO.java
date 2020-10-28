@@ -35,8 +35,17 @@ public class LetterDAO {
 	//<select id="letterDetailData" resultType="SelfVO" parameterType="int">
 	public static SelfVO letterDetailData(int sno) {
 		SqlSession session=ssf.openSession();
-		SelfVO vo=session.selectOne("letterDetailData",sno);
-		session.close();
+		SelfVO vo = new SelfVO();
+		
+		try {
+			vo=session.selectOne("letterDetailData",sno);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		return vo;
 	}
 	

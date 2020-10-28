@@ -45,23 +45,22 @@
 							<th class="text-center" width=30%>직종</th>
 							<th class="text-center" width=60%>제목</th>
 						</tr>
-						<c:forEach var="vo" items="${list }">
+						<c:forEach var="vo" items="${list }" end="9">
 						<tr>
 							<td class="text-center" width=10%>${vo.sno }</td>
 							<td class="text-center" width=30%>${vo.sindutype }</td>
 							<td class="text-center" width=60%>
-								<!--<a href="detail.jsp?sno=${vo.sno }">-->${vo.ssubject }<!-- </a> --> 
+								<a href="../selfletter/detail.do?sno=${vo.sno }" style="color:black;">${vo.ssubject }</a>
 							</td>
 						</tr>
-							<!-- 이 항목을 10개씩 출력-->
 						</c:forEach>
 					</table>
 					<table>
 				        <tr>
 				          <td class="text-right">
-				            <a href="letter.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-danger">이전</a>
+				            <a href="letter.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-xs btn-danger">이전</a>
 				              ${curpage } page / ${totalpage } pages
-				            <a href="letter.jsp?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary">다음</a>
+				            <a href="letter.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-xs btn-primary">다음</a>
 				          </td>
 				        </tr>
 				      </table>

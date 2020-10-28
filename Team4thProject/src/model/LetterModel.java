@@ -40,12 +40,21 @@ public class LetterModel {
 	//자소서 리스트 상세보기
 	@RequestMapping("selfletter/detail.do")
 	public String letter_detail(HttpServletRequest request) {
-		String sno=request.getParameter("sno");
-		String page=request.getParameter("page");
-		if(page==null)
-			page="1";
 		
-		request.setAttribute("main_jsp", "../selfletter/detail.jsp");
+		try {
+			String sno=request.getParameter("sno");
+//			String page=request.getParameter("page");
+//			if(page==null)
+//				page="1";
+			SelfVO vo = LetterDAO.letterDetailData(Integer.parseInt(sno));		// DAO의 메소드 실행하여 VO에 담기
+			request.setAttribute("vo", vo);										// VO를 request에 담아서 전송
+			
+			request.setAttribute("main_jsp", "../selfletter/detail.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		return "../main/main.jsp";
 	}
 	
