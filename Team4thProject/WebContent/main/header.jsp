@@ -8,7 +8,11 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+	
+		
+	
 
+	
 </script>
 </head>
 <body>
@@ -66,7 +70,7 @@
                                 <div class="main-menu d-none d-md-block">
                                     <nav>                  
                                         <ul id="navigation">    
-                                            <li><a href="../main/main.do">홈</a></li>
+                                            <li><a href="../main/main.do" id=home>홈</a></li>
                                             <li><a href="categori.html">채용공고</a>
                                             	<ul class="submenu">
                                                     <li><a href="#">100대기업 공채</a></li>

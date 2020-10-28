@@ -32,7 +32,7 @@
 인적성검사
  -->
 <body>
-	<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px;">
+	<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; border: 1px solid #437EC0;">
 		<form action="answer_ok.do" method="post">
 			<div class="do_answer" style="height: 1100px; padding:20px;">
 				<div class="select_tag" style="height: 60px;">
@@ -49,7 +49,7 @@
 						<option value="인적성검사">인적성검사</option>
 					</select>
 				</div>
-				<div class="answer_area" style="height:900px; background-color: white; border-radius: 5px; padding: 15px;">
+				<div class="answer_area" style="height:900px; background-color: white; border-radius: 5px; padding: 15px; border: 1px solid #AFAFAF;">
 					<div class="subject_area">																						<!-- 제목입력 -->
 						<input class="subject_input" type=text name=subject placeholder="질문 제목을 입력해주세요."
 						style="width:100%; height:60px; font-size:40px; border: none;">

@@ -7,6 +7,67 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$.ajax({							// 팁 가져오기
+		 type:'get',
+		 url:'../main/announce.do',
+		 async: false,
+		 dataType:'html',
+		 success:function(result)
+		 {
+			 $('#getAnnounce').html(result);
+		 }
+	 })
+	
+	
+	  $.ajax({							// 팁 가져오기
+		 type:'get',
+		 url:'../main/tip.do',
+		 async: false,
+		 dataType:'html',
+		 success:function(result)
+		 {
+			 $('#getTip').html(result);
+		 }
+	 })
+	 
+	 
+	 $.ajax({							// 지식인 가져오기
+		 type:'get',
+		 url:'../main/jobknowledge.do',
+		 async: false,
+		 dataType:'html',
+		 success:function(result)
+		 {
+			 $('#getJobknowledge').html(result);
+		 }
+	 })
+	 
+	 
+	 $.ajax({							// 비디오 가져오기
+		 type:'get',
+		 url:'../main/video.do',
+		 async: false,
+		 dataType:'html',
+		 success:function(result)
+		 {
+			 $('#getVideo').html(result);
+		 }
+	 })
+	 
+	 
+	 
+	 
+});
+
+	
+
+	
+</script>
+
 </head>
 <body>
 	<main>
@@ -19,125 +80,20 @@
                 <!-- 채용공고 ============================================================================================== 채용공고 -->
                     <div class="col-lg-8">
                         <div class="trending-bottom">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                <div class="single-bottom mb-35">
-                                    <div class="trend-bottom-img mb-30">
-                                        <img src="assets/img/trending/trending_bottom1.jpg" alt="">
-                                    </div>
-                                    <div class="trend-bottom-cap">
-                                        <span class="color1">개발직</span>
-                                        <h4><a href="details.html">인기공고1</a></h4>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom2.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color2">영업직</span>
-                                            <h4><h4><a href="details.html">인기공고2</a></h4></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">R&D</span>
-                                            <h4><a href="details.html">인기공고3</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">기능직</span>
-                                            <h4><a href="details.html">인기공고4</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">인사</span>
-                                            <h4><a href="details.html">인기공고5</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">총무</span>
-                                            <h4><a href="details.html">인기공고6</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row" id="getAnnounce">
+                            	
+                            
                             </div>
                         </div>
                     </div>
                     
                     
 				<!-- 취업관련 팁 ============================================================================================== 취업관련 팁 -->
-                    <div class="col-lg-4">
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right1.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color1">자기소개서</span>
-                                <h4><a href="details.html">취업관련 팁</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right2.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color3">면접</span>
-                                <h4><a href="details.html">취업관련 팁</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right3.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color2">인적성검사</span>
-                                <h4><a href="details.html">취업관련 팁</a></h4>
-                            </div>
-                        </div> 
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right4.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color4">기술면접</span>
-                                <h4><a href="details.html">취업관련 팁</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="assets/img/trending/right5.jpg" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color1">포트폴리오</span>
-                                <h4><a href="details.html">취업관련 팁</a></h4>
-                            </div>
-                        </div>
+                    <div class="col-lg-4" id="getTip">
+                    
+                    	
+	                        
+                        
                     </div>
                 </div>
             </div>
@@ -498,19 +454,11 @@
                 <div class="section-tittle mb-40">
                     <h3>Job 지식인</h3>
                 </div>
-                <!-- Flow Socail -->
                 <div class="single-follow mb-45">
-                    <div class="single-box">
-	              		<table class="table table-hover">
-	              			<c:forEach var="i" begin="0" end="7">
-	              				<tr>
-		              				<td height=100px>지식인 글</td>
-		              			</tr>
-	              			</c:forEach>
-	              		</table>
+                    <div class="single-box"  id="getJobknowledge">
+                    
                     </div>
                 </div>
-                
             </div>
             </div>
         </div>
@@ -532,43 +480,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="recent-active dot-style d-flex dot-style">
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent1.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">동영상분류</span>
-                                    <h4><a href="#">동영상 이름 동영상 이름</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">동영상분류</span>
-                                    <h4><a href="#">동영상 이름 동영상 이름</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent3.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">동영상분류</span>
-                                    <h4><a href="#">동영상 이름 동영상 이름</a></h4>
-                                </div>
-                            </div>
-                            <div class="single-recent mb-100">
-                                <div class="what-img">
-                                    <img src="assets/img/news/recent2.jpg" alt="">
-                                </div>
-                                <div class="what-cap">
-                                    <span class="color1">동영상분류</span>
-                                    <h4><a href="#">동영상 이름 동영상 이름</a></h4>
-                                </div>
-                            </div>
+                        <div class="recent-active dot-style d-flex dot-style" id="getVideo">
+                            
                         </div>
                     </div>
                 </div>
@@ -577,27 +490,7 @@
     </div>           
     
     
-    <!-- 페이지 넘기는 버튼 ============================================================================================================ 페이지 넘기는 버튼 -->
     
-    <div class="pagination-area pb-45 text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="single-wrap d-flex justify-content-center">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-start">
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted"></span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
-                            </ul>
-                          </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </main>
 </body>
 </html>

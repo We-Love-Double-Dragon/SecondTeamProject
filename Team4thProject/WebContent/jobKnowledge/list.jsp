@@ -25,13 +25,21 @@
 </script>
 <style type="text/css">
 
+.answer_box{
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+
 .answer_box:hover {					/* 게시글 호버 */
-	background-color:  #CDCDCD;
+	background-color:  #E7E7E7;
 }
 
 .list_option input:hover{
 	background-color: #E1E1E1;
 }
+
+.answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
+.answer_list::-webkit-scrollbar{ display:none; }
 
 </style>
 
@@ -39,7 +47,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px; height: 800px;">
+		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border: 1px solid #437EC0;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
 				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
 					<h3>전체</h3>																<!-- 머리부분 제목 -->
@@ -69,13 +77,13 @@
 					</div>
 				</div>
 				
-				<div class="answer_list" style="overflow-y:auto; height: 600px">												<!-- 질문 리스트 공간 -->
+				<div class="answer_list" style="overflow-y:auto; height: 600px; background-color: white; border-radius: 5px;">												<!-- 질문 리스트 공간 -->
 					
 						<c:forEach var="vo" items="${list }" >
 							<%-- <c:choose>
 								<c:when test="${i==10 }"> --%>									<!-- 10번째는 테두리 밑부분 설정 -->
 								
-									<div class="answer_box" style="height:150px; padding: 20px; border-top: 1px solid #9D9D9D; border-bottom: 1px solid #9D9D9D">		<!-- 개별 질문 박스 -->
+									<div class="answer_box" style="height:150px; padding: 20px; border-top: 1px solid #9D9D9D;">		<!-- 개별 질문 박스 -->
 										<div class="answer_box_header">																<!-- 질문박스 위의 제목 + 내용 -->
 											<c:if test="${fn:length(vo.subject)>35 }">
 												<a href="../jobKnowledge/detail.do?no=${vo.no }" style="text-decoration: none; color:black;">

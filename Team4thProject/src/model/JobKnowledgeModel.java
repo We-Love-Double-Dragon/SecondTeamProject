@@ -411,6 +411,8 @@ public class JobKnowledgeModel {
 	
 	
 	
+
+
 	// 답변만 삭제하기 =======================================================================================================
 	@RequestMapping("jobKnowledge/delete_reply.do")
 	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
@@ -445,7 +447,7 @@ public class JobKnowledgeModel {
 	public String jobknowledge_InsertComment(HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("id");						// id는 세션에서 받으면됨
 		String content = request.getParameter("content");
 		String rno = request.getParameter("rno");			// 답변글번호
 		String bno = request.getParameter("bno");			// 질문글번호
@@ -479,6 +481,7 @@ public class JobKnowledgeModel {
 	
 	
 	
+
 	
 	// 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
 		@RequestMapping("jobKnowledge/profile.do")
