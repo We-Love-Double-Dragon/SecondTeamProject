@@ -11,6 +11,15 @@
 		<typeAlias type="vo.JobKnowledgeVO" alias="JobKnowledgeVO"/>
 		<typeAlias type="vo.JobKnowledge_TagVO" alias="JobKnowledge_TagVO"/>
 		<typeAlias type="vo.JobKnowledge_CommentVO" alias="JobKnowledge_CommentVO"/>
+<<<<<<< Updated upstream
+=======
+	    <typeAlias type="vo.ComVO" alias="ComVO"/>
+	    <typeAlias type="vo.IntVO" alias="IntVO"/>
+	    <typeAlias type="vo.SelfVO" alias="SelfVO"/>
+	    <typeAlias type="vo.WorkVO" alias="WorkVO"/>
+	    <typeAlias type="vo.WorkBVO" alias="WorkBVO"/>
+	    
+>>>>>>> Stashed changes
   </typeAliases>
   <!-- 오라클 연결하는 부분 : getConnection() -->
   <environments default="development"><!-- 개발 환경을 만든다 -->
@@ -86,6 +95,13 @@
     <mapper resource="mapper/jobknowledge-mapper.xml"/>
     <mapper resource="mapper/user-mapper.xml"/>
     <mapper resource="mapper/resume-mapper.xml"/>
+<<<<<<< Updated upstream
+=======
+    <mapper resource="mapper/letter-mapper.xml"/>
+    <mapper resource="mapper/company-mapper.xml"/>
+    <mapper resource="mapper/newsTipVideo-mapper.xml"/>
+    <mapper resource="mapper/main-mapper.xml"/>
+>>>>>>> Stashed changes
   </mappers>
 </configuration>
 

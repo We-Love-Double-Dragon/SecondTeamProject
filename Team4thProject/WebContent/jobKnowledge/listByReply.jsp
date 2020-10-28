@@ -24,7 +24,6 @@
 	}); */
 </script>
 <style type="text/css">
-
 .answer_box{
 	transition-property: background-color;
 	transition-duration: 0.5s;
@@ -37,23 +36,22 @@
 .list_option input:hover{
 	background-color: #E1E1E1;
 }
-
 .answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
 .answer_list::-webkit-scrollbar{ display:none; }
-
 </style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border: 1px solid #437EC0;">
+		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border-radius: 5px;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
 				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
 					<h3>전체</h3>																<!-- 머리부분 제목 -->
 					<div class="list_option" style="text-align: right;">						<!-- 머리부분 옵션들 -->
 						
-						<input type=button value="답변적은순" id="array_by_reply" style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
+						<input type=button value="답변적은순" id="array_by_reply" onclick="location.href='../jobKnowledge/listByReply.do'"
+						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
 						<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
 						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
 						
@@ -76,13 +74,13 @@
 					</div>
 				</div>
 				
-				<div class="answer_list" style="overflow-y:auto; height: 600px; background-color: white; border-radius: 5px;">												<!-- 질문 리스트 공간 -->
+				<div class="answer_list" style="overflow-y:auto; height: 600px; background-color: white; border: 1px solid #437EC0; border-radius: 5px;">												<!-- 질문 리스트 공간 -->
 					
 						<c:forEach var="vo" items="${list }" >
 							<%-- <c:choose>
 								<c:when test="${i==10 }"> --%>									<!-- 10번째는 테두리 밑부분 설정 -->
 								
-									<div class="answer_box" style="height:150px; padding: 20px; border-top: 1px solid #9D9D9D;">		<!-- 개별 질문 박스 -->
+									<div class="answer_box" style="height:150px; padding: 20px; border-top: 1px solid #9D9D9D; border-bottom: 1px solid #9D9D9D">		<!-- 개별 질문 박스 -->
 										<div class="answer_box_header">																<!-- 질문박스 위의 제목 + 내용 -->
 											<c:if test="${fn:length(vo.subject)>35 }">
 												<a href="../jobKnowledge/detail.do?no=${vo.no }" style="text-decoration: none; color:black;">
@@ -135,18 +133,18 @@
 				<div class="text-center">
 					<ul class="pagination">
 						<c:if test="${currpage>block }">
-							<li><a href="../jobKnowledge/list.do?page=${startpage-1 }">&lt;</a></li>
+							<li><a href="../jobKnowledge/listByReply.do?page=${startpage-1 }">&lt;</a></li>
 						</c:if>
 						<c:forEach var="i" begin="${startpage }" end="${endpage }">
 							<c:if test="${i==currpage }">
-							<li class="active"><a href="../jobKnowledge/list.do?page=${i }">${i }</a></li>
+							<li class="active"><a href="../jobKnowledge/listByReply.do?page=${i }">${i }</a></li>
 							</c:if>
 							<c:if test="${i!=currpage }">
-							<li><a href="../jobKnowledge/list.do?page=${i }">${i }</a></li>
+							<li><a href="../jobKnowledge/listByReply.do?page=${i }">${i }</a></li>
 							</c:if>
 						</c:forEach>
 						<c:if test="${endpage<totalpage }">
-							<li><a href="../jobKnowledge/list.do?page=${endpage+1 }">&gt;</a></li>
+							<li><a href="../jobKnowledge/listByReply.do?page=${endpage+1 }">&gt;</a></li>
 						</c:if>
 					</ul>
 				</div>

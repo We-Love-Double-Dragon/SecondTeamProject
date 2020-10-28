@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-		<div class="col-lg-12" style="background-color: #8DB3DE; border-radius: 5px;">
+		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; border: 1px solid #437EC0;">
 			<div style="height:800px; padding-top:20px; padding-bottom:20px;">
 				<!-- <div class="button_answer" style="height:100px; background-color: #5A91CF; text-align: center; line-height: 100px; border-radius: 5px;">
 					<a href="../jobKnowledge/answer.do" style="font-size: 30px;">질문하기</a>

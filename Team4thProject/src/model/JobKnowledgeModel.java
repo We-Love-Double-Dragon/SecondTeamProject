@@ -345,6 +345,77 @@ public class JobKnowledgeModel {
 	
 	
 	
+<<<<<<< Updated upstream
+=======
+	// 답변만 삭제하기 =======================================================================================================
+	@RequestMapping("jobKnowledge/delete_reply.do")
+	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
+		
+		try {
+			System.out.println("답변만 삭제하기");
+			
+			// 사용자로부터 받는 파라미터 --------------------------------------
+			String no = request.getParameter("no");		// 답변의 번호
+			String bno = request.getParameter("bno");
+			
+			// DAO 메소드 실행
+			JobKnowledgeDAO.jobknowledgeDeleteReplyAlone(Integer.parseInt(no), Integer.parseInt(bno));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/delete_reply.jsp";
+	}
+	// 답변만 삭제 확인창 띄우기 ===========================================================================================================
+	@RequestMapping("jobKnowledge/deleteReally_reply.do")
+	public String jobKnowledgeDeleteReally_reply(HttpServletRequest request) {
+		return "../jobKnowledge/deleteReally_reply.jsp";
+	}
+	
+	
+	
+	
+	// 댓글달기 ==========================================================================================================================
+	@RequestMapping("jobKnowledge/comment.do")
+	public String jobknowledge_InsertComment(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");						// id는 세션에서 받으면됨
+		String content = request.getParameter("content");
+		String rno = request.getParameter("rno");			// 답변글번호
+		String bno = request.getParameter("bno");			// 질문글번호
+		
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("content", content);
+		map.put("rno", rno);
+		
+		request.setAttribute("bno", bno);					// 질문글번호는 comment.jsp로 넘기고 바로 detail.do?no=${bno} 리다이렉트
+		
+		JobKnowledgeDAO.jobknowledgeInsertComment(map);
+		
+		return "../jobKnowledge/comment.jsp";
+	}
+	// 댓글창 보이기 =========================================================================================================================
+	@RequestMapping("jobKnowledge/commentButton.do")
+	public String jobknowledge_commentButton(HttpServletRequest request) {
+		
+		return "../jobKnowledge/commentButton.jsp";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> Stashed changes
 	
 	// 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
 		@RequestMapping("jobKnowledge/profile.do")
