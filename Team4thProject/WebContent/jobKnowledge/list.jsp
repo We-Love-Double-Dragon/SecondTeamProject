@@ -140,7 +140,7 @@
 					
 				</div>																										<!-- 질문리스트 공간 끝 -->
 				<div class="text-center">
-					<ul class="pagination">
+					<ul class="pagination" style="display: inline;">
 						<c:if test="${currpage>block }">
 							<li><a href="../jobKnowledge/list.do?page=${startpage-1 }">&lt;</a></li>
 						</c:if>
@@ -156,6 +156,16 @@
 							<li><a href="../jobKnowledge/list.do?page=${endpage+1 }">&gt;</a></li>
 						</c:if>
 					</ul>
+					
+					<form action="#" style="display: inline;">
+						<select>
+							<option>제목</option>
+							<option>내용</option>
+							<option>글쓴이</option>
+						</select>
+						<input type=text id="search" size=15 placeholder="검색어 입력">
+						<input type=submit value=검색>
+					</form>
 				</div>
 				
 				
