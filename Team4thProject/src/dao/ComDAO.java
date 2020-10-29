@@ -35,8 +35,13 @@ public class ComDAO {
 	//<select id="comDetailData" resultType="ComVO" parameterType="int">
 	public static ComVO comDetailData(int cno) {
 		SqlSession session=ssf.openSession();
-		ComVO vo=session.selectOne("comDetailData",cno);
-		session.close();
+		ComVO vo=new ComVO();
+		try {
+			vo=session.selectOne("comDetailData",cno);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}	
 		return vo;
 	}
 	

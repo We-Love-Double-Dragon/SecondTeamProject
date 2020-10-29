@@ -44,10 +44,10 @@ public class ComModel {
    @RequestMapping("company/detail.do")
    public String company_detail(HttpServletRequest request) {
       String cno=request.getParameter("cno");
-      String page=request.getParameter("page");
       String cateno=request.getParameter("cateno");
-      if(page==null)
-         page="1";
+
+      ComVO vo=ComDAO.comDetailData(Integer.parseInt(cno));
+      request.setAttribute("vo", vo);
       
       request.setAttribute("main_jsp", "../company/detail.jsp");
       return "../main/main.jsp";
