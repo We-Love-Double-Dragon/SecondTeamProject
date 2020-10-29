@@ -97,14 +97,14 @@
 		text-align: center;
 	}
 	
-	#joinBtn{ 
+	#resumeBtn{ 
 		margin-right:20px;
 		border: 1px solid #288CD2; 
 		background-color: rgba(0,0,0,0);
 		color: black; 
 		font-weight: bolder; 
 	 } 
-	#cancleBtn{ 
+	#clBtn{ 
 		margin-left:20px; 
 		border: 1px solid #EB5A5A; 
 		background-color: rgba(0,0,0,0); 
@@ -112,11 +112,11 @@
 		font-weight: bolder; 
 	} 
 	
-	#joinBtn:hover{ 
+	#resumeBtn:hover{ 
 		color:white; 
 		background-color: #288CD2; 
 	}
-	#cancleBtn:hover{ 
+	#clBtn:hover{ 
 		color:white; 
 		background-color: #EB5A5A; 
 	}
@@ -126,9 +126,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 
-/* 
 $(function(){
-	$('#joinBtn').click(function(){
+	$('#resumeBtn').click(function(){
+/* 
 		let id=$('#id').val();
 		if(id.trim()=="")
 		{
@@ -185,10 +185,10 @@ $(function(){
 			$('#addr1').focus();
 			return;
 		}
-		
-		$('#joinFrm').submit();
+		*/
+		$('#resumeFrm').submit();
 	});
-}); */
+}); 
 </script>
 </head>
 <body>
@@ -199,7 +199,8 @@ $(function(){
 				<div class="row" style="text-center">
 				 <div class="row row1">
  				 <div id="content">이력서</div>
- 				  <form method=post action="../resume/resume_ok.do" name="joinFrm" id="joinFrm">
+ 				  <form method=post action="../resume/resume_ok.do" name="resumeFrm" id="resumeFrm">
+ 				 	 <input type=hidden name="id" id="id">
 					<table class="rform">
 					  	<tr>
 					  	  <th scope="row" width=20%>학력</th>
@@ -272,8 +273,8 @@ $(function(){
 					</table>
 					
 					<div id="btn_group">
-					 <input type=button value="등록" class="genric-btn success radius" id="joinBtn">
-					 <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
+					 <input type=button value="등록" class="genric-btn success radius" id="resumeBtn">
+					 <input type=button value="취소" class="genric-btn danger radius" id="clBtn"
 					  onclick="javascript:history.back()">
 					</div>
 				   

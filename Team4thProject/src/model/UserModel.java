@@ -1,12 +1,15 @@
 package model;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
-
 import dao.UserDAO;
 import vo.UserformVO;
+
+import java.util.*;
 
 public class UserModel {
 	 @RequestMapping("user/join.do")
@@ -38,31 +41,32 @@ public class UserModel {
 		   {
 			   //한글 변환 
 			   request.setCharacterEncoding("UTF-8");
+			 
+			   String id=request.getParameter("id");
+			   String pwd=request.getParameter("pwd");
+			   String name=request.getParameter("name");
+			   String email=request.getParameter("email");
+			   String birthday=request.getParameter("birthday");
+			   String sex=request.getParameter("sex");
+			   String post=request.getParameter("post");
+			   String addr1=request.getParameter("addr1");
+			   String addr2=request.getParameter("addr2");
+			   String tel=request.getParameter("tel");
+			   
+			   UserformVO vo=new UserformVO();
+			   vo.setId(id);
+			   vo.setPwd(pwd);
+			   vo.setName(name);
+			   vo.setEmail(email);
+			   vo.setBirthday(birthday);
+			   vo.setSex(sex);
+			   vo.setPost(post);
+			   vo.setAddr1(addr1);
+			   vo.setAddr2(addr2);
+			   vo.setTel(tel);
+
+			   UserDAO.userInsert(vo);
 		   }catch(Exception ex){}
-		   String id=request.getParameter("id");
-		   String pwd=request.getParameter("pwd");
-		   String name=request.getParameter("name");
-		   String email=request.getParameter("email");
-		   String birthday=request.getParameter("birthday");
-		   String sex=request.getParameter("sex");
-		   String post=request.getParameter("post");
-		   String addr1=request.getParameter("addr1");
-		   String addr2=request.getParameter("addr2");
-		   String tel=request.getParameter("tel");
-		   
-		   UserformVO vo=new UserformVO();
-		   vo.setId(id);
-		   vo.setPwd(pwd);
-		   vo.setName(name);
-		   vo.setEmail(email);
-		   vo.setBirthday(birthday);
-		   vo.setSex(sex);
-		   vo.setPost(post);
-		   vo.setAddr1(addr1);
-		   vo.setAddr2(addr2);
-		   vo.setTel(tel);
-		   //Insert문장 실행
-		   UserDAO.userInsert(vo);
 		   
 		   return "../user/join_ok.jsp";
 	   }
@@ -72,7 +76,6 @@ public class UserModel {
 	   @RequestMapping("user/login_form.do")
 	   public String user_login_form(HttpServletRequest request)
 	   {
-		   System.out.println("login_form.do 모델");
 		   request.setAttribute("main_jsp", "../user/login_form.jsp");//include(메인에 들어갈 파일 지정)
 		   return "../main/main.jsp";//include
 	   }
@@ -81,7 +84,6 @@ public class UserModel {
 	   @RequestMapping("user/login.do")
 	   public String user_login(HttpServletRequest request)
 	   {
-		   System.out.println("login.do 모델");
 		   String id=request.getParameter("id");
 		   String pwd=request.getParameter("pwd");
 		   UserformVO vo=UserDAO.userLogin(id, pwd);
@@ -102,5 +104,53 @@ public class UserModel {
 		   HttpSession session=request.getSession();
 		   session.invalidate();
 		   return "../user/logout.jsp";
+	   }
+	   
+	   @RequestMapping("user/update.do")
+	   public String user_update(HttpServletRequest request)
+	   {	
+		   //※
+		   HttpSession session=request.getSession();
+		   String id=(String)session.getAttribute("id");
+		   UserformVO vo=UserDAO.userUpdateData(id);
+		   request.setAttribute("vo",vo);
+		   request.setAttribute("main_jsp", "../user/update.jsp");
+		   return "../main/main.jsp";
+	   }
+	   
+	   @RequestMapping("user/update_ok.do")
+	   public String user_update_ok(HttpServletRequest request)
+	   {
+		   try
+		   {
+			   request.setCharacterEncoding("UTF-8");
+			   String id=request.getParameter("id");
+			   String pwd=request.getParameter("pwd");
+			   String name=request.getParameter("name");
+			   String email=request.getParameter("email");
+			   String birthday=request.getParameter("birthday");
+			   String sex=request.getParameter("sex");
+			   String post=request.getParameter("post");
+			   String addr1=request.getParameter("addr1");
+			   String addr2=request.getParameter("addr2");
+			   String tel=request.getParameter("tel");
+		  
+			   UserformVO vo=new UserformVO();
+			   vo.setId(id);
+			   vo.setPwd(pwd);
+			   vo.setName(name);
+			   vo.setEmail(email);
+			   vo.setBirthday(birthday);
+			   vo.setSex(sex);
+			   vo.setPost(post);
+			   vo.setAddr1(addr1);
+			   vo.setAddr2(addr2);
+			   vo.setTel(tel);
+			   
+			   UserDAO.userUpdate(vo);
+			   
+		   }catch(Exception ex){}
+		   
+		   return "../user/update_ok.jsp";
 	   }
 }

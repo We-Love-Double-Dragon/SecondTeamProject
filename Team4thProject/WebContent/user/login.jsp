@@ -4,13 +4,13 @@
 <c:choose>
   <c:when test="${msg=='NOID' }">
     <script>
-    alert("ID가 존재하지 않습니다!!");
+    alert("ID가 존재하지 않습니다.");
     history.back();
     </script>
   </c:when>
   <c:when test="${msg=='NOPWD' }">
     <script>
-    alert("비밀번호가 틀립니다!");
+    alert("비밀번호가 틀립니다.");
     history.back();
     </script>
   </c:when>
