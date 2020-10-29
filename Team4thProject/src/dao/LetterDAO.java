@@ -35,7 +35,7 @@ public class LetterDAO {
 	//<select id="letterDetailData" resultType="SelfVO" parameterType="int">
 	public static SelfVO letterDetailData(int sno) {
 		SqlSession session=ssf.openSession();
-		SelfVO vo = new SelfVO();
+		SelfVO vo=new SelfVO();
 		
 		try {
 			vo=session.selectOne("letterDetailData",sno);
@@ -43,9 +43,6 @@ public class LetterDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		return vo;
 	}
 	
