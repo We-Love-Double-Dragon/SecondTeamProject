@@ -9,9 +9,16 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <style type="text/css">
+	#jobLink{
+		transition-property: font-size;
+		transition-duration: 0.2s;
+	}
+
 	#jobLink:hover{
 		background-color: #C2EDFC;
 		border-radius: 5px;
+		font-size: 20px;
+		font-weight: bold;
 	}
 </style>
 </head>
