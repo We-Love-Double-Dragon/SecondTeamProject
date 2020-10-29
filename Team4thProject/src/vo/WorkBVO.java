@@ -41,7 +41,6 @@ deadline
 sal
 workspace
  */
-
 public class WorkBVO {
    private int l_no;
    private String ldo;
