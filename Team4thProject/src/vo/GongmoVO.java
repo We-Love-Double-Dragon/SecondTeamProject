@@ -2,6 +2,7 @@ package vo;
 
 public class GongmoVO {
     private int gm_no;
+    private int gm_cate;
     private String id;			// 아이디 30
     private String gm_subject; //제목 300
     private String gm_field; 	//분야 200
@@ -13,6 +14,27 @@ public class GongmoVO {
     private String gm_prize; 	//시상내역 100
     private String gm_prize2; 	//특전 100
     private String gm_poster; 	//이미지 300
+    private String gm_content;
+    private int gm_hit;
+    
+	public String getGm_content() {
+		return gm_content;
+	}
+	public void setGm_content(String gm_content) {
+		this.gm_content = gm_content;
+	}
+	public int getGm_hit() {
+		return gm_hit;
+	}
+	public void setGm_hit(int gm_hit) {
+		this.gm_hit = gm_hit;
+	}
+	public int getGm_cate() {
+		return gm_cate;
+	}
+	public void setGm_cate(int gm_cate) {
+		this.gm_cate = gm_cate;
+	}
 	public int getGm_no() {
 		return gm_no;
 	}
