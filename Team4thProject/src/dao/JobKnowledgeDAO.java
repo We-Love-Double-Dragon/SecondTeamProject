@@ -217,8 +217,9 @@ public class JobKnowledgeDAO {
 		SqlSession session = ssf.openSession(true);
 		
 		try {
-			session.delete("deleteReplyAlone", rno);
+			
 			session.update("declineBoardHit", bno);
+			session.delete("deleteReplyAlone", rno);
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();

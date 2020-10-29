@@ -130,19 +130,14 @@
                                             </li>
                                         	<li>
                                             <c:if test="${sessionScope.id!=null }">
-											  <form action="../user/logout.do"><%-- get(생략이 가능) --%>
-											    <div class="text-right" >
-											      ${sessionScope.name }님 
-											      <button class="genric-btn danger radius small">로그아웃</button>
-											    </div>
-											  </form>
  											</c:if>
  											</li>
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>             
-                            <div class="col-xl-2 col-lg-2 col-md-4">
+                            </div>       
+                        <div>
+                            <!-- <div class="col-xl-2 col-lg-2 col-md-4">
                                 <div class="header-right-btn f-right d-none d-lg-block">
                                     <i class="fas fa-search special-tag"></i>
                                     <div class="search-box">
@@ -152,7 +147,16 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+                            
+                            <form action="../user/logout.do" style="display: inline;"><%-- get(생략이 가능) --%>
+								    <div class="text-right" >
+								      ${sessionScope.name }님 
+								      <button class="genric-btn danger radius small">로그아웃</button>
+								      
+								    </div>
+						    </form>
+						</div>
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-md-none"></div>
@@ -160,6 +164,7 @@
                         </div>
                     </div>
                </div>
+               
             </div>
        </div>
         <!-- Header End -->

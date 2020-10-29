@@ -133,6 +133,9 @@
 	
 	
 <!-- 답변만 삭제하기 -->
+	<!-- <delete id="deleteReplyAlone" parameterType="int">
+		DELETE FROM jobknowledge WHERE no = #{rno}
+	</delete> -->
 	<delete id="deleteReplyAlone" parameterType="int">
 		DELETE FROM jobknowledge WHERE no = #{rno}
 	</delete>

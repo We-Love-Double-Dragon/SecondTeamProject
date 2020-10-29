@@ -370,9 +370,12 @@ public class JobKnowledgeModel {
 			// 사용자로부터 받는 파라미터 --------------------------------------
 			String rno = request.getParameter("rno");		// 답변의 번호
 			String bno = request.getParameter("bno");		// 질문글 번호
+			String content = request.getParameter("content");
 			
 			System.out.println("답변 : " + rno);
 			System.out.println("질문 : " + bno);
+			
+			
 			// DAO 메소드 실행
 			JobKnowledgeDAO.deleteReplyAlone(Integer.parseInt(rno), Integer.parseInt(bno));
 			
