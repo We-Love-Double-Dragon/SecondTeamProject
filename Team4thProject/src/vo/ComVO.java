@@ -26,7 +26,7 @@ public class ComVO {
 	private String cindutype;
 	private String cloc;
 	private String cscore;
-	private String sdate;
+	private String cdate;
 	private String worknum;
 	private String bname;
 	private String sale;
@@ -81,11 +81,11 @@ public class ComVO {
 	public void setCscore(String cscore) {
 		this.cscore = cscore;
 	}
-	public String getSdate() {
-		return sdate;
+	public String getCdate() {
+		return cdate;
 	}
-	public void setSdate(String sdate) {
-		this.sdate = sdate;
+	public void setCdate(String cdate) {
+		this.cdate = cdate;
 	}
 	public String getWorknum() {
 		return worknum;
@@ -123,6 +123,8 @@ public class ComVO {
 	public void setHistory(String history) {
 		this.history = history;
 	}
+	
+	
 	
 	
 }
