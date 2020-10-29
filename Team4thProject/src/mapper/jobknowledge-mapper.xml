@@ -130,4 +130,15 @@
 		DELETE FROM jobknowledge WHERE root = #{no}
 	</delete>
 	
+	
+	
+<!-- 답변만 삭제하기 -->
+	<delete id="deleteReplyAlone" parameterType="int">
+		DELETE FROM jobknowledge WHERE no = #{rno}
+	</delete>
+<!-- 답변만 삭제시 질문글의 답변수 감소 -->
+	<update id="declineBoardHit" parameterType="int">
+		UPDATE jobknowledge SET reply = reply - 1 WHERE no = #{bno}
+	</update>
+	
 </mapper>

@@ -42,6 +42,7 @@ public class JobKnowledgeDAO {
 		int total = 0;
 		try {
 			total = session.selectOne("jobknowledgeTatalPage");
+			session.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -70,6 +71,7 @@ public class JobKnowledgeDAO {
 		int total = 0;
 		try {
 			total = session.selectOne("jobknowledgeTatalPageByTag", tag);
+			session.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -88,6 +90,7 @@ public class JobKnowledgeDAO {
 			session.update("jobknowledgeIncrementHit", no);
 			session.commit();
 			vo = session.selectOne("jobknowledgeDetail", no);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,6 +104,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			list = session.selectList("jobknowledgeDetailReply", no);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,6 +121,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.insert("jobknowledgeInsertAnswer", vo);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,6 +136,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.insert("jobknowledgeReply", map);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -141,6 +147,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.update("jobknowledgeUpdateReply", no);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -151,6 +158,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.update("jobknowledgeUpdateGroupStep", map);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -167,6 +175,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			vo = session.selectOne("jobknowledgeDetail", no);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -179,6 +188,7 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.update("jobknowledgeModifyBoard_ok", map);
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -194,13 +204,26 @@ public class JobKnowledgeDAO {
 		try {
 			session.delete("jobknowledgeDeleteBoard", no);
 			session.delete("jobknowledgeDeleteReply", no);
-			
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	
+	
+	// 답변만 삭제하기 =====================================================================================================================
+	public static void deleteReplyAlone(int rno, int bno) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.delete("deleteReplyAlone", rno);
+			session.update("declineBoardHit", bno);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

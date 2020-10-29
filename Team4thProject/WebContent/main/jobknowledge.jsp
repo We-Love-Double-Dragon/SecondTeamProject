@@ -23,10 +23,10 @@
                		<a href="../jobKnowledge/detail.do?no=${jvo.no }" style="color:black; width:100%;" id="jobLink">
 	              		<div class="jobArea" style="height:90px; width:100%; padding:10px;">
 	              			
-		              			<c:if test="${fn:length(jvo.subject)>20 }">											<!-- 제목 -->
-		              				<span style="font-size: 20px;">${fn:substring(jvo.subject, 0, 20) }...</span>
+		              			<c:if test="${fn:length(jvo.subject)>18 }">											<!-- 제목 -->
+		              				<span style="font-size: 20px;">${fn:substring(jvo.subject, 0, 18) }...</span>
 		              			</c:if>
-		              			<c:if test="${fn:length(jvo.subject)<=20 }">
+		              			<c:if test="${fn:length(jvo.subject)<=18 }">
 		              				<span style="font-size: 20px;">${jvo.subject}</span>
 		              			</c:if>
 		              			

@@ -228,17 +228,27 @@ public class JobKnowledgeModel {
 	// 답변달기 메소드 ====================================================================================================
 	@RequestMapping("jobKnowledge/reply.do")
 	public String jobknowledge_Reply(HttpServletRequest request) {
+			
+		
+		
+		// 세션 --------------------------------------------------------------
+		HttpSession session = request.getSession();
+		
+		// 게시글 페이지로부터 받는 파라미터들 ----------------------------------------------
+		String no = "";
+		String content = "";							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
+		String sessionID = "";
+		
 		try {
 			System.out.println("답변달기 모델");
 			request.setCharacterEncoding("utf-8");
 			
-			// 세션 --------------------------------------------------------------
-			HttpSession session = request.getSession();
-			
 			// 게시글 페이지로부터 받는 파라미터들 ----------------------------------------------
-			String no = request.getParameter("no");
-			String content = request.getParameter("content");							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
-			String sessionID = (String)session.getAttribute("id");
+			no = request.getParameter("no");
+			content = request.getParameter("content");							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
+			sessionID = (String)session.getAttribute("id");
+			
+			
 			
 			// Map에 파라미터 담아서 DAO 메소드 실행 --------------------------------------------
 			Map map = new HashMap();
@@ -256,7 +266,8 @@ public class JobKnowledgeModel {
 		}
 		
 		
-		return "../jobKnowledge/reply_ok.jsp";
+		return "redirect:../jobKnowledge/detail.do?no=" + no;
+//		return "../jobKnowledge/reply_ok.jsp";
 	}
 	
 	
@@ -327,6 +338,7 @@ public class JobKnowledgeModel {
 			
 			// 사용자로부터 받는 파라미터 --------------------------------------
 			String no = request.getParameter("no");
+			System.out.println(no);
 			
 			// DAO 메소드 실행
 			JobKnowledgeDAO.jobknowledgeDeleteAll(Integer.parseInt(no));
@@ -347,30 +359,35 @@ public class JobKnowledgeModel {
 	
 
 	// 답변만 삭제하기 =======================================================================================================
-//	@RequestMapping("jobKnowledge/delete_reply.do")
-//	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
-//		
-//		try {
-//			System.out.println("답변만 삭제하기");
-//			
-//			// 사용자로부터 받는 파라미터 --------------------------------------
-//			String no = request.getParameter("no");		// 답변의 번호
-//			String bno = request.getParameter("bno");
-//			
-//			// DAO 메소드 실행
-//			JobKnowledgeDAO.jobknowledgeDeleteReplyAlone(Integer.parseInt(no), Integer.parseInt(bno));
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return "../jobKnowledge/delete_reply.jsp";
-//	}
-//	// 답변만 삭제 확인창 띄우기 ===========================================================================================================
-//	@RequestMapping("jobKnowledge/deleteReally_reply.do")
-//	public String jobKnowledgeDeleteReally_reply(HttpServletRequest request) {
-//		return "../jobKnowledge/deleteReally_reply.jsp";
-//	}
+	@RequestMapping("jobKnowledge/delete_reply.do")
+	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
+		
+		
+		
+		try {
+			System.out.println("답변만 삭제하기");
+			
+			// 사용자로부터 받는 파라미터 --------------------------------------
+			String rno = request.getParameter("rno");		// 답변의 번호
+			String bno = request.getParameter("bno");		// 질문글 번호
+			
+			System.out.println("답변 : " + rno);
+			System.out.println("질문 : " + bno);
+			// DAO 메소드 실행
+			JobKnowledgeDAO.deleteReplyAlone(Integer.parseInt(rno), Integer.parseInt(bno));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+//		return "redirect:../jobKnowledge/detail.do?no=" + bno;
+		return "../jobKnowledge/delete_reply.jsp";
+	}
+	// 답변만 삭제 확인창 띄우기 ===========================================================================================================
+	@RequestMapping("jobKnowledge/deleteReally_reply.do")
+	public String jobKnowledgeDeleteReally_reply(HttpServletRequest request) {
+		return "../jobKnowledge/deleteReally_reply.jsp";
+	}
 	
 	
 	
@@ -440,13 +457,13 @@ public class JobKnowledgeModel {
 			
 			
 			try {
-				String content = request.getParameter("content");
-				String no = request.getParameter("no");
+				String rno = request.getParameter("rno");
+				String bno = request.getParameter("bno");
 				
-				request.setAttribute("content", content);
-				request.setAttribute("no", no);
+				request.setAttribute("rno", rno);
+				request.setAttribute("bno", bno);
 				request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/test.jsp");
-				System.out.println("잡지식인 메인페이지");
+				System.out.println("테스트 모델");
 				
 			} catch (Exception e) {
 				e.printStackTrace();

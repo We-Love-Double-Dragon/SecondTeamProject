@@ -14,6 +14,10 @@
 	function deleteReally(){
 		window.open("../jobKnowledge/deleteReally.do", "deleteReally", "width=320,height=300,scrollbars=no")
 	}
+	
+	function deleteReally_reply(){
+		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
+	}
 </script>
 <style type="text/css">
 .bottom_info span{
@@ -24,13 +28,13 @@
 </style>
 </head>
 <body>
-	<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; min-height: 800px; padding:20px; overflow-y: auto; border: 1px solid #437EC0;">
+	<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px; min-height: 800px; padding:20px; overflow-y: auto;">
 	
 			<div class="tag_area" style="margin-bottom: 20px;">															<!-- 태그 -->
 					<a href="../jobKnowledge/listByTag.do?tag=${vo.tag }" style="background-color: #EEDCFF; color: #878787; border-radius: 5px; font-size:15px; padding-left: 5px; padding-right: 5px;">#${vo.tag }</a>													<!-- 태그 클릭시 태그에 맞는 게시글로 이동하는 기능 필요 ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆ -->
 			</div>
 			
-			<div class="answer_box" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px;">		<!-- 게시글 전체 박스 -->
+			<div class="answer_box" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px;">		<!-- 게시글 전체 박스 -->
 				
 				<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
 					<i style="display: inline; font-size: 20px; color: #386BFF;">Q&nbsp;&nbsp;&nbsp;</i><h3 style="display: inline;">${vo.subject }</h3>
@@ -48,7 +52,7 @@
 					<c:if test="${vo.id == sessionScope.id }" >																				<!-- 세션id와 게시글 id가 같으면 수정 / 삭제 버튼 활성화 -->
 						<form action="../jobKnowledge/modify_board.do" method="post" style="position: absolute; right: 5px; bottom:1px;">
 							<input type=submit value="수정">
-							<input type=hidden name=no value=${vo.no }>
+							<input type=hidden name=no value=${vo.no } id="bno">
 						</form>
 					</c:if>
 					<c:if test="${vo.id == sessionScope.id }" >	
@@ -63,20 +67,8 @@
 				</div>
 			</div>
 			
-<<<<<<< Updated upstream
 			<form action="../jobKnowledge/reply.do" method="post">																													<!-- 답변하기 -->
 				<div class="reply_area" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-top: 30px; position: relative;">
-=======
-			<c:if test="${sessionScope.id==null}">
-				<c:set var="isLogin" value="../user/login_form.do"/>
-			</c:if>
-			<c:if test="${sessionScope.id!=null}">
-				<c:set var="isLogin" value="../jobKnowledge/reply.do"/>
-			</c:if>
-			<%-- <c:if test="${sessionScope.id==null? ${isLogin}==../user/login_form.do: ${ isLogin}==../jobKnowledge/reply.do }"/> --%>
-			<form action="${isLogin }" method="post">																													<!-- 답변하기 -->
-				<div class="reply_area" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px; margin-top: 30px; position: relative;">
->>>>>>> Stashed changes
 					
 						<div class="reply_content_area">
 							<textarea class="content_textarea" rows="10" cols="107" name=content placeholder="진심어린 답변을 작성해주세요."
@@ -96,14 +88,21 @@
 			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979;"></div>																	<!-- 답변입력 - 답변리스트간 구분선 -->
 			
 			<c:forEach var="rVO" items="${list }">
-				<div class="reply_list" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px; margin-top: 25px; margin-bottom: 25px;">		<!-- 게시글 전체 박스 -->
+				<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-top: 25px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
 					
 					<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
 						<h3>${rVO.id }</h3>
 					</div>
 					<div class="content_area">
 						<p>${rVO.content }</p>
+						<p>${rVO.no }</p>
 					</div>
+				</div>
+				<div class="delete_modify_button" style="text-align: right;">
+					<c:if test="${rVO.id == sessionScope.id }">
+							<input type=button value=${rVO.no } id="deleteReply" onclick="deleteReally_reply()">
+							<input type=hidden value=${rVO.no } id="rno">
+					</c:if>
 				</div>
 			</c:forEach>
 			

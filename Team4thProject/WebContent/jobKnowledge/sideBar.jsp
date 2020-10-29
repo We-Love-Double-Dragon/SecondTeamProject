@@ -10,9 +10,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.button_answer{
+	background-color: #5A91CF;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+
 .button_answer:hover{
-	background-color: black;
-	color: black;
+	background-color: #4979B0;
 }
 </style>
 </head>
@@ -23,14 +28,15 @@
 					<a href="../jobKnowledge/answer.do" style="font-size: 30px;">질문하기</a>
 				</div> -->
 				
+				<!-- background-color: #5A91CF; -->
 				<!-- ../jobKnowledge/answer.do -->
 				<c:if test="${sessionScope.id==null }">
 					<input type="button" value="질문하기" class="button_answer" onclick="location.href='../user/login_form.do'"
-							style="height:100px; width:100%; background-color: #5A91CF; color:white; font-size: 30px; border: none; border-radius: 5px;">
+							style="height:100px; width:100%; color:white; font-size: 30px; border: none; border-radius: 5px;">
 				</c:if>
 				<c:if test="${sessionScope.id!=null }">
 					<input type="button" value="질문하기" class="button_answer" onclick="location.href='../jobKnowledge/answer.do'"
-							style="height:100px; width:100%; background-color: #5A91CF; color:white; font-size: 30px; border: none; border-radius: 5px;">
+							style="height:100px; width:100%; color:white; font-size: 30px; border: none; border-radius: 5px;">
 				</c:if>
 			</div>
 		</div>

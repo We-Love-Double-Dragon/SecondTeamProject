@@ -19,6 +19,15 @@
 </style>
 </head>
 <body>
+		<div style="height:70px; width:100%; padding: 15px;">
+		<h3 style="display: inline; font-weight:bold;">꿀팁</h3>
+             <div style="margin-left: 200px;display: inline;text-align: right;">
+		       	<input type=button value=더보기 onclick="location.href='../newsTipVideo/tip.do'" class="more"
+		       			style="font-size:13px;">
+		       </div>
+		</div>
+		
+
 		<c:forEach var="tvo" items="${tlist }">
 		
 		
@@ -29,7 +38,7 @@
 	                <img  src="${tvo.t_poster}">
 	            </div>
 	            <div class="trand-right-cap">
-	                <span class="color1">자기소개서</span>
+	                <!-- <span class="color1">자기소개서</span> -->
 	                <h5 style="font-size: 12px;"><a href="../newsTipVideo/tipdetail.do?no=${tvo.t_no }">${tvo.t_title }</a></h5>
 	            </div>
 	            

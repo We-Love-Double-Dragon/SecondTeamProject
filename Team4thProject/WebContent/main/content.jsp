@@ -68,6 +68,23 @@ $(function(){
 	
 </script>
 
+<style type="text/css">
+.more{
+	background-color: #DEF6FF;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	width: 50px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+	
+}
+.more:hover{
+	background-color: #B7EBFF;
+	cursor: pointer;
+}
+</style>
+
 </head>
 <body>
 	<main>
@@ -81,6 +98,7 @@ $(function(){
                     <div class="col-lg-8">
                         <div class="trending-bottom">
                             <div class="row" id="getAnnounce">
+                            
                             	
                             
                             </div>
@@ -452,7 +470,11 @@ $(function(){
             <div class="col-lg-4">
                 <!-- Section Tittle -->
                 <div class="section-tittle mb-40">
-                    <h3>Job 지식인</h3>
+                    <h3 style="display: inline;">Job 지식인</h3>
+                    <div style="margin-left: 175px;display: inline;text-align: right;">
+                    	<input type=button value=더보기 onclick="location.href='../jobKnowledge/list.do'" class="more"
+                    			style="font-size:13px;">
+                    </div>
                 </div>
                 <div class="single-follow mb-45">
                     <div class="single-box"  id="getJobknowledge">
@@ -474,7 +496,11 @@ $(function(){
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30">
-                            <h3>취업관련동영상</h3>
+                            <h3 style="display: inline;">취업관련동영상</h3>
+                            <div style="margin-left: 100px;display: inline;text-align: right;">
+		                    	<input type=button value=더보기 onclick="location.href='../newsTipVideo/video.do'" class="more"
+		                    			style="font-size:13px;">
+		                    </div>
                         </div>
                     </div>
                 </div>

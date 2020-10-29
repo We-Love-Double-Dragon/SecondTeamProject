@@ -34,8 +34,14 @@
 	background-color:  #E7E7E7;
 }
 
+.list_option input{
+	background-color: white;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+
 .list_option input:hover{
-	background-color: #E1E1E1;
+	background-color: #E7E7E7;
 }
 
 .answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
@@ -53,9 +59,10 @@
 					<h3>전체</h3>																<!-- 머리부분 제목 -->
 					<div class="list_option" style="text-align: right;">						<!-- 머리부분 옵션들 -->
 						
-						<input type=button value="답변적은순" id="array_by_reply" style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
+						<input type=button value="답변적은순" id="array_by_reply" onclick="location.href='../jobKnowledge/listByReply.do'"
+						style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
 						<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
-						style="width:100px; height:40px; background-color: white; font-size: 13px; border-radius: 5px; border:none;">
+						style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
 						
 						<form method="post" style="display: inline;">
 						<select class="selectpicker" onchange="window.open(value,'_self');"

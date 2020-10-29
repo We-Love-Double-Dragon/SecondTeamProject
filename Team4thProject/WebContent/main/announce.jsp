@@ -19,7 +19,13 @@
 </style>
 </head>
 <body>
-
+		<div style="height:70px; width:100%; padding: 15px;">
+		<h3 style="display: inline; font-weight:bold;">인기 공고</h3>
+             <div style="margin-left: 585px;display: inline;text-align: right;">
+		       	<input type=button value=더보기 onclick="location.href='#'" class="more"
+		       			style="font-size:13px;">
+		       </div>
+		</div>
 		
 		<c:forEach var="vo" items="${list }">
 		

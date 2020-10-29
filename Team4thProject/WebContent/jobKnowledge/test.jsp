@@ -13,10 +13,10 @@
 		<table>
 			<tr>
 				<th>내용</th>
-				<td>${content}</td>
+				<td>${rno}</td>
 			</tr>
 				<th>태그</th>
-				<td>${no}</td>
+				<td>${bno}</td>
 			</tr>
 		</table>
 	
