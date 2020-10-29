@@ -163,7 +163,7 @@
 							<option value="content">내용</option>
 							<option value="id">글쓴이</option>
 						</select>
-						<input type=text name="voca" size=15 placeholder="검색어 입력">
+						<input type=text id="voca" size=15 placeholder="검색어 입력">
 						<input type=submit value=검색>
 					</form>
 				</div>

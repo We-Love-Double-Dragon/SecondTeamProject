@@ -33,17 +33,30 @@ public class GongmoDAO {
 	   public static int gongmoTotalPage(int gm_cate)
 	   {
 		   SqlSession session=ssf.openSession();
-		   int total=session.selectOne("gongmoTotalPage", gm_cate);
-		   session.close();
+		   int total = 0;
+		   try {
+			   
+			   total=session.selectOne("gongmoTotalPage", gm_cate);
+			   session.close();
+			  
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		   return total;
+		   
 	   }
 
 	   // 카테고리넘버별(gm_cate)총 페이지 나누기 메소드 ==============================================================================================
 	   public static List<GongmoVO> gongmoTotalData(Map map)
 	   {
 		   SqlSession session=ssf.openSession();
-		   List<GongmoVO> list=session.selectList("gongmoTotalData",map);
-		   session.close();
+		   List<GongmoVO> list =  new ArrayList<GongmoVO>();
+		   try {
+			   list=session.selectList("gongmoTotalData",map);
+			   session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		   return list;
 	   }
 	   

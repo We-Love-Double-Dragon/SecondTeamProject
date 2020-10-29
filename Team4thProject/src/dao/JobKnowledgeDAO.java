@@ -229,6 +229,34 @@ public class JobKnowledgeDAO {
 	
 	
 	
+	// 질문글 검색 =================================================================================================searchBoard
+	public static List<JobKnowledgeVO> searchBoard(Map map) {
+		SqlSession session = ssf.openSession();
+		List<JobKnowledgeVO> list = new ArrayList<JobKnowledgeVO>();
+		
+		try {
+			list = session.selectList("searchBoard", map);
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return list;
+	}
+	// 검색시에 페이지 구하는 메소드 ==============================================================================================
+	public static int searchTotalPage(Map map) {
+		SqlSession session = ssf.openSession();
+		int total = 0;
+		try {
+			total = session.selectOne("searchTotalPage", map);
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return total;
+	}
+	
+	
 	
 	
 	

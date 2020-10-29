@@ -59,34 +59,40 @@ public class GongmoModel {
 	   @RequestMapping("gongmo/gongmo_home.do")
 	   public String gongmo_home(HttpServletRequest request)
 	   {
-		   //변수 -------------------------------------------------------------------------------------
-		   String page=request.getParameter("page");
-		   if(page==null)
-			   page="1";
-		   int curpage=Integer.parseInt(page);
-		   Map map=new HashMap();
-		   int rowSize=12;
-		   int start=(rowSize*curpage)-(rowSize-1);
-		   int end=rowSize*curpage;
-		   map.put("start", start);
-		   map.put("end",end);
-		   List<GongmoVO> list=GongmoDAO.gongmoTotalData(map);
-		   int totalpage=GongmoDAO.gongmoTotalPage2();
+		   try {
+			 //변수 -------------------------------------------------------------------------------------
+			   String page=request.getParameter("page");
+			   if(page==null)
+				   page="1";
+			   int curpage=Integer.parseInt(page);
+			   Map map=new HashMap();
+			   int rowSize=12;
+			   int start=(rowSize*curpage)-(rowSize-1);
+			   int end=rowSize*curpage;
+			   map.put("start", start);
+			   map.put("end",end);
+			   List<GongmoVO> list=GongmoDAO.gongmoTotalData(map);
+			   int totalpage=GongmoDAO.gongmoTotalPage2();
+			   
+			   int BLOCK=5;
+			   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+			   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+			   if(endPage>totalpage)
+				   endPage=totalpage;
+			   
+			   // request에 값을 채운다 => JSP에서 필요한 데이터를 보내기 시작 --------------------------------------------
+			   request.setAttribute("list", list);
+			   request.setAttribute("curpage", curpage);
+			   request.setAttribute("totalpage", totalpage);
+			   request.setAttribute("BLOCK", BLOCK);
+			   request.setAttribute("startPage", startPage);
+			   request.setAttribute("endPage", endPage);
+			   request.setAttribute("main_jsp", "../gongmo/gongmo_home.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		   
-		   int BLOCK=5;
-		   int startPage=((curpage-1)/BLOCK*BLOCK)+1;
-		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		   if(endPage>totalpage)
-			   endPage=totalpage;
 		   
-		   // request에 값을 채운다 => JSP에서 필요한 데이터를 보내기 시작 --------------------------------------------
-		   request.setAttribute("list", list);
-		   request.setAttribute("curpage", curpage);
-		   request.setAttribute("totalpage", totalpage);
-		   request.setAttribute("BLOCK", BLOCK);
-		   request.setAttribute("startPage", startPage);
-		   request.setAttribute("endPage", endPage);
-		   request.setAttribute("main_jsp", "../gongmo/gongmo_home.jsp");
 		   
 		   return "../main/main.jsp";
 	   }

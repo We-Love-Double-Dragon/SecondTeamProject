@@ -428,6 +428,69 @@ public class JobKnowledgeModel {
 	
 	
 	
+	// 전체태그 게시물 출력 ============================================================================================
+	@RequestMapping("jobKnowledge/search.do")
+	public String jobKnowledge_search(HttpServletRequest request) {
+		
+		
+		try {
+			
+			// 변수 -------------------------------------------------------------
+			String page = request.getParameter("page");					// 사용자로부터 받는 페이지
+			if(page == null) {		
+				page = "1";
+			}
+			String finding = request.getParameter("finding");
+			String voca = request.getParameter("voca");
+			
+			
+			int currpage = Integer.parseInt(page);						// 현재 페이지
+			
+			int rowSize = 10;											// 한번에 출력될 게시글
+			int start = (rowSize*currpage) - (rowSize - 1);				
+			int end = (rowSize*currpage);
+			int block = 5;												// 페이지 블록
+			int startpage=((currpage-1)/block*block)+1;					
+			int endpage=((currpage-1)/block*block)+block;
+			
+			System.out.println("태그 : " + finding);
+			System.out.println("검색어 : " + voca);
+			
+			
+			// 해쉬맵에 시작 / 끝 변수 담기 ------------------------------------------------------
+			Map map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("finding", finding);
+			map.put("voca", voca);
+			
+			int totalpage = JobKnowledgeDAO.searchTotalPage(map);	// 총 페이지
+			if(endpage>totalpage) {
+				endpage=totalpage;
+			}
+			List<JobKnowledgeVO> list = JobKnowledgeDAO.searchBoard(map);			// DAO의 메소드 리턴값을 받는 List 변수
+			
+			// 페이지로 보낼 파라미터들 -----------------------------------------------------------
+			request.setAttribute("list", list);
+			request.setAttribute("currpage", currpage);
+			request.setAttribute("totalpage", totalpage);
+			request.setAttribute("block", block);
+			request.setAttribute("startpage", startpage);
+			request.setAttribute("endpage", endpage);
+			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/search.jsp");
+			System.out.println("검색");
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "../jobKnowledge/box.jsp";
+	}
+
+	
+	
+	
+	
+	
 	
 	
 	
