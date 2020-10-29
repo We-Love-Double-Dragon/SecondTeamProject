@@ -95,6 +95,7 @@
     <mapper resource="mapper/letter-mapper.xml"/>
     <mapper resource="mapper/company-mapper.xml"/>
     <mapper resource="mapper/newsTipVideo-mapper.xml"/>
+    <mapper resource="mapper/workb-mapper.xml"/>
     <mapper resource="mapper/main-mapper.xml"/>
   </mappers>
 </configuration>
