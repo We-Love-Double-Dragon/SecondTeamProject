@@ -155,7 +155,8 @@
                                     </div>
                                 </div>
                             </div> -->
-                            
+                            <c:if test="${sessionScope.id!=null }">
+ 											
                             <form action="../user/logout.do" style="display: inline;"><%-- get(생략이 가능) --%>
 								    <div class="text-right" >
 								      ${sessionScope.name }님 
@@ -163,6 +164,7 @@
 								      
 								    </div>
 						    </form>
+						    </c:if>
 						</div>
                             <!-- Mobile Menu -->
                             <div class="col-12">
