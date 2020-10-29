@@ -27,4 +27,26 @@
      FROM userform
      WHERE id=#{id}
   </select>
+  
+  <select id="userUpdate_ok" resultType="vo.UserformVO">
+  	SELECT id,pwd,name,email,birthday,sex,post,addr1,addr2,tel
+	FROM userform	
+	WHERE id=#{id}
+  </select>
+  
+  <update id="userUpdate" parameterType="vo.UserformVO" >
+  	UPDATE userform 
+  	SET pwd=#{pwd},
+	    name=#{name},
+	    email=#{email},
+	    birthday=#{birthday},
+	    sex=#{sex},
+	    post=#{post},
+	    addr1=#{addr1},
+	    addr2=#{addr2},
+	    tel=#{tel}
+	WHERE id=#{id}
+  </update>
 </mapper>
+
+<!-- pwd=#{pwd,jdbcType=VARCHAR}, -->

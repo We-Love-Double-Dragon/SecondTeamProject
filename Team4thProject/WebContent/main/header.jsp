@@ -106,28 +106,33 @@
                                                     <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="#">로그인</a>
-                                                <ul class="submenu">
-                                                     <c:if test="${sessionScope.id!=null }">
-	                                                   <c:if test="${sessionScope.admin=='n'}">
-												            <li><a href="../resume/resume.do">내 이력서</a></li>
-												          </c:if>
-											           <li><a href="../user/join.do">회원수정</a></li>
-											         </c:if>
-											         <c:if test="${sessionScope.id==null }">
-	                                                   <li><a href="../user/login_form.do">로그인</a></li>
-												       <li><a href="../user/join.do">회원가입</a></li>
-                                                     </c:if>
-	                                                 <c:if test="${ sessionScope.id!=null}">
-													      <c:if test="${sessionScope.admin=='n'}">
-												            <li><a href="#">마이페이지</a></li>
-												          </c:if>
-												          <c:if test="${sessionScope.admin=='y'}">
-												            <li><a href="#">관리자페이지</a></li>
-												          </c:if>
-	      											 </c:if>
-                                                </ul>
-                                            </li>
+                                            
+                                           <c:if test="${sessionScope.id==null }">
+	                                            <li><a href="../user/login_form.do">로그인</a>
+		                                            <ul class="submenu">
+		                                              <li><a href="../user/login_form.do">로그인</a></li>
+												      <li><a href="../user/join.do">회원가입</a></li>
+												    </ul>
+											    </li>
+	                                        </c:if>
+	                                        <c:if test="${ sessionScope.id!=null}">
+											      <c:if test="${sessionScope.admin=='n'}">
+										            <li><a href="#">마이페이지</a>
+										            <ul class="submenu">
+										            	 <li><a href="../resume/resume.do">내 이력서</a></li>
+										            	 <li><a href="../user/update.do">회원수정</a></li>
+										           	</ul>
+										            </li>
+										          </c:if>
+										          <c:if test="${sessionScope.admin=='y'}">
+										            <li><a href="#">관리자페이지</a>
+										             <ul class="submenu">
+										            	<li><a href="../user/update.do">회원수정</a></li>
+										           	 </ul>
+										           	</li>
+										          </c:if>
+    									    </c:if>
+	                                        
                                         	<li>
                                             <c:if test="${sessionScope.id!=null }">
 											  <form action="../user/logout.do"><%-- get(생략이 가능) --%>
@@ -141,7 +146,7 @@
                                         </ul>
                                     </nav>
                                 </div>
-                            </div>             
+                            </div> 
                             <div class="col-xl-2 col-lg-2 col-md-4">
                                 <div class="header-right-btn f-right d-none d-lg-block">
                                     <i class="fas fa-search special-tag"></i>

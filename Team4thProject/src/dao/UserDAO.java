@@ -64,4 +64,24 @@ public class UserDAO {
 		  
 		  return vo;
 	  }
+	 
+	 
+	 //수정할 데이터 읽기
+	 public static UserformVO userUpdateData(String id)
+	 {
+		 UserformVO vo=new UserformVO();
+		 SqlSession session=ssf.openSession();
+		 vo=session.selectOne("userUpdate_ok",id); // ※
+		 session.close();
+		 return vo;
+	 }
+	 
+	 //수정하기
+	 public static void userUpdate(UserformVO vo)
+	 {
+		 SqlSession session=ssf.openSession();
+		 session.update("userUpdate", vo);
+		 session.commit();
+		 session.close();
+	 }
 }
