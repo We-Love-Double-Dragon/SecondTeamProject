@@ -89,11 +89,15 @@
                                                     <li><a href="details.html">추가요망</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="latest_news.html">공모전</a>
+                                            <li><a href="../gongmo/gongmo_home.do">공모전</a>
                                             	<ul class="submenu">
-                                                    <li><a href="#">추가요망</a></li>
-                                                    <li><a href="#">추가요망</a></li>
-                                                    <li><a href="#">추가요망</a></li>
+                                                    <li><a href="../gongmo/gongmo_all.do">전체 공모전</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno1.do?cno=1">기획/아이디어</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno2.do?cno=2">디자인</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno3.do?cno=3">광고/마케팅</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno4.do?cno=4">영상/사진/UCC</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno5.do?cno=5">문학/시나리오</a></li>
+                                                    <li><a href="../gongmo/gongmo_cno6.do?cno=6">기타</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="../jobKnowledge/list.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->

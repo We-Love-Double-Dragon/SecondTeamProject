@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.gongmo-mapper">
+
+	<!-- 공모전 리스트 데이터 출력 -->
+	<select id="gongmoListData" resultType="vo.GongmoVO"
+		parameterType="hashmap">
+		SELECT gm_no,gm_poster,gm_subject,num
+		FROM (SELECT gm_no,gm_poster,gm_subject,rownum as num
+		FROM (SELECT gm_no,gm_poster,gm_subject
+		FROM gongmo WHERE gm_cate=#{gm_cate} ORDER BY gm_no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 공모전 카테고리별(gm_cate) 데이터 출력 -->
+	<select id="gongmoTotalData" resultType="vo.GongmoVO"
+		parameterType="hashmap">
+		SELECT gm_no,gm_poster,gm_subject,num
+		FROM (SELECT gm_no,gm_poster,gm_subject,rownum as num
+		FROM (SELECT gm_no,gm_poster,gm_subject
+		FROM gongmo ORDER BY gm_no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!--  카테고리넘버별(gm_cate)총 페이지 나누기 -->
+	<select id="gongmoTotalPage" resultType="int"
+		parameterType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM gongmo
+		WHERE gm_cate=#{gm_cate}
+	</select>
+
+	<!-- 상세보기(gm_hit증가) -->
+	<update id="gongmoHitIncrement" parameterType="int">
+		UPDATE gongmo SET
+		gm_hit=gm_hit+1
+		WHERE gm_no=#{gm_no }
+	</update>
+
+	<!-- 전체 보기 페이지 --> 
+	<select id="gongmoTotalPage2" resultType="int"
+		parameterType="int">
+		SELECT CEIL(COUNT(*)/12.0) FROM gongmo
+	</select>
+	
+	<!-- 공모전 게시글 상세보기 -->
+	<select id="gongmoDetailData" resultType="vo.GongmoVO"
+		parameterType="int">
+		select * from gongmo
+		where gm_no=#{gm_no}
+	</select>
+</mapper>
