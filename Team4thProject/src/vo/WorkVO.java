@@ -9,6 +9,7 @@ RSUB   NOT NULL CLOB          //리뷰내용
 RGOOD           CLOB          //장점
 RBAD            CLOB          //단점
 RWISH           CLOB           //바라는점
+
  */
 public class WorkVO {
    private int rno;
@@ -20,6 +21,15 @@ public class WorkVO {
    private String rgood;
    private String rbad;
    private String rwish;
+   private ComVO cvo=new ComVO();
+   
+   
+   public ComVO getCvo() {
+	return cvo;
+   }
+   public void setCvo(ComVO cvo) {
+	this.cvo = cvo;
+	}
    public int getRno() {
       return rno;
    }

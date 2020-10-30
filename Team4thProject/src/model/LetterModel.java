@@ -7,6 +7,8 @@ import dao.LetterDAO;
 import vo.*;
 import dao.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.sist.controller.RequestMapping;
 import javax.servlet.http.HttpSession;
 
@@ -44,16 +46,52 @@ public class LetterModel {
 			String sno=request.getParameter("sno");
 			SelfVO vo=LetterDAO.letterDetailData(Integer.parseInt(sno));		// DAO의 메소드 실행하여 VO에 담기
 			request.setAttribute("vo", vo);										// VO를 request에 담아서 전송
-			
 			request.setAttribute("main_jsp", "../selfletter/detail.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 		return "../main/main.jsp";
 	}
-	
+	//자소서 새글 작성
+	@RequestMapping("selfletter/insert.do")
+	public String letter_insert(HttpServletRequest request) {
+		request.setAttribute("main_jsp", "../selfletter/insert.jsp");
+		return "../main/main.jsp";
+	}
+	//자소서 새글 입력
+	@RequestMapping("selfletter/insert_ok.do")
+	public String letterInsert_ok(HttpServletRequest request) {
+		System.out.println("insert_ok!!");
+		try {
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+			String ssubject=request.getParameter("ssubject");
+			String sname=request.getParameter("sname");
+			String sindutype=request.getParameter("sindutype");
+			String sq1=request.getParameter("sq1");
+			String sa1=request.getParameter("sa1");
+			String sq2=request.getParameter("sq2");
+			String sa2=request.getParameter("sa2");
+			String sq3=request.getParameter("sq3");
+			String sa3=request.getParameter("sa3");
+			
+			SelfVO vo=new SelfVO();
+			vo.setSsubject(ssubject);
+			vo.setSname(sname);
+			vo.setSindutype(sindutype);
+			vo.setSq1(sq1);
+			vo.setSa1(sa1);
+			vo.setSq2(sq2);
+			vo.setSa2(sa2);
+			vo.setSq3(sq3);
+			vo.setSa3(sa3);
+			
+			LetterDAO.letterInsert(vo);
+			return "redirect:../selfletter/letter.do";
+	}
 	
 	
 	

@@ -1,5 +1,4 @@
 package dao;
-import java.io.Reader;
 import java.util.*;
 
 import org.apache.ibatis.io.Resources;
@@ -36,7 +35,6 @@ public class LetterDAO {
 	public static SelfVO letterDetailData(int sno) {
 		SqlSession session=ssf.openSession();
 		SelfVO vo=new SelfVO();
-		
 		try {
 			vo=session.selectOne("letterDetailData",sno);
 			session.close();
@@ -45,6 +43,28 @@ public class LetterDAO {
 		}
 		return vo;
 	}
+	//자소서 작성
+	//<insert id="letterInsert" parameterType="SelfVO">
+	public static void letterInsert(SelfVO vo) {
+		try {
+			SqlSession session=ssf.openSession(true);
+			session.insert("letterInsert",vo);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
