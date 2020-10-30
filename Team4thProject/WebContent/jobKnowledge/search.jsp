@@ -47,6 +47,21 @@
 .answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
 .answer_list::-webkit-scrollbar{ display:none; }
 
+/*검색버튼*/
+#searchButton{
+	height: 30px;
+	width: 40px;
+	color: white;
+	background-color: #FD9999;
+	border: none;
+	border-radius: 5px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+#searchButton:hover{
+	background-color: #FF5757;
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -157,15 +172,17 @@
 						</c:if>
 					</ul>
 					
-					<form action="../jobKnowledge/search.do">
-						<select name="finding">
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<option value="id">글쓴이</option>
-						</select>
-						<input type=text id="voca" size=15 placeholder="검색어 입력">
-						<input type=submit value=검색>
-					</form>
+					<div style="text-align: right;">
+						<form action="../jobKnowledge/search.do" style="display: inline-block; margin-right:15px;">
+							<select name="finding" class="dropup">
+								<option value="subject" selected="selected">제목</option>
+								<option value="content">내용</option>
+								<option value="id">글쓴이</option>
+							</select>
+							<input type=text name="voca" size=25 placeholder="검색어 입력" style="height:30px; border: none; border-radius: 5px; margin-left:15px;">
+							<input type=submit value=검색 id="searchButton">
+						</form>
+					</div>
 				</div>
 				
 				
