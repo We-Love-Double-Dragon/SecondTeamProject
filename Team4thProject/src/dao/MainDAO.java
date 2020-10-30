@@ -71,13 +71,31 @@ private static SqlSessionFactory ssf;
 	} 
 	
 	
-	// 팁 가져오기 ============================================================================================================ 팁 가져오기
+	// 비디오 가져오기 ============================================================================================================ 팁 가져오기
 	public static List<vo.VideoVO> mainGetVideo(){
 		SqlSession session = ssf.openSession();
 		List<vo.VideoVO> list = new ArrayList<vo.VideoVO>();
 		
 		try {
 			list = session.selectList("mainGetVideo");
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	
+	
+	// 공모전 가져오기 ====================================================================================================================
+	public static List<GongmoVO> mainGetGongmo(){
+		SqlSession session = ssf.openSession();
+		List<GongmoVO> list = new ArrayList<GongmoVO>();
+		
+		try {
+			list = session.selectList("mainGetGongmo");
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();

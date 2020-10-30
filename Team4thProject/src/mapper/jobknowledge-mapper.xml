@@ -149,10 +149,15 @@
 	
 <!-- 게시물 검색하기 -->
 	<select id="searchBoard" resultType="JobKnowledgeVO" parameterType="hashmap">
-		SELECT no, subject, content, tag, regdate, reply
-		FROM jobknowledge WHERE root = 0 AND #{finding} LIKE '%'||#{voca}||'%' ORDER BY regdate desc
+		<!-- SELECT no, subject, content, tag, regdate, reply
+		FROM jobknowledge WHERE root = 0 AND #{finding} LIKE '%'||#{voca}||'%' ORDER BY regdate desc -->
+		SELECT no, subject, content, tag, regdate, reply, num
+		FROM (SELECT no, subject, content, tag, regdate, reply, rownum as num
+		FROM (SELECT no, subject, content, tag, regdate, reply
+		FROM jobknowledge WHERE root = 0 AND ${finding} LIKE '%'||'${voca}'||'%'ORDER BY regdate desc))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="searchTotalPage" resultType="int" parameterType="hashmap">
-		SELECT CEIL(COUNT(*) / 10.0) FROM jobknowledge WHERE #{finding} = '%' || #{voca} || '%' AND root = 0
+		SELECT CEIL(COUNT(*) / 10.0) FROM jobknowledge WHERE #{finding} LIKE '%' || #{voca} || '%' AND root = 0
 	</select>
 </mapper>

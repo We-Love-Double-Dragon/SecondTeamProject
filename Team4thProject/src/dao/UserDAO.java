@@ -61,6 +61,7 @@ public class UserDAO {
 				  vo.setMsg("NOPWD");
 			  }
 		  }
+		  session.close();
 		  
 		  return vo;
 	  }

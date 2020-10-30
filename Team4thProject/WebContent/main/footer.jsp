@@ -8,8 +8,9 @@
 </head>
 <body>
 	<footer>
+		<!-- #5076A0 -->
        <!-- Footer Start-->
-       <div class="footer-area footer-padding fix" style="background-color: #5076A0;">
+       <div class="footer-area footer-padding fix" style="background-color: #355880;">
             <div class="container">
                 <div class="row d-flex justify-content-between">
                     <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
@@ -17,7 +18,7 @@
                             <div class="single-footer-caption">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="../image/logo.png" width="400px"></a>
+                                    <a href="index.html"><img src="../image/logo2.png" width="400px"></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">

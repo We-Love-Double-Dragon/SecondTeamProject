@@ -30,7 +30,7 @@
 		<c:forEach var="vo" items="${list }">
 		
 			<div class="col-lg-4" style="padding:10px;" id="annLink">
-				<a href="#">
+				<a href="../Workb/detail.do?l_no=${vo.l_no }">
 				    <div class="single-bottom mb-35">
 				    	
 				        <div class="trend-bottom-img mb-30">
@@ -40,7 +40,6 @@
 				            <span class="color1">${vo.lname }</span>
 				            <h4 style="font-size: 15px;"><a href="#">${vo.ltitle }</a></h4>
 				        </div>
-				        
 				    </div>
 			    </a>
 		    </div>

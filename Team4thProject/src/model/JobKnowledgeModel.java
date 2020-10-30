@@ -256,9 +256,9 @@ public class JobKnowledgeModel {
 			map.put("content", content);
 			map.put("no", no);
 			
-			
-			JobKnowledgeDAO.jobknowledgeReply(map);
 			JobKnowledgeDAO.jobknowledgeUpdateReply(Integer.parseInt(no));
+			JobKnowledgeDAO.jobknowledgeReply(map);
+			
 			
 			
 		} catch (Exception e) {
@@ -428,7 +428,7 @@ public class JobKnowledgeModel {
 	
 	
 	
-	// 전체태그 게시물 출력 ============================================================================================
+	// 검색한 게시물 출력 ============================================================================================
 	@RequestMapping("jobKnowledge/search.do")
 	public String jobKnowledge_search(HttpServletRequest request) {
 		

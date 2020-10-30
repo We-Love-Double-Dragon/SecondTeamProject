@@ -47,6 +47,22 @@
 .answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
 .answer_list::-webkit-scrollbar{ display:none; }
 
+/*검색버튼*/
+#searchButton{
+	height: 30px;
+	width: 40px;
+	color: white;
+	background-color: #FD9999;
+	border: none;
+	border-radius: 5px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+#searchButton:hover{
+	background-color: #FF5757;
+}
+
+
 </style>
 
 <meta charset="UTF-8">
@@ -55,32 +71,41 @@
 <body>
 		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border: 1px solid #437EC0;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
-				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
-					<h3>전체</h3>																<!-- 머리부분 제목 -->
+				<div class="heading_area" style="height:100px; padding:10px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
+						<h3>전체</h3>																<!-- 머리부분 제목 -->
 					<div class="list_option" style="text-align: right;">						<!-- 머리부분 옵션들 -->
+					
 						
-						<input type=button value="답변적은순" id="array_by_reply" onclick="location.href='../jobKnowledge/listByReply.do'"
-						style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
-						<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
-						style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
+							
 						
-						<form method="post" style="display: inline;">
-						<select class="selectpicker" onchange="window.open(value,'_self');"
-							style="display: inline; width: 50px; height:10px; font-size:10px;">						<!-- 태그 셀렉트박스 (태그별 게시글 출력) -->
-							<option>태그 선택</option>
-							<option value="listByTag.do?tag=직무">직무</option>
-							<option value="listByTag.do?tag=노동법">노동법</option>
-							<option value="listByTag.do?tag=취업지원">취업지원</option>
-							<option value="listByTag.do?tag=공기업">공기업</option>
-							<option value="listByTag.do?tag=급여">급여</option>
-							<option value="listByTag.do?tag=회사생활">회사생활</option>
-							<option value="listByTag.do?tag=면접">면접</option>
-							<option value="listByTag.do?tag=자기소개서">자기소개서</option>
-							<option value="listByTag.do?tag=스펙">스펙</option>
-							<option value="listByTag.do?tag=인적성검사">인적성검사</option>
-						</select>
-						</form>
+						
+							<input type=button value="답변적은순" id="array_by_reply" onclick="location.href='../jobKnowledge/listByReply.do'"
+							style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
+							<input type=button value="최신순" id="array_by_recent" onclick="location.href='../jobKnowledge/list.do'"
+							style="width:100px; height:40px; font-size: 13px; border-radius: 5px; border:none;">
+						
+						
+						
+							<form method="post" style="display: inline;">
+								<select class="selectpicker" onchange="window.open(value,'_self');"
+									style="display: inline; width: 50px; height:10px; font-size:10px;">						<!-- 태그 셀렉트박스 (태그별 게시글 출력) -->
+									<option>태그 선택</option>
+									<option value="listByTag.do?tag=직무">직무</option>
+									<option value="listByTag.do?tag=노동법">노동법</option>
+									<option value="listByTag.do?tag=취업지원">취업지원</option>
+									<option value="listByTag.do?tag=공기업">공기업</option>
+									<option value="listByTag.do?tag=급여">급여</option>
+									<option value="listByTag.do?tag=회사생활">회사생활</option>
+									<option value="listByTag.do?tag=면접">면접</option>
+									<option value="listByTag.do?tag=자기소개서">자기소개서</option>
+									<option value="listByTag.do?tag=스펙">스펙</option>
+									<option value="listByTag.do?tag=인적성검사">인적성검사</option>
+								</select>
+							</form>
+							
+						
 					</div>
+					
 				</div>
 				
 				<div class="answer_list" style="overflow-y:auto; height: 600px; background-color: white; border-radius: 5px;">												<!-- 질문 리스트 공간 -->
@@ -156,16 +181,18 @@
 							<li><a href="../jobKnowledge/list.do?page=${endpage+1 }">&gt;</a></li>
 						</c:if>
 					</ul>
+					<div style="text-align: right;">
+						<form action="../jobKnowledge/search.do" style="display: inline-block; margin-right:15px;">
+							<select name="finding" class="dropup">
+								<option value="subject" selected="selected">제목</option>
+								<option value="content">내용</option>
+								<option value="id">글쓴이</option>
+							</select>
+							<input type=text name="voca" size=25 placeholder="검색어 입력" style="height:30px; border: none; border-radius: 5px; margin-left:15px;">
+							<input type=submit value=검색 id="searchButton">
+						</form>
+					</div>
 					
-					<form action="../jobKnowledge/search.do">
-						<select name="finding">
-							<option value="subject">제목</option>
-							<option value="content">내용</option>
-							<option value="id">글쓴이</option>
-						</select>
-						<input type=text name="voca" size=15 placeholder="검색어 입력">
-						<input type=submit value=검색>
-					</form>
 				</div>
 				
 				

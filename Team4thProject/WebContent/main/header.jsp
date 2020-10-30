@@ -10,15 +10,19 @@
 <script type="text/javascript">
 	
 		
-	
-
-	
 </script>
+<style type="text/css">
+#headerLink{
+	color: white;
+	font-size: 13pt;
+}
+
+</style>
 </head>
 <body>
 	<header>
         <!-- Header Start -->
-       <div class="header-area" style="background-color: #5076A0;">
+       <div class="header-area" style="background-color: #355880;">
             <div class="main-header ">
                 <div class="header-top black-bg d-none d-md-block">
                    <div class="container">
@@ -47,7 +51,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="index.html"><img src="../image/logo.png" width=400px></a>
+                                    <a href="index.html"><img src="../image/logo2.png" width=400px></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -64,32 +68,31 @@
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                                 <!-- sticky -->
                                     <div class="sticky-logo">
-                                        <a href="index.html"><img src="../image/logo.png" width=300px></a>
+                                        <a href="index.html"><img src="../image/logo2.png" width=300px></a>
                                     </div>
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-md-block">
                                     <nav>                  
                                         <ul id="navigation">    
-                                            <li><a href="../main/main.do" id=home>홈</a></li>
-                                            <li><a href="categori.html">채용공고</a>
+                                            <li><a href="../main/main.do" id="headerLink">홈</a></li>
+                                            <li><a href="../Workb/workb.do" id="headerLink">채용공고</a>
                                             	<ul class="submenu">
                                                     <li><a href="../Workb/workb.do">지역별</a></li>
-                                                    <li><a href="#">업종별</a></li>
-                                                    <li><a href="#">채용달력</a></li>
+                                                    <li><a href="#">업종별(구현 중)</a></li>
+                                                    <li><a href="#">채용달력(구현 중)</a></li>
                                                     <!-- <li><a href="details.html">상시모집</a></li> -->
                                                 </ul>
                                             </li>
-                                            <li><a href="about.html">취업꿀팁</a>
+                                            <li><a href="about.html" id="headerLink">취업꿀팁</a>
                                             	<ul class="submenu">
                                                     <li><a href="../selfletter/letter.do">합격자소서</a></li>
                                                     <li><a href="../company/company.do">기업·면접후기</a></li>
                                                     <li><a href="../newsTipVideo/news.do">취업뉴스</a></li>
                                                     <li><a href="../newsTipVideo/tip.do">취업꿀팁</a></li>
                                                     <li><a href="../newsTipVideo/video.do">취업영상</a></li>
-                                                    <li><a href="details.html">추가요망</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="../gongmo/gongmo_home.do">공모전</a>
+                                            <li><a href="../gongmo/gongmo_home.do" id="headerLink">공모전</a>
                                             	<ul class="submenu">
                                                     <li><a href="../gongmo/gongmo_all.do">전체 공모전</a></li>
                                                     <li><a href="../gongmo/gongmo_cno1.do?cno=1">기획/아이디어</a></li>
@@ -100,13 +103,13 @@
                                                     <li><a href="../gongmo/gongmo_cno6.do?cno=6">기타</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="../jobKnowledge/list.do">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
+                                            <li><a href="../jobKnowledge/list.do" id="headerLink">Job 지식인</a>				<!-- 잡지식인 메인페이지 : 게시글 리스트 출력 -->
                                             	<ul class="submenu">
                                             		<li><a href="../jobKnowledge/list.do">목록</a></li>
                                             		<c:if test="${sessionScope.id != null }">
                                             			<li><a href="../jobKnowledge/answer.do">질문하기</a></li>
                                             		</c:if>
-                                                    <li><a href="../jobKnowledge/profile.do">지식인 프로필</a></li>
+                                                    <li><a href="../jobKnowledge/profile.do">지식인 프로필(구현 중)</a></li>
                                                     <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
                                             </li>
@@ -129,7 +132,7 @@
 										            </li>
 										          </c:if>
 										          <c:if test="${sessionScope.admin=='y'}">
-										            <li><a href="#">관리자페이지</a>
+										            <li><a href="#" id="headerLink">관리자페이지(구현 중)</a>
 										             <ul class="submenu">
 										            	<li><a href="../user/update.do">회원수정</a></li>
 										           	 </ul>

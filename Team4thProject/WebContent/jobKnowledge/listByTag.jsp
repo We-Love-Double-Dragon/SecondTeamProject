@@ -31,6 +31,21 @@
 	background-color: #E7E7E7;
 }
 
+/*검색버튼*/
+#searchButton{
+	height: 30px;
+	width: 40px;
+	color: white;
+	background-color: #FD9999;
+	border: none;
+	border-radius: 5px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+#searchButton:hover{
+	background-color: #FF5757;
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -139,6 +154,19 @@
 							<li><a href="../jobKnowledge/list.do?page=${endpage+1 }">&gt;</a></li>
 						</c:if>
 					</ul>
+					
+					<div style="text-align: right;">
+						<form action="../jobKnowledge/search.do" style="display: inline-block; margin-right:15px;">
+							<select name="finding" class="dropup">
+								<option value="subject" selected="selected">제목</option>
+								<option value="content">내용</option>
+								<option value="id">글쓴이</option>
+							</select>
+							<input type=text name="voca" size=25 placeholder="검색어 입력" style="height:30px; border: none; border-radius: 5px; margin-left:15px;">
+							<input type=submit value=검색 id="searchButton">
+						</form>
+					</div>
+					
 				</div>
 				
 				
