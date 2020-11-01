@@ -20,7 +20,7 @@ public class ComModel {
       String cateno=request.getParameter("cateno");
       if(cateno==null)
     	  cateno="100";
-      int curpage=Integer.parseInt(page);
+       int curpage=Integer.parseInt(page);
        int rowSize=6;
        int start=(rowSize*curpage)-(rowSize-1);
        int end=rowSize*curpage;
@@ -52,6 +52,9 @@ public class ComModel {
       request.setAttribute("main_jsp", "../company/detail.jsp");
       return "../main/main.jsp";
    }
+   //기업 후기보기
+
+   //면접 후기보기
    
    
    

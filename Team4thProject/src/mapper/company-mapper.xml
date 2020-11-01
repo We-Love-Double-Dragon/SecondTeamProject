@@ -19,6 +19,14 @@
 	SELECT * FROM company
 	WHERE cno=#{cno}
 	</select>
-
-
+	<!-- 기업 후기보기 -->
+	<select id="workReviewData" resultType="WorkVO" parameterType="int">
+	SELECT * FROM workreview
+	WHERE cno=#{cno}
+	</select>
+	<!-- 면접 후기보기 -->
+	<select id="intReviewData" resultType="IntVO" parameterType="int">
+	SELECT * FROM intreview
+	WHERE cno=#{cno}
+	</select>
 </mapper>

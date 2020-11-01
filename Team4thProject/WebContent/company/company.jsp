@@ -4,6 +4,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
+<style type="text/css">
+#nav-tabContent{
+	boarder:2px;
+	solid:blue;
+	padding:4px 4px 4px 4px;
+}
+</style>
 
    <body>
     <main>
@@ -20,33 +27,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-8">
                         <!-- Nav Card -->
                         <div class="tab-content" id="nav-tabContent">
                             <!-- card one -->
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">           
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        
                                         <c:forEach var="vo" items="${list }">
                                         	<div class="col-lg-6 col-md-6">
 	                                            <div class="single-what-news mb-100">
 	                                                <div class="what-img">
-	                                                    <img src="${vo.clogo }" alt="">
+	                                                    <img src="${vo.clogo }" alt="company logo" border=10>
 	                                                </div>
 	                                                <div class="what-cap">
 	                                                    <span class="color1">평점 ${vo.cscore }</span>
-	                                                    <h4><a href="../company/detail.do?cno=${vo.cno }">${vo.cname }</a></h4>
+	                                                    <h6><a href="../company/detail.do?cno=${vo.cno }">${vo.cname }</a></h6>
 	                                                </div>
 	                                            </div>
-                                        </div>
-                                        
+                                       		 </div>
                                         </c:forEach>
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     <!-- End Nav Card -->
                     </div>
@@ -129,7 +132,7 @@
                      </ul>
                   </aside>
                   <aside class="single_sidebar_widget popular_post_widget">
-                     <h3 class="widget_title">Recent Post</h3>
+                     <h3 class="widget_title">최근 본 기업</h3>
                      <div class="media post_item">
                         <img src="assets/img/post/post_1.png" alt="post">
                         <div class="media-body">
@@ -182,11 +185,11 @@
                     <div class="single-wrap d-flex justify-content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow roted"></span></a></li>
+                              <li class="page-item"><a class="page-link" href="company.do?page=${curpage>1?curpage-1:curpage }"><span class="flaticon-arrow roted"></span></a></li>
                                 <li class="page-item active"><a class="page-link" href="#">01</a></li>
                                 <li class="page-item"><a class="page-link" href="#">02</a></li>
                                 <li class="page-item"><a class="page-link" href="#">03</a></li>
-                              <li class="page-item"><a class="page-link" href="#"><span class="flaticon-arrow right-arrow"></span></a></li>
+                              <li class="page-item"><a class="page-link" href="company.do?page=${curpage<totalpage?curpage+1:curpage }"><span class="flaticon-arrow right-arrow"></span></a></li>
                             </ul>
                           </nav>
                     </div>

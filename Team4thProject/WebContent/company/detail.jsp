@@ -5,7 +5,14 @@
 
 <!doctype html>
 <html>
-
+<head>
+  <title>${cname }</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 <body>
    
    <!--================기업상세보기 =================-->
@@ -15,27 +22,104 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img"></div>
-                     <img class="img-fluid" src="${vo.clogo }" alt="" border=0>
+                     <img class="img-fluid" src="${vo.clogo }" alt="" border=10>
                   </div>
                   <div class="blog_details">
                      <h2 style="color:black;">${vo.cname }</h2>
                      <ul class="blog-info-link mt-3 mb-4">
                         <li><a href="#"><i class="fa fa-user"></i>평점 ${vo.cscore }</a></li>
                      </ul>
-                      <div class="col-lg-9 col-md-9">
-                        <div class="properties__button">
-                            <!--탭 버튼  -->                                            
-                            <nav>                                                                     
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">소개</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">기업후기</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">면접후기</a> 
-                                </div>
-                            </nav>
-                            <!--탭 버튼  -->
-                        </div>
-                    </div>
-					<!-- 이부분에 테이블 형식으로 기업 소개 넣기 -->
+
+					<!-- ==============================기업 소개,리뷰 부분 시작======================================= -->
+					<div class="container">
+					  <h2>${vo.cname }</h2>
+					  <p>${vo.cscore }</p>
+					  <p>${vo.ctype } | ${vo.indutype }</p>
+					
+					  <ul class="nav nav-tabs">
+					    <li class="active"><a data-toggle="tab" href="#home">소개</a></li>
+					    <li><a data-toggle="tab" href="#menu1">기업후기</a></li>
+					    <li><a data-toggle="tab" href="#menu2">면접후기</a></li>
+					  </ul>
+					<!-- ================기업소개탭================= -->
+					  <div class="tab-content">
+					    <div id="home" class="tab-pane fade in active">
+					      <h3>기업정보</h3><br>
+					      <ul>
+					      	<li>대표이름 : ${vo.bname }</li><br>
+					      	<li>설립일 : ${vo.cdate }</li><br>
+					      	<li>사원수 : ${vo.worknum }</li><br>
+					      	<li>기업주소 : ${vo.cloc }</li><br>
+					      	<li>매출 : ${vo.sale }</li><br>
+					      	<li>기업소개 : ${vo.cover }</li><br>
+					      	<li>웹사이트 : ${vo.site1 }</li><br>
+					      	<li>연혁 : ${vo.history }</li>
+					      </ul>
+					    </div>
+					    <!-- ================기업후기탭================= -->
+					    <div id="menu1" class="tab-pane fade">
+					      <div class="container">
+							  <div class="media">
+								  <div class="media-left">
+								    <img src="user.png" class="media-object" style="width:60px">
+								  </div>
+								  <div class="media-body">
+								    <h4 class="media-heading">${vo.rtype } | ${vo.rloc } | ${vo.rdate }</h4>
+								    <p>${vo.rscore }</p>
+								  </div>
+								</div>
+							  <div class="panel-group">
+							    <div class="panel panel-primary">
+							      <div class="panel-heading">총평</div>
+							      <div class="panel-body">${vo.sub }</div>
+							    </div>
+							    <div class="panel panel-success">
+							      <div class="panel-heading">장점</div>
+							      <div class="panel-body">${vo.rgood }</div>
+							    </div>
+							    <div class="panel panel-warning">
+							      <div class="panel-heading">단점</div>
+							      <div class="panel-body">${vo.rbad }</div>
+							    </div>
+								 <div class="panel panel-info">
+							      <div class="panel-heading">바라는 점</div>
+							      <div class="panel-body">${vo.rwish }</div>
+							    </div>
+							  </div>
+							</div>
+					    </div>
+					     <!-- ================면접후기탭================= -->
+					    <div id="menu2" class="tab-pane fade">
+							<div class="container">
+							  <div class="media">
+								  <div class="media-left">
+								    <img src="user.png" class="media-object" style="width:60px">
+								  </div>
+								  <div class="media-body">
+								    <h4 class="media-heading">면접결과${vo.iresult}</h4>
+								    <p>${vo.iscore }면접난이도</p>
+								    <p>${vo.iregdate }면접일</p>
+								  </div>
+								</div>
+							  <div class="panel-group">
+							    <div class="panel panel-primary">
+							      <div class="panel-heading">총평</div>
+							      <div class="panel-body">${vo.ireview }</div>
+							    </div>
+							    <div class="panel panel-default">
+							      <div class="panel-heading">면접질문</div>
+							      <div class="panel-body">${vo.rgood }</div>
+							    </div>
+							    <div class="panel panel-default">
+							      <div class="panel-heading">면접답변 혹은 면접느낌</div>
+							      <div class="panel-body">${vo.rbad }</div>
+							    </div>
+							  </div>
+							</div>
+					    </div>
+					  </div>
+					</div>
+					<!-- =====================================기업 소개,리뷰 부분  끝===================================================-->
                </div>
                <div class="navigation-top">
                   <div class="d-sm-flex justify-content-between text-center">
@@ -49,53 +133,11 @@
                            class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                            <div class="introduce">
                            </div>
-                           <div class="detials">
-                           		<h6>기업형태 : ${vo.ctype }</h6>
-                                <h6>산업군 : ${vo.cindutype }</h6>
-                                <p><h6>기업주소 : ${vo.cloc}</h6></p>
-                                <h6>설립일 : ${vo.cdate }</h6>
-                                <h6>사원수 : ${vo.worknum }</h6>
-                                <h6>대표이름 : ${vo.bname }</h6>
-                                <h6>매출 : ${vo.sale }</h6>
-                                <h6>기업소개 : ${vo.cover}</h6>
-                                <h6>웹사이트 : ${vo.site1}</h6>
-                                <h6>연혁 : ${vo.history}</h6> 
-                           </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="comment-form">
-                  <h4>Leave a Reply</h4>
-                  <form class="form-contact comment_form" action="#" id="commentForm">
-                     <div class="row">
-                        <div class="col-12">
-                           <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                 placeholder="Write Comment"></textarea>
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group">
-                              <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group">
-                              <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                           </div>
-                        </div>
-                        <div class="col-12">
-                           <div class="form-group">
-                              <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                           </div>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
-                     </div>
-                  </form>
-               </div>
+
             </div>
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
@@ -207,72 +249,7 @@
                            <p>01 Hours ago</p>
                         </div>
                      </div>
-                  </aside>
-                  <aside class="single_sidebar_widget tag_cloud_widget">
-                     <h4 class="widget_title">Tag Clouds</h4>
-                     <ul class="list">
-                        <li>
-                           <a href="#">project</a>
-                        </li>
-                        <li>
-                           <a href="#">love</a>
-                        </li>
-                        <li>
-                           <a href="#">technology</a>
-                        </li>
-                        <li>
-                           <a href="#">travel</a>
-                        </li>
-                        <li>
-                           <a href="#">restaurant</a>
-                        </li>
-                        <li>
-                           <a href="#">life style</a>
-                        </li>
-                        <li>
-                           <a href="#">design</a>
-                        </li>
-                        <li>
-                           <a href="#">illustration</a>
-                        </li>
-                     </ul>
-                  </aside>
-                  <aside class="single_sidebar_widget instagram_feeds">
-                     <h4 class="widget_title">Instagram Feeds</h4>
-                     <ul class="instagram_row flex-wrap">
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                           </a>
-                        </li>
-                     </ul>
-                  </aside>
-                  
+                  </aside>           
                </div>
             </div>
          </div>

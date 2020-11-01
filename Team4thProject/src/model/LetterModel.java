@@ -90,7 +90,7 @@ public class LetterModel {
 			vo.setSa3(sa3);
 			
 			LetterDAO.letterInsert(vo);
-			return "redirect:../selfletter/letter.do";
+			return "../selfletter/insert_ok.jsp";
 	}
 	
 	

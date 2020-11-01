@@ -44,8 +44,32 @@ public class ComDAO {
 		}	
 		return vo;
 	}
-	
-	
+	//기업 후기보기
+	//<select id="workReviewData" resultType="WorkVO" parameterType="int">
+	public static WorkVO workReviewData(int cno) {
+		SqlSession session=ssf.openSession();
+		WorkVO vo=new WorkVO();
+		try {
+			vo=session.selectOne("workReviewData",cno);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}	
+		return vo;
+	}
+	//면접 후기보기
+	//<select id="intReviewData" resultType="IntVO" parameterType="int">
+	public static IntVO intReviewData(int cno) {
+		SqlSession session=ssf.openSession();
+		IntVO vo=new IntVO();
+		try {
+			vo=session.selectOne("intReviewData",cno);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}	
+		return vo;
+	}
 	
 	
 	

@@ -27,8 +27,7 @@
 	<selectKey keyProperty="sno" resultType="int" order="BEFORE">
 		SELECT NVL(MAX(sno)+1,1) as sno FROM selfletter
 	</selectKey>
-	INSERT INTO selfletter(sno,ssubject,sname,sindutype,sq1,sa1,sq2,sa2,sq3,sa3)
-	VALUES(
+	INSERT INTO selfletter VALUES(
 		#{sno},
 		#{ssubject},
 		#{sname},
