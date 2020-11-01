@@ -9,36 +9,33 @@
 </head>
 <body>
 	<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px; height: 1700px;">
-	
+		
+		<c:forEach var="cvo" items="${cList }" varStatus="s">
+			<c:if test="${s.index<6 }">
+				<table>
+					<tr>
+						<th>내용</th>
+						<td>${cvo.subject}</td>
+					</tr>
+					<tr>
+						<th>태그</th>
+						<td>${cvo.content}</td>
+					</tr>
+				</table>
+			</c:if>
+			
+		</c:forEach>
+		
 		<table>
-			<tr>
-				<th>내용</th>
-				<td>${rno}</td>
-			</tr>
-				<th>태그</th>
-				<td>${bno}</td>
-			</tr>
-		</table>
+				<tr>
+					<th>내용</th>
+					<td>${id}</td>
+				</tr>
+				
+			</table>
 	
 	
-	<!-- <table>
-			<tr>
-				<th>제목</th>
-				<td>aaaaaaaa</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>bbbbbbbbb</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>cccccccccc</td>
-			</tr>
-			<tr>
-				<th>태그</th>
-				<td>ddddddddddd</td>
-			</tr>
-		</table> -->
+	
 	</div>
 </body>
 </html>

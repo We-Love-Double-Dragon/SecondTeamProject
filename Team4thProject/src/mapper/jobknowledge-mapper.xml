@@ -160,4 +160,30 @@
 	<select id="searchTotalPage" resultType="int" parameterType="hashmap">
 		SELECT CEIL(COUNT(*) / 10.0) FROM jobknowledge WHERE #{finding} LIKE '%' || #{voca} || '%' AND root = 0
 	</select>
+	
+	
+	
+<!-- 스크랩 -->
+	<!-- 스크랩 저장  -->
+	<insert id="scrapInsert" parameterType="JobKnowledgeScrapVO">
+	INSERT INTO JobKnowledgeScrap VALUES(
+	(SELECT NVL(MAX(no)+1,1) FROM JobKnowledgeScrap),#{id},#{mno}
+	)
+	</insert>
+	<!-- 스크랩 리스트 가져오기 -->
+	<select id="scrapListData" parameterType="String" resultType="JobKnowledgeScrapVO">
+	SELECT * FROM JobKnowledgeScrap
+	WHERE id=#{id}
+	ORDER BY no DESC
+	</select>
+	<!-- 스크랩 여부 확인 -->
+	<select id="scrapCount" parameterType="JobKnowledgeScrapVO" resultType="int">
+	SELECT COUNT(*) FROM JobKnowledgeScrap
+	WHERE id=#{id} AND mno=#{mno}
+	</select>
+	<!-- 스크랩 취소  -->
+	<delete id="scrapDelete" parameterType="int">
+	DELETE FROM JobKnowledgeScrap
+	WHERE no=#{no}
+	</delete>
 </mapper>

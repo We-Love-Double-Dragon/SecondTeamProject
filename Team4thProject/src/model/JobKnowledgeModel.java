@@ -2,9 +2,10 @@ package model;
 
 import java.util.*;
 import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 
 import vo.*;
 import dao.*;
@@ -40,7 +41,6 @@ public class JobKnowledgeModel {
 			if(page == null) {		
 				page = "1";
 			}
-			
 			int currpage = Integer.parseInt(page);						// 현재 페이지
 			int totalpage = JobKnowledgeDAO.jobknowledgeTatalPage();	// 총 페이지
 			int rowSize = 10;											// 한번에 출력될 게시글
@@ -58,7 +58,28 @@ public class JobKnowledgeModel {
 			map.put("start", start);
 			map.put("end", end);
 			
+			
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListData(map);			// DAO의 메소드 리턴값을 받는 List 변수
+			
+			// 쿠키 ---------------------------------------------------------------------------------------------------
+			HttpSession session=request.getSession();
+			String id=(String)session.getAttribute("id");
+			// 쿠키 읽기
+			Cookie[] cookies=request.getCookies();							// 쿠키 배열 생성
+			List<JobKnowledgeVO> cList=new ArrayList<JobKnowledgeVO>();					// 쿠키를 담을 리스트 생성
+			if(cookies!=null)												// 쿠키가 비어있지 않으면
+			{
+				for(int i=cookies.length-1;i>=0;i--)						// (쿠키길이 - 1)부터 0까지 i를 1씩 감소 (그래야 최신 쿠키가 맨앞에 옴)
+				{
+					if(cookies[i].getName().startsWith(id))							// 쿠키배열의 이름이 id를 시작하면
+					{
+						String no=cookies[i].getValue();								// 변수 no에 쿠키값 넣기
+						JobKnowledgeVO vo=JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));		// vo에 상세보기를 담아서
+						cList.add(vo);													// 쿠키배열에 vo 담기
+					}
+				}
+			}
+			request.setAttribute("cList", cList);										// 쿠키값이 담긴 리스트를 전송
 			
 			// 페이지로 보낼 파라미터들 -----------------------------------------------------------
 			request.setAttribute("list", list);
@@ -113,6 +134,27 @@ public class JobKnowledgeModel {
 			
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeListDataByTag(map);			// DAO의 메소드 리턴값을 받는 List 변수
 			
+			// 쿠키 ---------------------------------------------------------------------------------------
+			HttpSession session=request.getSession();
+			String id=(String)session.getAttribute("id");
+			// 쿠키 읽기
+			Cookie[] cookies=request.getCookies();							// 쿠키 배열 생성
+			List<JobKnowledgeVO> cList=new ArrayList<JobKnowledgeVO>();					// 쿠키를 담을 리스트 생성
+			if(cookies!=null)												// 쿠키가 비어있지 않으면
+			{
+				for(int i=cookies.length-1;i>=0;i--)						// (쿠키길이 - 1)부터 0까지 i를 1씩 감소 (그래야 최신 쿠키가 맨앞에 옴)
+				{
+					if(cookies[i].getName().startsWith(id))							// 쿠키배열의 이름이 id를 시작하면
+					{
+						String no=cookies[i].getValue();								// 변수 no에 쿠키값 넣기
+						JobKnowledgeVO vo=JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));		// vo에 상세보기를 담아서
+						cList.add(vo);													// 쿠키배열에 vo 담기
+					}
+				}
+			}
+			request.setAttribute("cList", cList);										// 쿠키값이 담긴 리스트를 전송
+			
+			
 			// 페이지로 보낼 파라미터들 -----------------------------------------------------------
 			request.setAttribute("list", list);
 			request.setAttribute("currpage", currpage);
@@ -135,6 +177,37 @@ public class JobKnowledgeModel {
 	
 	
 	
+	// 상세보기 전에 쿠키 생성하기 ==================================================================================================
+	@RequestMapping("jobKnowledge/detail_before.do")
+	public String jobKnowledge_detail_before(HttpServletRequest request, HttpServletResponse response) {
+			String no = "";
+		try {
+			
+			
+			System.out.println("쿠키생성 모델");
+			
+			// 글번호 no와 세션의 id 가져오기-----------------------------
+			
+			no = request.getParameter("no");
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
+			
+			// 쿠키 생성 ----------------------------------------------
+			Cookie cookie = new Cookie(id + no, no);				// 쿠키의 키는 (세션아이디 + 글번호)  값은 글번호
+			cookie.setMaxAge(60*60*24);
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			System.out.println("쿠키이름 : " + cookie.getName() + "값 : " + cookie.getValue());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return "redirect:../jobKnowledge/detail.do?no=" + no;		// 글번호에 해당하는 detail.do로 리다이렉트
+	}
+	
+	
 	// 게시글 상세보기 ========================================================================================================
 	@RequestMapping("jobKnowledge/detail.do")
 	public String jobKnowledge_detail(HttpServletRequest request) {
@@ -148,6 +221,17 @@ public class JobKnowledgeModel {
 			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));				// DAO의 상세보기 메소드 리턴값을 vo에 담기 
 			
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeDetailReply(Integer.parseInt(no));	// list에 답변글들을 담기
+			
+			
+			// 스크랩 버튼 활성화 여부
+			HttpSession session=request.getSession();
+			String id=(String)session.getAttribute("id");
+			JobKnowledgeScrapVO svo=new JobKnowledgeScrapVO();
+			svo.setId(id);
+			svo.setMno(Integer.parseInt(no));
+			int count=JobKnowledgeDAO.scrapCount(svo);
+			
+			request.setAttribute("count", count);
 			
 			
 			request.setAttribute("vo", vo);
@@ -492,6 +576,59 @@ public class JobKnowledgeModel {
 	
 	
 	
+	// 스크랩하기 ==============================================================================================================
+	@RequestMapping("jobKnowledge/scrap.do")
+	public String jobKnowledge_scrap(HttpServletRequest request)
+	{
+		System.out.println("스크랩하기");
+		String no=request.getParameter("no");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		JobKnowledgeScrapVO vo=new JobKnowledgeScrapVO();
+		vo.setId(id);
+		vo.setMno(Integer.parseInt(no));
+		JobKnowledgeDAO.scrapInsert(vo);
+		return "redirect:../jobKnowledge/detail.do?no="+no;
+	}
+	
+	// 스크랩 취소 ==============================================================================================================
+	@RequestMapping("jobKnowledge/scrap_cancel.do")
+	public String jobKnowledge_scrap_cancel(HttpServletRequest request)
+	{
+		String no=request.getParameter("no");
+		JobKnowledgeDAO.scrapDelete(Integer.parseInt(no));
+		return "redirect:../jobKnowledge/scrapList.do";
+	}
+	
+	// 스크랩목록 가져오기 ==========================================================================================================
+	@RequestMapping("jobKnowledge/scrapList.do")
+	public String jobKnowledge_scrapList(HttpServletRequest request)
+	{
+		// 세션 아이디 가져오기
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		List<JobKnowledgeScrapVO> sList=JobKnowledgeDAO.scrapListData(id);
+		List<JobKnowledgeVO> jList=new ArrayList<JobKnowledgeVO>();
+		for(JobKnowledgeVO vo:jList){
+			JobKnowledgeVO mvo=JobKnowledgeDAO.jobknowledgeDetail(vo.getNo());
+			String content=mvo.getContent();
+			mvo.setNo(vo.getNo());
+			if(content.length()>150){
+				content=content.substring(0,150)+"...";
+				mvo.setContent(content);
+			}
+			jList.add(mvo);
+		}
+		  request.setAttribute("jList", jList);
+		  
+//		  request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/scrapList.jsp");
+		
+		return "../jobKnowledge/scrapList.jsp";
+	}
+	
+	
+	
 	
 	
 	
@@ -522,14 +659,38 @@ public class JobKnowledgeModel {
 		public String test(HttpServletRequest request) {
 			
 			
+			
 			try {
-				String rno = request.getParameter("rno");
-				String bno = request.getParameter("bno");
+				HttpSession session = request.getSession();
+				String id=(String)session.getAttribute("id");
+//				if(session.getAttribute("id") != null) {
+					
+					// 쿠키
+					
+					// 쿠키 읽기
+					Cookie[] cookies=request.getCookies();							// 쿠키 배열 생성
+					List<JobKnowledgeVO> cList=new ArrayList<JobKnowledgeVO>();					// 쿠키를 담을 리스트 생성
+					
+						for(int i=cookies.length-1;i>=0;i--)						// (쿠키길이 - 1)부터 0까지 i를 1씩 감소 (그래야 최신 쿠키가 맨앞에 옴)
+						{
+							if(cookies[i].getName().startsWith(id))							// 쿠키배열의 이름이 id를 시작하면
+							{
+								String no=cookies[i].getValue();								// 변수 no에 쿠키값 넣기
+								JobKnowledgeVO vo=JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));		// vo에 상세보기를 담아서
+								cList.add(vo);													// 쿠키배열에 vo 담기
+								System.out.println("출력 이름 : " + cookies[i].getName() + "출력 값 : " + cookies[i].getValue());
+							}
+						}
+					
+					request.setAttribute("cList", cList);										// 쿠키값이 담긴 리스트를 전송
+					
+					System.out.println("테스트");
+					
+					request.setAttribute("id", id);
+					
+					request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/test.jsp");
 				
-				request.setAttribute("rno", rno);
-				request.setAttribute("bno", bno);
-				request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/test.jsp");
-				System.out.println("테스트 모델");
+//				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();

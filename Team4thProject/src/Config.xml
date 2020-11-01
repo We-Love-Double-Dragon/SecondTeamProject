@@ -11,6 +11,7 @@
 		<typeAlias type="vo.JobKnowledgeVO" alias="JobKnowledgeVO"/>
 		<typeAlias type="vo.JobKnowledge_TagVO" alias="JobKnowledge_TagVO"/>
 		<typeAlias type="vo.JobKnowledge_CommentVO" alias="JobKnowledge_CommentVO"/>
+		<typeAlias type="vo.JobKnowledgeScrapVO" alias="JobKnowledgeScrapVO"/>
 	    <typeAlias type="vo.ComVO" alias="ComVO"/>
 	    <typeAlias type="vo.IntVO" alias="IntVO"/>
 	    <typeAlias type="vo.SelfVO" alias="SelfVO"/>

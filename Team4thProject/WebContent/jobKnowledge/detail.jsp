@@ -66,6 +66,12 @@
 	
 			<div class="tag_area" style="margin-bottom: 20px;">															<!-- 태그 -->
 					<a href="../jobKnowledge/listByTag.do?tag=${vo.tag }" style="background-color: #EEDCFF; color: #878787; border-radius: 5px; font-size:15px; padding-left: 5px; padding-right: 5px;">#${vo.tag }</a>													<!-- 태그 클릭시 태그에 맞는 게시글로 이동하는 기능 필요 ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆ -->
+					
+					<c:if test="${count==0 }">																										<!-- 스크랩하기 -->
+						<div style="text-align: right;">
+							<input type=button value="스크랩" onclick="location.href='../jobKnowledge/scrap.do?no=${vo.no}'">
+						</div>
+					</c:if>
 			</div>
 			
 			<div class="answer_box" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px;">		<!-- 게시글 전체 박스 -->

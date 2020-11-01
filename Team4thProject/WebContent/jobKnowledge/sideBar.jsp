@@ -19,6 +19,16 @@
 .button_answer:hover{
 	background-color: #4979B0;
 }
+
+.scrapButton{
+	background-color: #FD9999;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+.scrapButton:hover{
+	background-color: #FF5757;
+}
+
 </style>
 </head>
 <body>
@@ -38,6 +48,13 @@
 					<input type="button" value="질문하기" class="button_answer" onclick="location.href='../jobKnowledge/answer.do'"
 							style="height:100px; width:100%; color:white; font-size: 30px; border: none; border-radius: 5px;">
 				</c:if>
+				
+				<!-- 스크랩한 게시물 -->
+				<div style="width: 100%; height:50px; text-align: right;">
+					<input type=button value="스크랩한 질문" class="scrapButton" onclick="location.href='scrapList.do'"
+							style="height: 30px; width: 80px; margin-top: 15px; color: white; border: none; border-radius: 5px;">
+				</div>
+				
 			</div>
 		</div>
 					

@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import vo.JobKnowledgeScrapVO;
 import vo.JobKnowledgeVO;
 
 public class JobKnowledgeDAO {
@@ -257,6 +258,44 @@ public class JobKnowledgeDAO {
 	}
 	
 	
+	
+	
+	
+	// 스크랩 ================================================================================================================
+	
+	// 스크랩하기 =========================================================================================================
+	public static void scrapInsert(JobKnowledgeScrapVO vo)
+	{
+	 SqlSession session=ssf.openSession(true);
+	 session.update("scrapInsert", vo);
+	 session.close();
+	}
+
+	// 스크랩목록 가져오기 =========================================================================================================
+	public static List<JobKnowledgeScrapVO> scrapListData(String id)
+	{
+	 SqlSession session=ssf.openSession();
+	 List<JobKnowledgeScrapVO> list=session.selectList("scrapListData",id);
+	 session.close();
+	 return list;
+	}
+
+	// 스크랩 여부 확인 =========================================================================================================
+	public static int scrapCount(JobKnowledgeScrapVO vo)
+	{
+	 SqlSession session=ssf.openSession();
+	 int count=session.selectOne("scrapCount",vo);
+	 session.close();
+	 return count;
+	}
+
+	// 스크랩 취소 =========================================================================================================
+	public static void scrapDelete(int no)
+	{
+	 SqlSession session=ssf.openSession(true);
+	 session.delete("scrapDelete", no);
+	 session.close();
+	}
 	
 	
 	
