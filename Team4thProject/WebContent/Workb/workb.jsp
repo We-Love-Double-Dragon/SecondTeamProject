@@ -9,10 +9,26 @@
 		<div class="container box_1170">
 			<div class="section-top-border">
 				<h3 class="mb-30">채용공고</h3>
+				<div class="list_option" style="text-align: right;">					
+						<form method="post" style="display: inline;">
+						<select class="selectpicker" onchange="window.open(value,'_self');"
+							style="display: inline; width: 50px; height:10px; font-size:10px;">						<!-- 태그 셀렉트박스 (태그별 게시글 출력) -->
+							<option>태그 선택</option>
+							<option value="listByTag.do?tag=서울">서울</option>
+							<option value="listByTag.do?tag=경기">경기</option>
+							<option value="listByTag.do?tag=인천">인천</option>
+							<option value="listByTag.do?tag=부산">부산</option>
+							<option value="listByTag.do?tag=대구">대구</option>
+							<option value="listByTag.do?tag=광주">광주</option>
+							<option value="listByTag.do?tag=대전">대전</option>
+							<option value="listByTag.do?tag=강원">강원</option>
+							<option value="listByTag.do?tag=제주">제주</option>
+							<option value="listByTag.do?tag=전국">전국</option>
+						</select>
+						</form>
+					</div>
+				</div>
 				<div class="progress-table-wrap">
-			<!-- 	<div class=button>
-					<a href="insert.jsp" class="btn btn-sm btn-primary">새글</a>
-				</div> -->
 					<table class="table">
 						<tr>
 							<th class="text-center" width=5%>번호</th>
@@ -29,7 +45,7 @@
 						<tr>
 							<td class="text-center" width=5%>${vo.l_no }</td>
 							<td class="text-center" width=15%>${vo.lname }</td>
-							<td class="text-center" width=30%>
+							<td class   ="text-center" width=30%>
 								<a href="../Workb/detail.do?l_no=${vo.l_no }" style="color:black;">${vo.ltitle }</a>
 							</td>
 							<td class="text-center" width=10%>${vo.lapp_con }</td>
