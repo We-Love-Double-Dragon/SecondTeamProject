@@ -186,4 +186,89 @@
 	DELETE FROM JobKnowledgeScrap
 	WHERE mno=#{no}
 	</delete>
+	
+	
+	
+	
+	
+	
+	<!-- 댓글 올리기  -->
+  <insert id="commentInsert" parameterType="JobKnowledge_CommentVO">
+    <!-- 적용할 수 없다(한번) -->
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM jobknowledge_comment
+    </selectKey>
+    INSERT INTO jobknowledge_comment(no, reply_no, id, content, comment_id, board_no) VALUES(
+      #{no},
+      #{reply_no},
+      #{id},
+      #{content},
+      (SELECT NVL(MAX(comment_id)+1,1) FROM jobknowledge_comment),
+      #{board_no}
+    )
+  </insert>
+  
+  <!-- 댓글목록 가져오기 -->
+  <select id="commentListData" resultType="JobKnowledge_CommentVO" parameterType="hashmap">
+    SELECT no, reply_no, id, content, TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday, comment_tab 
+    FROM jobknowledge_comment 
+    WHERE reply_no=#{reply_no} AND board_no = #{board_no}
+    ORDER BY comment_id DESC , comment_step ASC
+  </select>
+  
+  <!-- 
+                         no  group_id   group_step  group_tab  root  depth
+        AAAAAA            1     1          0            0              3
+          =>OOOOOOO      8     1          1            1              0
+          =>KKKKKKK       7     1          2            1              0
+          =>BBBBBB        2     1          3            1              1
+          
+           =>CCCCCCC      3     1          4            2              1
+            =>FFFFFFF     5     1          5            3              0
+          
+        DDDDDD            4     2          0            0              1
+          => GGGGGGG      6     2          1            1              0
+          => KKKKKK       9     2          1            1
+   -->
+   
+   <!-- 대댓글의 부모댓글 comment_id,comment_step,comment_tab 가져오기 -->
+  <select id="commentParentData" parameterType="int" resultType="JobKnowledge_CommentVO">
+   SELECT comment_id,comment_step,comment_tab
+   FROM jobknowledge_comment
+   WHERE no=#{no}
+  </select>
+  
+  <!-- 부모댓글 내의 다른 댓글들 순서 증가 -->
+  <update id="commentStepIncrement" parameterType="JobKnowledge_CommentVO">
+    UPDATE jobknowledge_comment SET
+    comment_step=comment_step+1
+    WHERE comment_id=#{comment_id} AND comment_step>#{comment_step}
+  </update>
+  
+  <!-- 대댓글 달기 -->
+  <insert id="commentCommentInsert" parameterType="JobKnowledge_CommentVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM jobknowledge_comment
+    </selectKey>
+    INSERT INTO jobknowledge_comment(no, reply_no, id, content, comment_id, comment_step, comment_tab, root, depth, board_no) VALUES(
+      #{no},
+      #{reply_no},
+      #{id},
+      #{content},
+      #{comment_id},
+      #{comment_step},
+      #{comment_tab},
+      #{root},
+      #{board_no}
+      0
+    )
+  </insert>
+  
+  <!-- 부모댓글의 댓글수 증가 -->
+  <update id="commentDepthIncrement" parameterType="int">
+    UPDATE jobknowledge_comment SET
+    depth=depth+1
+    WHERE no=#{no}
+  </update>
+	
 </mapper>

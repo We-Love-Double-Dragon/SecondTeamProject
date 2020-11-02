@@ -21,6 +21,7 @@ public class JobKnowledge_CommentVO {
 	
 	private int no;				// 댓글번호
 	private int reply_no;		// 답변글 번호
+	private int board_no;		// 질문글 번호
 	private String id;			// 작성자 아이디
 	private String content;		// 내용
 	private Date regdate;		// 작성일
@@ -29,9 +30,23 @@ public class JobKnowledge_CommentVO {
 	private int comment_tab;	// 댓글 들여쓰기
 	private int root;			// 뿌리글
 	private int depth;			// 대댓글 개수
+	private String dbday;
 	
 	
 	
+	
+	public int getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
+	}
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getReply_no() {
 		return reply_no;
 	}

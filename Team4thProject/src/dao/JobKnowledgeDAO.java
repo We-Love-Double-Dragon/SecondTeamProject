@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import vo.JobKnowledgeScrapVO;
 import vo.JobKnowledgeVO;
+import vo.JobKnowledge_CommentVO;
 
 public class JobKnowledgeDAO {
 	
@@ -296,6 +297,52 @@ public class JobKnowledgeDAO {
 	 session.delete("scrapDelete", no);
 	 session.close();
 	}
+	
+	
+	
+	
+	
+	
+	
+	// 댓글 달기 ===========================================================================================================
+	public static void commentInsert(JobKnowledge_CommentVO vo){
+	   SqlSession session=ssf.openSession(true);// commit(X)
+	   // commit() ==> DML
+	   session.insert("commentInsert",vo);
+	   session.close();
+   }
+	
+	/*
+	 * <select id="commentListData" resultType="JobKnowledge_CommentVO" parameterType="hashmap">
+	    SELECT no, reply_no, id, content, TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,
+	    comment_tab FROM jobknowledge_comment 
+	    WHERE reply_no=#{reply_no} AND board_no = #{board_no}
+	    ORDER BY comment_id DESC , comment_step ASC
+	  </select>
+	 * */
+	// 댓글목록 가져오기 ======================================================================================================
+	public static List<JobKnowledge_CommentVO> commentListData(Map map){
+	   SqlSession session=ssf.openSession();
+	   List<JobKnowledge_CommentVO> list=session.selectList("commentListData",map);
+	   session.close();
+	   return list;
+   }
+	
+	// 대댓글 달기 ========================================================================================================
+	public static void commentCommentInsert(int root,JobKnowledge_CommentVO vo){
+		   SqlSession session=ssf.openSession();
+		   JobKnowledge_CommentVO pvo=session.selectOne("commentParentData",root);
+		   session.update("commentStepIncrement", pvo);
+		   vo.setComment_id(pvo.getComment_id());
+		   vo.setComment_step(pvo.getComment_step()+1);
+		   vo.setComment_tab(pvo.getComment_tab()+1);
+		   vo.setRoot(root);
+		   
+		   session.insert("commentCommentInsert", vo);
+		   session.update("commentDepthIncrement", root);
+		   session.commit();
+		   session.close();
+	   }
 	
 	
 	

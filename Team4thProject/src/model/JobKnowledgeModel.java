@@ -223,6 +223,8 @@ public class JobKnowledgeModel {
 			List<JobKnowledgeVO> list = JobKnowledgeDAO.jobknowledgeDetailReply(Integer.parseInt(no));	// list에 답변글들을 담기
 			
 			
+			
+			
 			// 스크랩 버튼 활성화 여부
 			HttpSession session=request.getSession();
 			String id=(String)session.getAttribute("id");
@@ -244,6 +246,27 @@ public class JobKnowledgeModel {
 		return "../jobKnowledge/box.jsp";
 	}
 	
+	// 상세보기시에 답변글의 댓글들 가져오기 ===========================================================================================
+	@RequestMapping("jobKnowledge/bringComment.do")
+	public String jobKnowledge_bringComment(HttpServletRequest request) {
+		
+		try {
+			String board_no = request.getParameter("board_no");
+			String reply_no = request.getParameter("reply_no");
+			
+			Map map = new HashMap();
+			map.put("board_no", board_no);
+			map.put("reply_no", reply_no);
+			
+			List<JobKnowledge_CommentVO> comment_list = JobKnowledgeDAO.commentListData(map);
+			
+			request.setAttribute("comment_list", comment_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/bringComment.jsp";
+	}
 	
 	
 	
@@ -627,6 +650,81 @@ public class JobKnowledgeModel {
 		
 		return "../jobKnowledge/box.jsp";
 	}
+	
+	
+	
+	
+	// 답변에 댓글달기 ==============================================================================================================================
+	   @RequestMapping("jobKnowledge/comment_insert.do")
+	   public String reply_insert(HttpServletRequest request)
+	   {
+		   
+		   String board_no = "";
+		   
+		   try
+		   {
+			   request.setCharacterEncoding("UTF-8");
+			   board_no = request.getParameter("board_no");
+			   String reply_no=request.getParameter("reply_no");			// 답변글번호
+			   String content=request.getParameter("content");				// 내용
+			   HttpSession session=request.getSession();
+			   String id=(String)session.getAttribute("id");				// 세션아이디
+//			   String name=(String)session.getAttribute("name");
+			   // VO에 담아서 => DAO
+			   JobKnowledge_CommentVO vo=new JobKnowledge_CommentVO();		// 댓글VO객체 생성
+			   vo.setReply_no(Integer.parseInt(reply_no));					// 답변글번호 setter
+			   vo.setId(id);												// 아이디 setter
+			   vo.setContent(content);										// 내용 setter
+			   vo.setBoard_no(Integer.parseInt(board_no));
+//			   vo.setName(name);
+			   // DAO연결 
+			   JobKnowledgeDAO.commentInsert(vo);
+			   
+		   }catch(Exception ex) {
+			   ex.printStackTrace();
+		   }
+		   
+		   return "redirect:../jobKnowledge/detail.do?no="+board_no;	// 수정 ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆
+	   }
+	   
+	   
+	   // 대댓글 달기 =======================================================================================================================
+	   @RequestMapping("jobKnowledge/comment_comment_insert.do")
+	   public String comment_comment_insert(HttpServletRequest request)
+	   {
+		   String board_no = "";
+		   
+		   try
+		   {
+			   request.setCharacterEncoding("UTF-8");
+			   
+			   board_no = request.getParameter("board_no");
+			   String no=request.getParameter("no");						// 댓글번호
+			   System.out.println("no="+no);
+			   String reply_no=request.getParameter("reply_no");			// 답변글 번호
+			   System.out.println("reply_no="+reply_no);
+			   String content=request.getParameter("content");				// 내용
+			   JobKnowledge_CommentVO vo=new JobKnowledge_CommentVO();		// 댓글VO 객체 생성
+			   //vo.setRoot(Integer.parseInt(no));
+			   vo.setReply_no(Integer.parseInt(reply_no));					// 답변글번호 setter
+			   vo.setContent(content);										// 내용 setter
+			   vo.setBoard_no(Integer.parseInt(board_no));
+			   HttpSession session=request.getSession();
+			   String id=(String)session.getAttribute("id");				// 세션아이디
+//			   String name=(String)session.getAttribute("name");
+			   vo.setId(id);												// 세션아이디 setter
+//			   vo.setName(name);
+			   // DB연동 
+			   JobKnowledgeDAO.commentCommentInsert(Integer.parseInt(no), vo);		// 대댓글 메소드 수행
+			   
+		   }catch(Exception ex) {
+			   ex.printStackTrace();
+		   }
+		   
+		   
+		   return "redirect:../jobKnowledge/detail.do?no="+board_no;
+	   }
+	  
 	
 	
 	

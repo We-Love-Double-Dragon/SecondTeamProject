@@ -11,20 +11,40 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
+
+	// 질문글삭제
 	function deleteReally(){
 		window.open("../jobKnowledge/deleteReally.do", "deleteReally", "width=320,height=300,scrollbars=no")
 	}
 	
+	// 답변글삭제
 	function deleteReally_reply(){
 		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
 	}
 	
+	// 댓글입력창 활성/비활성화
 	$(function(){
 		$('#comment_Insert_area').hide();
 		$('#bring_comment_tab').click(function(){
 			$('#comment_Insert_area').toggle();
 		})
+	
+	
+	// 답변글의 댓글 가져오기
+		let board_no = $('#bno').val();		// 질문글의 번호
+		let reply_no = $('#rno').val();		// 답변글의 번호
+		$.ajax({
+			type:'post',
+			data: {"board_no" : board_no, "reply_no" : reply_no},
+			url:'../jobKnowledge/bringComment.do',
+			success:function(result)
+			{
+			 $('.comment_list').html(result);
+			}
+		})
 	});
+	
+	
 </script>
 <style type="text/css">
 /* 답변하기 버튼 */
@@ -139,10 +159,10 @@
 				<div class="reply_list_area" style="background-color: #4273AB; padding:10px; border-radius: 5px;">
 					<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
 						
-						<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
+						<div class="subject_area" style="margin-bottom: 20px;">														<!-- 답변제목 -->
 							<h3>${rVO.id }</h3>
 						</div>
-						<div class="content_area">
+						<div class="content_area">																					<!-- 답변내용 -->
 							<p>${rVO.content }</p>
 							<p>${rVO.no }</p>
 						</div>
@@ -158,18 +178,59 @@
 					
 					<div id="comment_Insert_area"
 							style="width:100%; hight: 70px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px;">		<!-- 댓글 다는 공간 -->
-						<form action="../jobKnowledge/test.jsp" method="post">
+						<form action="../jobKnowledge/comment_insert.do" method="post">
 							<textarea rows="3" cols="105" name=content
 							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
 							<div class="comment_bottom" style="text-align: right; width:100%;">
-								<input type=submit value=댓글등록 id="aaaaa"
+								<input type=submit value=댓글등록 id="insertCommentButton"
 									style="height:30px; width:50px; background-color: #5A91CF; color:white; font-size: 13px; border: none; border-radius: 5px;">
 							</div>
-							<input type=hidden name=rno value="${rno}" id=rnoo>
-							<input type=hidden name=id value="${sessionID}" id=sessionIDD>
-							<input type=hidden name=bno value="${bno}" id=bnoo>
+							<input type=hidden name=reply_no value="${rVO.no}" id=rnoo>
+							<input type=hidden name=board_no value="${vo.no}">
 						</form>
 					</div>
+					
+					<div class="comment_list">
+					
+					</div>
+					
+					<%-- <c:forEach var="comment_vo" items="${comment_list }">
+						<div class="comment_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px; ">		<!-- 답변 전체 박스 -->
+							
+							<c:if test="${rvo.group_tab>0 }">								<!-- 그룹탭만큼 넣기 -->
+								<c:forEach var="i" begin="1" end="${rvo.group_tab }">
+									&nbsp;&nbsp;&nbsp;&nbsp;
+								</c:forEach>
+								▶
+							</c:if>
+							
+							<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
+								<h3>댓글아이디</h3>
+							</div>
+							
+							<div class="text-left">										
+								<c:if test="${rvo.group_tab>0 }">									<!-- 내용을 그룹탭만큼 넣기 -->
+									<c:forEach var="i" begin="1" end="${rvo.group_tab }">
+										&nbsp;&nbsp; &nbsp;&nbsp;
+									</c:forEach>
+								</c:if>
+								<pre style="white-space: pre-wrap;background-color: white;border:none">${rvo.msg }</pre>
+							</div>
+							
+							
+							<!-- <div class="content_area">
+								<p>댓글 내용</p>
+							</div> -->
+							<div class="delete_modify_button" style="text-align: right;">
+								<input type=button value="댓글" id="bring_comment_tab" onclick="bring_comment_tab()">
+								<c:if test="${rVO.id == sessionScope.id }">
+										<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
+										<input type=hidden value=${rVO.no } id="rno">
+								</c:if>
+								
+							</div>
+						</div>
+					</c:forEach> --%>
 					
 				</div>
 			</c:forEach>
