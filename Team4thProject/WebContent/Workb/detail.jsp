@@ -23,7 +23,6 @@
                      <td class="text-center" width=10%>${vo.ldeadline }</td>
                      <td class="text-center" width=5%>${vo.lsal }</td>
                      <td class="text-center" width=10%>${vo.lworkspace }</td>
-                            
                              -->
                             <div class="about-right mb-90">
                                 <div class="section-tittle mb-30 pt-30">
