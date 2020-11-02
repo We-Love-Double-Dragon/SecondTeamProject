@@ -500,12 +500,12 @@ public class JobKnowledgeModel {
 //		
 //		return "../jobKnowledge/comment.jsp";
 //	}
-//	// 댓글창 보이기 =========================================================================================================================
-//	@RequestMapping("jobKnowledge/commentButton.do")
-//	public String jobknowledge_commentButton(HttpServletRequest request) {
-//		
-//		return "../jobKnowledge/commentButton.jsp";
-//	}
+	// 댓글창 보이기 =========================================================================================================================
+	@RequestMapping("jobKnowledge/commentInsertTab.do")
+	public String jobknowledge_commentButton(HttpServletRequest request) {
+		
+		return "../jobKnowledge/commentInsertTab.jsp";
+	}
 	
 	
 	
@@ -604,27 +604,28 @@ public class JobKnowledgeModel {
 	@RequestMapping("jobKnowledge/scrapList.do")
 	public String jobKnowledge_scrapList(HttpServletRequest request)
 	{
-		// 세션 아이디 가져오기
-		HttpSession session=request.getSession();
-		String id=(String)session.getAttribute("id");
+		HttpSession session=request.getSession();					// 세션 생성
+		String id=(String)session.getAttribute("id");				// id를 세션id로 
 		
-		List<JobKnowledgeScrapVO> sList=JobKnowledgeDAO.scrapListData(id);
-		List<JobKnowledgeVO> jList=new ArrayList<JobKnowledgeVO>();
-		for(JobKnowledgeVO vo:jList){
-			JobKnowledgeVO mvo=JobKnowledgeDAO.jobknowledgeDetail(vo.getNo());
-			String content=mvo.getContent();
-			mvo.setNo(vo.getNo());
-			if(content.length()>150){
-				content=content.substring(0,150)+"...";
-				mvo.setContent(content);
-			}
-			jList.add(mvo);
-		}
-		  request.setAttribute("jList", jList);
 		  
-//		  request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/scrapList.jsp");
+		List<JobKnowledgeScrapVO> scrap_List=JobKnowledgeDAO.scrapListData(id);				// 찜 리스트 가져오기
+		List<JobKnowledgeVO> boardList=new ArrayList<JobKnowledgeVO>();						// boardList(게시글VO 리스트 객체) 생성
+		for(JobKnowledgeScrapVO scrap_vo : scrap_List) {											// 스크랩리스트 전부 for문 돌리기
+		JobKnowledgeVO board_vo=JobKnowledgeDAO.jobknowledgeDetail(scrap_vo.getMno());				// board_vo(게시글 VO 객체)에 detail 메소드 넣기 (파라미터는 스크랩VO의 mno컬럼(글번호))
+//		String story=mvo.getStory();								
+		board_vo.setScrap_no(scrap_vo.getNo());														// board_vo(게시글VO)의 scrap_no(찜번호 컬럼)에 scrap_vo의 번호(no) 넣기
+//		if(story.length()>150) {
+//		  
+//		story=story.substring(0,150)+"...";
+//		mvo.setStory(story);
+//		}
+		boardList.add(board_vo);											// 게시글VO리스트에 게시글VO객체 넣기
+		}
+		request.setAttribute("boardList", boardList);							// 게시글VO리스트를 전송
+		  
+		  request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/scrapList.jsp");
 		
-		return "../jobKnowledge/scrapList.jsp";
+		return "../jobKnowledge/box.jsp";
 	}
 	
 	

@@ -184,6 +184,6 @@
 	<!-- 스크랩 취소  -->
 	<delete id="scrapDelete" parameterType="int">
 	DELETE FROM JobKnowledgeScrap
-	WHERE no=#{no}
+	WHERE mno=#{no}
 	</delete>
 </mapper>

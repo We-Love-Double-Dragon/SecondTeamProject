@@ -18,6 +18,19 @@
 	function deleteReally_reply(){
 		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
 	}
+	
+	$(function(){
+		$('#bring_comment_tab').click(function(){
+			$.ajax({
+				type:'post',
+				url:'../jobKnowledge/commentInsertTab.do',
+				data: {"rno": rno, "bno": bno},		
+				success:function(result){
+					$('.comment_insert_area').html(result);
+				}
+			})
+		})
+	});
 </script>
 <style type="text/css">
 /* 답변하기 버튼 */
@@ -129,21 +142,28 @@
 			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979;"></div>																	<!-- 답변입력 - 답변리스트간 구분선 -->
 			
 			<c:forEach var="rVO" items="${list }">
-				<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-top: 25px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
+				<div class="reply_list_area" style="background-color: #4273AB; padding:10px; border-radius: 5px;">
+					<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
+						
+						<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
+							<h3>${rVO.id }</h3>
+						</div>
+						<div class="content_area">
+							<p>${rVO.content }</p>
+							<p>${rVO.no }</p>
+						</div>
+						<div class="delete_modify_button" style="text-align: right;">
+							<input type=button value="댓글" id="bring_comment_tab">
+							<c:if test="${rVO.id == sessionScope.id }">
+									<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
+									<input type=hidden value=${rVO.no } id="rno">
+							</c:if>
+							
+						</div>
+					</div>
+					<div class="comment_insert_area">
+					</div>
 					
-					<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
-						<h3>${rVO.id }</h3>
-					</div>
-					<div class="content_area">
-						<p>${rVO.content }</p>
-						<p>${rVO.no }</p>
-					</div>
-				</div>
-				<div class="delete_modify_button" style="text-align: right;">
-					<c:if test="${rVO.id == sessionScope.id }">
-							<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
-							<input type=hidden value=${rVO.no } id="rno">
-					</c:if>
 				</div>
 			</c:forEach>
 			

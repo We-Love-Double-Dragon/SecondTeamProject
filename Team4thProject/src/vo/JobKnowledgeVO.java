@@ -35,9 +35,16 @@ public class JobKnowledgeVO {
 	private String tag;			// 태그
 	private int adopt;			// 채택여부
 	private int reply;
+	private int scrap_no;		// 스크랩번호
 	
 	
 	
+	public int getScrap_no() {
+		return scrap_no;
+	}
+	public void setScrap_no(int scrap_no) {
+		this.scrap_no = scrap_no;
+	}
 	public int getReply() {
 		return reply;
 	}
