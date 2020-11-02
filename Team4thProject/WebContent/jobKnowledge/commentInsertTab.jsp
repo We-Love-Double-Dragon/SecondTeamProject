@@ -20,7 +20,7 @@
 
 </head>
 <body>
-	<div style="width:500px; hight: 150px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px;">
+	<%-- <div style="width:500px; hight: 150px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px;">
 		<form action="../jobKnowledge/test.jsp" method="post">
 			<textarea rows="6" cols="10" name=content
 			style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
@@ -32,6 +32,7 @@
 			<input type=hidden name=id value="${sessionID}" id=sessionIDD>
 			<input type=hidden name=bno value="${bno}" id=bnoo>
 		</form>
-	</div>
+	</div> --%>
+	<div style="height:100px; width:100px; background-color: red;"></div>
 </body>
 </html>

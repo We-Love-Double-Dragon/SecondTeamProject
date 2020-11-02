@@ -193,7 +193,7 @@
 					</ul>
 					<div style="text-align: right;">
 						<form action="../jobKnowledge/search.do" style="display: inline-block; margin-right:15px;">
-							<select name="finding" class="dropup">
+							<select name="finding">
 								<option value="subject" selected="selected">제목</option>
 								<option value="content">내용</option>
 								<option value="id">글쓴이</option>

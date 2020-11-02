@@ -20,15 +20,9 @@
 	}
 	
 	$(function(){
+		$('#comment_Insert_area').hide();
 		$('#bring_comment_tab').click(function(){
-			$.ajax({
-				type:'post',
-				url:'../jobKnowledge/commentInsertTab.do',
-				data: {"rno": rno, "bno": bno},		
-				success:function(result){
-					$('.comment_insert_area').html(result);
-				}
-			});
+			$('#comment_Insert_area').toggle();
 		})
 	});
 </script>
@@ -153,7 +147,7 @@
 							<p>${rVO.no }</p>
 						</div>
 						<div class="delete_modify_button" style="text-align: right;">
-							<input type=button value="댓글" id="bring_comment_tab">
+							<input type=button value="댓글" id="bring_comment_tab" onclick="bring_comment_tab()">
 							<c:if test="${rVO.id == sessionScope.id }">
 									<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
 									<input type=hidden value=${rVO.no } id="rno">
@@ -161,7 +155,20 @@
 							
 						</div>
 					</div>
-					<div class="comment_insert_area">
+					
+					<div id="comment_Insert_area"
+							style="width:100%; hight: 70px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px;">		<!-- 댓글 다는 공간 -->
+						<form action="../jobKnowledge/test.jsp" method="post">
+							<textarea rows="3" cols="105" name=content
+							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
+							<div class="comment_bottom" style="text-align: right; width:100%;">
+								<input type=submit value=댓글등록 id="aaaaa"
+									style="height:30px; width:50px; background-color: #5A91CF; color:white; font-size: 13px; border: none; border-radius: 5px;">
+							</div>
+							<input type=hidden name=rno value="${rno}" id=rnoo>
+							<input type=hidden name=id value="${sessionID}" id=sessionIDD>
+							<input type=hidden name=bno value="${bno}" id=bnoo>
+						</form>
 					</div>
 					
 				</div>
