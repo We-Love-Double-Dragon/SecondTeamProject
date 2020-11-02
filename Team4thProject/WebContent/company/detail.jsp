@@ -6,7 +6,6 @@
 <!doctype html>
 <html>
 <head>
-  <title>${cname }</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -22,7 +21,7 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img"></div>
-                     <img class="img-fluid" src="${vo.clogo }" alt="" border=10>
+                     <img class="img-fluid" src="${vo.clogo }" alt="기업로고">
                   </div>
                   <div class="blog_details">
                      <h2 style="color:black;">${vo.cname }</h2>
@@ -34,7 +33,7 @@
 					<div class="container">
 					  <h2>${vo.cname }</h2>
 					  <p>${vo.cscore }</p>
-					  <p>${vo.ctype } | ${vo.indutype }</p>
+					  <p>${vo.ctype } | ${vo.cindutype }</p>
 					
 					  <ul class="nav nav-tabs">
 					    <li class="active"><a data-toggle="tab" href="#home">소개</a></li>
@@ -57,7 +56,7 @@
 					      </ul>
 					    </div>
 					    <!-- ================기업후기탭================= -->
-					    <div id="menu1" class="tab-pane fade">
+<%-- 					    <div id="menu1" class="tab-pane fade">
 					      <div class="container">
 							  <div class="media">
 								  <div class="media-left">
@@ -118,28 +117,15 @@
 							</div>
 					    </div>
 					  </div>
-					</div>
+					</div> --%>
 					<!-- =====================================기업 소개,리뷰 부분  끝===================================================-->
                </div>
-               <div class="navigation-top">
-                  <div class="d-sm-flex justify-content-between text-center">
-                     <div class="col-sm-4 text-center my-2 my-sm-0">
-                        <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-                     </div>
-                  </div>
-                  <div class="navigation-area">
-                     <div class="row">
-                        <div
-                           class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                           <div class="introduce">
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
             </div>
-            <div class="col-lg-4">
+         </div>
+      </div>
+      
+      <!--  =========================================사이드바 시작부분======================================================-->
+      <div class="col-lg-4">
                <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
                      <form action="#">
@@ -156,6 +142,8 @@
                            type="submit">Search</button>
                      </form>
                   </aside>
+                  
+                  
                   <aside class="single_sidebar_widget post_category_widget">
                      <h4 class="widget_title">Category</h4>
                      <ul class="list cat-list">
@@ -211,6 +199,8 @@
                         </li>
                      </ul>
                   </aside>
+                  
+                  
                   <aside class="single_sidebar_widget popular_post_widget">
                      <h3 class="widget_title">Recent Post</h3>
                      <div class="media post_item">
@@ -249,11 +239,12 @@
                            <p>01 Hours ago</p>
                         </div>
                      </div>
-                  </aside>           
+                  </aside>  
+                  
+                  
+                           
                </div>
             </div>
-         </div>
-      </div>
    </section>
    <!--================ Blog Area end =================-->
 

@@ -21,12 +21,12 @@
 	</select>
 	<!-- 기업 후기보기 -->
 	<select id="workReviewData" resultType="WorkVO" parameterType="int">
-	SELECT * FROM workreview
-	WHERE cno=#{cno}
+	SELECT * FROM company c,workreview w
+	WHERE c.cno=w.#{cno}
 	</select>
 	<!-- 면접 후기보기 -->
 	<select id="intReviewData" resultType="IntVO" parameterType="int">
-	SELECT * FROM intreview
-	WHERE cno=#{cno}
+	SELECT * FROM intreview i,company c
+	WHERE c.cno=i.#{cno}
 	</select>
 </mapper>
