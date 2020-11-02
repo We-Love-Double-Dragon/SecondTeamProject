@@ -28,7 +28,7 @@
 				success:function(result){
 					$('.comment_insert_area').html(result);
 				}
-			})
+			});
 		})
 	});
 </script>
