@@ -27,12 +27,12 @@
 		$('.comment_Insert_area').hide();
 		
 		$('.bring_comment_tab').click(function(){				// bring_comment_tab 클릭시
-			let no = $(this).attr('value')						// 변수 no는 클릭한 bring_comment_tab의 value값
+			let no = $(this).attr('id')						// 변수 no는 클릭한 bring_comment_tab의 value값
 			$('#comment_Insert_area' + no).toggle(); 			// #comment_Insert_area + no를 토글
 		});
 	
 		
-		// 답변글의 댓글창 보이기
+		// 답변글의 댓글목록 보이기
 		$('.lookComment').click(function(){
 			let board_no = $(this).siblings('#comment_board_no').val();
 			let reply_no = $(this).siblings('#comment_reply_no').val();
@@ -212,7 +212,7 @@
 							<p>${rVO.no }</p>
 						</div>
 						<div class="delete_modify_button" style="text-align: right;">
-							<input type=button value="${rVO.no }" id="bring_comment_tab${rVO.no }" class="bring_comment_tab" onclick="bring_comment_tab()">
+							<input type=button value="댓글작성" id="${rVO.no }" class="bring_comment_tab" onclick="bring_comment_tab()">
 							<!-- <form method="post" action="../jobKnowledge/bringComment.do" style="display: inline;"> -->												<!-- 댓글보기 버튼 -->
 								<input type=submit value="댓글보기" class="lookComment">
 								<input type=hidden id="comment_board_no" name="board_no" value=${vo.no }>
@@ -234,7 +234,7 @@
 							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
 							<div class="comment_bottom" style="text-align: right; width:100%;">
 								<input type=submit value=댓글등록 id="insertCommentButton"
-									style="height:30px; width:50px; background-color: #5A91CF; color:white; font-size: 13px; border: none; border-radius: 5px;">
+									style="height:30px; background-color: #5A91CF; color:white; font-size: 10px; border: none; border-radius: 5px;">
 							</div>
 							<input type=hidden name=reply_no value="${rVO.no}" id=rnoo>
 							<input type=hidden name=board_no value="${vo.no}">

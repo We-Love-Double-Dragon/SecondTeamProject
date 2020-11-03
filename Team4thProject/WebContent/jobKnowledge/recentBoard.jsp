@@ -19,15 +19,15 @@
 							<c:forEach var="cvo" items="${cList }" varStatus="s">
 								<c:if test="${s.index < 5 }">
 								<div class="answer_box_header">																<!-- 최근 방문한 질문글 -->
-									<c:if test="${fn:length(cvo.subject)>35 }">
+									<c:if test="${fn:length(cvo.subject)>22 }">
 										<div class="recentVisitButton" onclick="location.href='../jobKnowledge/detail.do?no=${cvo.no }';"
 										style="cursor:pointer; height: 30px; width: 100%;  border-radius: 5px; margin-top: 10px; margin-bottom: 10px; padding:5px;">
 											<a href="../jobKnowledge/detail.do?no=${cvo.no }" style="text-decoration: none; color: white; line-height: 20px; font-size: 12px;">
-											${fn:substring(cvo.subject, 0, 35) }...
+											${fn:substring(cvo.subject, 0, 22) }...
 											</a>
 										</div>
 									</c:if>
-									<c:if test="${fn:length(cvo.subject)<=35 }">
+									<c:if test="${fn:length(cvo.subject)<=22 }">
 										<div class="recentVisitButton" onclick="location.href='../jobKnowledge/detail.do?no=${cvo.no }';"
 										style="cursor:pointer; height: 30px; width: 100%; border-radius: 5px; margin-top: 10px; margin-bottom: 10px; padding:5px;">
 											<a href="../jobKnowledge/detail.do?no=${cvo.no }" style="text-decoration: none; color: white; line-height: 20px; font-size: 12px;">

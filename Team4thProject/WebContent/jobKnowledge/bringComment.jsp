@@ -15,9 +15,20 @@
 		$('.comment_comment_Insert_area').hide();
 		
 		$('.bring_comment_comment_tab').click(function(){				// bring_comment_tab 클릭시
-			let no = $(this).attr('value')								// 변수 no는 클릭한 bring_comment_tab의 value값
+			let no = $(this).attr('id')								// 변수 no는 클릭한 bring_comment_tab의 value값
 			$('#comment_comment_Insert_area' + no).toggle(); 			// #comment_Insert_area + no를 토글
 		});
+		
+		
+		$.ajax({
+			type:'post',
+			url:'../jobKnowledge/deleteAll.do',
+			data: {"no": no},
+			success:function(result){
+				window.close();
+				opener.document.location.href="../jobKnowledge/list.do";
+			}
+		})
 	})
 </script>
 </head>
@@ -45,7 +56,8 @@
 				<pre style="white-space: pre-wrap;background-color: white;border:none">${comment_vo.content }</pre>
 			</div>
 			
-			<input type=button value="${comment_vo.no }"  class="bring_comment_comment_tab">
+			<!-- 대댓글 입력란 보이기 ======================================================================================================== 대댓글 입력란 보이기 -->
+			<input type=button value="댓글작성" id="${comment_vo.no }" class="bring_comment_comment_tab">				
 			<c:if test="${comment_vo.id == sessionScope.id }">													<!-- 삭제 수정버튼 -->
 					<input type=button value=삭제  class="delete_comment_button" onclick="deleteReally_reply()">
 					<input type=hidden value=${comment_vo.no } id="comment_vo">
@@ -66,10 +78,10 @@
 				style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
 				<div class="comment_bottom" style="text-align: right; width:100%;">
 					<input type=submit value=댓글등록 id="insertCommentButton"
-						style="height:30px; width:50px; background-color: #5A91CF; color:white; font-size: 13px; border: none; border-radius: 5px;">
+						style="height:30px; background-color: #5A91CF; color:white; font-size: 10px; border: none; border-radius: 5px;">
 				</div>
-				<input type=button name=reply_no value="" id="comment_comment_reply_no">
-				<input type=button name=board_no value="" id="comment_comment_board_no">
+				<input type=button name=reply_no value="${rVO.no }" id="comment_comment_reply_no${rVO.no }">
+				<input type=button name=board_no value="${vo.no }" id="comment_comment_board_no${vo.no }">
 				<input type=button name=no value="${comment_vo.no}">
 			</form>
 		</div>
