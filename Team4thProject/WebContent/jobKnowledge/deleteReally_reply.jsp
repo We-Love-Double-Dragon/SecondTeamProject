@@ -14,7 +14,7 @@
 	$(function(){
 		
 		$('#yes').click(function(){
-			let rno = $("#deleteReply", opener.document).val();			
+			let rno = $("#rno", opener.document).val();			
 			let bno = $("#bno", opener.document).val();
 			$.ajax({
 				

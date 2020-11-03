@@ -46,15 +46,7 @@
 	background-color: #FF5757;
 }
 
-/* 최근 방문한 게시글 */
-.recentVisitButton{
-	background-color: #4F80B8;
-	transition-property: background-color;
-	transition-duration: 0.5s;
-}
-.recentVisitButton:hover{
-	background-color: #3D638E;
-}
+
 
 </style>
 
@@ -181,38 +173,7 @@
 				
 				
 				
-				<div style="width: 100%; height: 30px; margin-top: 50px; margin-bottom: 20px; border-bottom: 1px solid #797979;">
-					<h3>최근 방문한 질문글</h3>
-				</div>																		<!-- 본 화면과 최근방문게시글의 구분선 -->
 				
-				<div class="recentVisit" style="width: 100%; text-align: left;">
-					<div class="recentVisitList" style="width:100%;">
-						<div class="recentVisitBox">
-							<c:forEach var="cvo" items="${cList }" varStatus="s">
-								<c:if test="${s.index < 5 }">
-								<div class="answer_box_header">																<!-- 최근 방문한 질문글 -->
-									<c:if test="${fn:length(cvo.subject)>35 }">
-										<div class="recentVisitButton" onclick="location.href='../jobKnowledge/detail.do?no=${cvo.no }';"
-										style="cursor:pointer; height: 40px; width: 350px;  border-radius: 5px; margin-top: 10px; margin-bottom: 10px; padding:5px;">
-											<a href="../jobKnowledge/detail.do?no=${cvo.no }" style="text-decoration: none; color: white; line-height: 30px; font-size: 12px;">
-											${fn:substring(cvo.subject, 0, 35) }...
-											</a>
-										</div>
-									</c:if>
-									<c:if test="${fn:length(cvo.subject)<=35 }">
-										<div class="recentVisitButton" onclick="location.href='../jobKnowledge/detail.do?no=${cvo.no }';"
-										style="cursor:pointer; height: 40px; width: 350px; border-radius: 5px; margin-top: 10px; margin-bottom: 10px; padding:5px;">
-											<a href="../jobKnowledge/detail.do?no=${cvo.no }" style="text-decoration: none; color: white; line-height: 30px; font-size: 12px;">
-											${cvo.subject }
-											</a>
-										</div>
-									</c:if>
-								</div>
-								</c:if>
-							</c:forEach>
-						</div>
-					</div>
-				</div>
 				
 				
 				

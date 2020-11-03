@@ -24,15 +24,42 @@
 	
 	// 댓글입력창 활성/비활성화
 	$(function(){
-		$('#comment_Insert_area').hide();
-		$('#bring_comment_tab').click(function(){
-			$('#comment_Insert_area').toggle();
-		})
+		$('.comment_Insert_area').hide();
+		
+		$('.bring_comment_tab').click(function(){				// bring_comment_tab 클릭시
+			let no = $(this).attr('value')						// 변수 no는 클릭한 bring_comment_tab의 value값
+			$('#comment_Insert_area' + no).toggle(); 			// #comment_Insert_area + no를 토글
+		});
 	
+		
+		// 답변글의 댓글창 보이기
+		$('.lookComment').click(function(){
+			let board_no = $(this).siblings('#comment_board_no').val();
+			let reply_no = $(this).siblings('#comment_reply_no').val();
+			$.ajax({
+				type:'post',
+				data: {"board_no" : board_no, "reply_no" : reply_no},
+				url:'../jobKnowledge/bringComment.do',
+				success:function(result)
+				{
+				 $('.comment_list' + reply_no).html(result);
+				}
+			});
+			
+			
+			// 댓글리스트에 질문글과 답변글 번호 넣기
+			$.ajax({
+				
+			})
+		})
+		
+		
+		
+		
 	
 	// 답변글의 댓글 가져오기
-		let board_no = $('#bno').val();		// 질문글의 번호
-		let reply_no = $('#rno').val();		// 답변글의 번호
+		/* var board_no = $('#bno').val();		// 질문글의 번호
+		var reply_no = $('#rno').val();		// 답변글의 번호
 		$.ajax({
 			type:'post',
 			data: {"board_no" : board_no, "reply_no" : reply_no},
@@ -41,8 +68,23 @@
 			{
 			 $('.comment_list').html(result);
 			}
-		})
+		}); */
 	});
+	
+	/* // 답변글의 댓글 가져오기
+	function bringComment(){
+		var board_no = $('#comment_board_no').val();		// 질문글의 번호
+		var reply_no = $('#comment_reply_no').val();
+		$.ajax({
+			type:'post',
+			data: {"board_no" : board_no, "reply_no" : reply_no},
+			url:'../jobKnowledge/bringComment.do',
+			success:function(result)
+			{
+			 $('.comment_list').html(result);
+			}
+		});
+	} */
 	
 	
 </script>
@@ -101,6 +143,7 @@
 					</c:if>
 			</div>
 			
+			<!-- 질문글 ==================================================================================================================================================== 질문글 -->
 			<div class="answer_box" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px;">		<!-- 게시글 전체 박스 -->
 				
 				<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
@@ -135,6 +178,7 @@
 				</div>
 			</div>
 			
+			<!-- 답변입력란 ================================================================================================================================================================================== 답변입력란 -->
 			<form action="../jobKnowledge/reply.do" method="post">																													<!-- 답변하기 -->
 				<div class="reply_area" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px; margin-top: 30px; position: relative;">
 					
@@ -153,10 +197,11 @@
 				
 			</form>
 			
-			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979;"></div>																	<!-- 답변입력 - 답변리스트간 구분선 -->
+			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979;"></div>				<!-- 답변입력란 - 답변리스트간 구분선 -->
 			
+			<!-- 답변 리스트 ================================================================================================================================================================== 답변리스트 -->
 			<c:forEach var="rVO" items="${list }">
-				<div class="reply_list_area" style="background-color: #4273AB; padding:10px; border-radius: 5px;">
+				<div class="reply_list_area" style="background-color: #4273AB; padding:10px; border-radius: 5px; margin-top: 40px; margin-bottom: 40px;">
 					<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
 						
 						<div class="subject_area" style="margin-bottom: 20px;">														<!-- 답변제목 -->
@@ -167,7 +212,12 @@
 							<p>${rVO.no }</p>
 						</div>
 						<div class="delete_modify_button" style="text-align: right;">
-							<input type=button value="댓글" id="bring_comment_tab" onclick="bring_comment_tab()">
+							<input type=button value="${rVO.no }" id="bring_comment_tab${rVO.no }" class="bring_comment_tab" onclick="bring_comment_tab()">
+							<!-- <form method="post" action="../jobKnowledge/bringComment.do" style="display: inline;"> -->												<!-- 댓글보기 버튼 -->
+								<input type=submit value="댓글보기" class="lookComment">
+								<input type=hidden id="comment_board_no" name="board_no" value=${vo.no }>
+								<input type=hidden id="comment_reply_no" name="reply_no" value=${rVO.no }>
+							<!-- </form> -->
 							<c:if test="${rVO.id == sessionScope.id }">
 									<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
 									<input type=hidden value=${rVO.no } id="rno">
@@ -176,10 +226,11 @@
 						</div>
 					</div>
 					
-					<div id="comment_Insert_area"
-							style="width:100%; hight: 70px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px;">		<!-- 댓글 다는 공간 -->
+					<!-- 댓글입력란 ======================================================================================================================================================================== 댓글입력란 -->
+					<div id="comment_Insert_area${rVO.no }" class="comment_Insert_area" 
+							style="width:90%; hight: 70px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px; margin-left: 10%; margin-bottom: 20px;">		<!-- 댓글 다는 공간 -->
 						<form action="../jobKnowledge/comment_insert.do" method="post">
-							<textarea rows="3" cols="105" name=content
+							<textarea rows="3" cols="90" name=content  placeholder="댓글을 작성해주세요"
 							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
 							<div class="comment_bottom" style="text-align: right; width:100%;">
 								<input type=submit value=댓글등록 id="insertCommentButton"
@@ -190,8 +241,10 @@
 						</form>
 					</div>
 					
-					<div class="comment_list">
 					
+					<!-- 댓글리스트 달리는 공간 ======================================================================================================================================================================== 댓글리스트 달리는 공간 -->
+					<div class="comment_list${rVO.no }">
+						<jsp:include page="${comment_list_jsp }"></jsp:include>
 					</div>
 					
 					<%-- <c:forEach var="comment_vo" items="${comment_list }">

@@ -329,17 +329,17 @@ public class JobKnowledgeDAO {
    }
 	
 	// 대댓글 달기 ========================================================================================================
-	public static void commentCommentInsert(int root,JobKnowledge_CommentVO vo){
+	public static void commentCommentInsert(int root,JobKnowledge_CommentVO vo){		// root(부모댓글번호), 입력한 대댓글vo 필요
 		   SqlSession session=ssf.openSession();
-		   JobKnowledge_CommentVO pvo=session.selectOne("commentParentData",root);
-		   session.update("commentStepIncrement", pvo);
-		   vo.setComment_id(pvo.getComment_id());
-		   vo.setComment_step(pvo.getComment_step()+1);
-		   vo.setComment_tab(pvo.getComment_tab()+1);
-		   vo.setRoot(root);
+		   JobKnowledge_CommentVO pvo=session.selectOne("commentParentData",root);		// 부모댓글번호를 통해 부모댓글의 comment_id,comment_step,comment_tab 가져오기
+		   session.update("commentStepIncrement", pvo);									// 가져온 부모댓글의  comment_id,comment_step,comment_tab를 통해 부모댓글 내의 다른 댓글들 순서를 1씩 증가
+		   vo.setComment_id(pvo.getComment_id());										// 입력한 대댓글의 comment_id는 부모댓글과 동일
+		   vo.setComment_step(pvo.getComment_step()+1);									// 입력한 대댓글의 순서는 부모댓글순서 + 1
+		   vo.setComment_tab(pvo.getComment_tab()+1);									// 입력한 대댓글의 들여쓰기도 부모댓글 + 1
+		   vo.setRoot(root);															// 입력한 대댓글의 부모댓글번호는 동일
 		   
-		   session.insert("commentCommentInsert", vo);
-		   session.update("commentDepthIncrement", root);
+		   session.insert("commentCommentInsert", vo);									// 입력한 대댓글 vo를 삽입
+		   session.update("commentDepthIncrement", root);								// 부모댓글의 depth 증가
 		   session.commit();
 		   session.close();
 	   }

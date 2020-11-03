@@ -213,8 +213,9 @@
     SELECT no, reply_no, id, content, TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday, comment_tab 
     FROM jobknowledge_comment 
     WHERE reply_no=#{reply_no} AND board_no = #{board_no}
-    ORDER BY comment_id DESC , comment_step ASC
+    ORDER BY comment_id ASC , comment_step ASC
   </select>
+  <!-- ORDER BY comment_id DESC에서 ASC로 변경함 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★ -->
   
   <!-- 
                          no  group_id   group_step  group_tab  root  depth
@@ -239,6 +240,7 @@
   </select>
   
   <!-- 부모댓글 내의 다른 댓글들 순서 증가 -->
+  <!-- comment_id가 #{comment_id}이고 comment_step이 #{comment_step}인 댓글의 comment_step을  1 증가 -->
   <update id="commentStepIncrement" parameterType="JobKnowledge_CommentVO">
     UPDATE jobknowledge_comment SET
     comment_step=comment_step+1

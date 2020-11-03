@@ -249,9 +249,11 @@ public class JobKnowledgeModel {
 	// 상세보기시에 답변글의 댓글들 가져오기 ===========================================================================================
 	@RequestMapping("jobKnowledge/bringComment.do")
 	public String jobKnowledge_bringComment(HttpServletRequest request) {
-		
+			
+			String board_no = "";
+			
 		try {
-			String board_no = request.getParameter("board_no");
+			board_no = request.getParameter("board_no");
 			String reply_no = request.getParameter("reply_no");
 			
 			Map map = new HashMap();
@@ -261,11 +263,13 @@ public class JobKnowledgeModel {
 			List<JobKnowledge_CommentVO> comment_list = JobKnowledgeDAO.commentListData(map);
 			
 			request.setAttribute("comment_list", comment_list);
+//			request.setAttribute("comment_list_jsp", "../jobKnowledge/bringComment.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return "../jobKnowledge/bringComment.jsp";
+//		return "redirect:../jobKnowledge/detail.do?no=" + board_no;
 	}
 	
 	
@@ -698,17 +702,17 @@ public class JobKnowledgeModel {
 		   {
 			   request.setCharacterEncoding("UTF-8");
 			   
-			   board_no = request.getParameter("board_no");
-			   String no=request.getParameter("no");						// 댓글번호
+			   board_no = request.getParameter("board_no");					// 질문글번호			ㅁㅁㅁ
+			   String no=request.getParameter("no");						// 부모 댓글번호			ㅁㅁㅁ	
 			   System.out.println("no="+no);
-			   String reply_no=request.getParameter("reply_no");			// 답변글 번호
+			   String reply_no=request.getParameter("reply_no");			// 답변글 번호			ㅁㅁㅁ
 			   System.out.println("reply_no="+reply_no);
-			   String content=request.getParameter("content");				// 내용
+			   String content=request.getParameter("content");				// 내용				ㅁㅁㅁ
 			   JobKnowledge_CommentVO vo=new JobKnowledge_CommentVO();		// 댓글VO 객체 생성
 			   //vo.setRoot(Integer.parseInt(no));
 			   vo.setReply_no(Integer.parseInt(reply_no));					// 답변글번호 setter
 			   vo.setContent(content);										// 내용 setter
-			   vo.setBoard_no(Integer.parseInt(board_no));
+			   vo.setBoard_no(Integer.parseInt(board_no));					// 질문글번호 setter
 			   HttpSession session=request.getSession();
 			   String id=(String)session.getAttribute("id");				// 세션아이디
 //			   String name=(String)session.getAttribute("name");
@@ -727,14 +731,42 @@ public class JobKnowledgeModel {
 	  
 	
 	
+	   
+	   
+	   
+	   // 사이드바에 최근 방문한 게시글 출력 =====================================================================================================
+	   @RequestMapping("jobKnowledge/recentBoard.do")
+	   public String jobKnowledge_sideBar(HttpServletRequest request) {
+		   
+		// 쿠키 ---------------------------------------------------------------------------------------------------
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		// 쿠키 읽기
+		Cookie[] cookies=request.getCookies();										// 쿠키 배열 생성
+		List<JobKnowledgeVO> cList=new ArrayList<JobKnowledgeVO>();					// 쿠키를 담을 리스트 생성
+		if(cookies!=null)															// 쿠키가 비어있지 않으면
+		{
+			for(int i=cookies.length-1;i>=0;i--)									// (쿠키길이 - 1)부터 0까지 i를 1씩 감소 (그래야 최신 쿠키가 맨앞에 옴)
+			{
+				if(cookies[i].getName().startsWith(id))								// 쿠키배열의 이름이 id를 시작하면
+				{
+					String no=cookies[i].getValue();								// 변수 no에 쿠키값 넣기
+					JobKnowledgeVO vo=JobKnowledgeDAO.jobknowledgeDetail(Integer.parseInt(no));		// vo에 상세보기를 담아서
+					cList.add(vo);													// 쿠키배열에 vo 담기
+				}
+			}
+		}
+		request.setAttribute("cList", cList);										// 쿠키값이 담긴 리스트를 전송
+		   
+		   return "../jobKnowledge/recentBoard.jsp";
+	   }
 	
 	
 	
 	
 	
 	
-	
-	// 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
+	   // 잡지식인 프로필 페이지 출력하는 메소드 ==========================================================================================
 		@RequestMapping("jobKnowledge/profile.do")
 		public String jobKnowledge_profile(HttpServletRequest request) {
 			
