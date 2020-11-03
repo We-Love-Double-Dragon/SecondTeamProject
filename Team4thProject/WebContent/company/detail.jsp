@@ -12,6 +12,21 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
+<style type="text/css">
+.col-lg-12 posts-list{
+	width: 200px;
+}
+#home{
+	width:700px;
+}
+#menu1{
+	width:700px;
+}
+#logo{
+	border: 2px dotted navy;
+	border-radius: 10px;
+}
+</style>
 <body>
    
    <!--================기업상세보기 =================-->
@@ -21,18 +36,13 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img"></div>
-                     <img class="img-fluid" src="${vo.clogo }" alt="기업로고">
+                     <img class="img-fluid" src="${vo.clogo }" alt="기업로고" id="logo" width=150 height="150">
                   </div>
-                  <div class="blog_details">
-                     <h2 style="color:black;">${vo.cname }</h2>
-                     <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="fa fa-user"></i>평점 ${vo.cscore }</a></li>
-                     </ul>
-
+                  
 					<!-- ==============================기업 소개,리뷰 부분 시작======================================= -->
-					<div class="container">
+					<div class="col-lg-12 posts-list">
 					  <h2>${vo.cname }</h2>
-					  <p>${vo.cscore }</p>
+					  <p><img src="star.png" width=20 height=20 id="user">&nbsp;${vo.cscore }</p>
 					  <p>${vo.ctype } | ${vo.cindutype }</p>
 					
 					  <ul class="nav nav-tabs">
@@ -41,9 +51,9 @@
 					    <li><a data-toggle="tab" href="#menu2">면접후기</a></li>
 					  </ul>
 					<!-- ================기업소개탭================= -->
-					  <div class="tab-content">
+					  <div class="tab-content" width="200">
 					    <div id="home" class="tab-pane fade in active">
-					      <h3>기업정보</h3><br>
+					      <br>
 					      <ul>
 					      	<li>대표이름 : ${vo.bname }</li><br>
 					      	<li>설립일 : ${vo.cdate }</li><br>
@@ -51,43 +61,47 @@
 					      	<li>기업주소 : ${vo.cloc }</li><br>
 					      	<li>매출 : ${vo.sale }</li><br>
 					      	<li>기업소개 : ${vo.cover }</li><br>
-					      	<li>웹사이트 : ${vo.site1 }</li><br>
+					      	<li>웹사이트 : <a href="${vo.site1 }"> ${vo.site1 }</a></li><br>
 					      	<li>연혁 : ${vo.history }</li>
 					      </ul>
 					    </div>
-					    <!-- ================기업후기탭================= -->
-<%-- 					    <div id="menu1" class="tab-pane fade">
+					  	<!-- ================기업후기탭================= -->
+					  	
+					    <div id="menu1" class="tab-pane fade">
 					      <div class="container">
 							  <div class="media">
 								  <div class="media-left">
-								    <img src="user.png" class="media-object" style="width:60px">
+								  &nbsp;&nbsp;&nbsp;&nbsp;
+								    <img src="user.png" class="media-object" style="width:50px">
+								    &nbsp;&nbsp;&nbsp;&nbsp;
 								  </div>
 								  <div class="media-body">
-								    <h4 class="media-heading">${vo.rtype } | ${vo.rloc } | ${vo.rdate }</h4>
-								    <p>${vo.rscore }</p>
+								    <h4 class="media-heading">${wvo.rtype } | ${wvo.rloc } | ${wvo.rdate }</h4>
+								    <p><img src="star.png" width=15 height=15>&nbsp;${wvo.rscore }</p>
 								  </div>
 								</div>
-							  <div class="panel-group">
+							  <div class="panel-group" >
 							    <div class="panel panel-primary">
 							      <div class="panel-heading">총평</div>
-							      <div class="panel-body">${vo.sub }</div>
+							      <div class="panel-body">${wvo.rsub }</div>
 							    </div>
 							    <div class="panel panel-success">
 							      <div class="panel-heading">장점</div>
-							      <div class="panel-body">${vo.rgood }</div>
+							      <div class="panel-body">${wvo.rgood }</div>
 							    </div>
 							    <div class="panel panel-warning">
 							      <div class="panel-heading">단점</div>
-							      <div class="panel-body">${vo.rbad }</div>
+							      <div class="panel-body">${wvo.rbad }</div>
 							    </div>
 								 <div class="panel panel-info">
 							      <div class="panel-heading">바라는 점</div>
-							      <div class="panel-body">${vo.rwish }</div>
+							      <div class="panel-body">${wvo.rwish }</div>
 							    </div>
 							  </div>
 							</div>
 					    </div>
-					     <!-- ================면접후기탭================= -->
+					    
+					    <%--<!-- ================면접후기탭================= -->
 					    <div id="menu2" class="tab-pane fade">
 							<div class="container">
 							  <div class="media">
@@ -95,23 +109,23 @@
 								    <img src="user.png" class="media-object" style="width:60px">
 								  </div>
 								  <div class="media-body">
-								    <h4 class="media-heading">면접결과${vo.iresult}</h4>
-								    <p>${vo.iscore }면접난이도</p>
-								    <p>${vo.iregdate }면접일</p>
+								    <h4 class="media-heading">면접결과${ivo.iresult}</h4>
+								    <p><img src="star.png" width=15 height=15>&nbsp;${ivo.iscore }면접난이도</p>
+								    <p>${ivo.iregdate }면접일</p>
 								  </div>
 								</div>
 							  <div class="panel-group">
 							    <div class="panel panel-primary">
 							      <div class="panel-heading">총평</div>
-							      <div class="panel-body">${vo.ireview }</div>
+							      <div class="panel-body">${ivo.ireview }</div>
 							    </div>
 							    <div class="panel panel-default">
 							      <div class="panel-heading">면접질문</div>
-							      <div class="panel-body">${vo.rgood }</div>
+							      <div class="panel-body">${ivo.iq }</div>
 							    </div>
 							    <div class="panel panel-default">
 							      <div class="panel-heading">면접답변 혹은 면접느낌</div>
-							      <div class="panel-body">${vo.rbad }</div>
+							      <div class="panel-body">${ivo.ia }</div>
 							    </div>
 							  </div>
 							</div>
@@ -121,7 +135,6 @@
 					<!-- =====================================기업 소개,리뷰 부분  끝===================================================-->
                </div>
             </div>
-         </div>
       </div>
       
       <!--  =========================================사이드바 시작부분======================================================-->

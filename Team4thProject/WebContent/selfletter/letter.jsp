@@ -31,7 +31,7 @@
 						</c:forEach>
 					</table>
 					<br>
-					<table>
+					<table class="text-center">
 				        <tr>
 				          <td class="text-center">
 				            <a href="letter.do?page=${curpage>1?curpage-1:curpage }" class="genric-btn danger circle">이전</a>
@@ -39,7 +39,7 @@
 				            <a href="letter.do?page=${curpage<totalpage?curpage+1:curpage }" class="genric-btn danger circle">다음</a>
 				          </td>
 				        </tr>
-				      </table>
+				    </table>
 				</div>
 			</div>
 		</div>

@@ -10,6 +10,15 @@
 	solid:blue;
 	padding:4px 4px 4px 4px;
 }
+.what-img{
+	width: 250px;
+	height: 250px;
+	border: 2px solid navy;
+	border-radius: 10px;
+}
+.color1{
+ background-color: #D4F4FA;
+}
 </style>
 
    <body>
@@ -27,7 +36,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12">
                         <!-- Nav Card -->
                         <div class="tab-content" id="nav-tabContent">
                             <!-- card one -->
@@ -41,7 +50,7 @@
 	                                                    <img src="${vo.clogo }" alt="company logo" border=10>
 	                                                </div>
 	                                                <div class="what-cap">
-	                                                    <span class="color1">평점 ${vo.cscore }</span>
+	                                                    <span class="color1"><img src="star.png" width=15 height=15>&nbsp;평점 ${vo.cscore }</span>
 	                                                    <h6><a href="../company/detail.do?cno=${vo.cno }">${vo.cname }</a></h6>
 	                                                </div>
 	                                            </div>

@@ -52,8 +52,37 @@ public class ComModel {
       request.setAttribute("main_jsp", "../company/detail.jsp");
       return "../main/main.jsp";
    }
+   
+   //기업 검색하기
+   @RequestMapping("company/search.do")
+   public String company_search(HttpServletRequest request) {
+	   try {
+		   	request.setCharacterEncoding("UTF-8");
+		    String fd=request.getParameter("fd");
+		    String ss=request.getParameter("ss");
+		    System.out.println("fd:"+fd);
+		    System.out.println("ss:"+ss);
+		    
+		    Map map=new HashMap();
+		    map.put("fd",fd);
+		    map.put("ss",ss);
+		    
+		    List<ComVO> list=ComDAO.comsearch(map);
+		    request.setAttribute("list", list);
+		    request.setAttribute("company_jsp", "../company/search.jsp");
+		    
+	   }catch(Exception ex) {
+		   ex.getMessage();
+	   }
+	   return "../company/company.jsp";
+   }
+   
+   
+   
+   
    //기업 후기보기
 
+   
    //면접 후기보기
    
    

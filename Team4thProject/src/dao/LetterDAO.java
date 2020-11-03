@@ -54,7 +54,30 @@ public class LetterDAO {
 			ex.printStackTrace();
 		}
 	}
-	
+	//자소서 수정
+	//<select id="letterupdate" parameterType="SelfVO">
+	//수정 전 데이터 읽기
+	public static SelfVO letterupdate(int sno) {
+		SqlSession session=ssf.openSession();
+		SelfVO vo=new SelfVO();
+		try{
+			vo=session.selectOne("letterDetailData",sno);
+			session.close();
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return vo;
+	}
+	//수정하기
+	public static void letterupdate_ok(Map map) {
+		SqlSession session=ssf.openSession(true);
+		try {
+			session.update("letterupdate_ok",map);
+			session.close();
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+	}
 	
 	
 	
