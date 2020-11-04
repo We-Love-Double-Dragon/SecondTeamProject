@@ -31,7 +31,7 @@
 						</c:forEach>
 					</table>
 					<br>
-					<table class="text-center">
+					<table class="text-center"  style="margin: 0px auto;">
 				        <tr>
 				          <td class="text-center">
 				            <a href="letter.do?page=${curpage>1?curpage-1:curpage }" class="genric-btn danger circle">이전</a>

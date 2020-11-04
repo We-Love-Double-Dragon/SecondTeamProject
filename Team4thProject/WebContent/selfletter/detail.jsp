@@ -39,6 +39,13 @@
                              </div>   
                             </div>
                    </div>
+                   <!-- =====================버튼그룹============================== -->
+                    <div id="btn_group">
+				       <input type=submit value="수정하기" class="genric-btn success-border small" id="updateBtn">
+				       <input type=button value="목록" class="genric-btn danger-border small" id="listBtn"
+				                 onclick="javascript:history.back()">
+			       </div>
+			       &nbsp;&nbsp;&nbsp;&nbsp;
             </div>
         </div>
         <!-- About US End -->

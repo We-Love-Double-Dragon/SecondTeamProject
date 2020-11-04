@@ -94,19 +94,15 @@ public class LetterModel {
 	}
 	//자소서 수정
 	//수정 전 내용 가져오기
-	@RequestMapping("selfletter/update.do")
-	public String letter_update(HttpServletRequest request) {
-		try {
-			String sno=request.getParameter("sno");
-			SelfVO vo=LetterDAO.letterupdate(Integer.parseInt(sno));
-			request.setAttribute("vo", vo);
-			request.setAttribute("letter_jsp", "../selfletter/update.jsp");
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		return "../selfletter/letter.jsp";
-	}
-	//음...어디로 보내지는거지..
+	/*
+	 * @RequestMapping("selfletter/update.do") public String
+	 * letter_update(HttpServletRequest request) { try { String
+	 * sno=request.getParameter("sno"); SelfVO
+	 * vo=LetterDAO.letterupdate(Integer.parseInt(sno)); request.setAttribute("vo",
+	 * vo); request.setAttribute("main_jsp", "../selfletter/update.jsp");
+	 * }catch(Exception ex) { ex.printStackTrace(); } return "../main/main.jsp"; }
+	 */
+	
 	
 	
 	

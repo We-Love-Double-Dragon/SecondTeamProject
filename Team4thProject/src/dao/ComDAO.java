@@ -44,6 +44,29 @@ public class ComDAO {
 		}	
 		return vo;
 	}
+
+	//기업 후기보기
+	//<select id="workReviewListData" resultType="WorkVO" parameterType="hashmap">
+	public static List<WorkVO> workReviewListData(int cno){
+		SqlSession session=ssf.openSession();
+		List<WorkVO> list=new ArrayList<WorkVO>();
+		try {
+			list=session.selectList("workReviewListData",cno);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	//면접 후기보기
+	//<select id="intReviewListData" resultType="IntVO" parameterType="hashmap">
+	public static List<IntVO> intReviewListData(int cno){
+		SqlSession session=ssf.openSession();
+		List<IntVO> list=session.selectList("intReviewListData",cno);
+		session.close();
+		return list;
+	}
+	
 	//기업 검색
 	//<select id="comsearch" resultType="ComVO" parameterType="hashmap">
 	public static List<ComVO> comsearch(Map map){
@@ -57,34 +80,6 @@ public class ComDAO {
 		}
 		return list;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//기업 후기보기
-	//<select id="workReviewListData" resultType="WorkVO" parameterType="hashmap">
-	public static List<WorkVO> workReviewListData(Map map){
-		SqlSession session=ssf.openSession();
-		List<WorkVO> list=session.selectList("workReviewListData",map);
-		session.close();
-		return list;
-	}
-	//면접 후기보기
-	//<select id="intReviewListData" resultType="IntVO" parameterType="hashmap">
-	public static List<IntVO> intReviewListData(Map map){
-		SqlSession session=ssf.openSession();
-		List<IntVO> list=session.selectList("intReviewListData",map);
-		session.close();
-		return list;
-	}
-	
-	
 	
 	
 }

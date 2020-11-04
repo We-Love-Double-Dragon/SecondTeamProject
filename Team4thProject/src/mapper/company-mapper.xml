@@ -23,33 +23,20 @@
 	</select>
 	
 	<!-- 기업 후기보기 -->
-	<select id="workReviewListData" resultType="WorkVO" parameterType="hashmap">
-	SELECT c.cno,w.*,num
-	FROM (SELECT c.cno,w.*,rownum as num
-	FROM (SELECT c.cno,w.*
-	FROM company c,workreview w WHERE c.cno=#{w.cno} ORDER BY rno DESC))
-	WHERE num BETWEEN #{start} AND #{end}
+	<select id="workReviewListData" resultType="WorkVO" parameterType="int">
+	SELECT workreview.* FROM company, workreview 
+	WHERE company.cno=workreview.cno AND company.cno=#{cno}
+	</select>
+
+	<!-- 면접 후기보기 -->
+	<select id="intReviewListData" resultType="IntVO" parameterType="int">
+	SELECT intreview.* FROM company, intreview 
+	WHERE company.cno=intreview.cno AND company.cno=#{cno}
 	</select>
 	
 	<!-- 기업 검색하기 -->
 	<select id="comsearch" resultType="ComVO" parameterType="hashmap">
 	SELECT * FROM company
 	WHERE ${fd} LIKE '%'||#{ss}||'%'
-	</select>
-	
-	<!--  기업 후기 총페이지 
-	<select id="workTotalPage" resultType="int" parameterType="int">
-	SELECT CEIL(COUNT(*)/10.0) FROM company
-	WHERE cateno=#{cateno}
-	</select> -->
-
-	
-	<!-- 면접 후기보기 -->
-	<select id="intReviewListData" resultType="IntVO" parameterType="hashmap">
-	SELECT c.cno,i.*,num
-	FROM (SELECT c.cno,i.*,rownum as num
-	FROM (SELECT c.cno,i.*
-	FROM company c,intreview i WHERE c.cno=#{i.cno} ORDER BY ino DESC))
-	WHERE num BETWEEN #{start} AND #{end}
 	</select>
 </mapper>

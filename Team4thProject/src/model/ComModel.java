@@ -21,7 +21,7 @@ public class ComModel {
       if(cateno==null)
     	  cateno="100";
        int curpage=Integer.parseInt(page);
-       int rowSize=6;
+       int rowSize=8;
        int start=(rowSize*curpage)-(rowSize-1);
        int end=rowSize*curpage;
       //map에 저장
@@ -43,12 +43,25 @@ public class ComModel {
    //기업 상세보기
    @RequestMapping("company/detail.do")
    public String company_detail(HttpServletRequest request) {
-      String cno=request.getParameter("cno");
-      String cateno=request.getParameter("cateno");
+	   
+	   try {
+		   String cno=request.getParameter("cno");
 
-      ComVO vo=ComDAO.comDetailData(Integer.parseInt(cno));
-      request.setAttribute("vo", vo);
-      
+	      ComVO vo=ComDAO.comDetailData(Integer.parseInt(cno));
+	      request.setAttribute("vo", vo);
+	      
+	      // ------------------------------------------------------------------------------
+	      // 기업 후기 
+	      List<WorkVO> work_list = ComDAO.workReviewListData(Integer.parseInt(cno));
+	      request.setAttribute("work_list", work_list);
+
+	      // 면접 후기
+	      List<IntVO> int_list = ComDAO.intReviewListData(Integer.parseInt(cno));
+	      request.setAttribute("int_list", int_list);
+	      // ------------------------------------------------------------------------------
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
       request.setAttribute("main_jsp", "../company/detail.jsp");
       return "../main/main.jsp";
    }
@@ -76,14 +89,9 @@ public class ComModel {
 	   }
 	   return "../company/company.jsp";
    }
-   
-   
-   
-   
-   //기업 후기보기
 
    
-   //면접 후기보기
+   
    
    
    

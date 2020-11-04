@@ -69,10 +69,10 @@ public class LetterDAO {
 		return vo;
 	}
 	//수정하기
-	public static void letterupdate_ok(Map map) {
+	public static void letterupdate_ok(SelfVO vo) {
 		SqlSession session=ssf.openSession(true);
 		try {
-			session.update("letterupdate_ok",map);
+			session.update("letterupdate_ok",vo);
 			session.close();
 		}catch(Exception ex) {
 			ex.getMessage();
