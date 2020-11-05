@@ -49,4 +49,3 @@
   </update>
 </mapper>
 
-<!-- pwd=#{pwd,jdbcType=VARCHAR}, -->

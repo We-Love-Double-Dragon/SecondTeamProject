@@ -124,9 +124,9 @@
 	                                        </c:if>
 	                                        <c:if test="${ sessionScope.id!=null}">
 											      <c:if test="${sessionScope.admin=='n'}">
-										            <li><a href="#">마이페이지</a>
+										            <li><a href="../resume/list.do">마이페이지</a>
 										            <ul class="submenu">
-										            	 <li><a href="../resume/resume.do">내 이력서</a></li>
+										            	 <li><a href="../resume/list.do">이력서 관리</a></li>
 										            	 <li><a href="../user/update.do">회원수정</a></li>
 										           	</ul>
 										            </li>
@@ -134,7 +134,7 @@
 										          <c:if test="${sessionScope.admin=='y'}">
 										            <li><a href="#" id="headerLink">관리자페이지(구현 중)</a>
 										             <ul class="submenu">
-										            	<li><a href="../user/update.do">회원수정</a></li>
+										            	<li><a href="../user/update.do">회원정보 수정</a></li>
 										           	 </ul>
 										           	</li>
 										          </c:if>
@@ -142,6 +142,12 @@
 	                                        
                                         	<li>
                                             <c:if test="${sessionScope.id!=null }">
+											  <form action="../user/logout.do">
+											    <div class="text-right" >
+											      ${sessionScope.name }님 
+											      <button class="genric-btn danger radius small">로그아웃</button>
+											    </div>
+											  </form>
  											</c:if>
  											</li>
                                         </ul>

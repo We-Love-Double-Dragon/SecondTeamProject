@@ -16,13 +16,13 @@
 		width: 600px;
 		height: 700px;
 	}
-	#content { 
+/* 	#content { 
 		height: 10px; 
 		line-height: 10px;
 		font-size: x-large;
 		font-weight: bolder;
 		margin: 0px auto;
-	}
+	} */
 	table.userform {
 		width: 600px;
 		height: 600px;
@@ -143,7 +143,7 @@ $(function(){
 			$('#birthday').focus();
 			return;
 		}
-			
+		
 		
 		let post=$('#post').val();
 		if(post.trim()=="")
@@ -168,96 +168,94 @@ $(function(){
 <body>
 	<div class="whole-wrap" style="height: 850px">
 		<div class="container box_1170" >
-			<div class="section-top-border">
-				<div class="row" style="text-center">
-				 <div class="row row1">
- 				 <div id="content">회원수정</div>
- 				  <form method=post action="../user/update_ok.do" name="updateFrm" id="updateFrm">
-					
-					<table class="userform">
-					  	<tr>
-					  	  <th scope="row" width=30%>아이디</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=id class="input-sm" size=15 style="margin-right: 15px;" readonly id="id" value="${vo.id }">
-					  	  	<input type=button value="중복체크" class="genric-btn success radius small" onclick="idcheck()">
-					  	  	<input type=hidden name=id value="${vo.id }">
-					  	  </td>
-					  	</tr>	
-					  	<tr>
-					  	  <th scope="row" width=30%>비밀번호</th>
-					  	  <td width=70%>
-					  	  	<input type=password name=pwd class="input-sm" size=15 id="pwd" value="${vo.pwd }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>비밀번호확인</th>
-					  	  <td width=70%>
-       						<input type=password name=pwd1 class="input-sm" size=15 id="pwd1">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>이름</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=name class="input-sm" size=15 id="name" value="${vo.name }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>이메일</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=email class="input-sm" size=45 value="${vo.email }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>생년월일</th>
-					  	  <td width=70%>
-					  	  	<input type=date name=birthday class="input-sm" size=25 id="birthday" value="${vo.birthday }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>성별</th>
-					  	  <td width=70%>
-					  	  	<input type=radio name=sex id="male" value="${vo.sex }">
-					  	  	<label for="male">남</label>
-					  	  	<input type=radio name=sex id="female" style="margin-left: 30px;" value="${vo.sex }">
-					  	  	<label for="female">여</label>
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>우편번호</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=post class="input-sm" size=7 style="margin-right: 10px;" readonly id="post"  value="${vo.post }">
-       						<input type=button value="우편번호찾기" class="genric-btn success radius small" onclick="postfind()">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>주소</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=addr1 class="input-sm" size=45 readonly id="addr1" value="${vo.addr1 }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>상세주소</th>
-					  	  <td width=70%>
-					  	  	<input type=text name=addr2 class="input-sm" size=45 value="${vo.addr2 }">
-					  	  </td>
-					  	</tr>
-					  	<tr>
-					  	  <th scope="row" width=30%>전화번호</th>
-					  	  <td width=70%>
-					        <input type=text name=tel class="input-sm" size=25 placeholder="  숫자만 입력" value="${vo.tel }">
-					       </td>
-					  	</tr>
-					</table>
-					
-					<div id="btn_group">
-					 <input type=button value="수정" class="genric-btn success radius" id="updateBtn">
-					 <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
-					  onclick="javascript:history.back()">
-					</div>
-					 
-				   </form>
-				  </div>
+			<div class="row" style="text-center">
+			  <div class="row row1">
+				<!--  <div id="content">회원수정</div> -->
+				  <form method=post action="../user/update_ok.do" name="updateFrm" id="updateFrm">
+				
+				<table class="userform">
+				  	<tr>
+				  	  <th scope="row" width=30%>아이디</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=id class="input-sm" size=15 style="margin-right: 15px;" readonly id="id" value="${vo.id }">
+				  	  	<input type=button value="중복체크" class="genric-btn success radius small" onclick="idcheck()">
+				  	  	<input type=hidden name=id value="${vo.id }">
+				  	  </td>
+				  	</tr>	
+				  	<tr>
+				  	  <th scope="row" width=30%>비밀번호</th>
+				  	  <td width=70%>
+				  	  	<input type=password name=pwd class="input-sm" size=15 id="pwd" value="${vo.pwd }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>비밀번호확인</th>
+				  	  <td width=70%>
+      						<input type=password name=pwd1 class="input-sm" size=15 id="pwd1">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>이름</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=name class="input-sm" size=15 id="name" value="${vo.name }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>이메일</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=email class="input-sm" size=45 value="${vo.email }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>생년월일</th>
+				  	  <td width=70%>
+				  	  	<input type=date name=birthday class="input-sm" size=25 id="birthday" value="${vo.birthday }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>성별</th>
+				  	  <td width=70%>
+				  	  	<input type=radio name=sex id="male" value="남" ${vo.sex=="남"?"checked":""}>
+				  	  	<label for="male">남</label>
+				  	  	<input type=radio name=sex id="female" style="margin-left: 30px;" value="여" ${vo.sex=="여"?"checked":""}>
+				  	  	<label for="female">여</label>
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>우편번호</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=post class="input-sm" size=7 style="margin-right: 10px;" readonly id="post"  value="${vo.post }">
+      						<input type=button value="우편번호찾기" class="genric-btn success radius small" onclick="postfind()">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>주소</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=addr1 class="input-sm" size=45 readonly id="addr1" value="${vo.addr1 }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>상세주소</th>
+				  	  <td width=70%>
+				  	  	<input type=text name=addr2 class="input-sm" size=45 value="${vo.addr2 }">
+				  	  </td>
+				  	</tr>
+				  	<tr>
+				  	  <th scope="row" width=30%>전화번호</th>
+				  	  <td width=70%>
+				        <input type=text name=tel class="input-sm" size=25 placeholder="  숫자만 입력" value="${vo.tel }">
+				       </td>
+				  	</tr>
+				</table>
+				
+				<div id="btn_group">
+				 <input type=button value="수정" class="genric-btn success radius" id="updateBtn">
+				 <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
+				  onclick="javascript:history.back()">
 				</div>
+				 
+			   </form>
+			  </div>
 			</div>
 		</div>
 	</div>

@@ -72,7 +72,7 @@ public class UserDAO {
 	 {
 		 UserformVO vo=new UserformVO();
 		 SqlSession session=ssf.openSession();
-		 vo=session.selectOne("userUpdate_ok",id); // ※
+		 vo=session.selectOne("userUpdate_ok",id); 
 		 session.close();
 		 return vo;
 	 }

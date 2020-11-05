@@ -114,8 +114,8 @@ public class UserModel {
 		   String id=(String)session.getAttribute("id");
 		   UserformVO vo=UserDAO.userUpdateData(id);
 		   request.setAttribute("vo",vo);
-		   request.setAttribute("main_jsp", "../user/update.jsp");
-		   return "../main/main.jsp";
+		   request.setAttribute("mypage_jsp", "../user/update.jsp");
+		   return "../mypage/mymain.jsp";
 	   }
 	   
 	   @RequestMapping("user/update_ok.do")
