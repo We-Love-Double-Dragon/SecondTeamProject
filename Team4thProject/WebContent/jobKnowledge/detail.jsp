@@ -22,6 +22,8 @@
 		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
 	}
 	
+	
+	
 	// 댓글입력창 활성/비활성화
 	$(function(){
 		$('.comment_Insert_area').hide();
@@ -52,6 +54,15 @@
 				
 			})
 		})
+		
+		// 답변삭제
+		/* $('.deleteReplyButton').click(function(){
+			window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no");
+			function getrno(){
+				var rnorno = $(this).siblings('.rno');		// 답변글번호 가져오고 input에 넣기?
+			}
+			
+		}) */
 		
 		
 		
@@ -128,19 +139,31 @@
 #mButton:hover{
 	background-color: #4979B0;
 }
+
+/*채택버튼*/
+#adoptButton{
+	background-color: #3EEB60; 
+}
+#adoptButton:hover{
+	background-color: #33B04C; 
+}
 </style>
 </head>
 <body>
 	<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; border: 1px solid #437EC0;min-height: 800px; padding:20px; overflow-y: auto;">
 	
 			<div class="tag_area" style="margin-bottom: 20px;">															<!-- 태그 -->
-					<a href="../jobKnowledge/listByTag.do?tag=${vo.tag }" style="background-color: #EEDCFF; color: #878787; border-radius: 5px; font-size:15px; padding-left: 5px; padding-right: 5px;">#${vo.tag }</a>													<!-- 태그 클릭시 태그에 맞는 게시글로 이동하는 기능 필요 ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆ -->
-					
+																	<!-- 태그 클릭시 태그에 맞는 게시글로 이동하는 기능 필요 ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆ -->
 					<c:if test="${count==0 }">																										<!-- 스크랩하기 -->
 						<div style="text-align: right;">
 							<input type=button value="스크랩" onclick="location.href='../jobKnowledge/scrap.do?no=${vo.no}'">
 						</div>
 					</c:if>
+					
+					<div style="width:190px; height: 50px; background-color: white; border-radius: 5px; padding: 10px; font-size: 16px;">
+						<img src="../image/medal.png" style="width:30px; height:30px;">&nbsp;&nbsp;${vo.point }
+						<a href="../jobKnowledge/listByTag.do?tag=${vo.tag }" style="background-color: #EEDCFF; color: black; border-radius: 5px; font-size:16px; padding-left: 5px; padding-right: 5px; margin-left: 10px;">#${vo.tag }</a>	
+					</div>
 			</div>
 			
 			<!-- 질문글 ==================================================================================================================================================== 질문글 -->
@@ -165,7 +188,7 @@
 							<input type=hidden name=no value=${vo.no } id="bno">
 						</form>
 					</c:if>
-					<c:if test="${vo.id == sessionScope.id }" >	
+					<c:if test="${vo.id == sessionScope.id}" >	
 						<%-- <form action="../jobKnowledge/delete_board.do" method="post" style="position: absolute; right: 50px; bottom:1px;">
 							<input type=submit value="삭제">
 							<input type=hidden name=no value=${vo.no }>
@@ -197,7 +220,9 @@
 				
 			</form>
 			
-			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979;"></div>				<!-- 답변입력란 - 답변리스트간 구분선 -->
+			
+			
+			<div style="width:100%; margin-top:100px; margin-bottom:20px; border-bottom: 1px solid #797979; font-size: 20px;">답변 ${vo.reply }</div>				<!-- 답변입력란 - 답변리스트간 구분선 -->
 			
 			<!-- 답변 리스트 ================================================================================================================================================================== 답변리스트 -->
 			<c:forEach var="rVO" items="${list }">
@@ -212,25 +237,38 @@
 							<p>${rVO.no }</p>
 						</div>
 						<div class="delete_modify_button" style="text-align: right;">
-							<input type=button value="댓글작성" id="${rVO.no }" class="bring_comment_tab" onclick="bring_comment_tab()">
+							<input type=button value="댓글작성" id="${rVO.no }" class="bring_comment_tab littleButton" onclick="bring_comment_tab()">
 							<!-- <form method="post" action="../jobKnowledge/bringComment.do" style="display: inline;"> -->												<!-- 댓글보기 버튼 -->
-								<input type=submit value="댓글보기" class="lookComment">
+								<input type=submit value="댓글보기" class="lookComment littleButton">
 								<input type=hidden id="comment_board_no" name="board_no" value=${vo.no }>
 								<input type=hidden id="comment_reply_no" name="reply_no" value=${rVO.no }>
 							<!-- </form> -->
 							<c:if test="${rVO.id == sessionScope.id }">
-									<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
+									<input type=button value=삭제  id="dButton${rVO.no }" onclick="deleteReally_reply()" class="littleButton deleteReplyButton">
 									<input type=hidden value=${rVO.no } id="rno">
+									<input type=hidden value=${rVO.no } class="rno${rVO.no }">
 							</c:if>
 							
 						</div>
 					</div>
 					
+					<!-- 채택버튼 -->
+					<c:if test="${sessionScope.id == vo.id && rVO.id != sessionScope.id}">
+						<div style="text-align: right;">
+							<form action="../jobKnowledge/adopt.do" method="get">
+								<input type="submit" value="채택하기" class="littleButton" id="adoptButton">
+								<input type="hidden" value=${vo.no } name="board_no">
+								<input type="hidden" value=${rVO.no } name="reply_no">
+								<input type="hidden" value=${rVO.id } name="reply_id">
+							</form>
+						</div>
+					</c:if>
+					
 					<!-- 댓글입력란 ======================================================================================================================================================================== 댓글입력란 -->
 					<div id="comment_Insert_area${rVO.no }" class="comment_Insert_area" 
 							style="width:90%; hight: 70px; background-color: white; border: 1px solid black; border-radius: 5px; padding: 10px; margin-top: 20px; margin-left: 10%; margin-bottom: 20px;">		<!-- 댓글 다는 공간 -->
 						<form action="../jobKnowledge/comment_insert.do" method="post">
-							<textarea rows="3" cols="90" name=content  placeholder="댓글을 작성해주세요"
+							<textarea rows="3" cols="87" name=content  placeholder="댓글을 작성해주세요"
 							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y:"></textarea>
 							<div class="comment_bottom" style="text-align: right; width:100%;">
 								<input type=submit value=댓글등록 id="insertCommentButton"
@@ -247,43 +285,7 @@
 						<jsp:include page="${comment_list_jsp }"></jsp:include>
 					</div>
 					
-					<%-- <c:forEach var="comment_vo" items="${comment_list }">
-						<div class="comment_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px; ">		<!-- 답변 전체 박스 -->
-							
-							<c:if test="${rvo.group_tab>0 }">								<!-- 그룹탭만큼 넣기 -->
-								<c:forEach var="i" begin="1" end="${rvo.group_tab }">
-									&nbsp;&nbsp;&nbsp;&nbsp;
-								</c:forEach>
-								▶
-							</c:if>
-							
-							<div class="subject_area" style="margin-bottom: 20px;">														<!-- 제목 -->
-								<h3>댓글아이디</h3>
-							</div>
-							
-							<div class="text-left">										
-								<c:if test="${rvo.group_tab>0 }">									<!-- 내용을 그룹탭만큼 넣기 -->
-									<c:forEach var="i" begin="1" end="${rvo.group_tab }">
-										&nbsp;&nbsp; &nbsp;&nbsp;
-									</c:forEach>
-								</c:if>
-								<pre style="white-space: pre-wrap;background-color: white;border:none">${rvo.msg }</pre>
-							</div>
-							
-							
-							<!-- <div class="content_area">
-								<p>댓글 내용</p>
-							</div> -->
-							<div class="delete_modify_button" style="text-align: right;">
-								<input type=button value="댓글" id="bring_comment_tab" onclick="bring_comment_tab()">
-								<c:if test="${rVO.id == sessionScope.id }">
-										<input type=button value=삭제  id="dButton" onclick="deleteReally_reply()" class="littleButton">
-										<input type=hidden value=${rVO.no } id="rno">
-								</c:if>
-								
-							</div>
-						</div>
-					</c:forEach> --%>
+					
 					
 				</div>
 			</c:forEach>

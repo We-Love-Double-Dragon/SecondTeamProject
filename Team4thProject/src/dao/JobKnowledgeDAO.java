@@ -199,13 +199,15 @@ public class JobKnowledgeDAO {
 	
 	
 	
-	// 게시글과 답변 삭제하기 ================================================================================================================
+	// 게시글과 답변과 댓글 삭제하기 ================================================================================================================
 	public static void jobknowledgeDeleteAll(int no) {
 		SqlSession session = ssf.openSession(true);
 		
 		try {
-			session.delete("jobknowledgeDeleteBoard", no);
-			session.delete("jobknowledgeDeleteReply", no);
+			session.delete("jobknowledgeDeleteBoard", no);		// 게시글 삭제
+			session.delete("jobknowledgeDeleteReply", no);		// 답변 삭제
+			session.delete("deleteCommentWithBoard", no);		// 댓글 삭제
+			session.delete("deleteBoardFromScrap", no);			// 스크랩 목록에서 삭제
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,15 +216,31 @@ public class JobKnowledgeDAO {
 	
 	
 	
-	// 답변만 삭제하기 =====================================================================================================================
+	// 답변과 댓글 삭제하기 =====================================================================================================================
 	public static void deleteReplyAlone(int rno, int bno) {
 		SqlSession session = ssf.openSession(true);
 		
 		try {
 			
-			session.update("declineBoardHit", bno);
-			session.delete("deleteReplyAlone", rno);
+			session.update("declineBoardHit", bno);			// 질문글의 답변수 감소
+			session.delete("deleteReplyAlone", rno);		// 답변 삭제
+			session.delete("deleteCommentWithReply", rno);	// 답변에 딸린 댓글 삭제
 			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	// 댓글만 삭제하기 ======================================================================================================================
+	public static void deleteCommentAlone(int no) {
+		SqlSession session =ssf.openSession(true);
+		
+		try {
+			session.delete("deleteCommentAlone", no); 		// 댓글 삭제하기
+			session.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -346,6 +364,38 @@ public class JobKnowledgeDAO {
 	
 	
 	
+	
+	
+	// 채택하기 ==========================================================================================================
+	public static void adopt(Map map, int board_no) {
+		SqlSession session = ssf.openSession();
+		
+		try {
+			session.update("sendAdoptPoint", map);
+			session.update("declineAnswerPoint", map);
+			session.update("yesAdopt", board_no);
+			session.commit();
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	// 유저 포인트 표시 (사이드바에) ===========================================================================================
+	public static int indicatePoint(String id) {
+		SqlSession session = ssf.openSession();
+		int user_point = 0;
+		try {
+			user_point = session.selectOne("indicatePoint", id);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user_point;
+	}
 	
 	
 	

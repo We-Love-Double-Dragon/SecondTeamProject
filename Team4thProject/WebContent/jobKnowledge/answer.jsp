@@ -57,8 +57,13 @@
 					<div class="segment_line" style="height:20px; border-bottom: 1px solid #D1D1D1; margin-bottom: 40px;">			<!-- 제목 - 내용간 구분선 -->
 					</div>
 					<div class="content_area">																						<!-- 내용입력 -->
-						<textarea class="content_textarea" rows="33" cols="107" name=content placeholder="구체적인 내용을 입력해주세요."
+						<textarea class="content_textarea" rows="30" cols="107" name=content placeholder="구체적인 내용을 입력해주세요."
 						style="background-color: white; font-size: 15px; border: none; resize: none;"></textarea>
+					</div>
+					<div style="width:100%; height:20px; border-bottom: 1px solid #D1D1D1; margin-bottom: 20px;"></div>
+					<div class="point_area" style="text-align: right; font-size: 14px;">
+						<img src="../image/medal.png" style="width:30px; height:30px;">
+						포인트 : <input type="text" name=point size=10 placeholder="포인트 입력" style="border:1px solid #D1D1D1; border-radius: 5px; text-align: center;">
 					</div>
 				</div>
 				<div class="bottom_buttons" style="margin-top: 20px; text-align: center;">											<!-- 확인, 취소버튼 -->

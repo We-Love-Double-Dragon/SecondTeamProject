@@ -36,9 +36,17 @@ public class JobKnowledgeVO {
 	private int adopt;			// 채택여부
 	private int reply;
 	private int scrap_no;		// 스크랩번호
+	private int point;			// 채택시 답변자에게 부여할 점수
 	
 	
 	
+	
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public int getScrap_no() {
 		return scrap_no;
 	}

@@ -34,7 +34,7 @@
 </head>
 <body>
 	<c:forEach var="comment_vo" items="${comment_list }">
-		<div class="comment_list" style="width:90%; border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px; margin-left:10%;">		<!-- 답변 전체 박스 -->
+		<div class="comment_list" style="width:80%; border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px; margin-left:20%;">		<!-- 답변 전체 박스 -->
 			
 			<c:if test="${comment_vo.comment_tab>0 }">								<!-- 그룹탭만큼 넣기 -->
 				<c:forEach var="i" begin="1" end="${comment_vo.comment_tab }">
@@ -57,10 +57,12 @@
 			</div>
 			
 			<!-- 대댓글 입력란 보이기 ======================================================================================================== 대댓글 입력란 보이기 -->
-			<input type=button value="댓글작성" id="${comment_vo.no }" class="bring_comment_comment_tab">				
+			<%-- <input type=button value="댓글작성" id="${comment_vo.no }" class="bring_comment_comment_tab"> --%>				
 			<c:if test="${comment_vo.id == sessionScope.id }">													<!-- 삭제 수정버튼 -->
-					<input type=button value=삭제  class="delete_comment_button" onclick="deleteReally_reply()">
+				<div style="text-align: right;">
+					<input type=button value=삭제  id="dButton" class="littleButton" onclick="deleteReally_reply()">
 					<input type=hidden value=${comment_vo.no } id="comment_vo">
+				</div>
 			</c:if>
 			
 			<!-- <div class="commentCommentArea"></div> -->											<!-- 대댓글 달리는 곳 -->

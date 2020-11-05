@@ -37,7 +37,7 @@
 	
 <!-- 게시글 상세보기 -->
 	<select id="jobknowledgeDetail" resultType="JobKnowledgeVO" parameterType="int">
-		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE no = #{no}
+		SELECT no, id, subject, content, regdate, hit, tag, point, reply FROM jobknowledge WHERE no = #{no}
 	</select>
 <!-- 상세보기할 때 조회수 증가 -->
 	<update id="jobknowledgeIncrementHit" parameterType="int">
@@ -45,7 +45,7 @@
 	</update>
 <!-- 상세보기할 때 답변글 가져오기 -->
 	<select id="jobknowledgeDetailReply" resultType="JobKnowledgeVO" parameterType="int">
-		SELECT no, id, subject, content, regdate, hit, tag FROM jobknowledge WHERE root = #{no} ORDER BY regdate
+		SELECT no, id, subject, content, regdate, hit, tag, adopt FROM jobknowledge WHERE root = #{no} ORDER BY regdate
 	</select>
 	
 	
@@ -54,7 +54,7 @@
 	
 <!-- 질문하기 -->
 	<insert id="jobknowledgeInsertAnswer" parameterType="JobKnowledgeVO">
-		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply) 
+		INSERT INTO jobknowledge(no, id, subject, content, regdate, hit, group_id, group_step, root, depth, comment_id, tag, adopt, reply, point) 
 		VALUES(
 		(SELECT (MAX(no)) FROM jobknowledge)+1,
 		#{id},																	<!-- 아이디를 세션의 아이디로 지정할 것 -->
@@ -69,7 +69,8 @@
 		(SELECT (MAX(no)) FROM jobknowledge)+1,
 		#{tag},
 		0,
-		0
+		0,
+		#{point}
 		)
 	</insert>
 	
@@ -129,6 +130,14 @@
 	<delete id="jobknowledgeDeleteReply" parameterType="int">
 		DELETE FROM jobknowledge WHERE root = #{no}
 	</delete>
+<!-- 댓글 삭제하기 -->
+	<delete id="deleteCommentWithBoard" parameterType="int">
+		DELETE FROM jobknowledge_comment WHERE board_no = #{no}
+	</delete>
+<!-- 스크랩 목록에서 제거하기 -->
+	<delete id="deleteBoardFromScrap" parameterType="int">
+		DELETE FROM jobknowledgescrap WHERE mno = #{no}
+	</delete>
 	
 	
 	
@@ -139,11 +148,21 @@
 	<delete id="deleteReplyAlone" parameterType="int">
 		DELETE FROM jobknowledge WHERE no = #{rno}
 	</delete>
+<!-- 댓글도 삭제하기 -->
+	<delete id="deleteCommentWithReply" parameterType="int">
+		DELETE FROM jobknowledge_comment WHERE reply_no = #{rno}
+	</delete>
 <!-- 답변만 삭제시 질문글의 답변수 감소 -->
 	<update id="declineBoardHit" parameterType="int">
 		UPDATE jobknowledge SET reply = reply - 1 WHERE no = #{bno}
 	</update>
 	
+	
+	
+<!-- 댓글만 삭제하기 -->
+	<delete id="deleteCommentAlone" parameterType="int">
+		DELETE FROM jobknowledge_comment WHERE no = #{no}
+	</delete>
 	
 	
 	
@@ -272,5 +291,29 @@
     depth=depth+1
     WHERE no=#{no}
   </update>
+  
+  
+  
+  
+  
+  
+<!-- 채택하기 -->
+	<update id="sendAdoptPoint" parameterType="hashmap">
+		UPDATE userform set point = point + (SELECT point FROM jobknowledge WHERE no = #{board_no} ) WHERE id = #{reply_id}
+	</update>
+<!-- 질문자 포인트 감소 -->
+	<update id="declineAnswerPoint" parameterType="hashmap">
+		UPDATE userform set point = point - (SELECT point FROM jobknowledge WHERE no = #{board_no} ) WHERE id = #{board_id}
+	</update>
+<!-- 답변글 채택상태 변경 -->
+	<update id="yesAdopt" parameterType="int">
+		UPDATE jobknowledge adopt = 1 WHERE no = #{board_no}
+	</update>
 	
+	
+	
+<!-- 유저 포인트 표시 (사이드바) -->
+	<select id="indicatePoint" resultType="int" parameterType="String">
+		SELECT point FROM userform WHERE id = #{id}
+	</select>
 </mapper>

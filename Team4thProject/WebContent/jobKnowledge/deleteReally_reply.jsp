@@ -12,9 +12,10 @@
 	var rcontent = $('#rcontent', opener.document).val(); */
 	
 	$(function(){
-		
+		/* var rno = window.opener.getrno(); */
 		$('#yes').click(function(){
-			let rno = $("#rno", opener.document).val();			
+			let rno = $("#rno", opener.document).val();		
+			
 			let bno = $("#bno", opener.document).val();
 			$.ajax({
 				

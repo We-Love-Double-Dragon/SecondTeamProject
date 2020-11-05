@@ -312,6 +312,7 @@ public class JobKnowledgeModel {
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 			String tag = request.getParameter("tag");
+			String point = request.getParameter("point");
 			
 			// VO에 파라미터를 담아서 DAO의 질문하기 메소드 실행 -------------------------
 			JobKnowledgeVO vo = new JobKnowledgeVO();
@@ -320,6 +321,7 @@ public class JobKnowledgeModel {
 			vo.setSubject(subject);
 			vo.setContent(content);
 			vo.setTag(tag);
+			vo.setPoint(Integer.parseInt(point));
 			JobKnowledgeDAO.jobknowledgeInsertAnswer(vo);
 			
 			
@@ -440,7 +442,7 @@ public class JobKnowledgeModel {
 	
 	
 	
-	// 게시글과 답변 삭제하기 =======================================================================================================
+	// 게시글과 답변과 댓글 삭제하기 =======================================================================================================
 	@RequestMapping("jobKnowledge/deleteAll.do")
 	public String jobKnowledgeDeleteAll(HttpServletRequest request) {
 		
@@ -469,7 +471,7 @@ public class JobKnowledgeModel {
 	
 	
 
-	// 답변만 삭제하기 =======================================================================================================
+	// 답변과 댓글만 삭제하기 =======================================================================================================
 	@RequestMapping("jobKnowledge/delete_reply.do")
 	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
 		
@@ -501,6 +503,24 @@ public class JobKnowledgeModel {
 	@RequestMapping("jobKnowledge/deleteReally_reply.do")
 	public String jobKnowledgeDeleteReally_reply(HttpServletRequest request) {
 		return "../jobKnowledge/deleteReally_reply.jsp";
+	}
+	
+	
+	// 댓글만 삭제하기 =================================================================================================================
+	@RequestMapping("jobKnowledge/deleteCommentAlone.do")
+	public String jobKnowledge_delete_comment_alone(HttpServletRequest request) {
+		
+			String board_no = "";
+		try {
+			board_no = request.getParameter("board_no");
+			String no = request.getParameter("no");
+			
+			JobKnowledgeDAO.deleteCommentAlone(Integer.parseInt(no));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:../jobKnowledge/detail.do?no=" + board_no;
 	}
 	
 	
@@ -757,11 +777,61 @@ public class JobKnowledgeModel {
 			}
 		}
 		request.setAttribute("cList", cList);										// 쿠키값이 담긴 리스트를 전송
-		   
+		
 		   return "../jobKnowledge/recentBoard.jsp";
 	   }
+	   // 사이드바에 유저 포인트 표시 =====================================================================================================
+	   @RequestMapping("jobKnowledge/user_point.do")
+	   public String jobKnowledge_user_point(HttpServletRequest request) {
+		   
+		   HttpSession session = request.getSession();
+		   String id = (String)session.getAttribute("id");
+		   int user_point = JobKnowledgeDAO.indicatePoint(id);
+		   
+		   request.setAttribute("user_point", user_point);
+		   
+		   return "../jobKnowledge/user_point.jsp";
+	   }
 	
-	
+	   
+	   
+	   
+	   
+	   
+	   // 답변글 채택하기 ============================================================================================================
+	   @RequestMapping("jobKnowledge/adopt.do")
+	   public String jobKnowledge_adopt(HttpServletRequest request) {
+		   
+		   System.out.println("채택하기");
+		   String board_no = "";
+		try {
+			
+			HttpSession session = request.getSession();
+			board_no = request.getParameter("board_no");		// 질문글 번호
+			String board_id = (String)session.getAttribute("id");	// 질문자 아이디
+			String reply_id = request.getParameter("reply_id");		// 답변자 아이디
+			
+			
+			
+			Map map = new HashMap();
+			map.put("board_no", board_no);
+			map.put("board_id", board_id);
+			map.put("reply_id", reply_id);
+			
+			JobKnowledgeDAO.adopt(map, Integer.parseInt(board_no));
+			
+			System.out.println(board_no);
+			System.out.println(reply_id);
+			System.out.println(board_id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		   
+		   return "redirect:../jobKnowledge/list.do";
+	   }
+	   
+	   
 	
 	
 	

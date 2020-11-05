@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.scrapItem{
+	/* .scrapItem{
 		background-color: #4F80B8; 
 		color: white;
 		transition-property: background-color, color;
@@ -17,7 +17,7 @@
 		background-color: white; 
 		color: black;
 		cursor: pointer;
-	}
+	} */
 	
 	#scrap_cancel_button_td{
 		background-color: #9EC1E8;
@@ -38,6 +38,10 @@
 	}
 	
 	
+	#scrap_subject:hover{
+		cursor: pointer;
+	}
+	
 	
 </style>
 </head>
@@ -56,10 +60,10 @@
 				<div class="segment_line" style="width:100%; height: 15px; margin-bottom: 50px; border-bottom: 1px solid #797979;">
 				</div>
 				
-				<div class="scrap_list" style="width:100%;">
+				<div class="scrap_list" style="width:100%; padding:10px;">
 				
 					
-						<table style="width:750px; font-size: 12px;">
+						<table style="width:750px; font-size: 12px; background-color: white; border-radius: 5px;">
 							<tr style="height: 30px;border-bottom: 1px solid #797979;">
 								<th style="text-align: center; width: 15%;">글번호</th>
 								<th style="text-align: center; width: 60%;">제목</th>
@@ -73,10 +77,10 @@
 								<th>&nbsp;</th>
 							</tr>
 							<c:forEach var="scrap_vo" items="${boardList }">
-								<tr class="scrapItem" onclick="location.href='../jobKnowledge/detail.do?no=${scrap_vo.no}'"
+								<tr class="scrapItem" 
 									style="height:30px;">
 									<td style="text-align: center">${scrap_vo.no }</td>
-									<td style="text-align: left">${scrap_vo.subject}</td>
+									<td id="scrap_subject" style="text-align: left" onclick="location.href='../jobKnowledge/detail.do?no=${scrap_vo.no}'">${scrap_vo.subject}</td>
 									<td style="text-align: center">${scrap_vo.reply }</td>
 									<td id="scrap_calcel_button_td">
 										<input id="scrap_calcel_button" type=button value="스크랩 취소"
@@ -89,7 +93,7 @@
 				
 				</div>
 				
-				<table style="border:1px solid black;">
+				<%-- <table style="border:1px solid black;">
 					<c:forEach var="scrap_vo" items="${boardList }">
 					<tr>
 						<th>번호</th>
@@ -105,7 +109,7 @@
 					</tr>
 						<input type="button" value="스크랩취소${scrap_vo.no }" onclick="location.href='../jobKnowledge/scrap_cancel.do?no=${scrap_vo.no}'">
 					</c:forEach>
-				</table>
+				</table> --%>
 				
 																													
 				

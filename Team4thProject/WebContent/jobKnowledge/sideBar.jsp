@@ -23,6 +23,17 @@
 				 $('#recentBoard').html(result);
 			 }
 		 })
+		 
+		 $.ajax({							// 팁 가져오기
+			 type:'get',
+			 url:'../jobKnowledge/user_point.do',
+			 async: false,
+			 dataType:'html',
+			 success:function(result)
+			 {
+				 $('#user_point').html(result);
+			 }
+		 })
 	})
 </script>
 <style type="text/css">
@@ -76,15 +87,22 @@
 							style="height:100px; width:100%; color:white; font-size: 30px; border: none; border-radius: 5px;">
 				</c:if>
 				
+				
+				
+				<!-- 유저 포인트 -->
+				<div id="user_point" style="width:100%; height: 60px; background-color: white; border-radius: 5px; padding: 10px; margin-top: 30px; text-align: center;">
+					
+				</div>
+				
 				<!-- 스크랩한 게시물 -->
-				<div style="width: 100%; height:50px; text-align: right;">
+				<div style="width: 100%; height:50px; text-align: right; margin-top:10px;">
 					<input type=button value="스크랩한 질문" class="scrapButton" onclick="location.href='scrapList.do'"
-							style="height: 30px; width: 80px; margin-top: 15px; color: white; border: none; border-radius: 5px;">
+							style="height: 35px; font-size:12px; margin-top: 15px; color: white; border: none; border-radius: 5px;">
 				</div>
 				
 				<!-- 최근 방문한 질문글 리스트  -->
 				<div id="recentBoard"
-				style="width:100%; min-height:70px; margin-top:330px; background-color: white; border-radius: 5px; padding: 10px;">
+				style="width:100%; min-height:70px; margin-top:250px; background-color: white; border-radius: 5px; padding: 10px;">
 					
 					
 					
