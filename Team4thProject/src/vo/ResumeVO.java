@@ -5,6 +5,7 @@ package vo;
 	이름     널? 유형            
 	------ -- ------------- 
 	ID        VARCHAR2(20)  
+	NO		  NUMBER
 	PHOTO     VARCHAR2(100) 
 	STYPE     VARCHAR2(50)  
 	SNAME     VARCHAR2(50)  
@@ -22,7 +23,8 @@ package vo;
  */
 public class ResumeVO {
 	private String id;
-	private String photo;
+	private int no;
+	private String subject;
 	private String stype;
 	private String sname;
 	private String smajor;
@@ -36,17 +38,24 @@ public class ResumeVO {
 	private String cname;
 	private String cdate;
 	private String cl;
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPhoto() {
-		return photo;
+	public int getNo() {
+		return no;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	public String getStype() {
 		return stype;
@@ -126,5 +135,8 @@ public class ResumeVO {
 	public void setCl(String cl) {
 		this.cl = cl;
 	}
+	
+	
+	
 	
 }
