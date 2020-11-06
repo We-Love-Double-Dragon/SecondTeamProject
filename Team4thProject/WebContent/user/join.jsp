@@ -3,16 +3,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-
-<title>News HTML-5 Template </title>
+<meta charset="UTF-8">
+<title>회원가입폼</title>
 
 <style type="text/css">
-	div.row1{
-		margin: 0px auto;
-		width: 600px;
-		height: 700px;
+	.whole {
+	    width:100%;
+	    height:950px;
+	    margin: 0;
+  		padding-top: 80px;
+  		padding-bottom: 40px;
+  		/* font-family: "Nanum Gothic", arial, helvetica, sans-serif; */
+  		background-repeat: no-repeat;
+  		background:rgba( 35, 80, 142, 0.1); 
 	}
+	
+    .card {
+        margin: 0 auto; 
+        float: none; 
+        margin-bottom: 10px; 
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.form-signin .form-control {
+  		position: relative;
+  		height: auto;
+  		-webkit-box-sizing: border-box;
+     	-moz-box-sizing: border-box;
+        	 box-sizing: border-box;
+  		padding: 10px;
+  		font-size: 16px;
+	}
+	
+	#logBtn{
+		background-color:  rgba( 13, 80, 163);
+	}
+	
 	#content { 
 		height: 10px; 
 		line-height: 10px;
@@ -20,16 +46,16 @@
 		font-weight: bolder;
 		margin: 0px auto;
 	}
+	
 	table.userform {
 		width: 600px;
-		height: 600px;
+		height: 650x;
 	    border-collapse: collapse;
 	    text-align: left;
 	    line-height: 1.5;
 	    border-top: 1px solid #ccc;
-	    border-left: 3px solid #288CD2;
-		margin : 20px 10px;
-		vertical-align: middle;
+		margin : 0px auto;
+		
 	}
 	table.userform th {
 	    padding: 10px;
@@ -37,14 +63,13 @@
 	    font-size: medium;
 	    vertical-align: middle;
 	    color: #153d73;
-	    border-bottom: 1px solid #ccc;
+	    border-bottom: 1px solid rgba(0,0,0,0.1);
 	
 	}
 	table.userform td {
 	    padding: 10px;
 	    vertical-align: top;
-	    border-right: 1px solid #ccc;
-	    border-bottom: 1px solid #ccc;
+	    border-bottom: 1px solid rgba(0,0,0,0.1);
 	    vertical-align: middle;
 	}
 	
@@ -56,9 +81,10 @@
 	
 	#joinBtn{ 
 		margin-right:20px;
-		border: 1px solid #288CD2; 
-		background-color: rgba(0,0,0,0);
-		color: black; 
+		width:200px;
+		border-color: white;
+		background-color: rgba( 13, 80, 163);
+		color: white; 
 		font-weight: bolder; 
 	 } 
 	#cancleBtn{ 
@@ -70,15 +96,29 @@
 	} 
 	
 	#joinBtn:hover{ 
-		color:white; 
-		background-color: #288CD2; 
+		color:black; 
+		background-color:  rgba( 13, 80, 163, 0.09);
 	}
 	#cancleBtn:hover{ 
 		color:white; 
 		background-color: #EB5A5A; 
 	}
-
+	
+	#button{
+		width: 130px;
+		border-color: white;
+		background-color: rgba( 13, 80, 163, 0.6);
+		color: white; 
+		font-weight: bolder; 
+		text-align: center;
+		margin: 0 auto;
+	}
+	
+	input::-webkit-input-placeholder { font-size: 10pt;  font-family: inherit;}
+	input::-ms-input-placeholder { font-size: 10pt;  font-family: inherit;}
+	input::placeholder { font-size: 10pt; font-family: inherit;}
 </style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -121,7 +161,7 @@ $(function(){
 		
 		if(pwd!==pwd1)
 		{
-			alert("비밀번호를 다시 입력하세요!!");
+			alert("비밀번호를 다시 입력하세요");
 			$('#pwd1').val("");
 			$('#pwd1').focus();
 			return;
@@ -162,37 +202,38 @@ $(function(){
 </script>
 </head>
 
-<body>
-	<div class="whole-wrap" style="height: 850px">
-		<div class="container box_1170" >
-			<div class="section-top-border">
-				<div class="row" style="text-center">
-				 <div class="row row1">
- 				 <div id="content">회원가입</div>
- 				  <form method=post action="../user/join_ok.do" name="joinFrm" id="joinFrm">
+  <body>
+   <div class="whole">
+	<div class="card align-middle" style="width:700px; border-radius:20px;">
+		<div class="card-title" style="margin-top:30px; height: 30px;">
+			<h2 class="card-title text-center" style="color:#113366; font-weight: bolder;">회원가입</h2>
+		</div>
+		
+		<div class="card-body">
+		<form method=post action="../user/join_ok.do" name="joinFrm" id="joinFrm">
 					
 					<table class="userform">
 					  	<tr>
-					  	  <th scope="row" width=30%>아이디</th>
+					  	  <th scope="row" width=30%>아이디*</th>
 					  	  <td width=70%>
 					  	  	<input type=text name=id class="input-sm" size=15 style="margin-right: 15px;" readonly id="id">
-					  	  	<input type=button value="중복체크" class="genric-btn success radius small" onclick="idcheck()">
+					  	  	<input type=button value="중복체크" class="genric-btn radius small" id="button" onclick="idcheck()">
 					  	  </td>
 					  	</tr>	
 					  	<tr>
-					  	  <th scope="row" width=30%>비밀번호</th>
+					  	  <th scope="row" width=30%>비밀번호*</th>
 					  	  <td width=70%>
 					  	  	<input type=password name=pwd class="input-sm" size=15 id="pwd">
 					  	  </td>
 					  	</tr>
 					  	<tr>
-					  	  <th scope="row" width=30%>비밀번호확인</th>
+					  	  <th scope="row" width=30%>비밀번호확인*</th>
 					  	  <td width=70%>
        						<input type=password name=pwd1 class="input-sm" size=15 id="pwd1">
 					  	  </td>
 					  	</tr>
 					  	<tr>
-					  	  <th scope="row" width=30%>이름</th>
+					  	  <th scope="row" width=30%>이름*</th>
 					  	  <td width=70%>
 					  	  	<input type=text name=name class="input-sm" size=15 id="name">
 					  	  </td>
@@ -204,7 +245,7 @@ $(function(){
 					  	  </td>
 					  	</tr>
 					  	<tr>
-					  	  <th scope="row" width=30%>생년월일</th>
+					  	  <th scope="row" width=30%>생년월일*</th>
 					  	  <td width=70%>
 					  	  	<input type=date name=birthday class="input-sm" size=25 id="birthday">
 					  	  </td>
@@ -219,14 +260,14 @@ $(function(){
 					  	  </td>
 					  	</tr>
 					  	<tr>
-					  	  <th scope="row" width=30%>우편번호</th>
+					  	  <th scope="row" width=30%>우편번호*</th>
 					  	  <td width=70%>
-					  	  	<input type=text name=post class="input-sm" size=7 style="margin-right: 10px;" readonly id="post">
-       						<input type=button value="우편번호찾기" class="genric-btn success radius small" onclick="postfind()">
+					  	  	<input type=text name=post class="input-sm" size=7 style="margin-right: 15px;" readonly id="post">
+       						<input type=button value="우편번호찾기" style="padding-left: 20px;" class="genric-btn radius small" id="button" onclick="postfind()">
 					  	  </td>
 					  	</tr>
 					  	<tr>
-					  	  <th scope="row" width=30%>주소</th>
+					  	  <th scope="row" width=30%>주소*</th>
 					  	  <td width=70%>
 					  	  	<input type=text name=addr1 class="input-sm" size=45 readonly id="addr1">
 					  	  </td>
@@ -244,19 +285,19 @@ $(function(){
 					       </td>
 					  	</tr>
 					</table>
-					
+					<div style="height: 20px;"></div>
 					<div id="btn_group">
-					 <input type=button value="가입" class="genric-btn success radius" id="joinBtn">
-					 <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
-					  onclick="javascript:history.back()">
+					 <input type=button value="가입하기" class="genric-btn radius" id="joinBtn">
+					 <!-- <input type=button value="취소" class="genric-btn danger radius" id="cancleBtn"
+					  onclick="javascript:history.back()"> -->
 					</div>
 					 
 				   </form>
-				  </div>
-				</div>
-			</div>
 		</div>
+		
 	</div>
-       
-</body>
+   </div>
+	
+  
+  </body>
 </html>

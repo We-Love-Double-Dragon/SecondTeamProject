@@ -108,9 +108,9 @@
                                             </li>
                                             
                                            <c:if test="${sessionScope.id==null }">
-	                                            <li><a href="../user/login_form.do">로그인</a>
+	                                            <li><a href="../user/login.do">로그인</a>
 		                                            <ul class="submenu">
-		                                              <li><a href="../user/login_form.do">로그인</a></li>
+		                                              <li><a href="../user/login.do">로그인</a></li>
 												      <li><a href="../user/join.do">회원가입</a></li>
 												    </ul>
 											    </li>
@@ -132,11 +132,10 @@
 										           	</li>
 										          </c:if>
     									    </c:if>
-	                                        
-                                        	<li>
+	                                        <li>
                                             <c:if test="${sessionScope.id!=null }">
-											  <form action="../user/logout.do">
-											    <div class="text-right" >
+											  <form action="../user/logout.do"><%-- get(생략이 가능) --%>
+											    <div class="logout" style="margin-left: 30px;" >
 											      ${sessionScope.name }님 
 											      <button class="genric-btn danger radius small">로그아웃</button>
 											    </div>

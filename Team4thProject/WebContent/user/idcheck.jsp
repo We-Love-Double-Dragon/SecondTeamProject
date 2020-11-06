@@ -72,9 +72,9 @@ function ok()
      <div class="row" style="text-center">
        <div style="margin:0 auto">
          <div style="height: 30px" ></div>
-       		<h4 class="text-center">아이디 중복체크</h4><br>
-      		<input type=text id=id class="input-sm" size=15 >
-            <input type=button value="중복체크" id="idcheckBtn" class="genric-btn success radius small">
+       		<h3 class="text-center">아이디 중복체크</h3><br>
+      		<input type=text id=id class="input-sm" size=18 > <br>
+            <input type=button value="확인" id="idcheckBtn" class="genric-btn success radius small">
       		<div style="height: 20px" ></div>
          	<div class="text-center" id="idcheck_result"></div><br>
          	<div class="text-center" id="ok"></div>

@@ -8,17 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+
 import dao.ResumeDAO;
 import vo.ResumeVO;
 
 
 public class ResumeModel {
+
 	@RequestMapping("mypage/mymain.do")
 	 public String my_main(HttpServletRequest request)
 	 {
+		 HttpSession session=request.getSession(); 
+		 String id=(String)session.getAttribute("id");
+		 List<ResumeVO> list=ResumeDAO.resumeListData(id);
+		 request.setAttribute("list", list);
+		 request.setAttribute("mypage_jsp", "../resume/list.jsp");
 		  return "../mypage/mymain.jsp";
 	 }
-	
 	
 	 @RequestMapping("resume/list.do")
 	 public String resume_list(HttpServletRequest request)
@@ -89,10 +95,10 @@ public class ResumeModel {
 	 public String resume_update(HttpServletRequest request)
 	 {
 		 String no=request.getParameter("no");
-		 ResumeVO vo=ResumeDAO.resumeUpdateData(no);
+		 ResumeVO vo=ResumeDAO.resumeUpdateData(Integer.parseInt(no));
 		 request.setAttribute("vo", vo);
-		 request.setAttribute("main_jsp", "../resume/resumeUpdate.jsp");
-		 return "../main/main.jsp";
+		 request.setAttribute("mypage_jsp", "../resume/resumeUpdate.jsp");
+		 return "../mypage/mymain.jsp";
 	 }
 	
 	 @RequestMapping("resume/resumeUpdate_ok.do")
@@ -147,5 +153,15 @@ public class ResumeModel {
 		 return "../resume/resumeUpdate_ok.jsp";
 	 }
 	 
+	 
+	 @RequestMapping("resume/delete.do")
+	   public String resume_delete(HttpServletRequest request)
+	   {
+		   String no=request.getParameter("no");
+		   ResumeDAO.resumeDelete(Integer.parseInt(no));
+		   return "../resume/delete.jsp";
+	   }
+	 
+	
 	 
 }

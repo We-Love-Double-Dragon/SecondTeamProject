@@ -8,15 +8,14 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#content { 
-		line-height: 60px;
-		font-size: x-large;
+		font-size: 18pt;
 		font-weight: bolder;
-		margin: 0px auto;
+		margin-bottom: 30px;
 	}
 	.toplist{
 		width: 1000px;
 		height: 40px;
-		background-color :#B9CDF7;
+		background-color :rgba( 35, 80, 142, 0.1 );
 		border-top: solid 2px #2A58A8;
 		border-bottom: solid 2px #2A58A8;
 		font-weight: bolder;
@@ -31,11 +30,21 @@
 		height: 100px;
 		border-bottom: solid 1px #2A58A8;
 		background-color:  white;   /* #EFF6FF;  */
-		font-size: 15pt;
+		font-size: 13pt;
 		display: table-cell;
      	vertical-align: middle;
-		
 	}
+	#dbtn{
+		position: absolute;
+		left: 750px;
+		width: 50px;
+		height: 30px;
+		border-color: white;
+		background-color: rgba( 13, 80, 163);
+		color: white; 
+		font-size: 10pt;
+	}
+	
 </style>
 </head>
 <body>
@@ -54,8 +63,11 @@
   	  	  	  <c:forEach var="vo" items="${list }">
   	  	  	  <li class="ing">
   	  	  	  	<div class="col" id="list">
-  	  	  	  	  <a href="../resume/resumeUpdate.do?no=${vo.no }" style="color: black">${vo.subject}</a>
+  	  	  	  	  <a href="../resume/resumeUpdate.do?no=${vo.no }" style="color: black; margin-left: 25px;">${vo.subject}</a>
+  	  	  	  	  <button type="button" onclick="location.href='../resume/delete.do?no=${vo.no }'" id="dbtn">삭제</button>
   	  	  	  	</div>
+  	  	  	  	  <%-- <a href="../resume/delete.do?no=${vo.no }" style="color: black">삭제</a> --%>
+  	  	  	  	
   	  	  	  </li>
   	  	  	  </c:forEach>
   	  	  	</ul>

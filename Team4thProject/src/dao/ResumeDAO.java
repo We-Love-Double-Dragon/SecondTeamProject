@@ -37,7 +37,7 @@ public class ResumeDAO {
 	 }
 	 
 	 //이력서 수정할 데이터 가져오기
-	 public static ResumeVO resumeUpdateData(String no)
+	 public static ResumeVO resumeUpdateData(int no)
 	 {
 		 ResumeVO vo=new ResumeVO();
 		 SqlSession session=ssf.openSession();
@@ -53,5 +53,24 @@ public class ResumeDAO {
 		 session.update("resumeUpdate", vo);
 		 session.close();
 	 }
+	 
+	 
+	 public static ResumeVO resumeDeleteData(int no)
+	 {
+		 ResumeVO vo=new ResumeVO();
+		 SqlSession session=ssf.openSession();
+		 vo=session.selectOne("resumeDelete_ok",no);
+		 session.close();
+		 return vo;
+	 }
+	 
+	 public static void resumeDelete(int no)
+	   {
+		   SqlSession session=ssf.openSession();
+		   session.delete("resumeDelete",no);
+		   session.commit();
+		   session.close();
+	   }
+	 
 	 
 }
