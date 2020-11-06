@@ -130,8 +130,7 @@ public class ComModel {
 	}
 
 	
-	  //기업 검색하기
-	  
+	  //기업 검색하기  
 	  @RequestMapping("company/find.do") public String
 	  company_find(HttpServletRequest request) { 
 		  try { 

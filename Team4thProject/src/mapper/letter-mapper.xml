@@ -41,6 +41,25 @@
 	)
 	</insert>
 	
+	<!-- 조회수 증가 -->
+	<update id="letterHitIncrement" parameterType="int">
+	UPDATE selfletter SET
+	hit=hit+1
+	WHERE sno=#{sno}
+	</update>
+	
+	<!-- 많이 본 자소서 -->
+	<select id="popular" resultType="SelfVO" parameterType="hashmap">
+	SELECT sno,ssubject,sindutype,num
+	FROM (SELECT sno,ssubject,sindutype,rownum as num
+	FROM (SELECT sno,ssubject,sindutype
+	FROM selfletter ORDER BY hit DESC))
+	WHERE num BETWEEN #{start} AND #{end}
+
+	</select> 
+
+	
+	
 	<!-- 수정하기 -->
 	<!-- <update id="letterupdate" parameterType="SelfVO">
 	UPDATE selfletter SET

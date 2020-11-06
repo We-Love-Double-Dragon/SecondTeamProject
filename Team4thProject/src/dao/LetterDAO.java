@@ -30,10 +30,26 @@ public class LetterDAO {
 		session.close();
 		return total;
 	}
+	//많이 본 자소서
+	//<select id="popular" resultType="SelfVO" parameterType="hashmap">
+	public static List<SelfVO> popular(Map map){
+		SqlSession session=ssf.openSession();
+		List<SelfVO> list=session.selectList("popular",map);
+		session.close();
+		return list;
+	}
+	
+	
+	
+	
 	//자소서 상세보기
 	//<select id="letterDetailData" resultType="SelfVO" parameterType="int">
+	//조회수 증가
+	//<update id="letterHitIncrement" parameterType="int">
 	public static SelfVO letterDetailData(int sno) {
 		SqlSession session=ssf.openSession();
+		session.update("letterHitIncrement",sno);
+		session.commit();
 		SelfVO vo=new SelfVO();
 		try {
 			vo=session.selectOne("letterDetailData",sno);

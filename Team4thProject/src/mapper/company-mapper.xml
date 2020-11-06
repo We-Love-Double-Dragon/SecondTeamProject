@@ -68,17 +68,7 @@
 	)
 	</insert>
 	
-	
-	
-	
-	
-	
-	
-	
-	
 
-	
-	<!-- ================================================================ -->
 	<!-- 기업 검색하기 -->
 	<select id="comFindData" resultType="ComVO" parameterType="hashmap">
 	<!-- SELECT * FROM company

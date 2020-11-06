@@ -18,6 +18,23 @@
 	padding: 20px;
 	margin: 20px;
 }
+.l_sidebar{
+	border : 8px solid #A9D0F5;
+	margin-top : 20px;
+	padding: 20px;
+	width: 100;
+	height: 50%;
+}
+.sidebar_title{
+	font-weight: bold;
+}
+#sidetitle{
+	font-size: 20px;
+	color: black;
+}
+#sidetitle:hover{
+	background-color: #CEF6F5;
+}
 </style>
 
 
@@ -60,6 +77,29 @@
                                 </div>
                              </div>   
                             </div>
+                            <!--=================================사이드바  -->
+
+							  <aside class="l_sidebar">
+			                     <h4 class="sidebar_title">인기 자소서 Top3</h4>
+			                     &nbsp;&nbsp;&nbsp;&nbsp;
+			                     <div class="media post_item">
+			                        <div class="media-body">
+			                        <c:forEach var="vo" items="${pList }" end="3">
+			                           <a href="../selfletter/detail.do?sno=${vo.sno }">
+			                              <h2 id="sidetitle">${vo.ssubject }</h2>
+			                           </a>
+			                           <p>${vo.sindutype} </p>
+			                        </c:forEach>
+			                        </div>
+			                     </div>
+			                  </aside>  
+
+                            
+                            
+                            
+                            
+                            <!--=================================사이드바  -->
+                            
                    </div>
                    <!-- =====================버튼그룹============================== -->
                     <div id="btn_group">
@@ -70,6 +110,10 @@
             </div>
         </div>
         <!-- 합격자기소개서 상세보기 끝 -->
+
+        
+        
+        
     </main>
         
     </body>

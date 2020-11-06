@@ -10,6 +10,7 @@ SQ2                CLOB          //항목2
 SA2                CLOB          //답변2
 SQ3                CLOB          //항목3
 SA3                CLOB          //답변3
+HIT				   NUMBER		//조회수
  */
 public class SelfVO {
    private int sno;
@@ -22,9 +23,17 @@ public class SelfVO {
    private String sa2;
    private String sq3;
    private String sa3;
-   public int getSno() {
-      return sno;
-   }
+   private int hit;
+   
+   public int getHit() {
+	return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public int getSno() {
+	      return sno;
+	   }
    public void setSno(int sno) {
       this.sno = sno;
    }

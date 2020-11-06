@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!doctype html>
 <html>
@@ -33,6 +34,8 @@
 	border-radius: 10px;
 	padding: 5px;
 }
+
+
 </style>
 <body>
    
@@ -76,6 +79,7 @@
 					      	<li>연혁 : ${vo.history }</li>
 					      </ul>
 					    </div>
+
 					    
 					  	<!-- ================기업후기탭=================================================================== -->
 					  	
@@ -89,8 +93,8 @@
 											    <img src="user.png" class="media-object" style="width:50px">
 											    &nbsp;&nbsp;&nbsp;&nbsp;
 											  </div>
-											  <div class="media-body">
-											    <h4 class="media-heading">${wvo.rtype } | ${wvo.rloc } | ${wvo.rdate }</h4>
+											  <div class="typebar">
+											    <h4 class="media-heading">${wvo.rtype } | ${wvo.rloc } | ${wvo.rdate } </h4>
 											    <p><img src="star.png" width=15 height=15>&nbsp;${wvo.rscore }</p>
 											  </div>
 											</div>
@@ -129,9 +133,9 @@
 										    <img src="user.png" class="media-object" style="width:60px">
 										  </div>
 										  <div class="media-body">
-										    <h4 class="media-heading">면접결과${ivo.iresult}</h4>
-										    <p><img src="star.png" width=15 height=15>&nbsp;${ivo.iscore }면접난이도</p>
-										    <p>${ivo.iregdate }면접일</p>
+										    <h4 class="media-heading">면접결과 &nbsp;${ivo.iresult}</h4>
+										    <p>면접난이도&nbsp;<img src="star.png" width=15 height=15>&nbsp;${ivo.iscore }</p>
+										    <p>면접일&nbsp;${ivo.iregdate }</p>
 										  </div>
 										</div>
 									  <div class="panel-group">
@@ -152,10 +156,10 @@
 							</c:forEach>
 						</div>
 						<!-- 새글작성 버튼 -->
-						&nbsp;&nbsp;&nbsp;&nbsp;
+					<!-- 	&nbsp;&nbsp;&nbsp;&nbsp;
                		<div class=button>
 						<a href="../company/insert.do" class="genric-btn success circle">새 리뷰 작성</a>
-					</div>
+					</div> -->
                		
                		
             </div>
@@ -163,21 +167,7 @@
             <!--  =========================================사이드바 시작부분======================================================-->
       <div class="col-lg-4">
                <div class="blog_right_sidebar">
-                  <aside class="single_sidebar_widget search_widget">
-                     <form method="post" action="../company/find.do">
-                        <div class="form-group">
-                           <div class="input-group mb-3">
-                              <input type="text" class="form-control" placeholder='기업 이름 검색'
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = '기업 이름 검색'">
-                              <div class="input-group-append">
-                                 <button class="btns" type="button"><i class="ti-search"></i></button>
-                              </div>
-                           </div>
-                        </div>
-                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">검색하기</button>
-                     </form>
-                  </aside>
+               
                   
                   
                   <aside class="single_sidebar_widget post_category_widget">
@@ -279,7 +269,7 @@
                   
                   	</div>
                   </div>
-      </div>
+     			 </div>
       
                
                </div>

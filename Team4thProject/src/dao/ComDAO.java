@@ -92,27 +92,6 @@ public class ComDAO {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//기업 검색===============================================================
 	//<select id="comFindData" resultType="ComVO" parameterType="hashmap">
 	public static List<ComVO> comFindData(Map map){

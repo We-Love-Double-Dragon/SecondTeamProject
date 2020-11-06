@@ -39,6 +39,7 @@ public class LetterModel {
 		request.setAttribute("main_jsp", "../selfletter/letter.jsp");
 		return "../main/main.jsp";
 	}
+	
 	//자소서 리스트 상세보기
 	@RequestMapping("selfletter/detail.do")
 	public String letter_detail(HttpServletRequest request) {
@@ -46,6 +47,16 @@ public class LetterModel {
 			String sno=request.getParameter("sno");
 			SelfVO vo=LetterDAO.letterDetailData(Integer.parseInt(sno));		// DAO의 메소드 실행하여 VO에 담기
 			request.setAttribute("vo", vo);										// VO를 request에 담아서 전송
+			///
+			Map map=new HashMap();
+			int start=1;
+			int end=3;
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<SelfVO> pList=LetterDAO.popular(map);
+			request.setAttribute("pList", pList);
+			///
 			request.setAttribute("main_jsp", "../selfletter/detail.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
