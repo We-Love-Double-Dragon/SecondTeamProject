@@ -42,7 +42,7 @@
 	</insert>
 	
 	<!-- 수정하기 -->
-	<update id="letterupdate" parameterType="SelfVO">
+	<!-- <update id="letterupdate" parameterType="SelfVO">
 	UPDATE selfletter SET
 	ssubject=#{ssubject},
 	sname=#{sname},
@@ -54,7 +54,7 @@
 	sq3=#{sq3},
 	sa3=#{sa3}
 	WHERE sno=#{sno}
-	</update>
+	</update> -->
 	
 	
 </mapper>

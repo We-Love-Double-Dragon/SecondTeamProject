@@ -4,20 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
-<!-- 라이브러리 추가 -->
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
- $(function(){
-	 $.ajax({
-		 type:'post',
-		 url:'../company/find.do',
-		 success:function(result)
-		 {
-			 $('#company_find').html(result);
-		 }
-	 });
-</script>
-<!-- css================================ -->
+
+
+
+<!-- ====================================================================== -->
+
 <style type="text/css">
 #nav-tabContent{
 	boarder:2px;
@@ -34,7 +25,7 @@
  background-color: #D4F4FA;
 }
 </style>
-<!-- css================================ -->
+
    <body>
     <main>
    <!-- ==============================================기업목록 출력 시작================================================================ -->
@@ -57,7 +48,7 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">           
                                 <div class="whats-news-caption">
                                     <div class="row">
-                                        <c:forEach var="vo" items="${list }">
+                                        <c:forEach var="vo" items="${fList }">
                                         	<div class="col-lg-6 col-md-6">
 	                                            <div class="single-what-news mb-100">
 	                                                <div class="what-img">
@@ -86,7 +77,7 @@
                 </div>
                 <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
-                     <form action="../company/find.do">
+                     <form method="post" action="../company/find.do">
                         <div class="form-group">
                            <div class="input-group mb-3">
                               <input type="text" name="fname" class="form-control" placeholder='기업 이름 검색'

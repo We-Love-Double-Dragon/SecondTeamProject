@@ -67,18 +67,77 @@ public class ComDAO {
 		return list;
 	}
 	
-	//기업 검색
-	//<select id="comsearch" resultType="ComVO" parameterType="hashmap">
-	public static List<ComVO> comsearch(Map map){
+	//기업후기작성
+	//<insert id="workReviewInsert" parameterType="WorkVO">
+	public static void workReviewInsert(WorkVO vo) {
+		try {
+			SqlSession session=ssf.openSession(true);
+			session.insert("workReviewInsert",vo);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	//면접후기작성
+	//<insert id="intReviewInsert" parameterType="IntVO">
+	public static void intReviewInsert(IntVO vo) {
+		try {
+			SqlSession session=ssf.openSession(true);
+			session.insert("intReviewInsert",vo);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//기업 검색===============================================================
+	//<select id="comFindData" resultType="ComVO" parameterType="hashmap">
+	public static List<ComVO> comFindData(Map map){
 		SqlSession session=ssf.openSession();
 		List<ComVO> list=new ArrayList<ComVO>();
 		try{
-			list=session.selectList("comsearch",map);
+			list=session.selectList("comFindData",map);
 			session.close();
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());
 		}
 		return list;
+	}
+	//검색된 글 페이징
+	//<select id="comFindTotalPage" resultType="int" parameterType="hashmap">
+	public static int comFindTotalPage(Map map) {
+		SqlSession session=ssf.openSession();
+		int total=0;
+		try {
+			total=session.selectOne("comFindTotalPage",map);
+			session.close();
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return total;
 	}
 	
 	

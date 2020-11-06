@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!doctype html>
+<style type="text/css">
+.line:hover{
+	background-color: #CEF6F5;
+}
+</style>
 <html>
 <body>
 	<!-- Start Align Area -->
@@ -17,11 +23,11 @@
 					<table class="table">
 						<tr>
 							<th class="text-center" width=10%>번호</th>
-							<th class="text-center" width=30%>직종</th>
+							<th class="text-center" width=30%>지원직무</th>
 							<th class="text-center" width=60%>제목</th>
 						</tr>
 						<c:forEach var="vo" items="${list }" end="9">
-						<tr>
+						<tr class="line">
 							<td class="text-center" width=10%>${vo.sno }</td>
 							<td class="text-center" width=30%>${vo.sindutype }</td>
 							<td class="text-center" width=60%>

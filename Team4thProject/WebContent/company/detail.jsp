@@ -29,8 +29,9 @@
 	width:700px;
 }
 #logo{
-	border: 2px dotted navy;
+	border: 2px solid black;
 	border-radius: 10px;
+	padding: 5px;
 }
 </style>
 <body>
@@ -58,7 +59,7 @@
 					    <li class="active"><a data-toggle="tab" href="#home">소개</a></li>
 					    <li><a data-toggle="tab" href="#menu1">기업후기</a></li>
 					    <li><a data-toggle="tab" href="#menu2">면접후기</a></li>
-					  </ul>
+					</ul>
 					<!-- ================기업소개탭====================================================================== -->
 					  <div class="tab-content" width="200">
 					  
@@ -150,7 +151,11 @@
 									</div>
 							</c:forEach>
 						</div>
-               		
+						<!-- 새글작성 버튼 -->
+						&nbsp;&nbsp;&nbsp;&nbsp;
+               		<div class=button>
+						<a href="../company/insert.do" class="genric-btn success circle">새 리뷰 작성</a>
+					</div>
                		
                		
             </div>
@@ -159,18 +164,18 @@
       <div class="col-lg-4">
                <div class="blog_right_sidebar">
                   <aside class="single_sidebar_widget search_widget">
-                     <form action="#">
+                     <form method="post" action="../company/find.do">
                         <div class="form-group">
                            <div class="input-group mb-3">
-                              <input type="text" class="form-control" placeholder='Search Keyword'
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                              <input type="text" class="form-control" placeholder='기업 이름 검색'
+                                 onfocus="this.placeholder = ''" onblur="this.placeholder = '기업 이름 검색'">
                               <div class="input-group-append">
                                  <button class="btns" type="button"><i class="ti-search"></i></button>
                               </div>
                            </div>
                         </div>
                         <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">Search</button>
+                           type="submit">검색하기</button>
                      </form>
                   </aside>
                   
