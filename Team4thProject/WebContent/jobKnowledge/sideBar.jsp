@@ -34,6 +34,18 @@
 				 $('#user_point').html(result);
 			 }
 		 })
+		 
+		 
+		 $.ajax({							// 답변달린 질문리스트 가져오기
+			 type:'get',
+			 url:'../jobKnowledge/noti.do',
+			 async: false,
+			 dataType:'html',
+			 success:function(result)
+			 {
+				 $('#notiBoard').html(result);
+			 }
+		 })
 	})
 </script>
 <style type="text/css">
@@ -55,17 +67,18 @@
 .scrapButton:hover{
 	background-color: #FF5757;
 }
-
-
 /* 최근 방문한 게시글 */
 .recentVisitButton{
 	background-color: #4F80B8;
+	color: white;
 	transition-property: background-color;
 	transition-duration: 0.5s;
 }
 .recentVisitButton:hover{
-	background-color: #3D638E;
+	background-color: #2F67A6;
 }
+
+
 
 </style>
 </head>
@@ -100,12 +113,17 @@
 							style="height: 35px; font-size:12px; margin-top: 15px; color: white; border: none; border-radius: 5px;">
 				</div>
 				
+				
+				<!-- 답변 달린 질문 리스트 -->
+				<div id="notiBoard"
+				style="width:100%; min-height:70px; margin-top:30px; border-radius: 5px; padding: 10px;">
+					
+				</div>
+				
+				
 				<!-- 최근 방문한 질문글 리스트  -->
 				<div id="recentBoard"
-				style="width:100%; min-height:70px; margin-top:250px; background-color: white; border-radius: 5px; padding: 10px;">
-					
-					
-					
+				style="width:100%; min-height:70px; margin-top:150px; background-color: white; border-radius: 5px; padding: 10px;">
 					
 				</div>
 				

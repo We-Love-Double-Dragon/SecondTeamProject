@@ -31,7 +31,7 @@
 }
 
 .answer_box:hover {					/* 게시글 호버 */
-	background-color:  #E7E7E7;
+	background-color:  #E8FCFF;
 }
 
 .list_option input{
@@ -72,6 +72,13 @@
 	background-color: #3D638E;
 }
 
+/* 게시글 리스트 크기 확대 */
+.answer_box{
+	transition: all ease 0.1s;
+}
+.answer_box:hover{
+	transform: scale( 1.01 );
+}
 
 </style>
 

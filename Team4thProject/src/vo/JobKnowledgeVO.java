@@ -37,10 +37,17 @@ public class JobKnowledgeVO {
 	private int reply;
 	private int scrap_no;		// 스크랩번호
 	private int point;			// 채택시 답변자에게 부여할 점수
+	private int noti;			// 새로운 답변 갯수
 	
 	
 	
 	
+	public int getNoti() {
+		return noti;
+	}
+	public void setNoti(int noti) {
+		this.noti = noti;
+	}
 	public int getPoint() {
 		return point;
 	}

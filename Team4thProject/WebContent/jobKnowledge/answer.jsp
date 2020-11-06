@@ -8,6 +8,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#text-box').keyup(function (e){
+	    var content = $(this).val();
+	    $('#counter').html("("+content.length+" / 최대 1000자)");    //글자수 실시간 카운팅
+
+	    if (content.length > 1000){
+	        alert("최대 1000자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 800));
+	        $('#counter').html("1000 / 최대 1000자");
+	    }
+	});
+
+
+});
+</script>
 <style type="text/css">
 .subject_input::placeholder{
 	color: #B4B4B4;
@@ -34,7 +51,7 @@
 <body>
 	<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; border: 1px solid #437EC0;">
 		<form action="answer_ok.do" method="post">
-			<div class="do_answer" style="height: 1100px; padding:20px;">
+			<div class="do_answer" style="height: 1000px; padding:20px;">
 				<div class="select_tag" style="height: 60px;">
 					<select class="select_box" name="tag" style="display: inline; width: 50px; height:30px; font-size:40px;">		<!-- 태그 셀렉트박스 -->
 						<option value="직무">직무</option>
@@ -49,7 +66,7 @@
 						<option value="인적성검사">인적성검사</option>
 					</select>
 				</div>
-				<div class="answer_area" style="height:900px; background-color: white; border-radius: 5px; padding: 15px; border: 1px solid #AFAFAF;">
+				<div class="answer_area" style="height:750px; background-color: white; border-radius: 5px; padding: 15px; border: 1px solid #AFAFAF;">
 					<div class="subject_area">																						<!-- 제목입력 -->
 						<input class="subject_input" type=text name=subject placeholder="질문 제목을 입력해주세요."
 						style="width:100%; height:60px; font-size:40px; border: none;">
@@ -57,11 +74,12 @@
 					<div class="segment_line" style="height:20px; border-bottom: 1px solid #D1D1D1; margin-bottom: 40px;">			<!-- 제목 - 내용간 구분선 -->
 					</div>
 					<div class="content_area">																						<!-- 내용입력 -->
-						<textarea class="content_textarea" rows="30" cols="107" name=content placeholder="구체적인 내용을 입력해주세요."
+						<textarea class="content_textarea" id="text-box" rows="23" cols="107" name=content placeholder="구체적인 내용을 입력해주세요."
 						style="background-color: white; font-size: 15px; border: none; resize: none;"></textarea>
 					</div>
 					<div style="width:100%; height:20px; border-bottom: 1px solid #D1D1D1; margin-bottom: 20px;"></div>
 					<div class="point_area" style="text-align: right; font-size: 14px;">
+						<span style="color:#aaa; margin-right: 30px;" id="counter">(0 / 최대 1000자)</span>
 						<img src="../image/medal.png" style="width:30px; height:30px;">
 						포인트 : <input type="text" name=point size=10 placeholder="포인트 입력" style="border:1px solid #D1D1D1; border-radius: 5px; text-align: center;">
 					</div>

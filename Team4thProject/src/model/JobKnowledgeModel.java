@@ -225,7 +225,7 @@ public class JobKnowledgeModel {
 			
 			
 			
-			// 스크랩 버튼 활성화 여부
+			// 스크랩 버튼 활성화 여부 -------------------------------------
 			HttpSession session=request.getSession();
 			String id=(String)session.getAttribute("id");
 			JobKnowledgeScrapVO svo=new JobKnowledgeScrapVO();
@@ -234,6 +234,11 @@ public class JobKnowledgeModel {
 			int count=JobKnowledgeDAO.scrapCount(svo);
 			
 			request.setAttribute("count", count);
+			
+			// 채택된 답변글 수 가져오기 (채택버튼 활성화 / 비활성화 관련) ---------------------------------------------------------
+			int adoptCount = JobKnowledgeDAO.getAdoptCount(Integer.parseInt(no));
+			request.setAttribute("adoptCount", adoptCount);
+			
 			
 			
 			request.setAttribute("vo", vo);
@@ -351,6 +356,7 @@ public class JobKnowledgeModel {
 		String no = "";
 		String content = "";							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
 		String sessionID = "";
+		String board_no = request.getParameter("board_no");
 		
 		try {
 			System.out.println("답변달기 모델");
@@ -371,6 +377,7 @@ public class JobKnowledgeModel {
 			
 			JobKnowledgeDAO.jobknowledgeUpdateReply(Integer.parseInt(no));
 			JobKnowledgeDAO.jobknowledgeReply(map);
+			JobKnowledgeDAO.incrementNoti(Integer.parseInt(board_no));				// 답변달리면 질문글의 noti 증가
 			
 			
 			
@@ -440,6 +447,55 @@ public class JobKnowledgeModel {
 	
 	
 	
+	// 답변 수정 전 내용 가져오기 ==============================================================================================================
+	@RequestMapping("jobKnowledge/modifyReply.do")
+	public String getReply(HttpServletRequest request) {
+		try {
+			System.out.println("답변 수정 전 내용 가져오기");
+			String board_no = request.getParameter("board_no");
+			String reply_no = request.getParameter("reply_no");
+			
+			JobKnowledgeVO vo = JobKnowledgeDAO.jobknowledgeModifyBoard(Integer.parseInt(board_no));		// 질문글 
+			JobKnowledgeVO rVO = JobKnowledgeDAO.getReply(Integer.parseInt(reply_no));						// 답변글
+			
+			request.setAttribute("vo", vo);
+			request.setAttribute("rVO", rVO);
+			request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/modifyReply.jsp");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "../jobKnowledge/box.jsp";
+	}
+	// 답변 수정하기 =========================================================================================================================
+	@RequestMapping("jobKnowledge/modifyReply_ok.do")
+	public String modifyReply_ok(HttpServletRequest request) {
+		String board_no = "";
+		try {
+			System.out.println("답변 수정하기");
+			request.setCharacterEncoding("utf-8");
+			board_no = request.getParameter("board_no");
+			String reply_no = request.getParameter("reply_no");
+			String reply_content = request.getParameter("reply_content");
+			
+			Map map = new HashMap();
+			map.put("reply_no", reply_no);
+			map.put("reply_content", reply_content);
+			
+			JobKnowledgeDAO.ModifyReply(map);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:../jobKnowledge/detail.do?no=" + board_no;
+	}
+	
+	
+	
+	
 	
 	
 	// 게시글과 답변과 댓글 삭제하기 =======================================================================================================
@@ -475,29 +531,36 @@ public class JobKnowledgeModel {
 	@RequestMapping("jobKnowledge/delete_reply.do")
 	public String jobKnowledgeDeleteReplyAlone(HttpServletRequest request) {
 		
-		
+			String bno = "";
+			
 		
 		try {
-			System.out.println("답변만 삭제하기");
+			System.out.println("답변과 댓글만 삭제하기");
 			
 			// 사용자로부터 받는 파라미터 --------------------------------------
 			String rno = request.getParameter("rno");		// 답변의 번호
-			String bno = request.getParameter("bno");		// 질문글 번호
-			String content = request.getParameter("content");
+			bno = request.getParameter("bno");		// 질문글 번호
+//			String content = request.getParameter("content");
+			HttpSession session = request.getSession();			
+			String id = (String)session.getAttribute("id");		// id는 세션아이디
+			String pwd = request.getParameter("pwd");
 			
 			System.out.println("답변 : " + rno);
 			System.out.println("질문 : " + bno);
-			
-			
-			// DAO 메소드 실행
+												
 			JobKnowledgeDAO.deleteReplyAlone(Integer.parseInt(rno), Integer.parseInt(bno));
+			
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-//		return "redirect:../jobKnowledge/detail.do?no=" + bno;
-		return "../jobKnowledge/delete_reply.jsp";
+		return "redirect:../jobKnowledge/detail.do?no=" + bno;
+			
+//		return "../jobKnowledge/delete_reply.jsp";
 	}
 	// 답변만 삭제 확인창 띄우기 ===========================================================================================================
 	@RequestMapping("jobKnowledge/deleteReally_reply.do")
@@ -510,9 +573,9 @@ public class JobKnowledgeModel {
 	@RequestMapping("jobKnowledge/deleteCommentAlone.do")
 	public String jobKnowledge_delete_comment_alone(HttpServletRequest request) {
 		
-			String board_no = "";
+//			String board_no = "";
 		try {
-			board_no = request.getParameter("board_no");
+//			board_no = request.getParameter("board_no");
 			String no = request.getParameter("no");
 			
 			JobKnowledgeDAO.deleteCommentAlone(Integer.parseInt(no));
@@ -520,7 +583,7 @@ public class JobKnowledgeModel {
 			e.printStackTrace();
 		}
 		
-		return "redirect:../jobKnowledge/detail.do?no=" + board_no;
+		return "../jobKnowledge/list.jsp";
 	}
 	
 	
@@ -702,7 +765,7 @@ public class JobKnowledgeModel {
 			   vo.setBoard_no(Integer.parseInt(board_no));
 //			   vo.setName(name);
 			   // DAO연결 
-			   JobKnowledgeDAO.commentInsert(vo);
+			   JobKnowledgeDAO.commentInsert(vo, Integer.parseInt(reply_no));
 			   
 		   }catch(Exception ex) {
 			   ex.printStackTrace();
@@ -792,7 +855,23 @@ public class JobKnowledgeModel {
 		   
 		   return "../jobKnowledge/user_point.jsp";
 	   }
-	
+	   // 사이드바에 답변달린 질문 표시 ==================================================================================================
+	   @RequestMapping("jobKnowledge/noti.do")
+	   public String jobKnowledge_noti(HttpServletRequest request) {
+		   
+		   try {
+			   HttpSession session = request.getSession();
+			   String id = (String)session.getAttribute("id");
+			   List<JobKnowledgeVO> noti_list = JobKnowledgeDAO.indicateNotiBoard(id);
+			   
+			   request.setAttribute("noti_list", noti_list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		   
+		   
+		   return "../jobKnowledge/noti.jsp";
+	   }
 	   
 	   
 	   
@@ -810,6 +889,7 @@ public class JobKnowledgeModel {
 			board_no = request.getParameter("board_no");		// 질문글 번호
 			String board_id = (String)session.getAttribute("id");	// 질문자 아이디
 			String reply_id = request.getParameter("reply_id");		// 답변자 아이디
+			String reply_no = request.getParameter("reply_no");		// 답변글 번호
 			
 			
 			
@@ -818,19 +898,36 @@ public class JobKnowledgeModel {
 			map.put("board_id", board_id);
 			map.put("reply_id", reply_id);
 			
-			JobKnowledgeDAO.adopt(map, Integer.parseInt(board_no));
+			JobKnowledgeDAO.adopt(map, Integer.parseInt(reply_no));
 			
-			System.out.println(board_no);
-			System.out.println(reply_id);
+			System.out.println("board_no : " + board_no);
+			System.out.println("reply_no : " + reply_id);
 			System.out.println(board_id);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		   
 		   return "redirect:../jobKnowledge/list.do";
 	   }
 	   
+	   
+	   
+	   
+	   // 사이드바 알람 클릭시 질문의 noti 감소 ============================================================================================================
+	   @RequestMapping("jobKnowledge/declineNoti.do")
+	   public String declineNoti(HttpServletRequest request) {
+		   String no = "";
+		   try {
+			no = request.getParameter("no");
+			JobKnowledgeDAO.declineNoti(Integer.parseInt(no));
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		   
+		   return "redirect:../jobKnowledge/detail.do?no=" + no;
+		   }
 	   
 	
 	

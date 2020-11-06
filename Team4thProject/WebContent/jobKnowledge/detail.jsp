@@ -18,9 +18,9 @@
 	}
 	
 	// 답변글삭제
-	function deleteReally_reply(){
+	/* function deleteReally_reply(){
 		window.open("../jobKnowledge/deleteReally_reply.do", "deleteReally_reply", "width=320,height=300,scrollbars=no")
-	}
+	} */
 	
 	
 	
@@ -47,13 +47,27 @@
 				 $('.comment_list' + reply_no).html(result);
 				}
 			});
-			
-			
-			// 댓글리스트에 질문글과 답변글 번호 넣기
-			$.ajax({
-				
-			})
 		})
+		
+		
+		// 답변글 삭제시 비밀번호 입력창
+		$('.inputPwd').hide();						// inputPwd
+		
+		$('.deleteReplyButton').click(function(){				// deleteReplyButton 클릭시
+			let rno = $(this).attr('id')						// 변수 no는 클릭한 bring_comment_tab의 value값
+			$('#inputPwd' + rno).toggle(); 			// #comment_Insert_area + no를 토글
+		});
+		
+		$('#text-box').keyup(function (e){
+		    var content = $(this).val();
+		    $('#counter').html("("+content.length+" / 최대 1000자)");    //글자수 실시간 카운팅
+
+		    if (content.length > 1000){
+		        alert("최대 1000자까지 입력 가능합니다.");
+		        $(this).val(content.substring(0, 800));
+		        $('#counter').html("1000 / 최대 1000자");
+		    }
+		});
 		
 		// 답변삭제
 		/* $('.deleteReplyButton').click(function(){
@@ -81,21 +95,6 @@
 			}
 		}); */
 	});
-	
-	/* // 답변글의 댓글 가져오기
-	function bringComment(){
-		var board_no = $('#comment_board_no').val();		// 질문글의 번호
-		var reply_no = $('#comment_reply_no').val();
-		$.ajax({
-			type:'post',
-			data: {"board_no" : board_no, "reply_no" : reply_no},
-			url:'../jobKnowledge/bringComment.do',
-			success:function(result)
-			{
-			 $('.comment_list').html(result);
-			}
-		});
-	} */
 	
 	
 </script>
@@ -146,6 +145,15 @@
 }
 #adoptButton:hover{
 	background-color: #33B04C; 
+}
+
+
+/* 답변 내 댓글작성, 댓글보기 버튼 */
+.commentButton{
+	background-color: #F575FF;
+}
+.commentButton:hover{
+	background-color: #AA4EB1;
 }
 </style>
 </head>
@@ -206,12 +214,16 @@
 				<div class="reply_area" style="border-radius: 5px; border: 1px solid #AFAFAF;background-color: white; padding:20px; margin-top: 30px; position: relative;">
 					
 						<div class="reply_content_area">
-							<textarea class="content_textarea" rows="10" cols="107" name=content placeholder="진심어린 답변을 작성해주세요."
+							<textarea class="content_textarea" id="text-box" rows="10" cols="107" name=content placeholder="진심어린 답변을 작성해주세요."
 							style="background-color: white; font-size: 15px; border: none; resize: none; overflow-y: auto; margin-bottom: 10px;"></textarea>		<!-- 답변내용 입력 -->
 							<div style="height:10px; border-bottom: 1px solid #D1D1D1; margin-bottom: 50px;"></div>
-							<input type="hidden" name="no" value="${vo.no }">																						<!-- no넘기기(답변수 증가용) -->
+							<input type="hidden" name="no" value="${vo.no }">
+							<div style="display: inline; text-align: right; width:100%;">
+								<span style="color:#797979; font-size: 14px;" id="counter">(0 / 최대 1000자)</span>		
+							</div>																			<!-- no넘기기(답변수 증가용) -->
 							<input type=submit value=답변하기 id="replyButton"
 									style="height:50px; width:130px; color:white; font-size: 20px; border: none; border-radius: 5px; margin-right:10px; position: absolute; bottom: 10px; right: 10px;">
+							<input type=hidden value=${vo.no } name="board_no">
 						</div>
 						<div class="bottom_reply">
 							
@@ -230,30 +242,48 @@
 					<div class="reply_list" style="border-radius: 5px; border: 1px solid #D1D1D1;background-color: white; padding:20px; margin-bottom: 15px;">		<!-- 답변 전체 박스 -->
 						
 						<div class="subject_area" style="margin-bottom: 20px;">														<!-- 답변제목 -->
-							<h3>${rVO.id }</h3>
+							<c:if test="${rVO.adopt == 1 }">
+								<img src="../image/adopt.png" style="width:40px; height:40px; margin-right: 5px;">
+							</c:if>
+							<h3 style="display: inline;">${rVO.id }</h3>
 						</div>
 						<div class="content_area">																					<!-- 답변내용 -->
 							<p>${rVO.content }</p>
 							<p>${rVO.no }</p>
 						</div>
 						<div class="delete_modify_button" style="text-align: right;">
-							<input type=button value="댓글작성" id="${rVO.no }" class="bring_comment_tab littleButton" onclick="bring_comment_tab()">
+							<input type=button value="댓글작성" id="${rVO.no }" class="bring_comment_tab littleButton commentButton" onclick="bring_comment_tab()">
 							<!-- <form method="post" action="../jobKnowledge/bringComment.do" style="display: inline;"> -->												<!-- 댓글보기 버튼 -->
-								<input type=submit value="댓글보기" class="lookComment littleButton">
+								<input type=submit value="댓글보기" class="lookComment littleButton commentButton">
 								<input type=hidden id="comment_board_no" name="board_no" value=${vo.no }>
 								<input type=hidden id="comment_reply_no" name="reply_no" value=${rVO.no }>
 							<!-- </form> -->
 							<c:if test="${rVO.id == sessionScope.id }">
-									<input type=button value=삭제  id="dButton${rVO.no }" onclick="deleteReally_reply()" class="littleButton deleteReplyButton">
-									<input type=hidden value=${rVO.no } id="rno">
-									<input type=hidden value=${rVO.no } class="rno${rVO.no }">
+									<form action="../jobKnowledge/modifyReply.do" method="post" style="display: inline;">
+										<input type=submit value=수정 class="littleButton modifyReplyButton">
+										<input type=hidden name="board_no" value=${vo.no }>
+										<input type=hidden name="reply_no" value=${rVO.no }>
+									</form>
+									<input type=button value=삭제  id=${rVO.no } class="littleButton deleteReplyButton">
+									
 							</c:if>
 							
 						</div>
 					</div>
 					
+					<!-- 삭제시 비밀번호입력창 -->
+					<div class="inputPwd" id="inputPwd${rVO.no }" style="text-align: right;">
+						<p style="display: inline; color: red; font-weight: bold;">* 삭제한 답변은 복구할 수 없습니다. 삭제하시겠습니까?</p>
+						<form action="../jobKnowledge/delete_reply.do" method="post" style="display: inline;">
+							<!-- <input type="password" size=10 placeholder="비밀번호 입력" name="pwd"> -->
+							<input type="submit" value="삭제" class="littleButton">
+							<input type=hidden value=${rVO.no } name="rno">
+							<input type=hidden value=${vo.no } name="bno">
+						</form>
+					</div>
+					
 					<!-- 채택버튼 -->
-					<c:if test="${sessionScope.id == vo.id && rVO.id != sessionScope.id}">
+					<c:if test="${sessionScope.id == vo.id && rVO.id != sessionScope.id && adoptCount == 0}">
 						<div style="text-align: right;">
 							<form action="../jobKnowledge/adopt.do" method="get">
 								<input type="submit" value="채택하기" class="littleButton" id="adoptButton">

@@ -165,6 +165,17 @@ public class JobKnowledgeDAO {
 			e.printStackTrace();
 		}
 	}
+	// 답변달면 질문글의 noti 증가 ===========================================================================================================
+	public static void incrementNoti(int board_no) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.update("incrementNoti", board_no);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
@@ -190,6 +201,35 @@ public class JobKnowledgeDAO {
 		
 		try {
 			session.update("jobknowledgeModifyBoard_ok", map);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	// 답변 수정 전 내용 가져오기 =============================================================================================================
+		public static JobKnowledgeVO getReply(int no) {
+			JobKnowledgeVO vo = new JobKnowledgeVO();
+			SqlSession session = ssf.openSession();
+			
+			try {
+				vo = session.selectOne("getReply", no);
+				session.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return vo;
+		}
+	// 답변 수정하기 =======================================================================================================================
+	public static void ModifyReply(Map map) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.update("ModifyReply", map);
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -229,6 +269,21 @@ public class JobKnowledgeDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	// 답변과 댓글 삭제하기 전에 비밀번호 확인	 ==========================================================================================================
+	public static String getReplyPwd(String id) {
+		SqlSession session = ssf.openSession(true);
+		String db_pwd = "";
+		
+		try {
+			
+			db_pwd = session.selectOne("getReplyPwd", id);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return db_pwd;
 	}
 	
 	
@@ -323,10 +378,11 @@ public class JobKnowledgeDAO {
 	
 	
 	// 댓글 달기 ===========================================================================================================
-	public static void commentInsert(JobKnowledge_CommentVO vo){
+	public static void commentInsert(JobKnowledge_CommentVO vo, int reply_no){
 	   SqlSession session=ssf.openSession(true);// commit(X)
 	   // commit() ==> DML
 	   session.insert("commentInsert",vo);
+	   session.update("incrementReplyReply", reply_no);
 	   session.close();
    }
 	
@@ -367,18 +423,28 @@ public class JobKnowledgeDAO {
 	
 	
 	// 채택하기 ==========================================================================================================
-	public static void adopt(Map map, int board_no) {
-		SqlSession session = ssf.openSession();
+	public static void adopt(Map map, int reply_no) {
+		SqlSession session = ssf.openSession(true);
 		
 		try {
 			session.update("sendAdoptPoint", map);
 			session.update("declineAnswerPoint", map);
-			session.update("yesAdopt", board_no);
-			session.commit();
+			session.update("yesAdopt", reply_no);
 			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	// 상세보기할 때 채택된 답변글 수 가져오기 ===========================================================================================
+	public static int getAdoptCount(int no) {
+		SqlSession session = ssf.openSession(true);
+		int count = 0;
+		try {
+			count = session.selectOne("getAdoptCount", no);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 	
 	
@@ -392,9 +458,36 @@ public class JobKnowledgeDAO {
 			user_point = session.selectOne("indicatePoint", id);
 			session.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return user_point;
+	}
+	// 최근 답변달린 질문 표시(사이드바에) =======================================================================================
+	public static List<JobKnowledgeVO> indicateNotiBoard(String id) {
+		SqlSession session = ssf.openSession();
+		List<JobKnowledgeVO> list = new ArrayList<JobKnowledgeVO>();
+		try {
+			list = session.selectList("indicateNotiBoard", id);
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list;
+	}
+	
+	
+	
+	
+	// 사이드바에서 알람 클릭시 noti 감소
+	public static void declineNoti(int no) {
+		SqlSession session = ssf.openSession(true);
+		
+		try {
+			session.update("declineNoti", no);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

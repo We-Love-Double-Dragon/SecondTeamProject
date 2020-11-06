@@ -47,8 +47,10 @@
 	<select id="jobknowledgeDetailReply" resultType="JobKnowledgeVO" parameterType="int">
 		SELECT no, id, subject, content, regdate, hit, tag, adopt FROM jobknowledge WHERE root = #{no} ORDER BY regdate
 	</select>
-	
-	
+<!-- 상세보기할 때 채택된 답변글의 수 가져오기 (채택버튼 활성화 / 비활성화 관련) -->
+	<select id="getAdoptCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM jobknowledge WHERE root = #{no} AND adopt = 1
+	</select>	
 	
 	
 	
@@ -106,6 +108,10 @@
 	<update id="jobknowledgeUpdateGroupStep" parameterType="hashmap">
 		UPDATE jobknowledge set group_step = group_step+1 WHERE group_id = #{group_id} AND group_step &gt; #{group_step}
 	</update>
+<!-- 답변달리면 질문글의 noti컬럼 +1 -->
+	<update id="incrementNoti" parameterType="int">
+		UPDATE jobknowledge SET noti = noti + 1 WHERE no = #{board_no}
+	</update>
 	
 	
 	
@@ -119,6 +125,19 @@
 		WHERE no = #{no}
 	</update>
 	
+
+
+
+<!-- 답변 수정하기 -->
+	<update id="ModifyReply" parameterType="hashmap">
+		UPDATE jobknowledge SET
+		content = #{reply_content}
+		WHERE no = #{reply_no}
+	</update>
+<!-- 답변 수정 전 내용 가져오기 -->
+	<select id="getReply" resultType="JobKnowledgeVO" parameterType="int">
+		SELECT no, id, content FROM jobknowledge WHERE no = #{reply_no}
+	</select>
 	
 	
 	
@@ -148,6 +167,10 @@
 	<delete id="deleteReplyAlone" parameterType="int">
 		DELETE FROM jobknowledge WHERE no = #{rno}
 	</delete>
+<!-- 삭제하기 전에 비밀번호 일치여부 확인 -->
+	<select id="getReplyPwd" resultType="String" parameterType="String">
+		SELECT pwd FROM userform WHERE id = #{id}
+	</select>
 <!-- 댓글도 삭제하기 -->
 	<delete id="deleteCommentWithReply" parameterType="int">
 		DELETE FROM jobknowledge_comment WHERE reply_no = #{rno}
@@ -156,6 +179,7 @@
 	<update id="declineBoardHit" parameterType="int">
 		UPDATE jobknowledge SET reply = reply - 1 WHERE no = #{bno}
 	</update>
+	
 	
 	
 	
@@ -226,6 +250,10 @@
       #{board_no}
     )
   </insert>
+<!-- 댓글올릴 때 답변글의 reply 증가 -->
+	<update id="incrementReplyReply" parameterType="int">
+		UPDATE jobknowledge SET reply = reply + 1 WHERE no = #{reply_no}
+	</update>
   
   <!-- 댓글목록 가져오기 -->
   <select id="commentListData" resultType="JobKnowledge_CommentVO" parameterType="hashmap">
@@ -307,7 +335,7 @@
 	</update>
 <!-- 답변글 채택상태 변경 -->
 	<update id="yesAdopt" parameterType="int">
-		UPDATE jobknowledge adopt = 1 WHERE no = #{board_no}
+		UPDATE jobknowledge SET adopt = adopt + 1 WHERE no = #{reply_no}
 	</update>
 	
 	
@@ -316,4 +344,17 @@
 	<select id="indicatePoint" resultType="int" parameterType="String">
 		SELECT point FROM userform WHERE id = #{id}
 	</select>
+	
+<!-- noti가 증가한 질문글 표시 (사이드바) -->
+	<select id="indicateNotiBoard" resultType="JobKnowledgeVO" parameterType="String">
+		SELECT no, noti, subject FROM jobknowledge WHERE id = #{id} AND noti &gt; 0
+	</select>
+	
+	
+	
+	
+<!-- 사이드바에서 알람 클릭시 noti 감소 -->
+	<update id="declineNoti">
+		UPDATE jobknowledge SET noti = noti - (SELECT noti FROM jobknowledge WHERE no = #{no}) WHERE no = #{no}
+	</update>
 </mapper>

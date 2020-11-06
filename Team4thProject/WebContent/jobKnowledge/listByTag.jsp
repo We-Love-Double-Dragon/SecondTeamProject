@@ -46,7 +46,13 @@
 	background-color: #FF5757;
 }
 
-
+/* 게시글 리스트 크기 확대 */
+.answer_box{
+	transition: all ease 0.1s;
+}
+.answer_box:hover{
+	transform: scale( 1.01 );
+}
 
 </style>
 
