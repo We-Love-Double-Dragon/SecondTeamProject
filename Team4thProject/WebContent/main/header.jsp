@@ -78,8 +78,8 @@
                                             <li><a href="../Workb/workb.do" id="headerLink">채용공고</a>
                                             	<ul class="submenu">
                                                     <li><a href="../Workb/workb.do">지역별</a></li>
-                                                    <li><a href="#">업종별(구현 중)</a></li>
-                                                    <li><a href="#">채용달력(구현 중)</a></li>
+                                                    <li><a href="../Workb/workb2.do">업종별</a></li>
+                                                    <li><a href="../jobcalendar/jobcalendar.do">채용달력</a></li>
                                                     <!-- <li><a href="details.html">상시모집</a></li> -->
                                                 </ul>
                                             </li>
