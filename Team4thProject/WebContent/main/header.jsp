@@ -109,8 +109,6 @@
                                             		<c:if test="${sessionScope.id != null }">
                                             			<li><a href="../jobKnowledge/answer.do">질문하기</a></li>
                                             		</c:if>
-                                                    <li><a href="../jobKnowledge/profile.do">지식인 프로필(구현 중)</a></li>
-                                                    <li><a href="../jobKnowledge/test.do">테스트</a></li>
                                                 </ul>
                                             </li>
                                             
@@ -132,7 +130,7 @@
 										            </li>
 										          </c:if>
 										          <c:if test="${sessionScope.admin=='y'}">
-										            <li><a href="#" id="headerLink">관리자페이지(구현 중)</a>
+										            <li><a href="#" id="headerLink">관리자페이지</a>
 										             <ul class="submenu">
 										            	<li><a href="../user/update.do">회원정보 수정</a></li>
 										           	 </ul>
@@ -140,14 +138,14 @@
 										          </c:if>
     									    </c:if>
 	                                        <li>
-                                            <c:if test="${sessionScope.id!=null }">
-											  <form action="../user/logout.do"><%-- get(생략이 가능) --%>
+                                            <%-- <c:if test="${sessionScope.id!=null }">
+											  <form action="../user/logout.do">get(생략이 가능)
 											    <div class="logout" style="margin-left: 30px;" >
 											      ${sessionScope.name }님 
 											      <button class="genric-btn danger radius small">로그아웃</button>
 											    </div>
 											  </form>
- 											</c:if>
+ 											</c:if> --%>
  											</li>
                                         </ul>
                                     </nav>

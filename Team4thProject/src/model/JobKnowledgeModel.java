@@ -174,7 +174,7 @@ public class JobKnowledgeModel {
 	
 
 	// 상세보기 전에 쿠키 생성하기
-	@RequestMapping("Workb/detail_before.do")
+	@RequestMapping("jobKnowledge/detail_before.do")
 	public String jobKnowledge_detail_before(HttpServletRequest request, HttpServletResponse response) {
 			String no = "";
 		try {
@@ -190,7 +190,7 @@ public class JobKnowledgeModel {
 			
 			// 쿠키 생성 ----------------------------------------------
 			Cookie cookie = new Cookie(id + no, no);				// 쿠키의 키는 (세션아이디 + 글번호)  값은 글번호
-			cookie.setMaxAge(60*60*24);
+			cookie.setMaxAge(60);
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			System.out.println("쿠키이름 : " + cookie.getName() + "값 : " + cookie.getValue());
