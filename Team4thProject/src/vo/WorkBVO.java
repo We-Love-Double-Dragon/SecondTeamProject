@@ -53,6 +53,7 @@ public class WorkBVO {
    private String ldeadline;
    private String lsal;
    private String lworkspace;
+   private String l_like;
    public int getL_no() {
       return l_no;
    }
@@ -121,4 +122,10 @@ public class WorkBVO {
    public void setLworkspace(String lworkspace) {
       this.lworkspace = lworkspace;
    }
+   public String getL_like() {
+	   return l_like;
+   }
+   public void setL_like(String l_like) {
+	   this.l_like = l_like;
+   } 
 }

@@ -42,7 +42,6 @@ body{
 }
 </style>
    </head>
-
    <body>
    
    
@@ -62,12 +61,12 @@ body{
     
 <!-- 푸터 ================================================================================================================================ 푸터-->
    <jsp:include page="../main/footer.jsp"></jsp:include>
-
-   
+	
+    
 	<!-- JS here (자바스크립트 링크) ============================================================================================= JS here (자바스크립트 링크) -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
-        <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="./assets/js/vendor/modernizr-3.5.0 .min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
 		<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>

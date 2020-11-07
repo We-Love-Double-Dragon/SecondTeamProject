@@ -172,13 +172,9 @@ public class JobKnowledgeModel {
 		return "../jobKnowledge/box.jsp";
 	}
 	
-	
-	
-	
-	
-	
-	// 상세보기 전에 쿠키 생성하기 ==================================================================================================
-	@RequestMapping("jobKnowledge/detail_before.do")
+
+	// 상세보기 전에 쿠키 생성하기
+	@RequestMapping("Workb/detail_before.do")
 	public String jobKnowledge_detail_before(HttpServletRequest request, HttpServletResponse response) {
 			String no = "";
 		try {
