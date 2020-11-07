@@ -35,7 +35,7 @@ $(function(){
 	<div class="row">
 		<table class="table">
 		<tr>
-       <td width=35% height=500>
+       <td width=40% height=500>
          <table class="table">
            <%-- <caption class="text-center"> --%>
            <h5 class="text-left">채용 달력</h5>
@@ -47,7 +47,7 @@ $(function(){
            </tr>
          </table>
        </td>
-       <td width=65% height=500>
+       <td width=60% height=500>
          <table class="table">
            <h5 class="text-left">채용 정보</h5>
            <tr>

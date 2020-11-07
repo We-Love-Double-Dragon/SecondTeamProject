@@ -20,21 +20,32 @@ public class WorkbModel2 {
 		if(page==null) 
 			page="1";
 		
-		Map map=new HashMap();
 		int curpage=Integer.parseInt(page);
+		int totalpage=WorkbDAO2.workbTotalPage2();
 		int rowSize=10;
 		int start=(rowSize*curpage)-(rowSize-1);
-		int end=rowSize*curpage;
+		int end = (rowSize*curpage);
+		int block = 5;												// 페이지 블록
+		int startpage=((curpage-1)/block*block)+1;					
+		int endpage=((curpage-1)/block*block)+block;
+		if(endpage>totalpage) {
+			endpage=totalpage;
+		}
+		
+		Map map=new HashMap();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("lcateno", lcateno);
 		
 		List<WorkBVO> list=WorkbDAO2.workbListData2(map);
-		int totalpage=WorkbDAO2.workbTotalPage2();
+		
 		
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("block", block);
+		request.setAttribute("startpage", startpage);
+		request.setAttribute("endpage", endpage);
 		request.setAttribute("main_jsp", "../Workb/workb2.jsp");
 		
 		

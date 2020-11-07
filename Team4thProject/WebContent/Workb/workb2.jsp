@@ -3,6 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
+<head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+.w3-bar {
+	margin-top:0; 
+	border:1px solid #e0e0e0; 
+	border-top:1px solid #999; 
+	border-bottom:none; 
+	background-color:#fff; 
+	*zoom:1; 
+	border-bottom:1px solid #e8e8e8; 
+	position:relative; text-align:center; 
+	padding:10px 10px 10px; 
+}
+</style>
+</head>
 <body>
 	<!-- Start Align Area -->
 	<div class="whole-wrap">
@@ -35,7 +52,7 @@
 				</div>
 				<div class="progress-table-wrap">
 					<table class="table">
-						<tr>
+						<tr style="background-color: #495FA1; color: white;">
 							<th class="text-center" width=5%>번호</th>
 							<th class="text-center" width=15%>회사명</th>
 							<th class="text-center" width=30%>채용공고</th>
@@ -60,15 +77,22 @@
 						</tr>
 						</c:forEach>
 					</table>
-					<table>
-				        <tr>
-				          <td class="text-right">
-				            <a href="workb.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-xs btn-danger">이전</a>
-				              ${curpage } page / ${totalpage } pages
-				            <a href="workb.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-xs btn-primary">다음</a>
-				          </td>
-				        </tr>
-				      </table>
+					<div class="w3-bar">
+ 				<c:if test="${curpage>block }">
+ 					 <a href="../Workb/workb.do?page=${startpage-1 }" class="w3-button">&lt;</a>
+ 				</c:if>
+ 					<c:forEach var="i" begin="${startpage }" end="${endpage }">
+					  <c:if test="${i==curpage }">
+ 						 <a href="../Workb/workb.do?page=${i }" class="w3-button w3-blue">${i }</a>
+  					  </c:if>
+ 					  <c:if test="${i!=curpage }">
+ 					   <a href="../Workb/workb.do?page=${i }" class="w3-button">${i }</a>
+  					  </c:if>
+  					</c:forEach>
+  				<c:if test="${endpage<totalpage }">
+  					<a href="../Workb/workb.do?page=${endpage+1 }" class="w3-button">&gt;</a>
+  				</c:if>
+				</div>
 				</div>
 			</div>
 		</div>
