@@ -73,16 +73,16 @@ public class UserModel {
 	   
 	   
 	   
-	   @RequestMapping("user/login_form.do")
-	   public String user_login_form(HttpServletRequest request)
+	   @RequestMapping("user/login.do")
+	   public String user_login(HttpServletRequest request)
 	   {
-		   request.setAttribute("main_jsp", "../user/login_form.jsp");//include(메인에 들어갈 파일 지정)
+		   request.setAttribute("main_jsp", "../user/login.jsp");//include(메인에 들어갈 파일 지정)
 		   return "../main/main.jsp";//include
 	   }
 	 
 	   
-	   @RequestMapping("user/login.do")
-	   public String user_login(HttpServletRequest request)
+	   @RequestMapping("user/login_ok.do")
+	   public String user_login_ok(HttpServletRequest request)
 	   {
 		   String id=request.getParameter("id");
 		   String pwd=request.getParameter("pwd");
@@ -96,7 +96,7 @@ public class UserModel {
 		   }
 		   
 		   request.setAttribute("msg", vo.getMsg());
-		   return "../user/login.jsp";
+		   return "../user/login_ok.jsp";
 	   }
 	   @RequestMapping("user/logout.do")
 	   public String user_logout(HttpServletRequest request)

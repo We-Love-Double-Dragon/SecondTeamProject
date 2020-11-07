@@ -8,15 +8,14 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#content { 
-		line-height: 60px;
-		font-size: x-large;
+		font-size: 18pt;
 		font-weight: bolder;
-		margin: 0px auto;
+		margin-bottom: 30px;
 	}
 	.toplist{
 		width: 1000px;
 		height: 40px;
-		background-color :#B9CDF7;
+		background-color :rgba( 35, 80, 142, 0.1 );
 		border-top: solid 2px #2A58A8;
 		border-bottom: solid 2px #2A58A8;
 		font-weight: bolder;
@@ -31,9 +30,10 @@
 		height: 100px;
 		border-bottom: solid 1px #2A58A8;
 		background-color:  white;   /* #EFF6FF;  */
-		font-size: 15pt;
+		font-size: 13pt;
 		display: table-cell;
      	vertical-align: middle;
+     	
 		
 	}
 </style>
@@ -43,15 +43,24 @@
   <div class="container">
   	<div class="row">
   	  <div class="col-lg-12" style="height: 850px;">
-  	  	
   	  	<div id="content">${id }님의 스크랩</div>
   	  	
+  	  	<div class="tableList">
+  	  	  <div class="top-area">
+  	  	  	<div class="toplist">스크랩 목록</div>
+  	  	  </div>
+  	  	 
+  	  	  <div class="list-area">
+  	  	  	<ul>
+  	  	  	    
+  	  	  	    
+  	  	  	    <!-- 스크랩 리스트 넣는부분 -->
+  	  	  	    
+  	  	  	    
+  	  	  	</ul>
+  	  	  </div>
   	  	
-  	  	  <div class="col-lg-9 col-md-9">
-               
   	  	</div>
-  	  	
-  	  	
   	  </div>
   	</div>
   </div>
