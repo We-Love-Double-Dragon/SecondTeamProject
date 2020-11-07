@@ -79,7 +79,7 @@
 	<select id="jobcalendar2_listdata" resultType="vo.WorkBVO"
 		parameterType="hashmap">
 		SELECT * FROM saramin_emp
-		WHERE ldeadline LIKE '%'||'#{ss}'||'%'
+		WHERE ldeadline LIKE '%'||#{ss}||'%'
 	</select>
 
 	<!-- 좋1아요 -->
