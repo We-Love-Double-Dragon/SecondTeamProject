@@ -28,7 +28,7 @@ $(function(){
 			</div> -->
 			<div class="progress-table-wrap">
 				<table class="table">
-					<tr>
+					<tr style="background-color: #495FA1; color: white;">
 						<th class="text-center" width=5%>번호</th>
 						<th class="text-center" width=15%>회사명</th>
 						<th class="text-center" width=30%>채용공고</th>
