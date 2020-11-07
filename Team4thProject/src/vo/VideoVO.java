@@ -27,11 +27,21 @@ public class VideoVO {
 	private String v_content;
 	private String v_writer;
 	private int v_hit;
-	private String v_tag;
-	private int v_cno;
-	private String v_comment;
-	private String v_id;
-	private String v_pwd;
+	private int v_replyCount;
+	private int v_sno;
+	
+	public int getV_sno() {
+		return v_sno;
+	}
+	public void setV_sno(int v_sno) {
+		this.v_sno = v_sno;
+	}
+	public int getV_hit() {
+		return v_hit;
+	}
+	public void setV_hit(int v_hit) {
+		this.v_hit = v_hit;
+	}
 	public int getV_no() {
 		return v_no;
 	}
@@ -74,40 +84,11 @@ public class VideoVO {
 	public void setV_writer(String v_writer) {
 		this.v_writer = v_writer;
 	}
-	public int getV_hit() {
-		return v_hit;
+	public int getV_replyCount() {
+		return v_replyCount;
 	}
-	public void setV_hit(int v_hit) {
-		this.v_hit = v_hit;
+	public void setV_replyCount(int v_replyCount) {
+		this.v_replyCount = v_replyCount;
 	}
-	public String getV_tag() {
-		return v_tag;
-	}
-	public void setV_tag(String v_tag) {
-		this.v_tag = v_tag;
-	}
-	public int getV_cno() {
-		return v_cno;
-	}
-	public void setV_cno(int v_cno) {
-		this.v_cno = v_cno;
-	}
-	public String getV_comment() {
-		return v_comment;
-	}
-	public void setV_comment(String v_comment) {
-		this.v_comment = v_comment;
-	}
-	public String getV_id() {
-		return v_id;
-	}
-	public void setV_id(String v_id) {
-		this.v_id = v_id;
-	}
-	public String getV_pwd() {
-		return v_pwd;
-	}
-	public void setV_pwd(String v_pwd) {
-		this.v_pwd = v_pwd;
-	}
+	
 }

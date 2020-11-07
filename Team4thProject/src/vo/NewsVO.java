@@ -30,11 +30,21 @@ public class NewsVO {
 	private String n_content;
 	private String n_writer;
 	private int n_hit;
-	private String n_tag;
-	private int n_cno;
-	private String n_comment;
-	private String n_id;
-	private String n_pwd;
+	private int n_replyCount;
+	private int n_sno;
+	
+	public int getN_sno() {
+		return n_sno;
+	}
+	public void setN_sno(int n_sno) {
+		this.n_sno = n_sno;
+	}
+	public int getN_replyCount() {
+		return n_replyCount;
+	}
+	public void setN_replyCount(int n_replyCount) {
+		this.n_replyCount = n_replyCount;
+	}
 	public int getN_no() {
 		return n_no;
 	}
@@ -88,35 +98,5 @@ public class NewsVO {
 	}
 	public void setN_hit(int n_hit) {
 		this.n_hit = n_hit;
-	}
-	public String getN_tag() {
-		return n_tag;
-	}
-	public void setN_tag(String n_tag) {
-		this.n_tag = n_tag;
-	}
-	public int getN_cno() {
-		return n_cno;
-	}
-	public void setN_cno(int n_cno) {
-		this.n_cno = n_cno;
-	}
-	public String getN_comment() {
-		return n_comment;
-	}
-	public void setN_comment(String n_comment) {
-		this.n_comment = n_comment;
-	}
-	public String getN_id() {
-		return n_id;
-	}
-	public void setN_id(String n_id) {
-		this.n_id = n_id;
-	}
-	public String getN_pwd() {
-		return n_pwd;
-	}
-	public void setN_pwd(String n_pwd) {
-		this.n_pwd = n_pwd;
 	}
 }
