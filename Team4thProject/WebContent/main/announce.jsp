@@ -27,14 +27,14 @@
 		       </div>
 		</div>
 		
-		<c:forEach var="vo" items="${list }">
+		<c:forEach var="vo" items="${list }" varStatus="s">
 		
 			<div class="col-lg-4" style="padding:10px;" id="annLink">
 				<a href="../Workb/detail.do?l_no=${vo.l_no }">
 				    <div class="single-bottom mb-35">
 				    	
 				        <div class="trend-bottom-img mb-30">
-				            <img src="assets/img/trending/trending_bottom1.jpg">
+				            <img src="../image/Screenshot_${s.count }.png">
 				        </div>
 				        <div class="trend-bottom-cap">
 				            <span class="color1">${vo.lname }</span>

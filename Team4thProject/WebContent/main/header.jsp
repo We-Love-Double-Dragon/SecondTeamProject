@@ -30,8 +30,8 @@
                             <div class="row d-flex justify-content-between align-items-center">
                                 <div class="header-info-left">
                                     <ul>     
-                                        <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
-                                        <li><img src="assets/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
+                                        <li><img src="assets/img/icon/header_icon1.png" alt="">10ºc, Cloudy </li>
+                                        <li><img src="assets/img/icon/header_icon1.png" alt="">Monday, 9th November, 2020</li>
                                     </ul>
                                 </div>
                                 <div class="header-info-right">
@@ -51,7 +51,7 @@
                             <!-- Logo -->
                             <div class="col-xl-3 col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="index.html"><img src="../image/logo2.png" width=400px></a>
+                                    <a href="../main/main.do"><img src="../image/logo2.png" width=400px></a>
                                 </div>
                             </div>
                             <div class="col-xl-9 col-lg-9 col-md-9">
@@ -62,7 +62,7 @@
                         </div>
                    </div>
                 </div>
-               <div class="header-bottom header-sticky">
+               <div class="header-bottom"><!--  header-sticky -->
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-xl-10 col-lg-10 col-md-12 header-flex">

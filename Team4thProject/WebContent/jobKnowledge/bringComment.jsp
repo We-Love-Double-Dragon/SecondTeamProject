@@ -49,7 +49,7 @@
 			<%-- <input type=button value="댓글작성" id="${comment_vo.no }" class="bring_comment_comment_tab"> --%>				
 			<c:if test="${comment_vo.id == sessionScope.id }">													<!-- 삭제 수정버튼 -->
 				<div style="text-align: right;">
-					<input type=button value=삭제  id=${comment_vo.no } class="littleButton deleteCommentButton">
+					<input type=button value=삭제  id=${comment_vo.no } class="littleButton deleteCommentButton deleteReplyButton">
 					<input type=hidden value=${comment_vo.no } id="comment_vo">
 				</div>
 			</c:if>
@@ -66,7 +66,7 @@
 			<p style="display: inline; color: red; font-weight: bold;">* 삭제한 댓글은 복구할 수 없습니다. 삭제하시겠습니까?</p>
 			<form action="../jobKnowledge/deleteCommentAlone.do" method="post" style="display: inline;">
 				<!-- <input type="password" size=10 placeholder="비밀번호 입력" name="pwd"> -->
-				<input type="submit" value="삭제" class="littleButton">
+				<input type="submit" value="삭제" class="littleButton deleteReplyButton">
 				<input type=hidden value=${comment_vo.no } name="no">
 			</form>
 		</div>

@@ -33,7 +33,7 @@
 						<a href="../gongmo/gongmo_detail.do?no=${vo.gm_no }">
 	                          <div class="single-what-news mb-100">
 	                              <div class="what-img">
-	                                  <img src="${vo.gm_poster }">
+	                                  <img src="${vo.gm_poster } ">
 	                              </div>
 	                              <div class="what-cap">
 	                                  <span class="color1">${vo.gm_host }</span>

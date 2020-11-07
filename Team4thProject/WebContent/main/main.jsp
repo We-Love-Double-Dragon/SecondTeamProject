@@ -33,12 +33,12 @@
   
 <style type="text/css">
 @font-face {
-	font-family: "Gothic";
+	font-family: "NanumGothic";
 	src: url(../font/NanumGothic.ttf) format('truetype');
 	
 }
 body{
-	font-family: Gothic;
+	font-family: NanumGothic;
 }
 </style>
    </head>

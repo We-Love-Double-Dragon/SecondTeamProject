@@ -155,6 +155,22 @@
 .commentButton:hover{
 	background-color: #AA4EB1;
 }
+
+/* 답변 내 수정버튼 */
+.modifyReplyButton{
+	background-color: #5A91CF;
+}
+.modifyReplyButton:hover{
+	background-color: #4979B0;
+}
+
+/* 답변 내 삭제버튼 */
+.deleteReplyButton{
+	background-color: #FD9999;
+}
+.deleteReplyButton:hover{
+	background-color: #FF5757;
+}
 </style>
 </head>
 <body>
@@ -276,7 +292,7 @@
 						<p style="display: inline; color: red; font-weight: bold;">* 삭제한 답변은 복구할 수 없습니다. 삭제하시겠습니까?</p>
 						<form action="../jobKnowledge/delete_reply.do" method="post" style="display: inline;">
 							<!-- <input type="password" size=10 placeholder="비밀번호 입력" name="pwd"> -->
-							<input type="submit" value="삭제" class="littleButton">
+							<input type="submit" value="삭제" class="littleButton deleteReplyButton">
 							<input type=hidden value=${rVO.no } name="rno">
 							<input type=hidden value=${vo.no } name="bno">
 						</form>
