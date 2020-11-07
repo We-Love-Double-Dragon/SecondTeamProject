@@ -29,67 +29,6 @@
 .w3-bar {margin-top:0; border:1px solid #e0e0e0; border-top:1px solid #999; border-bottom:none; background-color:#fff; *zoom:1; border-bottom:1px solid #e8e8e8; position:relative; text-align:center; padding:10px 10px 10px; }
 
 * {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 600px;
-  position: relative;
-  margin: auto;
-}
-
-/* Caption text */
-.text {
-  color: #000000;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 3s;
-  animation-name: fade;
-  animation-duration: 3s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .1} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .1} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-
-
-* {box-sizing: border-box;}
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -162,7 +101,6 @@ body {
     border: 1px solid #ccc;  
   }
 }
-
 </style>
 </head>
 
@@ -179,52 +117,7 @@ body {
 
 <div style="height:30px"></div>
 
-<div class="slideshow-container">
-<c:forEach var="vo" items="${hlist }" begin="0" end="2" varStatus="status">
-<a href="../newsTipVideo/newsdetail.do?no=${vo.n_no }">
-<div class="mySlides fade">
-  <img src="${vo.n_poster }" width="600" height="200">
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <div class="text"><span class="label label-danger">Hot</span> <b>이 시각 인기 뉴스</b><br>${vo.n_title }</div>
-</div>
-</a>
-</c:forEach>
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-  <span class="dot"></span> 
-</div>
-
-<script>
-var slideIndex = 0;
-showSlides();
-
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 3000); // Change image every 2 seconds
-}
-</script>
-
-<span style="text-align: left; height:50px; padding:0px 5px 50px">총 <span style="color:#336699; font-weight:bold;">${newscount }</span>개</span>
+<span style="text-align: left; height:50px; padding:0px 5px 50px"><b>"${searchkey }"</b> 검색 결과 총 <span style="color:#336699; font-weight:bold;">${searchcount }</span>개</span>
 
 <div style="height:30px"></div>
 
@@ -261,23 +154,23 @@ function showSlides() {
     </form>
   </div>
 </div>
-
 <div class="w3-bar">
  <c:if test="${curpage>BLOCK }">
-  <a href="../newsTipVideo/news.do?page=${startPage-1 }" class="w3-button">&lt;</a>
+  <a href="../newsTipVideo/newsSearch.do?page=${startPage-1 }&searchkey=${searchkey }" class="w3-button">&lt;</a>
  </c:if>
  <c:forEach var="i" begin="${startPage }" end="${endPage }">
   <c:if test="${i==curpage }">
-  <a href="../newsTipVideo/news.do?page=${i }" class="w3-button w3-blue">${i }</a>
+  <a href="../newsTipVideo/newsSearch.do?page=${i }&searchkey=${searchkey }" class="w3-button w3-blue">${i }</a>
   </c:if>
   <c:if test="${i!=curpage }">
-  <a href="../newsTipVideo/news.do?page=${i }" class="w3-button">${i }</a>
+  <a href="../newsTipVideo/newsSearch.do?page=${i }&searchkey=${searchkey }" class="w3-button">${i }</a>
   </c:if>
   </c:forEach>
   <c:if test="${endPage<totalpage }">
-  <a href="../newsTipVideo/news.do?page=${endPage+1 }" class="w3-button">&gt;</a>
+  <a href="../newsTipVideo/newsSearch.do?page=${endPage+1 }&searchkey=${searchkey }" class="w3-button">&gt;</a>
   </c:if>
 </div>
+
 <div style="height:100px"></div>
 
 </body>
