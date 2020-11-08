@@ -58,6 +58,17 @@ public class ComDAO {
 		}
 		return list;
 	}
+	//기업후기 총페이지
+	//<select id="workReviewTotalPage" resultType="int"	parameterType="int">
+	public static int workReviewTotalPage(int cno) {
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("workReviewTotalPage",cno);
+		session.close();
+		return total;
+	}
+	
+	
+	
 	//면접 후기보기
 	//<select id="intReviewListData" resultType="IntVO" parameterType="hashmap">
 	public static List<IntVO> intReviewListData(int cno){
