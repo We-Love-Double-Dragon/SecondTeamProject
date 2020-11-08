@@ -352,12 +352,12 @@ public class JobKnowledgeModel {
 		String no = "";
 		String content = "";							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
 		String sessionID = "";
-		String board_no = request.getParameter("board_no");
+		String board_no = "";
 		
 		try {
 			System.out.println("답변달기 모델");
 			request.setCharacterEncoding("utf-8");
-			
+			board_no = request.getParameter("board_no");
 			// 게시글 페이지로부터 받는 파라미터들 ----------------------------------------------
 			no = request.getParameter("no");
 			content = request.getParameter("content");							// 아이디를 세션id로 지정 ☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆★	
