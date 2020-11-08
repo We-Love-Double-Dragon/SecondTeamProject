@@ -132,10 +132,10 @@
 									<div class="container" style="width:750px; margin-bottom:30px;margin-top:20px;">
 									  <div class="media">
 										  <div class="media-left">
-										    <img src="user.png" class="media-object" style="width:60px">
+										    <img src="user.png" class="media-object" style="width:50px">
 										  </div>
 										  <div class="media-body">
-										    <h4 class="media-heading">면접결과 &nbsp;${ivo.iresult}</h4>
+										    <h5 class="media-heading">면접결과 &nbsp;${ivo.iresult}</h5>
 										    <p>면접난이도&nbsp;<img src="star.png" width=15 height=15>&nbsp;${ivo.iscore }</p>
 										    <p>면접일&nbsp;${ivo.iregdate }</p>
 										  </div>
