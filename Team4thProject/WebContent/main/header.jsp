@@ -113,7 +113,7 @@
                                             </li>
                                             
                                            <c:if test="${sessionScope.id==null }">
-	                                            <li><a href="../user/login.do">로그인</a>
+	                                            <li><a href="../user/login.do" id="headerLink">로그인</a>
 		                                            <ul class="submenu">
 		                                              <li><a href="../user/login.do">로그인</a></li>
 												      <li><a href="../user/join.do">회원가입</a></li>
@@ -122,7 +122,7 @@
 	                                        </c:if>
 	                                        <c:if test="${ sessionScope.id!=null}">
 											      <c:if test="${sessionScope.admin=='n'}">
-										            <li><a href="../resume/list.do">마이페이지</a>
+										            <li><a href="../resume/list.do" id="headerLink">마이페이지</a>
 										            <ul class="submenu">
 										            	 <li><a href="../resume/list.do">이력서 관리</a></li>
 										            	 <li><a href="../user/update.do">회원수정</a></li>
@@ -168,10 +168,10 @@
                             <c:if test="${sessionScope.id!=null }">
  											
                             <form action="../user/logout.do" style="display: inline;"><%-- get(생략이 가능) --%>
-								    <div class="text-right" >
+								    <div class="text-right" style="color: white;">
 								      ${sessionScope.name }님 
-								      <button class="genric-btn danger radius small">로그아웃</button>
-								      
+								      <button class="genric-btn radius small" style="background-color: red; border: 0px;">로그아웃</button>
+								    <!--   <button class="genric-btn danger radius small" style="background-color: red;">로그아웃</button> -->
 								    </div>
 						    </form>
 						    </c:if>

@@ -136,6 +136,13 @@
 		background-color: rgba( 255, 110, 43, 0.09);
 	}
 	
+	#printBtn{
+		position: absolute;
+		left: 750px;
+		width: 45px; 
+		height: 45px;
+	}
+	
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
@@ -145,6 +152,11 @@ $(function(){
 		$('#rupdateFrm').submit();
 	});
 }); 
+
+function resumeprint()
+{
+	window.open("../resume/print.do?no=${vo.no }","resumeprint","width=750,height=900,scrollbars=yes");
+}
 </script>
 </head>
 <body>
@@ -228,8 +240,9 @@ $(function(){
 			
 			<div id="btn_group">
 			 <input type=button value="수정" class="genric-btn success radius" id="rupdateBtn">
-			 <input type=button value="취소" class="genric-btn danger radius" id="clBtn"
-			  onclick="javascript:history.back()">
+			 <input type=button value="취소" class="genric-btn danger radius" id="clBtn" onclick="javascript:history.back()">
+			 <img src="../resume/print.png" id="printBtn" onclick="resumeprint()">
+			 <!-- <input type=button value="인쇄" class="genric-btn success radius" id="printBtn" onclick="resumeprint()"> -->
 			</div>
 		   
 		  </form>

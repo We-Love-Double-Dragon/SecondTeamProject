@@ -12,6 +12,16 @@
     width:300px;
     height: 200px;
 }
+#idcheckBtn{
+	width:45px;
+	height:27px;
+	margin-left: 5px;
+	background-color:  rgba( 13, 80, 163, 0.6);
+	border-color: white;
+	color: white;
+	padding-right: 5px;
+	text-align: left;
+}
 </style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -73,8 +83,8 @@ function ok()
        <div style="margin:0 auto">
          <div style="height: 30px" ></div>
        		<h3 class="text-center">아이디 중복체크</h3><br>
-      		<input type=text id=id class="input-sm" size=18 > <br>
-            <input type=button value="확인" id="idcheckBtn" class="genric-btn success radius small">
+      		<input type=text id=id class="input-sm" size=15 > 
+            <input type=button value=" 확 인 " id="idcheckBtn" >
       		<div style="height: 20px" ></div>
          	<div class="text-center" id="idcheck_result"></div><br>
          	<div class="text-center" id="ok"></div>
