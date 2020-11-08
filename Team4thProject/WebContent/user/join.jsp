@@ -86,23 +86,13 @@
 		background-color: rgba( 13, 80, 163);
 		color: white; 
 		font-weight: bolder; 
-	 } 
-	#cancleBtn{ 
-		margin-left:20px; 
-		border: 1px solid #EB5A5A; 
-		background-color: rgba(0,0,0,0); 
-		color: black; 
-		font-weight: bolder; 
-	} 
+	 }
 	
 	#joinBtn:hover{ 
 		color:black; 
 		background-color:  rgba( 13, 80, 163, 0.09);
 	}
-	#cancleBtn:hover{ 
-		color:white; 
-		background-color: #EB5A5A; 
-	}
+	
 	
 	#button{
 		width: 130px;

@@ -53,17 +53,9 @@ public class ResumeDAO {
 		 session.update("resumeUpdate", vo);
 		 session.close();
 	 }
+	
 	 
-	 
-	 public static ResumeVO resumeDeleteData(int no)
-	 {
-		 ResumeVO vo=new ResumeVO();
-		 SqlSession session=ssf.openSession();
-		 vo=session.selectOne("resumeDelete_ok",no);
-		 session.close();
-		 return vo;
-	 }
-	 
+	 //이력서 삭제
 	 public static void resumeDelete(int no)
 	   {
 		   SqlSession session=ssf.openSession();
@@ -72,5 +64,11 @@ public class ResumeDAO {
 		   session.close();
 	   }
 	 
-	 
+	 public static ResumeVO resumePrint(int no)
+	 {
+		 ResumeVO vo=new ResumeVO();
+		 SqlSession session=ssf.openSession(true);
+		 vo=session.selectOne("resumePrint",no);
+		 return vo;
+	 }
 }

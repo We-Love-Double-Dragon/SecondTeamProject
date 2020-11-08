@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import com.sist.controller.RequestMapping;
 
 import dao.ResumeDAO;
+import dao.UserDAO;
 import vo.ResumeVO;
+import vo.UserformVO;
 
 
 public class ResumeModel {
@@ -161,7 +163,22 @@ public class ResumeModel {
 		   ResumeDAO.resumeDelete(Integer.parseInt(no));
 		   return "../resume/delete.jsp";
 	   }
-	 
 	
-	 
+
+	
+	 @RequestMapping("resume/print.do")
+	 public String resume_print(HttpServletRequest request)
+	 {
+		 String no=request.getParameter("no");
+		 ResumeVO vo=ResumeDAO.resumePrint(Integer.parseInt(no));
+		 request.setAttribute("vo", vo);
+		 
+		 HttpSession session=request.getSession();
+	     String id=(String)session.getAttribute("id");
+	     UserformVO uvo=UserDAO.userUpdateData(id);
+	     request.setAttribute("uvo",uvo);
+		 
+		 
+		 return "../resume/print.jsp";
+	 }
 }

@@ -57,9 +57,17 @@
    WHERE no=#{no}
   </update>
 	  
+  
   <delete id="resumeDelete" parameterType="int">
     DELETE FROM resume 
     WHERE no=#{no}
   </delete>
+  
+  
+  <select id="resumePrint" resultType="vo.ResumeVO">
+  	SELECT id,no,subject,stype,sname,smajor,sdate1,sdate2,state,btype,bname,bgrade,bdate,cname,cdate,cl
+  	FROM resume
+  	WHERE no=#{no}
+  </select>
   
 </mapper>
