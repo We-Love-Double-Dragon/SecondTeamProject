@@ -1,9 +1,9 @@
 package vo;
 
-public class NewsScrapVO {
+public class VideoScrapVO {
 	private int no;
 	private String id;
-	private int nno;
+	private int vno;
 	public int getNo() {
 		return no;
 	}
@@ -16,11 +16,11 @@ public class NewsScrapVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getNno() {
-		return nno;
+	public int getVno() {
+		return vno;
 	}
-	public void setNno(int nno) {
-		this.nno = nno;
+	public void setVno(int vno) {
+		this.vno = vno;
 	}
 	
 }

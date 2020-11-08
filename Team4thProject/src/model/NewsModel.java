@@ -133,13 +133,17 @@ public class NewsModel {
 		String no=request.getParameter("no");
 		NewsVO vo=NewsDAO.newsDetailData(Integer.parseInt(no));
 		request.setAttribute("vo", vo);
+		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
+		// 리플
 		List<newsReplyVO> list=NewsDAO.newsReplyListData(Integer.parseInt(no));
 		request.setAttribute("rList", list);
+		
 		NewsScrapVO ns=new NewsScrapVO();
 		ns.setId(id);
-		ns.setN_no(Integer.parseInt(no));
+		ns.setNno(Integer.parseInt(no));
 		int count=NewsDAO.newsScrapCount(ns);
 		request.setAttribute("count", count);
 		request.setAttribute("news_container", "../newsTipVideo/newsdetail.jsp");
@@ -338,14 +342,17 @@ public class NewsModel {
 		String no=request.getParameter("no");
 		TipVO vo=NewsDAO.tipDetailData(Integer.parseInt(no));
 		request.setAttribute("vo", vo);
+		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
 		List<tipReplyVO> list=NewsDAO.tipReplyListData(Integer.parseInt(no));
 		request.setAttribute("rList", list);
-		NewsScrapVO ns=new NewsScrapVO();
-		ns.setId(id);
-		ns.setT_no(Integer.parseInt(no));
-		int count=NewsDAO.tipScrapCount(ns);
+		
+		TipScrapVO ts=new TipScrapVO();
+		ts.setId(id);
+		ts.setTno(Integer.parseInt(no));
+		int count=NewsDAO.tipScrapCount(ts);
 		request.setAttribute("count", count);
 		request.setAttribute("news_container", "../newsTipVideo/tipdetail.jsp");
 		return "../newsTipVideo/newscontainer.jsp";
@@ -546,14 +553,19 @@ public class NewsModel {
 		String no=request.getParameter("no");
 		VideoVO vo=NewsDAO.videoDetailData(Integer.parseInt(no));
 		request.setAttribute("vo", vo);
+		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
+		
+		// 리플
 		List<videoReplyVO> list=NewsDAO.videoReplyListData(Integer.parseInt(no));
 		request.setAttribute("rList", list);
-		NewsScrapVO ns=new NewsScrapVO();
-		ns.setId(id);
-		ns.setV_no(Integer.parseInt(no));
-		int count=NewsDAO.videoScrapCount(ns);
+		
+		// 스크랩
+		VideoScrapVO vs=new VideoScrapVO();
+		vs.setId(id);
+		vs.setVno(Integer.parseInt(no));
+		int count=NewsDAO.videoScrapCount(vs);
 		request.setAttribute("count", count);
 		request.setAttribute("news_container", "../newsTipVideo/videodetail.jsp");
 		return "../newsTipVideo/newscontainer.jsp";
@@ -601,7 +613,7 @@ public class NewsModel {
 		   vo.setId(id);
 		   // DB연동 
 		   NewsDAO.videoReplyReplyInsert(Integer.parseInt(no), vo);
-		   return "redirect:../newsTipVideo/tipdetail.do?no="+bno;
+		   return "redirect:../newsTipVideo/videodetail.do?no="+bno;
 	   }
 	   
 	   @RequestMapping("newsTipVideo/video_reply_update.do")
@@ -643,7 +655,7 @@ public class NewsModel {
 		String id=(String)session.getAttribute("id");
 		NewsScrapVO vo=new NewsScrapVO();
 		vo.setId(id);
-		vo.setN_no(Integer.parseInt(no));
+		vo.setNno(Integer.parseInt(no));
 		NewsDAO.newsScrapInsert(vo);
 		return "redirect:../newsTipVideo/newsdetail.do?no="+no;
 	 }
@@ -654,9 +666,9 @@ public class NewsModel {
 		String no=request.getParameter("no");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		NewsScrapVO vo=new NewsScrapVO();
+		TipScrapVO vo=new TipScrapVO();
 		vo.setId(id);
-		vo.setT_no(Integer.parseInt(no));
+		vo.setTno(Integer.parseInt(no));
 		NewsDAO.tipScrapInsert(vo);
 		return "redirect:../newsTipVideo/tipdetail.do?no="+no;
 	 }
@@ -667,73 +679,35 @@ public class NewsModel {
 		String no=request.getParameter("no");
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
-		NewsScrapVO vo=new NewsScrapVO();
+		VideoScrapVO vo=new VideoScrapVO();
 		vo.setId(id);
-		vo.setV_no(Integer.parseInt(no));
+		vo.setVno(Integer.parseInt(no));
 		NewsDAO.videoScrapInsert(vo);
 		return "redirect:../newsTipVideo/videodetail.do?no="+no;
 	 }
 	
 	// 뉴스 스크랩 삭제
-	 @RequestMapping("newsTipVideo/newsScrapCancel.do")
-	 public String news_scrap_cancel(HttpServletRequest request) {
+	@RequestMapping("newsTipVideo/newsScrapCancel.do")
+	public String news_scrap_cancel(HttpServletRequest request) {
 		String no=request.getParameter("no");
 		NewsDAO.newsScrapDelete(Integer.parseInt(no));
 		return "redirect:../mypage/newsscrap.do";
-	 }
-	 
-	 
-	 
-	 
-	 // 마이페이지 스크랩 출력
-	 @RequestMapping("mypage/newsscrap.do")
-	 public String news_scrap_mypage(HttpServletRequest request){
-		 HttpSession session=request.getSession();
-		 String id=(String)session.getAttribute("id");
-				  
-	 	 List<NewsScrapVO> sList=NewsDAO.newsScrapListData(id);
-		 List<NewsVO> nList=new ArrayList<NewsVO>();
-		 for(NewsScrapVO vo:sList) {
-			NewsVO nvo=NewsDAO.newsDetailData(vo.getN_no());
-			nvo.setN_sno(vo.getNo());
-			nList.add(nvo);
-		 }
-		 request.setAttribute("nList", nList);
-		 request.setAttribute("news_container", "../mypage/newsscrap.jsp");
-		 return "../newsTipVideo/newscontainer.jsp";
-	 }
+	}
+	
+	// 팁 스크랩 삭제
+	@RequestMapping("newsTipVideo/tipScrapCancel.do")
+	public String tip_scrap_cancel(HttpServletRequest request) {
+		String no=request.getParameter("no");
+		NewsDAO.tipScrapDelete(Integer.parseInt(no));
+		return "redirect:../mypage/tipscrap.do";
+	}
+		
+	// 비디오 스크랩 삭제
+	@RequestMapping("newsTipVideo/videoScrapCancel.do")
+	public String video_scrap_cancel(HttpServletRequest request) {
+		String no=request.getParameter("no");
+		NewsDAO.videoScrapDelete(Integer.parseInt(no));
+		return "redirect:../mypage/videoscrap.do";
+	}
 
-	 @RequestMapping("mypage/tip_scrap_mypage.do")
-	 public String tip_scrap_mypage(HttpServletRequest request){
-		 HttpSession session=request.getSession();
-		 String id=(String)session.getAttribute("id");
-				  
-	 	 List<NewsScrapVO> sList=NewsDAO.newsScrapListData(id);
-		 List<TipVO> tList=new ArrayList<TipVO>();
-		 for(NewsScrapVO vo:sList) {
-			TipVO tvo=NewsDAO.tipDetailData(vo.getT_no());
-			tvo.setT_sno(vo.getNo());
-			tList.add(tvo);
-		 }
-		 request.setAttribute("tList", tList);
-		 request.setAttribute("news_container", "../mypage/newsscrap.jsp");
-		 return "../newsTipVideo/newscontainer.jsp";
-	 }
-	 
-	 @RequestMapping("mypage/video_scrap_mypage.do")
-	 public String video_scrap_mypage(HttpServletRequest request){
-		 HttpSession session=request.getSession();
-		 String id=(String)session.getAttribute("id");
-				  
-	 	 List<NewsScrapVO> sList=NewsDAO.newsScrapListData(id);
-		 List<VideoVO> vList=new ArrayList<VideoVO>();
-		 for(NewsScrapVO vo:sList) {
-			VideoVO vvo=NewsDAO.videoDetailData(vo.getV_no());
-			vvo.setV_sno(vo.getNo());
-			vList.add(vvo);
-		 }
-		 request.setAttribute("vList", vList);
-		 request.setAttribute("news_container", "../mypage/newsscrap.jsp");
-		 return "../newsTipVideo/newscontainer.jsp";
-	 }
 }

@@ -565,98 +565,134 @@ public class NewsDAO {
 				   return count;
 			   }
 	
-	
-   /*
-    <!-- 뉴스 스크랩 저장 -->
+			   
+	/*
+	<!-- 뉴스 스크랩 저장 -->
 	<insert id="newsScrapInsert" parameterType="vo.NewsScrapVO">
-	*/
-   
-   public static void newsScrapInsert(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession(true);
+	*/		   
+	public static void newsScrapInsert(NewsScrapVO vo) {
+	   SqlSession session=ssf.openSession(true); //insert, update, delete는 autocommit해줘야됨
 	   session.update("newsScrapInsert", vo);
 	   session.close();
    }
-   
-   /*
+	
+	/*
 	<!-- 팁 스크랩 저장 -->
-	<insert id="tipScrapInsert" parameterType="vo.NewsScrapVO">
+	<insert id="tipScrapInsert" parameterType="vo.TipScrapVO">
 	*/
-   
-   public static void tipScrapInsert(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession(true);
-	   session.update("tipScrapInsert", vo);
-	   session.close();
-   }
-   
-   /*
+	public static void tipScrapInsert(TipScrapVO vo) {
+		SqlSession session=ssf.openSession(true);
+		session.update("tipScrapInsert", vo);
+		session.close();
+	}
+	   
+	/*
 	<!-- 비디오 스크랩 저장 -->
-	<insert id="videoScrapInsert" parameterType="vo.NewsScrapVO">
-	*/
-   
-   public static void videoScrapInsert(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession(true); //insert, update, delete는 autocommit해줘야됨
-	   session.update("videoScrapInsert", vo);
-	   session.close();
-   }
-   
-   
-   /*
-	<!-- 스크랩 데이터 읽기(스크랩 목록) -->
+	<insert id="videoScrapInsert" parameterType="vo.VideoScrapVO">
+	*/   
+	public static void videoScrapInsert(VideoScrapVO vo) {
+		SqlSession session=ssf.openSession(true); 
+		session.update("videoScrapInsert", vo);
+		session.close();
+	}
+	
+	/*		
+	<!-- 뉴스스크랩 데이터 읽기(스크랩 목록) -->
 	<select id="newsScrapListData" parameterType="String" resultType="vo.NewsScrapVO">
 	*/
-   
-   public static List<NewsScrapVO> newsScrapListData(String id) {
-	   SqlSession session=ssf.openSession();
-	   List<NewsScrapVO> list=session.selectList("newsScrapListData",id);
-	   session.close();
-	   return list;
-   }
-   
-   /*
+	public static List<NewsScrapVO> newsScrapListData(String id) {
+		SqlSession session=ssf.openSession();
+		List<NewsScrapVO> list=session.selectList("newsScrapListData",id);
+		session.close();
+		return list;
+	}
+	 
+	/*
+	<!-- 팁스크랩 데이터 읽기(스크랩 목록) -->
+	<select id="tipScrapListData" parameterType="String" resultType="vo.TipScrapVO">
+	*/
+	public static List<TipScrapVO> tipScrapListData(String id) {
+		SqlSession session=ssf.openSession();
+		List<TipScrapVO> list=session.selectList("tipScrapListData",id);
+		session.close();
+		return list;
+	}
+	
+	/*
+	<!-- 비디오스크랩 데이터 읽기(스크랩 목록) -->
+	<select id="videoScrapListData" parameterType="String" resultType="vo.VideoScrapVO">
+	*/
+	public static List<VideoScrapVO> videoScrapListData(String id) {
+		SqlSession session=ssf.openSession();
+		List<VideoScrapVO> list=session.selectList("videoScrapListData",id);
+		session.close();
+		return list;
+	}
+	
+	/*
 	<!-- 뉴스 스크랩 여부 확인: 같은 것 스크랩 불가능하게끔 -->
 	<select id="newsScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
 	*/
-   
-   public static int newsScrapCount(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession();
-	   int count=session.selectOne("newsScrapCount",vo);
-	   session.close();
-	   return count;
-   }
-   
-   /*
+	public static int newsScrapCount(NewsScrapVO vo) {
+		SqlSession session=ssf.openSession();
+		int count=session.selectOne("newsScrapCount",vo);
+		session.close();
+		return count;
+	}
+	
+	
+	/*
 	<!-- 팁 스크랩 여부 확인 -->
-	<select id="tipScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
+	<select id="tipScrapCount" parameterType="vo.TipScrapVO" resultType="int">
 	*/
-   
-   public static int tipScrapCount(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession();
-	   int count=session.selectOne("tipScrapCount",vo);
-	   session.close();
-	   return count;
-   }
-   
-   /*
+	public static int tipScrapCount(TipScrapVO vo) {
+		SqlSession session=ssf.openSession();
+		int count=session.selectOne("tipScrapCount",vo);
+		session.close();
+		return count;
+	}
+	
+	/*
 	<!-- 비디오 스크랩 여부 확인 -->
-	<select id="videoScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
+	<select id="videoScrapCount" parameterType="vo.VideoScrapVO" resultType="int">
 	*/
-   
-   public static int videoScrapCount(NewsScrapVO vo) {
-	   SqlSession session=ssf.openSession();
-	   int count=session.selectOne("videoScrapCount",vo);
-	   session.close();
-	   return count;
-   }
-   
-   /*
-	<!-- 뉴스, 팁, 비디오 스크랩 취소 -->
+	public static int videoScrapCount(VideoScrapVO vo) {
+		SqlSession session=ssf.openSession();
+		int count=session.selectOne("videoScrapCount",vo);
+		session.close();
+		return count;
+	}
+	
+	
+	/*
+	<!-- 뉴스 스크랩 취소 -->
 	<delete id="newsScrapDelete" parameterType="int">
-    */
-   
-   public static void newsScrapDelete(int no) {
+	*/
+	public static void newsScrapDelete(int no) {
 	   SqlSession session=ssf.openSession(true);
 	   session.delete("newsScrapDelete", no);
 	   session.close();
-   }
+    }
+   	
+	/*
+	<!-- 팁 스크랩 취소 -->
+	<delete id="tipScrapDelete" parameterType="int">
+	*/
+	public static void tipScrapDelete(int no) {
+		   SqlSession session=ssf.openSession(true);
+		   session.delete("tipScrapDelete", no);
+		   session.close();
+	}
+	
+	/*
+	<!-- 비디오 스크랩 취소 -->
+	<delete id="videoScrapDelete" parameterType="int">
+	*/
+	public static void videoScrapDelete(int no) {
+		   SqlSession session=ssf.openSession(true);
+		   session.delete("videoScrapDelete", no);
+		   session.close();
+	}
+
    
 }
