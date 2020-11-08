@@ -120,6 +120,8 @@
 										
 								</c:forEach>
 					    </div>
+					    <!-- -페이지 -->
+						
                			
                			
                			<!-- 면접후기 탭 ===================================================================================== -->
@@ -130,10 +132,10 @@
 									<div class="container" style="width:750px; margin-bottom:30px;margin-top:20px;">
 									  <div class="media">
 										  <div class="media-left">
-										    <img src="user.png" class="media-object" style="width:60px">
+										    <img src="user.png" class="media-object" style="width:50px">
 										  </div>
 										  <div class="media-body">
-										    <h4 class="media-heading">면접결과 &nbsp;${ivo.iresult}</h4>
+										    <h5 class="media-heading">면접결과 &nbsp;${ivo.iresult}</h5>
 										    <p>면접난이도&nbsp;<img src="star.png" width=15 height=15>&nbsp;${ivo.iscore }</p>
 										    <p>면접일&nbsp;${ivo.iregdate }</p>
 										  </div>
@@ -225,47 +227,45 @@
                         </li>
                      </ul>
                   </aside>
-                  
-                  
-                  <aside class="single_sidebar_widget popular_post_widget">
-                     <h3 class="widget_title">Recent Post</h3>
+                                    <aside class="single_sidebar_widget popular_post_widget">
+                     <h3 class="widget_title">최근 본 기업</h3>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_1.png" alt="post">
+                        <img src="masa.jpg" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>From life was you fish...</h3>
+                           <a href="#">
+                              <h3>한국마사회</h3>
                            </a>
-                           <p>January 12, 2019</p>
+                           <p>01 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_2.png" alt="post">
+                        <img src="mc.png" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>The Amazing Hubble</h3>
+                           <a href="#">
+                              <h3>한국맥도날드(유)</h3>
                            </a>
-                           <p>02 Hours ago</p>
+                           <p>02 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_3.png" alt="post">
+                        <img src="nong.png" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>Astronomy Or Astrology</h3>
+                           <a href="#">
+                              <h3>한국농어촌공사</h3>
                            </a>
-                           <p>03 Hours ago</p>
+                           <p>03 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_4.png" alt="post">
+                        <img src="startbuc.jpg" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>Asteroids telescope</h3>
+                           <a href="#">
+                              <h3>스타벅스커피코리아(주)</h3>
                            </a>
-                           <p>01 Hours ago</p>
+                           <p>04 시간 전</p>
                         </div>
                      </div>
-                  </aside>  
+                  </aside>
                   
                   	</div>
                   </div>

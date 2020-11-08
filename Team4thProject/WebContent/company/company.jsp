@@ -27,12 +27,13 @@
 .what-img{
 	width: 250px;
 	height: 250px;
-	border: 2px solid navy;
+	border: 3px solid #08088A;
 	border-radius: 10px;
 }
 .color1{
- background-color: #D4F4FA;
+ background-color: #CEE3F6;
 }
+
 </style>
 <!-- css================================ -->
    <body>
@@ -161,39 +162,39 @@
                   <aside class="single_sidebar_widget popular_post_widget">
                      <h3 class="widget_title">최근 본 기업</h3>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_1.png" alt="post">
+                        <img src="masa.jpg" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>From life was you fish...</h3>
+                           <a href="#">
+                              <h3>한국마사회</h3>
                            </a>
-                           <p>January 12, 2019</p>
+                           <p>01 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_2.png" alt="post">
+                        <img src="mc.png" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>The Amazing Hubble</h3>
+                           <a href="#">
+                              <h3>한국맥도날드(유)</h3>
                            </a>
-                           <p>02 Hours ago</p>
+                           <p>02 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_3.png" alt="post">
+                        <img src="nong.png" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>Astronomy Or Astrology</h3>
+                           <a href="#">
+                              <h3>한국농어촌공사</h3>
                            </a>
-                           <p>03 Hours ago</p>
+                           <p>03 시간 전</p>
                         </div>
                      </div>
                      <div class="media post_item">
-                        <img src="assets/img/post/post_4.png" alt="post">
+                        <img src="startbuc.jpg" alt="post">
                         <div class="media-body">
-                           <a href="single-blog.html">
-                              <h3>Asteroids telescope</h3>
+                           <a href="#">
+                              <h3>스타벅스커피코리아(주)</h3>
                            </a>
-                           <p>01 Hours ago</p>
+                           <p>04 시간 전</p>
                         </div>
                      </div>
                   </aside>
@@ -214,9 +215,9 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">
                               <li class="page-item"><a class="page-link" href="company.do?page=${curpage>1?curpage-1:curpage }"><span class="flaticon-arrow roted"></span></a></li>
-                                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                <li class="page-item active"><a class="page-link" href="../company/company.do?page=1">01</a></li>
+                                <li class="page-item"><a class="page-link" href="../company/company.do?page=2">02</a></li>
+                                <li class="page-item"><a class="page-link" href="../company/company.do?page=3">03</a></li>
                               <li class="page-item"><a class="page-link" href="company.do?page=${curpage<totalpage?curpage+1:curpage }"><span class="flaticon-arrow right-arrow"></span></a></li>
                             </ul>
                           </nav>

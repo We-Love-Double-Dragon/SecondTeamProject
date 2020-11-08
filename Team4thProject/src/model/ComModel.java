@@ -13,54 +13,54 @@ import javax.servlet.http.HttpSession;
 
 public class ComModel {
 	// 기업목록 보기(카테고리별)
-	@RequestMapping("company/company.do")
-	public String company(HttpServletRequest request) {
-		String page = request.getParameter("page");
-		if (page == null)
-			page = "1";
-		String cateno = request.getParameter("cateno");
-		if (cateno == null)
-			cateno = "100";
-		int curpage = Integer.parseInt(page);
-		int rowSize = 8;
-		int start = (rowSize * curpage) - (rowSize - 1);
-		int end = rowSize * curpage;
-		// map에 저장
-		Map map = new HashMap();
-		map.put("cateno", cateno);
-		map.put("start", start);
-		map.put("end", end);
+		@RequestMapping("company/company.do")
+		public String company(HttpServletRequest request) {
+			String page = request.getParameter("page");
+			if (page == null)
+				page = "1";
+			String cateno = request.getParameter("cateno");
+			if (cateno == null)
+				cateno = "100";
+			int curpage = Integer.parseInt(page);
+			int rowSize = 8;
+			int start = (rowSize * curpage) - (rowSize - 1);
+			int end = rowSize * curpage;
+			// map에 저장
+			Map map = new HashMap();
+			map.put("cateno", cateno);
+			map.put("start", start);
+			map.put("end", end);
 
-		List<ComVO> list = ComDAO.comListData(map);
-		int totalpage = ComDAO.comTotalPage(Integer.parseInt(cateno));
+			List<ComVO> list = ComDAO.comListData(map);
+			int totalpage = ComDAO.comTotalPage(Integer.parseInt(cateno));
 
-		request.setAttribute("list", list);
-		request.setAttribute("curpage", curpage);
-		request.setAttribute("totalpage", totalpage);
-		// ======================================================
-		// 쿠키
-		
-		 //HttpSession session1=request.getSession(); 
-		// String id=(String)session.getAttribute("id"); 
-		 //쿠키읽기 Cookie[]
-		 //Cookie[] cookies=request.getCookies(); 
-		 //List<ComVO> cList=new ArrayList<ComVO>();
-		 //if(cookies!=null) { 
-			 //for(int i=cookies.length-1;i>=0;i--) {
-				 //if(cookies[i].getName().startsWith(id)) { 
-					 //String cno=cookies[i].getValue();
-					// ComVO vo=ComDAO.comDetailData(Integer.parseInt(cno));
-					// cList.add(vo); 
+			request.setAttribute("list", list);
+			request.setAttribute("curpage", curpage);
+			request.setAttribute("totalpage", totalpage);
+			// ======================================================
+			// 쿠키
+			
+			 //HttpSession session=request.getSession(); 
+			 //String id=(String)session.getAttribute("id"); 
+			 //쿠키읽기
+			 //Cookie[] cookies=request.getCookies(); 
+			 //List<ComVO> cList=new ArrayList<ComVO>();
+			 //if(cookies!=null) { 
+				 //for(int i=cookies.length-1;i>=0;i--) {
+					 //if(cookies[i].getName().startsWith(id)) { 
+						 //String cno=cookies[i].getValue();
+						 //ComVO vo=ComDAO.comDetailData(Integer.parseInt(cno));
+						 //cList.add(vo); 
+					 //} 
 				 //} 
-			 //} 
-		//}
-		 //request.setAttribute("cList", cList);
-		 
-		// ==========================================================
+			//}
+			//request.setAttribute("cList", cList);
+			 
+			// ==========================================================
 
-		request.setAttribute("main_jsp", "../company/company.jsp");
-		return "../main/main.jsp";
-	}
+			request.setAttribute("main_jsp", "../company/company.jsp");
+			return "../main/main.jsp";
+		}
 
 	// 기업 상세보기
 	@RequestMapping("company/detail.do")
@@ -74,6 +74,22 @@ public class ComModel {
 
 			// ------------------------------------------------------------------------------
 			// 기업 후기
+			//////////////////////총페이지 구하는 메소드
+			/*
+			 * String page = request.getParameter("page"); if (page == null) page = "1";
+			 * String cateno = request.getParameter("cateno"); if (cateno == null) cateno =
+			 * "100"; int curpage = Integer.parseInt(page); int rowSize = 2; int start =
+			 * (rowSize * curpage) - (rowSize - 1); int end = rowSize * curpage; // map에 저장
+			 * Map map = new HashMap(); map.put("cateno", cateno); map.put("start", start);
+			 * map.put("end", end);
+			 * 
+			 * //List<ComVO> list = ComDAO.comListData(map); int totalpage =
+			 * ComDAO.comTotalPage(Integer.parseInt(cateno));
+			 * 
+			 * //request.setAttribute("list", list); request.setAttribute("curpage",
+			 * curpage); request.setAttribute("totalpage", totalpage);
+			 */
+			/////////////////////////////
 			List<WorkVO> work_list = ComDAO.workReviewListData(Integer.parseInt(cno));
 			request.setAttribute("work_list", work_list);
 

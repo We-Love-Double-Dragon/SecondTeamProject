@@ -27,6 +27,11 @@
 	SELECT workreview.* FROM company, workreview 
 	WHERE company.cno=workreview.cno AND company.cno=#{cno}
 	</select>
+	<!-- 기업후기 총페이지 -->
+	<select id="workReviewTotalPage" resultType="int"	parameterType="int">
+	SELECT CEIL(COUNT(*)/2.0) FROM workreview
+	WHERE cno=#{cno}
+	</select>
 
 	<!-- 면접 후기보기 -->
 	<select id="intReviewListData" resultType="IntVO" parameterType="int">

@@ -14,7 +14,12 @@ $(function(){
 	});
 });
 </script>
-
+<style type="text/css">
+.single-textarea{
+	line-height: normal;
+	font-size: 12px;
+}
+</style>
 
 <body>
 	<!-- 합격자소서 작성하기 -->

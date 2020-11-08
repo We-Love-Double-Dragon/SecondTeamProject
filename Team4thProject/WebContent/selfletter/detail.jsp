@@ -13,13 +13,17 @@
 	font-weight: bold;
 	
 }
+#subtitle{
+	font-size: small;
+	font-weight: 100;
+}
 #letterpanel{
-	border : 8px solid #CEF6F5;
+	border : 8px solid #E0ECF8;
 	padding: 20px;
 	margin: 20px;
 }
 .l_sidebar{
-	border : 8px solid #A9D0F5;
+	border : 5px solid #E0ECF8;
 	margin-top : 20px;
 	padding: 20px;
 	width: 100;
@@ -29,11 +33,11 @@
 	font-weight: bold;
 }
 #sidetitle{
-	font-size: 20px;
+	font-size :medium;
 	color: black;
 }
 #sidetitle:hover{
-	background-color: #CEF6F5;
+	color:#5882FA;
 }
 </style>
 
@@ -54,7 +58,7 @@
                                     <h3>${vo.ssubject }</h3>
                                 </div>
                                  <div class="indutype">
-                                    <h5>지원 직무 : ${vo.sindutype }</h5>
+                                    <p id="subtitle">지원 직무 : ${vo.sindutype }</p>
                                 </div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <div class="about-prea">
@@ -86,9 +90,9 @@
 			                        <div class="media-body">
 			                        <c:forEach var="vo" items="${pList }" end="3">
 			                           <a href="../selfletter/detail.do?sno=${vo.sno }">
-			                              <h2 id="sidetitle">${vo.ssubject }</h2>
+			                              <p id="sidetitle">${vo.ssubject }</p>
 			                           </a>
-			                           <p>${vo.sindutype} </p>
+			                         <%--  <p>${vo.sindutype} </p> --%>
 			                        </c:forEach>
 			                        </div>
 			                     </div>
