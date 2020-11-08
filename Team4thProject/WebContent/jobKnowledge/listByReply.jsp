@@ -45,13 +45,17 @@
 
 .answer_list{ -ms-overflow-style: none; } 				/* 질문 리스트 스크롤바 없애기 */
 .answer_list::-webkit-scrollbar{ display:none; }
+
+
+
+
 </style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border-radius: 5px;">
+		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; min-height: 800px; border-radius: 5px;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
 				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
 					<h3>전체</h3>																<!-- 머리부분 제목 -->
@@ -155,6 +159,9 @@
 						</c:if>
 					</ul>
 				</div>
+				
+				
+				
 				
 				
 				

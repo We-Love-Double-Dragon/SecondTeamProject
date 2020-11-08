@@ -6,39 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		var bno = 
+		
+	})
+	
+</script>
 </head>
 <body>
 	<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px; height: 1700px;">
+		
+	<c:forEach var="i" begin="1" end="5">	
 	
-		<table>
-			<tr>
-				<th>내용</th>
-				<td>${rno}</td>
-			</tr>
-				<th>태그</th>
-				<td>${bno}</td>
-			</tr>
-		</table>
+		<input type=button id="a${i }">
+		
+		<input tyle=textarea value="입력${i }" id="b${i }"> 
 	
 	
-	<!-- <table>
-			<tr>
-				<th>제목</th>
-				<td>aaaaaaaa</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>bbbbbbbbb</td>
-			</tr>
-			<tr>
-				<th>작성일</th>
-				<td>cccccccccc</td>
-			</tr>
-			<tr>
-				<th>태그</th>
-				<td>ddddddddddd</td>
-			</tr>
-		</table> -->
+	</c:forEach>
 	</div>
 </body>
 </html>

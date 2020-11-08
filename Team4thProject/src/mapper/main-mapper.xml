@@ -3,7 +3,7 @@
 <mapper namespace="mapper.main-mapper">
 
 
-<!-- 채용공고 왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지왜안되지 -->
+<!-- 채용공고  -->
 	<select id="mainGetAnnounce" resultType="WorkBVO">
 		SELECT l_no, lname, ltitle FROM saramin_emp WHERE l_no BETWEEN 1 AND 6
 	</select>
@@ -14,7 +14,9 @@
 	</select>
 	
 <!-- 공모전 가져오기 -->
-	
+	<select id="mainGetGongmo" resultType="vo.GongmoVO">
+		SELECT gm_no, gm_poster, gm_host, gm_subject FROM gongmo WHERE gm_no BETWEEN 5 AND 6
+	</select>
 	
 <!-- 지식인 글 가져오기 -->
 	<select id="mainGetJobknowledge" resultType="JobKnowledgeVO">

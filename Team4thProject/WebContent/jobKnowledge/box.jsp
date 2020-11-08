@@ -65,7 +65,7 @@
     
     
     
-    <div class="row" style="margin-bottom:30px"></div>		<!-- 푸터 - 박스 사이 여백 -->
+    <div class="row" style="margin-bottom:30px;"></div>		<!-- 푸터 - 박스 사이 여백 -->
     
 <!-- 푸터 ================================================================================================================================ 푸터-->
    <jsp:include page="../main/footer.jsp"></jsp:include>

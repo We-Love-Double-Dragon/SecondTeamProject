@@ -35,9 +35,31 @@ public class JobKnowledgeVO {
 	private String tag;			// 태그
 	private int adopt;			// 채택여부
 	private int reply;
+	private int scrap_no;		// 스크랩번호
+	private int point;			// 채택시 답변자에게 부여할 점수
+	private int noti;			// 새로운 답변 갯수
 	
 	
 	
+	
+	public int getNoti() {
+		return noti;
+	}
+	public void setNoti(int noti) {
+		this.noti = noti;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	public int getScrap_no() {
+		return scrap_no;
+	}
+	public void setScrap_no(int scrap_no) {
+		this.scrap_no = scrap_no;
+	}
 	public int getReply() {
 		return reply;
 	}

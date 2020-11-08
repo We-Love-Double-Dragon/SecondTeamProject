@@ -31,13 +31,36 @@
 	background-color: #E7E7E7;
 }
 
+/*검색버튼*/
+#searchButton{
+	height: 30px;
+	width: 40px;
+	color: white;
+	background-color: #FD9999;
+	border: none;
+	border-radius: 5px;
+	transition-property: background-color;
+	transition-duration: 0.5s;
+}
+#searchButton:hover{
+	background-color: #FF5757;
+}
+
+/* 게시글 리스트 크기 확대 */
+.answer_box{
+	transition: all ease 0.1s;
+}
+.answer_box:hover{
+	transform: scale( 1.01 );
+}
+
 </style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; height: 800px; border: 1px solid #437EC0;">
+		<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px; min-height: 800px; border: 1px solid #437EC0;">
 			<div class="content_area" style="padding: 20px;">						<!-- 전체 목록 div -->
 				<div class="heading_area" style="height:100px; padding:15px;">						<!-- 머리부분 (태그이름 + 정렬기준) -->
 					<h3>${tag }</h3>																<!-- 머리부분 제목 -->
@@ -139,7 +162,25 @@
 							<li><a href="../jobKnowledge/list.do?page=${endpage+1 }">&gt;</a></li>
 						</c:if>
 					</ul>
+					
+					<div style="text-align: right;">
+						<form action="../jobKnowledge/search.do" style="display: inline-block; margin-right:15px;">
+							<select name="finding" class="dropup">
+								<option value="subject" selected="selected">제목</option>
+								<option value="content">내용</option>
+								<option value="id">글쓴이</option>
+							</select>
+							<input type=text name="voca" size=25 placeholder="검색어 입력" style="height:30px; border: none; border-radius: 5px; margin-left:15px;">
+							<input type=submit value=검색 id="searchButton">
+						</form>
+					</div>
+					
 				</div>
+				
+				
+				
+				
+				
 				
 				
 				

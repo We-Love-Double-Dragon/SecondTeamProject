@@ -11,11 +11,13 @@
 		<typeAlias type="vo.JobKnowledgeVO" alias="JobKnowledgeVO"/>
 		<typeAlias type="vo.JobKnowledge_TagVO" alias="JobKnowledge_TagVO"/>
 		<typeAlias type="vo.JobKnowledge_CommentVO" alias="JobKnowledge_CommentVO"/>
+		<typeAlias type="vo.JobKnowledgeScrapVO" alias="JobKnowledgeScrapVO"/>
 	    <typeAlias type="vo.ComVO" alias="ComVO"/>
 	    <typeAlias type="vo.IntVO" alias="IntVO"/>
 	    <typeAlias type="vo.SelfVO" alias="SelfVO"/>
 	    <typeAlias type="vo.WorkVO" alias="WorkVO"/>
 	    <typeAlias type="vo.WorkBVO" alias="WorkBVO"/>
+	    <typeAlias type="vo.JjimVO" alias="JjimVO"/>
 	    
   </typeAliases>
   <!-- 오라클 연결하는 부분 : getConnection() -->
@@ -95,7 +97,10 @@
     <mapper resource="mapper/letter-mapper.xml"/>
     <mapper resource="mapper/company-mapper.xml"/>
     <mapper resource="mapper/newsTipVideo-mapper.xml"/>
+    <mapper resource="mapper/workb-mapper.xml"/>
+    <mapper resource="mapper/workb-mapper2.xml"/>
     <mapper resource="mapper/main-mapper.xml"/>
+    <mapper resource="mapper/gongmo-mapper.xml"/>
   </mappers>
 </configuration>
 

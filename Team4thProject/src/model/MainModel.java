@@ -112,4 +112,24 @@ public class MainModel {
 	
 	}
 	
+	
+	// 공모전 가져오는 메소드 ==================================================================================================== 공모전 가져오기
+	@RequestMapping("main/gongmo.do")
+	public String main_getGongmo(HttpServletRequest request) {
+
+		try {
+			System.out.println("메인페이지 공모전");
+			
+			List<GongmoVO> glist = MainDAO.mainGetGongmo();					// 지식인 가져오기
+			
+			
+			request.setAttribute("glist", glist);								// 지식인 보내기
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "../main/gongmo.jsp";
+	
+	}
+	
 }

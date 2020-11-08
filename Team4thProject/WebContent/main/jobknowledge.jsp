@@ -10,8 +10,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <style type="text/css">
 	#jobLink{
-		transition-property: font-size;
-		transition-duration: 0.2s;
+		transition-property: background-color;
+		transition-duration: 0.5s;
 	}
 
 	#jobLink:hover{

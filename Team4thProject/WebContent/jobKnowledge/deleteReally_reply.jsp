@@ -7,13 +7,18 @@
 <title>Insert title here</title>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-	var rno = $("#rno", opener.document).val();
+	/* var rno = $("#deleteReply", opener.document).val();			
 	var bno = $("#bno", opener.document).val();
+	var rcontent = $('#rcontent', opener.document).val(); */
 	
 	$(function(){
-		
+		/* var rno = window.opener.getrno(); */
 		$('#yes').click(function(){
+			let rno = $("#rno", opener.document).val();		
+			
+			let bno = $("#bno", opener.document).val();
 			$.ajax({
+				
 				type:'post',
 				url:'../jobKnowledge/delete_reply.do',
 				data: {"rno": rno, "bno": bno},		

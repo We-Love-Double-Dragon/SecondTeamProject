@@ -35,14 +35,89 @@ public class ComDAO {
 	//<select id="comDetailData" resultType="ComVO" parameterType="int">
 	public static ComVO comDetailData(int cno) {
 		SqlSession session=ssf.openSession();
-		ComVO vo=session.selectOne("comDetailData",cno);
-		session.close();
+		ComVO vo=new ComVO();
+		try {
+			vo=session.selectOne("comDetailData",cno);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}	
 		return vo;
+	}
+
+	//기업 후기보기
+	//<select id="workReviewListData" resultType="WorkVO" parameterType="hashmap">
+	public static List<WorkVO> workReviewListData(int cno){
+		SqlSession session=ssf.openSession();
+		List<WorkVO> list=new ArrayList<WorkVO>();
+		try {
+			list=session.selectList("workReviewListData",cno);
+			session.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	//면접 후기보기
+	//<select id="intReviewListData" resultType="IntVO" parameterType="hashmap">
+	public static List<IntVO> intReviewListData(int cno){
+		SqlSession session=ssf.openSession();
+		List<IntVO> list=session.selectList("intReviewListData",cno);
+		session.close();
+		return list;
+	}
+	
+	//기업후기작성
+	//<insert id="workReviewInsert" parameterType="WorkVO">
+	public static void workReviewInsert(WorkVO vo) {
+		try {
+			SqlSession session=ssf.openSession(true);
+			session.insert("workReviewInsert",vo);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	//면접후기작성
+	//<insert id="intReviewInsert" parameterType="IntVO">
+	public static void intReviewInsert(IntVO vo) {
+		try {
+			SqlSession session=ssf.openSession(true);
+			session.insert("intReviewInsert",vo);
+			session.close();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	
-	
-	
+	//기업 검색===============================================================
+	//<select id="comFindData" resultType="ComVO" parameterType="hashmap">
+	public static List<ComVO> comFindData(Map map){
+		SqlSession session=ssf.openSession();
+		List<ComVO> list=new ArrayList<ComVO>();
+		try{
+			list=session.selectList("comFindData",map);
+			session.close();
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return list;
+	}
+	//검색된 글 페이징
+	//<select id="comFindTotalPage" resultType="int" parameterType="hashmap">
+	public static int comFindTotalPage(Map map) {
+		SqlSession session=ssf.openSession();
+		int total=0;
+		try {
+			total=session.selectOne("comFindTotalPage",map);
+			session.close();
+		}catch(Exception ex) {
+			ex.getMessage();
+		}
+		return total;
+	}
 	
 	
 }

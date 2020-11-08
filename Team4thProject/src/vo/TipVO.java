@@ -29,11 +29,15 @@ public class TipVO {
 	private String t_content;
 	private String t_writer;
 	private int t_hit;
-	private String t_tag;
-	private int t_cno;
-	private String t_comment;
-	private String t_id;
-	private String t_pwd;
+	private int t_replyCount;
+	private int t_sno;
+	
+	public int getT_sno() {
+		return t_sno;
+	}
+	public void setT_sno(int t_sno) {
+		this.t_sno = t_sno;
+	}
 	public int getT_no() {
 		return t_no;
 	}
@@ -88,34 +92,11 @@ public class TipVO {
 	public void setT_hit(int t_hit) {
 		this.t_hit = t_hit;
 	}
-	public String getT_tag() {
-		return t_tag;
+	public int getT_replyCount() {
+		return t_replyCount;
 	}
-	public void setT_tag(String t_tag) {
-		this.t_tag = t_tag;
+	public void setT_replyCount(int t_replyCount) {
+		this.t_replyCount = t_replyCount;
 	}
-	public int getT_cno() {
-		return t_cno;
-	}
-	public void setT_cno(int t_cno) {
-		this.t_cno = t_cno;
-	}
-	public String getT_comment() {
-		return t_comment;
-	}
-	public void setT_comment(String t_comment) {
-		this.t_comment = t_comment;
-	}
-	public String getT_id() {
-		return t_id;
-	}
-	public void setT_id(String t_id) {
-		this.t_id = t_id;
-	}
-	public String getT_pwd() {
-		return t_pwd;
-	}
-	public void setT_pwd(String t_pwd) {
-		this.t_pwd = t_pwd;
-	}
+	
 }
