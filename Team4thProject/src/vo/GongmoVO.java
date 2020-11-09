@@ -16,7 +16,16 @@ public class GongmoVO {
     private String gm_poster; 	//이미지 300
     private String gm_content;
     private int gm_hit;
+    private int jjim_no;
     
+    
+    
+	public int getJjim_no() {
+		return jjim_no;
+	}
+	public void setJjim_no(int jjim_no) {
+		this.jjim_no = jjim_no;
+	}
 	public String getGm_content() {
 		return gm_content;
 	}
