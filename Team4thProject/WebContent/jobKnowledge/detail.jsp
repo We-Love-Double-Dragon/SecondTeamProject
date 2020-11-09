@@ -184,7 +184,7 @@
 						</div>
 					</c:if>
 					
-					<div style="width:190px; height: 50px; background-color: white; border-radius: 5px; padding: 10px; font-size: 16px;">
+					<div style="width:230px; height: 50px; background-color: white; border-radius: 5px; padding: 10px; font-size: 16px;">
 						<img src="../image/medal.png" style="width:30px; height:30px;">&nbsp;&nbsp;${vo.point }
 						<a href="../jobKnowledge/listByTag.do?tag=${vo.tag }" style="background-color: #EEDCFF; color: black; border-radius: 5px; font-size:16px; padding-left: 5px; padding-right: 5px; margin-left: 10px;">#${vo.tag }</a>	
 					</div>

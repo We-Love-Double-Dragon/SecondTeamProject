@@ -42,7 +42,7 @@
 			</div>
 			
 			<div class="comment_content">										
-				<pre style="white-space: pre-wrap;background-color: white;border:none">${comment_vo.content }</pre>
+				<pre style="white-space: pre-wrap;background-color: white;border:none; font-size: 12pt; color: #506172;">${comment_vo.content }</pre>
 			</div>
 			
 			<!-- 대댓글 입력란 보이기 ======================================================================================================== 대댓글 입력란 보이기 -->

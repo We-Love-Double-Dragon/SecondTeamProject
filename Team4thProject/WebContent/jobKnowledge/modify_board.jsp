@@ -32,7 +32,7 @@
 인적성검사
  -->
 <body>
-	<div class="col-lg-12" style="background-color: #E9E9E9; border-radius: 5px;">
+	<div class="col-lg-12" style="background-color: #9EC1E8; border-radius: 5px;">
 		<form action="../jobKnowledge/modify_board_ok.do" method="post">
 			<div class="do_answer" style="height: 1100px; padding:20px;">
 			

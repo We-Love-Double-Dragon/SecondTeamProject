@@ -207,7 +207,7 @@ $(function(){
         <form method=post action="../newsTipVideo/news_reply_insert.do">
             <input type=hidden name="bno" value="${vo.n_no }">
 	        <textarea rows="3" cols="80" name="msg" style="float: left; width:970px; height:100px;"></textarea>
-	        <button type="submit" value="댓글쓰기" style="background-color:#f2f2f2; border:1px solid black; border-radius:5px; padding:38px 30px; margin-left:7px;"><span>댓글쓰기</span></button>
+	        <button type="submit" value="댓글쓰기" style="background-color:#f2f2f2; border:1px solid black; border-radius:5px; padding:38px 30px;"><span>댓글쓰기</span></button>
         </form>
        </td>
       </tr>
