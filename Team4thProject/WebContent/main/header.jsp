@@ -92,7 +92,7 @@
                                                     <li><a href="../newsTipVideo/video.do">취업영상</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="../gongmo/gongmo_home.do">공모전</a>
+                                            <li><a href="../gongmo/gongmo_home.do" id="headerLink">공모전</a>
                                             	<ul class="submenu">
                                                     <li><a href="../gongmo/gongmo_all.do">전체 공모전</a></li>
                                                     <li><a href="../gongmo/gongmo_cno1.do?cno=1">기획/아이디어</a></li>
