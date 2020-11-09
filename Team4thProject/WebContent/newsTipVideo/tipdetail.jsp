@@ -18,7 +18,7 @@ $(function(){
 	$('.tip_reply_reply').click(function(){
 	  $('.rIn').hide();
 	  $('.rUp').hide();
-	  $('.tip_reply_reply').text("댓글");
+	  $('.tip_reply_reply').text("대댓글");
 	  let no=$(this).attr('value');
 	  if(i==0)
 	  {
@@ -30,7 +30,7 @@ $(function(){
 	  else
 	  {
 		    $('#rIn'+no).hide();
-		    $(this).text("댓글");
+		    $(this).text("대댓글");
 			i=0;
 	  }
 		
@@ -149,16 +149,16 @@ $(function(){
              <c:forEach var="i" begin="1" end="${rvo.group_tab }">
                &nbsp;&nbsp;&nbsp;&nbsp;
              </c:forEach>
-             ㅎ
+             <img src=https://www.shareicon.net/data/512x512/2015/08/12/84291_reply_512x512.png width=30 height=30>
            </c:if>
            &nbsp;${rvo.id }(${rvo.dbday })
           </td>
           <td class="text-right">
             <c:if test="${sessionScope.id==rvo.id }">
-             <span class="btn btn-xs btn-primary tip_reply_update" value="${rvo.no }">수정</span>
-             <a href="../newsTipVideo/tip_reply_delete.do?no=${rvo.no }&bno=${vo.t_no}" class="btn btn-xs btn-success">삭제</a>
+            <button type="button" style="background-color:#99ffc9; border:1px solid #bfbfbf; border-radius:5px; padding:5px 5px" class="tip_reply_update" title="수정" value="${rvo.no }"><span>수정</span></button>
+            <button type="button" style="background-color:#ffd6cc; border:1px solid #bfbfbf; border-radius:5px; padding:5px 5px" onclick="location.href='../newsTipVideo/tip_reply_delete.do?no=${rvo.no }&bno=${vo.t_no}'" title="삭제"><span>삭제</span></button>
             </c:if>
-             <span class="btn btn-xs btn-danger tip_reply_reply" value="${rvo.no }">댓글</span>
+            <button type="button" style="background-color:#ccd8ff; border:1px solid #bfbfbf; border-radius:5px; padding:5px 5px" class="tip_reply_reply" title="대댓글" value="${rvo.no }"><span>대댓글</span></button>
           </td>
         </tr>
         <tr>
@@ -176,10 +176,8 @@ $(function(){
         <form method=post action="../newsTipVideo/tip_reply_reply_insert.do">
             <input type=hidden name="no" value="${rvo.no }">
             <input type=hidden name="bno" value="${vo.t_no }">
-	        <textarea rows="3" cols="80" name="msg" style="float: left"></textarea>
-	        <input type=submit value="댓글쓰기" style="height:70px;float: left"
-	          class="btn btn-sm btn-primary"
-	        >
+	        <textarea rows="3" cols="80" name="msg" style="float: left; width:970px; height:100px;"></textarea>
+	        <button type="submit" value="대댓글달기" style="background-color:#ccd8ff; border:1px solid #bfbfbf; border-radius:5px; padding:38px 30px;"><span>댓글달기</span></button>
         </form>
        </td>
       </tr>
@@ -188,10 +186,8 @@ $(function(){
         <form method=post action="../newsTipVideo/tip_reply_update.do">
             <input type=hidden name="no" value="${rvo.no }">
             <input type=hidden name="bno" value="${vo.t_no }">
-	        <textarea rows="3" cols="80" name="msg" style="float: left">${rvo.msg }</textarea>
-	        <input type=submit value="댓글수정" style="height:70px;float: left"
-	          class="btn btn-sm btn-primary"
-	        >
+	        <textarea rows="3" cols="80" name="msg" style="float: left; width:970px; height:100px;">${rvo.msg }</textarea>
+	        <button type="submit" value="댓글수정" style="background-color:#99ffc9; border:1px solid #bfbfbf; border-radius:5px; padding:38px 30px;"><span>수정하기</span></button>
         </form>
        </td>
       </tr>
@@ -203,10 +199,8 @@ $(function(){
        <td>
         <form method=post action="../newsTipVideo/tip_reply_insert.do">
             <input type=hidden name="bno" value="${vo.t_no }">
-	        <textarea rows="3" cols="80" name="msg" style="float: left"></textarea>
-	        <input type=submit value="댓글쓰기" style="height:70px;float: left"
-	          class="btn btn-sm btn-primary"
-	        >
+	        <textarea rows="3" cols="80" name="msg" style="float: left; width:970px; height:100px;"></textarea>
+	        <button type="submit" value="댓글쓰기" style="background-color:#f2f2f2; border:1px solid black; border-radius:5px; padding:38px 30px; margin-left:7px;"><span>댓글쓰기</span></button>
         </form>
        </td>
       </tr>

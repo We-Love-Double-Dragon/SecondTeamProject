@@ -41,7 +41,7 @@
 	
 	<!-- 뉴스 상세페이지 -->
 	<select id="newsDetailData" resultType="vo.NewsVO" parameterType="int">
-	    SELECT n_no,n_poster2,n_title,n_regdate,n_content,n_writer,n_hit FROM news 
+	    SELECT n_no,n_precontent,n_poster,n_poster2,n_title,n_regdate,n_content,n_writer,n_hit FROM news 
 	    WHERE n_no=#{n_no}
 	</select>
   	
@@ -204,7 +204,7 @@
 	
 	<!-- 팁 상세페이지 -->
 	<select id="tipDetailData" resultType="vo.TipVO" parameterType="int">
-	    SELECT t_no,t_poster2,t_title,t_regdate,t_content,t_writer,t_hit FROM tip  
+	    SELECT t_no,t_precontent,t_poster,t_poster2,t_title,t_regdate,t_content,t_writer,t_hit FROM tip  
 	    WHERE t_no=#{t_no}
 	</select>
 	
@@ -369,7 +369,7 @@
 	
 	<!-- 비디오 상세페이지 -->
 	<select id="videoDetailData" resultType="vo.VideoVO" parameterType="int">
-	    SELECT v_no,v_title,v_video,v_writer,v_hit FROM video 
+	    SELECT v_no,v_poster,v_title,v_video,v_writer,v_hit FROM video 
 	    WHERE v_no=#{v_no}
 	</select>
 	
@@ -498,27 +498,41 @@
   	<!-- 뉴스 스크랩 저장 -->
 	<insert id="newsScrapInsert" parameterType="vo.NewsScrapVO">
 	  	INSERT INTO newsscrap VALUES(
-	  		(SELECT NVL(MAX(no)+1,1) FROM newsscrap),#{id},#{n_no},#{t_no},#{v_no}
+	  		(SELECT NVL(MAX(no)+1,1) FROM newsscrap),#{id},#{nno}
 	  	)
 	</insert>
 	
 	<!-- 팁 스크랩 저장 -->
-	<insert id="tipScrapInsert" parameterType="vo.NewsScrapVO">
-	  	INSERT INTO newsscrap VALUES(
-	  		(SELECT NVL(MAX(no)+1,1) FROM newsscrap),#{id},#{n_no},#{t_no},#{v_no}
+	<insert id="tipScrapInsert" parameterType="vo.TipScrapVO">
+	  	INSERT INTO tipscrap VALUES(
+	  		(SELECT NVL(MAX(no)+1,1) FROM tipscrap),#{id},#{tno}
 	  	)
 	</insert>
 	
 	<!-- 비디오 스크랩 저장 -->
-	<insert id="videoScrapInsert" parameterType="vo.NewsScrapVO">
-	  	INSERT INTO newsscrap VALUES(
-	  		(SELECT NVL(MAX(no)+1,1) FROM newsscrap),#{id},#{n_no},#{t_no},#{v_no}
+	<insert id="videoScrapInsert" parameterType="vo.VideoScrapVO">
+	  	INSERT INTO videoscrap VALUES(
+	  		(SELECT NVL(MAX(no)+1,1) FROM videoscrap),#{id},#{vno}
 	  	)
 	</insert>
 	
-	<!-- 스크랩 데이터 읽기(스크랩 목록) -->
+	<!-- 뉴스스크랩 데이터 읽기(스크랩 목록) -->
 	<select id="newsScrapListData" parameterType="String" resultType="vo.NewsScrapVO">
 	  	SELECT * FROM newsscrap 
+	  	WHERE id=#{id} 
+	  	ORDER BY no DESC
+	</select>
+	
+	<!-- 팁스크랩 데이터 읽기(스크랩 목록) -->
+	<select id="tipScrapListData" parameterType="String" resultType="vo.TipScrapVO">
+	  	SELECT * FROM tipscrap 
+	  	WHERE id=#{id} 
+	  	ORDER BY no DESC
+	</select>
+	
+	<!-- 비디오스크랩 데이터 읽기(스크랩 목록) -->
+	<select id="videoScrapListData" parameterType="String" resultType="vo.VideoScrapVO">
+	  	SELECT * FROM videoscrap 
 	  	WHERE id=#{id} 
 	  	ORDER BY no DESC
 	</select>
@@ -526,28 +540,37 @@
 	<!-- 뉴스 스크랩 여부 확인: 같은 것 스크랩 불가능하게끔 -->
 	<select id="newsScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
 	  	SELECT COUNT(*) FROM newsscrap 
-	  	WHERE id=#{id} AND n_no=#{n_no}
+	  	WHERE id=#{id} AND nno=#{nno}
 	</select>
 	
 	<!-- 팁 스크랩 여부 확인 -->
-	<select id="tipScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
-	  	SELECT COUNT(*) FROM newsscrap 
-	  	WHERE id=#{id} AND t_no=#{t_no}
+	<select id="tipScrapCount" parameterType="vo.TipScrapVO" resultType="int">
+	  	SELECT COUNT(*) FROM tipscrap 
+	  	WHERE id=#{id} AND tno=#{tno}
 	</select>
 	
 	<!-- 비디오 스크랩 여부 확인 -->
-	<select id="videoScrapCount" parameterType="vo.NewsScrapVO" resultType="int">
-	  	SELECT COUNT(*) FROM newsscrap 
-	  	WHERE id=#{id} AND v_no=#{v_no}
+	<select id="videoScrapCount" parameterType="vo.VideoScrapVO" resultType="int">
+	  	SELECT COUNT(*) FROM videoscrap 
+	  	WHERE id=#{id} AND vno=#{vno}
 	</select>
 	
-	<!-- 뉴스, 팁, 비디오 스크랩 취소 -->
+	<!-- 뉴스 스크랩 취소 -->
 	<delete id="newsScrapDelete" parameterType="int">
 	  	DELETE FROM newsscrap 
 	  	WHERE no=#{no}
 	</delete>
 	
+	<!-- 팁 스크랩 취소 -->
+	<delete id="tipScrapDelete" parameterType="int">
+	  	DELETE FROM tipscrap 
+	  	WHERE no=#{no}
+	</delete>
 	
-	
+	<!-- 비디오 스크랩 취소 -->
+	<delete id="videoScrapDelete" parameterType="int">
+	  	DELETE FROM videoscrap 
+	  	WHERE no=#{no}
+	</delete>
 	
 </mapper>

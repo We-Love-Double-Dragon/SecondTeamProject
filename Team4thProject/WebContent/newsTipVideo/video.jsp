@@ -39,7 +39,7 @@
 .list_cast.type2 .t1 { padding-left: 0; }
 .list_cast.type2 .t2 { padding-left: 0; }
 .list_cast.type2 .t3 { padding-left: 0; }
-.list_cast.type3 { border-bottom: solid 2px #272727; }
+.list_cast.type3 { border-bottom: solid 1px #272727; }
 .list_cast.type3 li { height: 250px; }
 .list_cast.type3 .t1 { padding-left: 0; }
 .list_cast.type3 .t2 { padding-left: 0; }
