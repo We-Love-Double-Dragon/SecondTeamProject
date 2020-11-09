@@ -83,7 +83,7 @@
 									<td id="scrap_subject" style="text-align: left" onclick="location.href='../jobKnowledge/detail.do?no=${scrap_vo.no}'">${scrap_vo.subject}</td>
 									<td style="text-align: center">${scrap_vo.reply }</td>
 									<td id="scrap_calcel_button_td">
-										<input id="scrap_calcel_button" type=button value="스크랩 취소"
+										<input id="scrap_calcel_button" type=button value="취소"
 												onclick="location.href='../jobKnowledge/scrap_cancel.do?no=${scrap_vo.no}'">
 									</td>
 								</tr>

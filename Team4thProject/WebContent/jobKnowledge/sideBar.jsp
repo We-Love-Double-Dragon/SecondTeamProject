@@ -109,7 +109,7 @@
 				
 				<!-- 스크랩한 게시물 -->
 				<div style="width: 100%; height:50px; text-align: right; margin-top:10px;">
-					<input type=button value="스크랩한 질문" class="scrapButton" onclick="location.href='scrapList.do'"
+					<input type=button value="스크랩한 질문" class="scrapButton" onclick="location.href='scrapList2.do'"
 							style="height: 35px; font-size:12px; margin-top: 15px; color: white; border: none; border-radius: 5px;">
 				</div>
 				

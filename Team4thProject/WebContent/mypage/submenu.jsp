@@ -23,7 +23,7 @@
 	 font-size: 15pt;
 }
 #sidebar{
-	width: 200px;
+	width: 201px;
 	border: 1px solid #8c8c8c;	
     background-color: rgba( 35, 80, 142, 0.1 );
 }
@@ -40,14 +40,16 @@
 	width: 200px;
 	height: 40px;
 }
-
+.menu:hover{ 
+	background-color: rgba( 35, 80, 142, 0.4); 
+}
 </style>
 </head>
 <body>
 
 
      <div id="sidebar">
-           <aside class="single_sidebar_widget post_category_widget" style="padding: 15px 3px; ">
+           <aside class="single_sidebar_widget post_category_widget" style="padding: 15px 0px; ">
              <div class="mypage">
              	<p>마이페이지</p>
              </div> 
@@ -89,17 +91,12 @@
                  </div>
                  <div class="sub">
                      <a href="../mypage/videoscrap.do" class="d-flex">
-                         <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">&nbsp;취업영상</p>
+                         <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">취업영상</p>
                      </a>
                  </div>
                  <div class="sub">
-                     <a href="#" class="d-flex">
-                         <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">&nbsp;공모전</p>
-                     </a>
-                 </div>
-                 <div class="sub">
-                     <a href="#" class="d-flex">
-                         <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">JOB지식인</p>
+                     <a href="../jobKnowledge/scrapList2.do" class="d-flex">
+                         <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">Job 지식인</p>
                      </a>
                  </div>
                  

@@ -703,11 +703,11 @@ public class JobKnowledgeModel {
 	{
 		String no=request.getParameter("no");
 		JobKnowledgeDAO.scrapDelete(Integer.parseInt(no));
-		return "redirect:../jobKnowledge/scrapList.do";
+		return "redirect:../jobKnowledge/scrapList2.do";
 	}
 	
 	// 스크랩목록 가져오기 ==========================================================================================================
-	@RequestMapping("jobKnowledge/scrapList.do")
+	@RequestMapping("jobKnowledge/scrapList2.do")
 	public String jobKnowledge_scrapList(HttpServletRequest request)
 	{
 		HttpSession session=request.getSession();					// 세션 생성
@@ -729,9 +729,12 @@ public class JobKnowledgeModel {
 		}
 		request.setAttribute("boardList", boardList);							// 게시글VO리스트를 전송
 		  
-		  request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/scrapList.jsp");
 		
-		return "../jobKnowledge/box.jsp";
+		request.setAttribute("mypage_jsp", "../jobKnowledge/scrapList2.jsp");
+	    return "../mypage/mymain.jsp";
+//		  request.setAttribute("jobKnowledge_jsp", "../jobKnowledge/scrapList2.jsp");
+		
+//		return "../jobKnowledge/box.jsp";
 	}
 	
 	
