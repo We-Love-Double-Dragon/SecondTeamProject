@@ -1,14 +1,8 @@
 package dao;
-
 import java.util.*;
-
-
-
 import java.io.*;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
 import dao.CreateSqlSessionFactory;
 import vo.*;
 
@@ -85,4 +79,77 @@ public class GongmoDAO {
 		   
 		   return vo;
 		} 
+
+		
+	   // 질문글 검색 =================================================================================================searchBoard
+		public static List<GongmoVO> gongmoSearchBoard(Map map) {
+			SqlSession session = ssf.openSession();
+			List<GongmoVO> list = new ArrayList<GongmoVO>();
+			
+			try {
+				list = session.selectList("gongmoSearchBoard", map);
+				session.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			return list;
+		}
+		// 검색시에 페이지 구하는 메소드 ==============================================================================================
+		public static int gongmoSearchTotalPage(Map map) {
+			SqlSession session = ssf.openSession();
+			int total = 0;
+			try {
+				total = session.selectOne("gongmoSearchTotalPage", map);
+				session.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return total;
+		}
+		
+		
+		//좋아요========================================================
+		   public static void gongmoLikeIncrement(int gm_no)
+		   {
+			   SqlSession session=ssf.openSession(true);
+			   session.update("gongmoLikeIncrement", gm_no);
+			   session.close();
+		   }		
+		   
+		// 스크랩 ================================================================================================================
+			
+			public static void gongmoScrapInsert(GongmoScrapVO vo)
+			{
+			 SqlSession session=ssf.openSession(true);
+			 session.update("gongmoScrapInsert", vo);
+			 session.close();
+			}
+
+			// 찜목록 가져오기 =========================================================================================================
+			public static List<vo.GongmoScrapVO> gongmoScrapListData(String id)
+			{
+			 SqlSession session=ssf.openSession();
+			 List<GongmoScrapVO> list=session.selectList("gongmoScrapListData",id);
+			 session.close();
+			 return list;
+			}
+
+			// 찜 여부 확인 =========================================================================================================
+			public static int gongmoScrapCount(GongmoScrapVO vo)
+			{
+			 SqlSession session=ssf.openSession();
+			 int count=session.selectOne("gongmoScrapCount",vo);
+			 session.close();
+			 return count;
+			}
+
+			// 찜 취소 =========================================================================================================
+			public static void gongmoScrapCancel(int no)
+			{
+			 SqlSession session=ssf.openSession(true);
+			 session.delete("gongmoScrapCancel", no);
+			 session.close();
+			}
+		   
 	}

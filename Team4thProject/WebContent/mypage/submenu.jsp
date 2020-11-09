@@ -99,6 +99,11 @@
                          <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">Job 지식인</p>
                      </a>
                  </div>
+                 <div class="sub">
+                    <a href="../mypage/gongmoscrap.do" class="d-flex">
+                        <p> <img src="../mypage/b.png" style="width: 10px; height: 10px; margin-right: 10px;">&nbsp;공모전</p>
+                    </a>
+                </div>
                  
                 
                   <div class="menu">

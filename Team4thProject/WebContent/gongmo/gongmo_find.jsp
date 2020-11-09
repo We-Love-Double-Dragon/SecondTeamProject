@@ -1,32 +1,35 @@
-<%@page import="vo.GongmoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="vo.*,model.*,dao.*"%>
+	pageEncoding="UTF-8" import="java.util.*, dao.*,java.text.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<jsp:useBean id="toDay" class="java.util.Date" />
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="script.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+/* 검색기능---------------------------------------------------------------------------------------------- */
+function send()
+{
+	var f=document.frm; 
+	if(f.ss.value=="")
+	{
+		f.ss.focus();
+		return;
+	}
+	f.submit();
+}
 </script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 
 /* 세로메뉴바 */
 #cssmenu ul li a {
   margin: 0px auto;
-  padding: 0;
-  border: 0;
+
   list-style: none;
   line-height: 1;
   display: block;
@@ -115,7 +118,7 @@
 #cssmenu > ul > li > a:hover > span::after,
 #cssmenu > ul > li.active > a > span::after,
 #cssmenu > ul > li.open > a > span::after {
-  border-color: #000073;
+  border-color: ##000073;
 }
 .holder::before {
   top: 18px;
@@ -185,13 +188,9 @@
 #cssmenu ul ul li > a:hover::after {
   border-color: #ffffff;
 }
-.row3{
-	margin-top: 100px;
-	float: right;
-}
 
-.h3 {
-	
+#findt {
+	margin-right: 500px;
 }
 </style>
 </head>
@@ -201,17 +200,16 @@
 			<div class="row d-flex justify-content-between">
 				<!-- 왼쪽 메인 주제 ----------------------------------------------------------------------------------- 왼쪽 메인 주제-->
 				<div class="container">
-					<div class="col-md-4" >
-					<div class="section-tittle pt-25 pb-20">
+					<div class="col-md-4">
+					<div class="section-tittle mb-30">
 						<h3>전체 공모전</h3>
 					</div>
 				</div>
 				<!-- 카테고리가로바 ----------------------------------------------------------------------------------- 카테고리가로바-->
-				<div class="col-lg-8">
+				<div class="col-md-8">
 				<section class="whats-news-area pt-50 pb-20">
-					<div class="nav">
-						<div class="properties__button">
-							 <!--Nav Button  -->                                            
+                        <div class="properties__button">
+                           <!--Nav Button  -->                                            
                             <nav>                                                                     
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="onclick" href="../gongmo/gongmo_all.do" role="tab" aria-controls="nav-home" aria-selected="true">전체</a>
@@ -223,18 +221,24 @@
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
-						</div>
-					</div>
+                        </div>
 				</section>
+				
+				
+				
+				
+				
+				
+                    </div>
+				</div>
 			</div>
-		</div>
-		</div>
-			<!-- 세로카테고리바-------------------------------------------------------------------------------- -->
+		
+			<!-- 게시물 ----------------------------------------------------------------------------------------------------------- 게시물 -->
 			<div class="col-lg-4">
-				<div id='cssmenu'>
+			  <div id='cssmenu'>
 				<ul>
 				   <li><a href='#'><span>메뉴</span></a></li>
-				   <li class='active has-sub'><a href='../gongmo/gongmo_all.do'><span>공모전</span></a>
+				   <li class='active has-sub'><a href='#'><span>공모전</span></a>
 				      <ul>
 				         <li class='last'><a href='../gongmo/gongmo_cno1.do?cno=1'><span>기획/아이디어</span></a></li>
 				         <li class='last'><a href='../gongmo/gongmo_cno2.do?cno=2'><span>디자인</span></a></li>
@@ -260,45 +264,32 @@
 				   </li>
 				</ul>
 				</div>
-			</div>
-			
-			<!-- 오늘 날짜 ------------------------------------------- -->
-<%-- 				<fmt:formatDate var="toDay" value="${toDay}" pattern="yyyy.MM.dd" />
-			
-			 	<c:forEach var="dvo" items="${list }">
-			 	
-		 			<c:set var = "countdown" value = "${dvo.gm_period }"/>
-					<c:set var = "countdown2" value = "${fn:substring(countdown,12,23)}" />
-					<p>${countdown }</p>
-					<p>뒤에서 자르기 : ${countdown2 }</p> 
-					
-					<fmt:parseDate value="${toDay }" var="strPlanDate" pattern="yyyy.MM.dd"/>
-					<fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-					<fmt:parseDate value="${countdown2 }" var="endPlanDate" pattern="yyyy.MM.dd"/>
-					<fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
- 					<font color="red">${endDate - strDate }</font>
+			  </div>
 
-				</c:forEach> --%>
- 				
-			<!-- 게시물 ----------------------------------------------------------------------------------------------------------- 게시물 -->	
-			<div class="col-lg-8">
-				<div class="box">
-				<c:forEach var="vo" items="${list }">
-					<div class="col-md-4 col-md-8">
-						<div class="thumbnail">
-							<a href="../gongmo/gongmo_detail.do?no=${vo.gm_no }&page=${curpage}">
-								<img src="${vo.gm_poster }" alt="Lights" style="width: 250px; height: 200px;">
-								<div class="caption">
-									<p style="font-size: 10px;">제목: ${fn:length(vo.gm_subject)>14?fn:substring(vo.gm_subject,0,14)+="...":vo.gm_subject  }</p>
-									<p style="font-size: 10px;">기한: ${vo.gm_period }</p>
-									<p style="font-size: 10px;">주최: ${fn:length(vo.gm_host)>14?fn:substring(vo.gm_host,0,14)+="...":vo.gm_host  }</p>
-								</div>
-							</a>
-						</div>
-					</div>
-				</c:forEach>
-				</div>
-			 <!-- 검색-------------------------------------------------------------------------------------------------------- -->
+				<div class="col-lg-8">
+			     <table class="table table-striped" id="findt" float="right;" style="width: 900px;">
+			       <tr class="warning">
+			         <th class="text-center" width=45%>공모명</th>
+			         <th class="text-center" width=15%>주최</th>
+			         <th class="text-center" width=20%>접수기간</th>
+			         <th class="text-center" width=10%>조회수</th>
+			       </tr>
+			       <c:forEach var="vo" items="${list }">
+			         <tr>
+					    <td class="text-center" width=10%>
+					    <a href="../gongmo/gongmo_detail.do?no=${vo.gm_no }">
+					    ${vo.gm_subject}</a></td>
+					    <td class="text-center" width=15%>${vo.gm_host }</td>
+					    <td class="text-center" width=20%>${vo.gm_period }</td>
+					    <td class="text-center" width=10%>${vo.gm_hit }</td>
+					</tr>
+				   </c:forEach>
+			     </table>
+			
+			  
+			    
+			  <!-- 검색-------------------------------------------------------------------------------------------------------- -->
+			  <table class="table">  					
 			 	<div style="text-align: right;">
 						<form action="../gongmo/gongmo_find.do" style="display: inline-block; margin-right:15px;">
 							<select name="finding" class="dropup">
@@ -308,43 +299,36 @@
 							<input type=text name="voca" size=25 placeholder="검색어 입력" style="height:30px; border: none; border-radius: 5px; margin-left:15px;">
 							<input type=submit value=검색 id="searchButton">
 						</form>
-					</div>			
-				</div>
+					</div>
+					</table>
+			</div>
 		<!-- 페이지 페이징 버튼 ========================================================================================= 페이지 페이징 버튼 -->
-		<div class="box2">
+		<div class="row2">
 			<div class="text-center">
 				<ul class="pagination">
 					<c:if test="${curpage>BLOCK }">
-						<li><a href="../gongmo/gongmo_all?page=${startPage-1 }">&lt;</a></li>
+						<li><a href="../gongmo/gongmo_all.do?cno=1&page=${startPage-1 }">&lt;</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${startPage }" end="${endPage }">
 						<c:if test="${i==curpage }">
-							<li class="active"><a href="../gongmo/gongmo_all?page=${i }">${i }</a></li>
+							<li class="active"><a href="../gongmo/gongmo_all.do?cno=1&page=${i }">${i }</a></li>
 						</c:if>
 						<c:if test="${i!=curpage }">
-							<li><a href="../gongmo/gongmo_all.do?page=${i }">${i }</a></li>
+							<li><a href="../gongmo/gongmo_all.do?cno=1&page=${i }">${i }</a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${endPage<totalpage }">
-						<li><a href="../gongmo/gongmo_all.do?page=${endPage+1 }">&gt;</a></li>
+						<li><a href="../gongmo/gongmo_all.do?cno=1&page=${endPage+1 }">&gt;</a></li>
 					</c:if>
 				</ul>
 			</div>
 		</div>
-	</div>
-</div>		
-	<!-- 최근 방문한 질문글 리스트  -->
-	    <h2></h2>
-		  <table class="table"> 
-		    <c:forEach var="vo" items="${cList }" varStatus="s">
-		      <div class="col-md-2">
-			    <div class="thumbnail">
-			        <a href="../gongmo/gongmo_all_before.do?no=${vo.gm_no }">
-						<img src="${vo.gm_poster }" alt="Lights" style="width: 250px; height: 200px;">
-					</a>
-		       </div>
-		    </div>
-		    </c:forEach>
-		</table>
+			 </div>
+				
+			
+				</table>
+			</div>
+			</div>			
 </body>
 </html>
+
