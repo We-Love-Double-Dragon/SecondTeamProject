@@ -18,6 +18,7 @@
 ### 1. 백앤드 
 #### 언어 : Java
 #### 프레임워크 : Eclips
+#### 웹 서버: Apache
 #### DB : Oracle
 #### 주사용기술 : HTML Paser
 
