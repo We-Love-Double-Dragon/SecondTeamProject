@@ -23,5 +23,5 @@
 #### 주사용기술 : HTML Paser
 
 ### 1. 프론트앤드
-#### 언어 : XML, js
+#### 언어 : XML, Javascript
 #### 주사용기술 : ajax, MyBatis, OpenAPI, JSP
